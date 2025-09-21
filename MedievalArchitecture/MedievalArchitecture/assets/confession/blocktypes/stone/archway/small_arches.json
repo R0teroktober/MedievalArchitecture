@@ -1,0 +1,96 @@
+{
+	"enabled": true,
+	"code": "arch-s",
+	"maxStackSize": 1,
+	"behavior": [
+		{
+			"name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
+			"properties": {
+				"textures": {
+					"noglass-*": {
+						"stone": { "base": "game:block/stone/rock/{stone}" }
+					}
+				},
+				//"shape": {
+				//	"gothic-*": { "base": "confession:block/stone/arch-s-{type}" }
+				//}
+			}
+		}
+	],
+	"creativeInventoryStacks": [
+		{
+			// default creative tabs
+			"tabs": [ "general", "decorative" ],
+			"stacks": [
+				// in this case, we add our block with all possible wood types, but we can make our block have more types, for example:
+				// "types": {
+				//    "wood": "birch",
+				//    "stone": "granite",
+				//    "metal": "iron"
+				// }
+
+				{
+					"type": "block",
+					"code": "arch-s",
+					"attributes": { "types": { "stone": "granite1" } }
+				},
+				{
+					"type": "block",
+					"code": "arch-s",
+					"attributes": { "types": { "stone": "andesite" } }
+				},
+				{
+					"type": "block",
+					"code": "arch-s",
+					"attributes": { "types": { "stone": "conglomerate" } }
+				},
+				{
+					"type": "block",
+					"code": "arch-s",
+					"attributes": { "types": { "stone": "claystone" } }
+				},
+				{
+					"type": "block",
+					"code": "arch-s",
+					"attributes": { "types": { "stone": "limestone" } }
+				},
+				{
+					"type": "block",
+					"code": "arch-s",
+					"attributes": { "types": { "stone": "chert" } }
+				},
+				{
+					"type": "block",
+					"code": "arch-s",
+					"attributes": { "types": { "stone": "basalt" } }
+				},
+				{
+					"type": "block",
+					"code": "arch-s",
+					"attributes": { "types": { "stone": "slate" } }
+				},
+				{
+					"type": "block",
+					"code": "arch-s",
+					"attributes": { "types": { "stone": "peridotite" } }
+				},
+				{
+					"type": "block",
+					"code": "arch-s",
+					"attributes": { "types": { "stone": "phyllite" } }
+				},
+				{
+					"type": "block",
+					"code": "arch-s",
+					"attributes": { "types": { "stone": "sandstone" } }
+				},
+				{
+					"type": "block",
+					"code": "arch-s",
+					"attributes": { "types": { "stone": "bauxite1" } }
+				}
+			]
+		}
+	]
+
+}

@@ -1,0 +1,15 @@
+{
+    "$schema": "https://moddbcdn.vintagestory.at/schema/modinfo.latest.json",
+    "type": "Code",
+    "modid": "medievalarchitecture",
+    "name": "MedievalArchitecture",
+    "authors": [
+        "Roteroktober", "12Port"
+    ],
+    "description": "Medieval themed architexture mod.",
+    "version": "1.0.0",
+    "dependencies": {
+      "game": "1.21.0",
+      "attributerenderinglibrary":  "2.3.0"
+    }
+}
