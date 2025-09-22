@@ -1,0 +1,760 @@
+{
+	"enabled": true,
+	"code": "arch_small",
+	"maxStackSize": 1,
+	"blockmaterial": "Stone",
+	"resistance": 4,
+	"renderPass": "OpaqueNoCull",
+	"facecullmode": "nevercull",
+	"lightabsorption": 0,
+	"sideopaque": {
+		"all": false
+	},
+	"sideao": {
+		"all": true
+	},
+	"sidesolidByType": {
+		"*-north": {
+			"all": false,
+			"up":  true,
+			"west": true,
+			"east": true
+		},
+		"*-south": {
+			"all": false,
+			"up": true,
+			"west": true,
+			"east": true
+		},
+		"*-east": {
+			"all": false,
+			"up":  true,
+			"north": true,
+			"south": true,
+		},
+		"*-west": {
+			"all": false,
+			"up": true,
+			"north": true,
+			"south": true
+		}
+	},
+	"variantgroups": [
+		{
+			"code": "side",
+			"loadFromProperties": "abstract/horizontalorientation"
+		}
+	],
+	"attributes": {
+		"handbook": {
+			"groupBy": [ "arch_small-*" ],
+			"excludeByType": {
+				"*-west*": true,
+				"*-east": true,
+				"*-south*": true
+			}
+		}
+	},
+	"entityBehaviors": [ { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" } ],
+	"behaviors": [
+		{ "name": "AttributeRenderingLibrary.HorizontalOrientable" },
+		{
+			"name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
+			"properties": {
+				"name": {
+					//"style-*::rock-*::glass-*": [ "Small Archway {style}", " (", "{glass} glass + {rock} rock", ")" ],
+					//"style-*::cobblestone-*::glass-*": [ "Small Archway {style}", " (", "{glass} glass + {cobblestone} cobblestone", ")" ],
+					//"style-*::brick-*::glass-*": [ "Small Archway {style}", " (", "{glass} glass + {brick} brick", ")" ],
+					//"rock-*::glass-*": [ "Small Archway A", " (", "{glass} glass + {rock} rock", ")" ],
+					//"cobblestone-*::glass-*": [ "Small Archway A", " (", "{glass} glass + {cobblestone} cobblestone", ")" ],
+					//"brick-*::glass-*": [ "Small Archway A", " (", "{glass} glass + {brick} brick", ")" ],
+					"style-*::rock-*": [ "Small Archway {style}", " (", "{rock} rock", ")" ],
+					"style-*::cobblestone-*": [ "Small Archway {style}", " (", "{cobblestone} cobblestone", ")" ],
+					"style-*::brick-*": [ "Small Archway {style}", " (", "{brick} brick", ")" ],
+					//"style-*::glass-*": [ "Small Archway {style}", " (", "{glass} glass", ")" ],
+					"style-*": [ "Small Archway {style}", " (", "granite rock", ")" ],
+					"rock-*:": [ "Small Archway A", " (", "{rock} rock", ")" ],
+					"cobblestone-*": [ "Small Archway A", " (", "{cobblestone} cobblestone", ")" ],
+					"brick-*": [ "Small Archway A", " (", "{brick} brick", ")" ],
+					//"glass-*": [ "Small Archway A", " (", "{glass} glass + granite rock", ")" ],
+					"*": [ "Small Archway A", " (", "granite rock", ")" ]
+				},
+				"textures": {
+					//"style-*::rock-*::glass-*::plaster-plain": {
+					//	"material": {
+					//		"base": "game:block/stone/plaster/plain"
+					//	},
+					//	"rim": {
+					//		"base": "game:block/stone/rock/{rock}1",
+					//		"overlays": [ "game:block/overlay/crackedcobblestone1" ]
+					//	},
+					//	"glass": {
+					//		"base": "game:block/glass/{glass}",
+					//		"overlays": [ "game:block/glass/leaded" ]
+					//	},
+					//	"plaster": {
+					//		"base": "game:block/stone/rock/{rock}1",
+					//		"blendedOverlays": [
+					//			{
+					//				"base": "game:block/clay/fireclay",
+					//				"blendMode": "Lighten"
+					//			}
+					//		]
+					//	},
+					//	"putty": { "base": "game:block/metal/ingot/lead" },
+					//	"frame": { "base": "game:block/wood/debarked/veryaged" },
+					//	"black": { "base": "game:block/black" }
+
+					//},
+					//"style-*::cobblestone-*::glass-*::plaster-plain": {
+					//	"material": {
+					//		"base": "game:block/stone/plaster/plain"
+					//	},
+					//	"rim": {
+					//		"base": "game:block/stone/rock/{cobblestone}1",
+					//		"overlays": [ "game:block/overlay/crackedcobblestone1" ]
+					//	},
+					//	"glass": {
+					//		"base": "game:block/glass/{glass}",
+					//		"overlays": [ "game:block/glass/leaded" ]
+					//	},
+					//	"plaster": {
+					//		"base": "game:block/stone/rock/{cobblestone}1",
+					//		"blendedOverlays": [
+					//			{
+					//				"base": "game:block/clay/fireclay",
+					//				"blendMode": "Lighten"
+					//			}
+					//		]
+					//	},
+					//	"putty": { "base": "game:block/metal/ingot/lead" },
+					//	"frame": { "base": "game:block/wood/debarked/veryaged" },
+					//	"black": { "base": "game:block/black" }
+
+					//},
+					//"style-*::brick-*::glass-*::plaster-plain": {
+					//	"material": {
+					//		"base": "game:block/stone/plaster/plain"
+					//	},
+					//	"rim": {
+					//		"base": "game:block/stone/rock/{brick}1",
+					//		"overlays": [ "game:block/overlay/crackedcobblestone1" ]
+					//	},
+					//	"glass": {
+					//		"base": "game:block/glass/{glass}",
+					//		"overlays": [ "game:block/glass/leaded" ]
+					//	},
+					//	"plaster": {
+					//		"base": "game:block/stone/rock/{brick}1",
+					//		"blendedOverlays": [
+					//			{
+					//				"base": "game:block/clay/fireclay",
+					//				"blendMode": "Lighten"
+					//			}
+					//		]
+					//	},
+					//	"putty": { "base": "game:block/metal/ingot/lead" },
+					//	"frame": { "base": "game:block/wood/debarked/veryaged" },
+					//	"black": { "base": "game:block/black" }
+
+					//},
+					//"style-*::rock-*::glass-*": {
+					//	"material": {
+					//		"base": "game:block/stone/rock/{rock}1"
+					//	},
+					//	"rim": {
+					//		"base": "game:block/stone/rock/{rock}1",
+					//		"overlays": [ "game:block/overlay/crackedcobblestone1" ]
+					//	},
+					//	"glass": {
+					//		"base": "game:block/glass/{glass}",
+					//		"overlays": [ "game:block/glass/leaded" ]
+					//	},
+					//	"plaster": {
+					//		"base": "game:block/stone/rock/{rock}1",
+					//		"blendedOverlays": [
+					//			{
+					//				"base": "game:block/clay/fireclay",
+					//				"blendMode": "Lighten"
+					//			}
+					//		]
+					//	},
+					//	"putty": { "base": "game:block/metal/ingot/lead" },
+					//	"frame": { "base": "game:block/wood/debarked/veryaged" },
+					//	"black": { "base": "game:block/black" }
+
+					//},
+					//"style-*::cobblestone-*::glass-*": {
+					//	"material": {
+					//		"base": "game:block/stone/cobblestone/{cobblestone}1"
+					//	},
+					//	"rim": {
+					//		"base": "game:block/stone/rock/{cobblestone}1",
+					//		"overlays": [ "game:block/overlay/crackedcobblestone1" ]
+					//	},
+					//	"glass": {
+					//		"base": "game:block/glass/{glass}",
+					//		"overlays": [ "game:block/glass/leaded" ]
+					//	},
+					//	"plaster": {
+					//		"base": "game:block/stone/rock/{cobblestone}1",
+					//		"blendedOverlays": [
+					//			{
+					//				"base": "game:block/clay/fireclay",
+					//				"blendMode": "Lighten"
+					//			}
+					//		]
+					//	},
+					//	"putty": { "base": "game:block/metal/ingot/lead" },
+					//	"frame": { "base": "game:block/wood/debarked/veryaged" },
+					//	"black": { "base": "game:block/black" }
+
+					//},
+					//"style-*::brick-*::glass-*": {
+					//	"material": {
+					//		"base": "game:block/stone/brick/{brick}1"
+					//	},
+					//	"rim": {
+					//		"base": "game:block/stone/rock/{brick}1",
+					//		"overlays": [ "game:block/overlay/crackedcobblestone1" ]
+					//	},
+					//	"glass": {
+					//		"base": "game:block/glass/{glass}",
+					//		"overlays": [ "game:block/glass/leaded" ]
+					//	},
+					//	"plaster": {
+					//		"base": "game:block/stone/rock/{brick}1",
+					//		"blendedOverlays": [
+					//			{
+					//				"base": "game:block/clay/fireclay",
+					//				"blendMode": "Lighten"
+					//			}
+					//		]
+					//	},
+					//	"putty": { "base": "game:block/metal/ingot/lead" },
+					//	"frame": { "base": "game:block/wood/debarked/veryaged" },
+					//	"black": { "base": "game:block/black" }
+
+					//},
+					"style-*::rock-*": {
+						"material": {
+							"base": "game:block/stone/rock/{rock}1"
+
+						},
+						"rim": {
+							"base": "game:block/stone/rock/{rock}1",
+							"overlays": [ "game:block/overlay/crackedcobblestone1" ]
+						},
+						"plaster": {
+							"base": "game:block/stone/rock/{rock}1",
+							"blendedOverlays": [
+								{
+									"base": "game:block/clay/fireclay",
+									"blendMode": "Lighten"
+								}
+							]
+						}
+					},
+					"style-*::cobblestone-*": {
+						"material": {
+							"base": "game:block/stone/cobblestone/{cobblestone}1"
+						},
+						"rim": {
+							"base": "game:block/stone/rock/{cobblestone}1",
+							"overlays": [ "game:block/overlay/crackedcobblestone1" ]
+						},
+						"plaster": {
+							"base": "game:block/stone/rock/{cobblestone}1",
+							"blendedOverlays": [
+								{
+									"base": "game:block/clay/fireclay",
+									"blendMode": "Lighten"
+								}
+							]
+						}
+					},
+					"style-*::brick-*": {
+						"material": {
+							"base": "game:block/stone/brick/{brick}1"
+
+						},
+						"rim": {
+							"base": "game:block/stone/rock/{brick}1",
+							"overlays": [ "game:block/overlay/crackedcobblestone1" ]
+						},
+						"material2": {
+							"base": "game:block/stone/brick/{brick}1",
+							"alternates": [
+								{ "base": "game:block/stone/brick/{brick}2" },
+								{ "base": "game:block/stone/brick/{brick}3" }
+							]
+						},
+						"plaster": {
+							"base": "game:block/stone/rock/{brick}1",
+							"blendedOverlays": [
+								{
+									"base": "game:block/clay/fireclay",
+									"blendMode": "Lighten"
+								}
+							]
+						}
+					},
+					//"rock-*::glass-*": {
+					//	"material": {
+					//		"base": "game:block/stone/rock/{rock}1"
+
+					//	},
+					//	"rim": {
+					//		"base": "game:block/stone/rock/{rock}1",
+					//		"overlays": [ "game:block/overlay/crackedcobblestone1" ]
+					//	},
+					//	"glass": {
+					//		"base": "game:block/glass/{glass}",
+					//		"overlays": [ "game:block/glass/leaded" ]
+					//	},
+					//	"plaster": {
+					//		"base": "game:block/stone/rock/{rock}1",
+					//		"blendedOverlays": [
+					//			{
+					//				"base": "game:block/clay/fireclay",
+					//				"blendMode": "Lighten"
+					//			}
+					//		]
+					//	},
+					//	"putty": { "base": "game:block/metal/ingot/lead" },
+					//	"frame": { "base": "game:block/wood/debarked/veryaged" },
+					//	"black": { "base": "game:block/black" }
+
+					//},
+					//"cobblestone-*::glass-*": {
+					//	"material": {
+					//		"base": "game:block/stone/cobblestone/{cobblestone}1"
+					//	},
+					//	"rim": {
+					//		"base": "game:block/stone/rock/{cobblestone}1",
+					//		"overlays": [ "game:block/overlay/crackedcobblestone1" ]
+					//	},
+					//	"glass": {
+					//		"base": "game:block/glass/{glass}",
+					//		"overlays": [ "game:block/glass/leaded" ]
+					//	},
+					//	"plaster": {
+					//		"base": "game:block/stone/rock/{cobblestone}1",
+					//		"blendedOverlays": [
+					//			{
+					//				"base": "game:block/clay/fireclay",
+					//				"blendMode": "Lighten"
+					//			}
+					//		]
+					//	},
+					//	"putty": { "base": "game:block/metal/ingot/lead" },
+					//	"frame": { "base": "game:block/wood/debarked/veryaged" },
+					//	"black": { "base": "game:block/black" }
+
+					//},
+					//"brick-*::glass-*": {
+					//	"material": {
+					//		"base": "game:block/stone/brick/{brick}1"
+
+					//	},
+					//	"rim": {
+					//		"base": "game:block/stone/rock/{brick}1",
+					//		"overlays": [ "game:block/overlay/crackedcobblestone1" ]
+					//	},
+					//	"glass": {
+					//		"base": "game:block/glass/{glass}",
+					//		"overlays": [ "game:block/glass/leaded" ]
+					//	},
+					//	"plaster": {
+					//		"base": "game:block/stone/rock/{brick}1",
+					//		"blendedOverlays": [
+					//			{
+					//				"base": "game:block/clay/fireclay",
+					//				"blendMode": "Lighten"
+					//			}
+					//		]
+					//	},
+					//	"putty": { "base": "game:block/metal/ingot/lead" },
+					//	"frame": { "base": "game:block/wood/debarked/veryaged" },
+					//	"black": { "base": "game:block/black" }
+
+					//},
+					//"glass-*": {
+					//	"glass": {
+					//		"base": "game:block/glass/{glass}",
+					//		"overlays": [ "game:block/glass/leaded" ]
+					//	},
+					//	"putty": { "base": "game:block/metal/ingot/lead" },
+					//	"frame": { "base": "game:block/wood/debarked/veryaged" },
+					//	"black": { "base": "game:block/black" }
+
+					//},
+					"rock-*": {
+						"material": {
+							"base": "game:block/stone/rock/{rock}1",
+							"alternates": [
+								{ "base": "game:block/stone/rock/{rock}2" },
+								{ "base": "game:block/stone/rock/{rock}3" },
+								{ "base": "game:block/stone/rock/{rock}4" }
+							]
+						},
+						"rim": {
+							"base": "game:block/stone/rock/{rock}1",
+							"overlays": [ "game:block/overlay/crackedcobblestone1" ]
+						},
+						"plaster": {
+							"base": "game:block/stone/rock/{rock}1",
+							"blendedOverlays": [
+								{
+									"base": "game:block/clay/fireclay",
+									"blendMode": "Lighten"
+								}
+							]
+						}
+					},
+					"cobblestone-*": {
+						"material": {
+							"base": "game:block/stone/cobblestone/{cobblestone}1",
+							"alternates": [
+								{ "base": "game:block/stone/rock/{cobblestone}2" },
+								{ "base": "game:block/stone/rock/{cobblestone}3" },
+								{ "base": "game:block/stone/rock/{cobblestone}4" },
+								{ "base": "game:block/stone/rock/{cobblestone}5" }
+							]
+						},
+						"rim": {
+							"base": "game:block/stone/rock/{cobblestone}1",
+							"overlays": [ "game:block/overlay/crackedcobblestone1" ]
+						},
+						"plaster": {
+							"base": "game:block/stone/rock/{cobblestone}1",
+							"blendedOverlays": [
+								{
+									"base": "game:block/clay/fireclay",
+									"blendMode": "Lighten"
+								}
+							]
+						}
+					},
+					"brick-*": {
+						"material": {
+							"base": "game:block/stone/brick/{brick}1",
+							"alternates": [
+								{ "base": "game:block/stone/rock/{brick}2" },
+								{ "base": "game:block/stone/rock/{brick}3" }
+							]
+						},
+						"rim": {
+							"base": "game:block/stone/rock/{brick}1",
+							"overlays": [ "game:block/overlay/crackedcobblestone1" ]
+						},
+						"plaster": {
+							"base": "game:block/stone/brick/{brick}1"
+						}
+					}
+				},
+				"shape": {
+					"style-B": {
+						"base": "confession:block/stone/arch-s-b",
+						"rotateYByType": {
+							"*-north": 0,
+							"*-east": 270,
+							"*-south": 180,
+							"*-west": 90
+						}
+					},
+					"style-C": {
+						"base": "confession:block/stone/arch-s-c",
+						"rotateYByType": {
+							"*-north": 0,
+							"*-east": 270,
+							"*-south": 180,
+							"*-west": 90
+						}
+					},
+					"style-D": {
+						"base": "confession:block/stone/arch-s-d",
+						"rotateYByType": {
+							"*-north": 0,
+							"*-east": 270,
+							"*-south": 180,
+							"*-west": 90
+						}
+					}
+				}
+			}
+		}
+	],
+	"creativeinventoryStacksByType": {
+			"*-north": [
+				{
+					"tabs": [ "general", "decorative" ],
+					"stacks": [
+						// in this case, we add our block with all possible wood types, but we can make our block have more types, for example:
+						// "types": {
+						//    "wood": "birch",
+						//    "stone": "granite",
+						//    "metal": "iron"
+						// }
+
+						{
+							"type": "block",
+							"code": "arch_small-north",
+						},
+						{
+							"type": "block",
+							"code": "arch_small-north",
+							"attributes": {
+								"types": {
+									"brick": "slate"
+								}
+							}
+						},
+						{
+							"type": "block",
+							"code": "arch_small-north",
+							"attributes": {
+								"types": {
+									"cobblestone": "andesite"
+								}
+							}
+						},
+						{
+							"type": "block",
+							"code": "arch_small-north",
+							"attributes": {
+								"types": {
+									"brick": "granite"
+								}
+							}
+						},
+						{
+							"type": "block",
+							"code": "arch_small-north",
+							"attributes": {
+								"types": {
+									"cobblestone": "redmarble",
+									"style": "B"
+								}
+							}
+						},
+						{
+							"type": "block",
+							"code": "arch_small-north",
+							"attributes": {
+								"types": {
+									"brick": "claystone"
+								}
+							}
+						},
+						{
+							"type": "block",
+							"code": "arch_small-north",
+							"attributes": {
+								"types": {
+									"rock": "granite",
+									"plaster": "plain",
+									"style": "B"
+								}
+							}
+						}
+					]
+				}
+			]
+		},
+		"shape": {
+			"base": "block/stone/arch-s-a",
+			"rotateYByType": {
+				"*-north": 0,
+				"*-east": 270,
+				"*-south": 180,
+				"*-west": 90
+			}
+		},
+	"textures": {
+			"material": { "base": "game:block/stone/rock/granite1" },
+			"rim": {
+				"base": "game:block/stone/rock/granite1",
+				"overlays": [ "game:block/overlay/crackedcobblestone1" ]
+			},
+			"glass": { "base": "game:block/transparent" },
+			"plaster": {
+				"base": "game:block/stone/rock/granite1",
+				"blendedOverlays": [
+					{
+						"base": "game:block/clay/fireclay",
+						"blendMode": "Lighten"
+					}
+				]
+			},
+			"putty": { "base": "game:block/transparent" },
+			"frame": { "base": "game:block/transparent" },
+		"black": { "base": "game:block/transparent" }
+	},
+	"collisionSelectionBoxesByType": {
+		"*-closed-north": [
+			{
+				"x1": 0.02,
+				"y1": 0.98,
+				"z1": 0,
+				"x2": 0.98,
+				"y2": 1,
+				"z2": 1
+			},
+			{
+				"x1": 0,
+				"y1": 0,
+				"z1": 0,
+				"x2": 0.02,
+				"y2": 1,
+				"z2": 1
+			},
+			{
+				"x1": 0.98,
+				"y1": 0,
+				"z1": 0,
+				"x2": 1,
+				"y2": 1,
+				"z2": 1
+			},
+			{
+				"x1": 0,
+				"y1": 0,
+				"z1": 0.25,
+				"x2": 1,
+				"y2": 1,
+				"z2": 0.375
+			}
+		],
+		"*-closed-west": [
+			{
+				"x1": 0.02,
+				"y1": 0.98,
+				"z1": 0,
+				"x2": 0.98,
+				"y2": 1,
+				"z2": 1,
+				"rotateY": 270
+			},
+			{
+				"x1": 0,
+				"y1": 0,
+				"z1": 0,
+				"x2": 0.02,
+				"y2": 1,
+				"z2": 1,
+				"rotateY": 270
+			},
+			{
+				"x1": 0.98,
+				"y1": 0,
+				"z1": 0,
+				"x2": 1,
+				"y2": 1,
+				"z2": 1,
+				"rotateY": 270
+			},
+			{
+				"x1": 0,
+				"y1": 0,
+				"z1": 0.25,
+				"x2": 1,
+				"y2": 1,
+				"z2": 0.375,
+				"rotateY": 270
+			}
+		],
+		"*-closed-south": [
+			{
+				"x1": 0.02,
+				"y1": 0.98,
+				"z1": 0,
+				"x2": 0.98,
+				"y2": 1,
+				"z2": 1,
+				"rotateY": 180
+			},
+			{
+				"x1": 0,
+				"y1": 0,
+				"z1": 0,
+				"x2": 0.02,
+				"y2": 1,
+				"z2": 1,
+				"rotateY": 180
+			},
+			{
+				"x1": 0.98,
+				"y1": 0,
+				"z1": 0,
+				"x2": 1,
+				"y2": 1,
+				"z2": 1,
+				"rotateY": 180
+			},
+			{
+				"x1": 0,
+				"y1": 0,
+				"z1": 0.25,
+				"x2": 1,
+				"y2": 1,
+				"z2": 0.375,
+				"rotateY": 180
+			}
+		],
+		"*-closed-east": [
+			{
+				"x1": 0.02,
+				"y1": 0.98,
+				"z1": 0,
+				"x2": 0.98,
+				"y2": 1,
+				"z2": 1,
+				"rotateY": 90
+			},
+			{
+				"x1": 0,
+				"y1": 0,
+				"z1": 0,
+				"x2": 0.02,
+				"y2": 1,
+				"z2": 1,
+				"rotateY": 90
+			},
+			{
+				"x1": 0.98,
+				"y1": 0,
+				"z1": 0,
+				"x2": 1,
+				"y2": 1,
+				"z2": 1,
+				"rotateY": 90
+			},
+			{
+				"x1": 0,
+				"y1": 0,
+				"z1": 0.25,
+				"x2": 1,
+				"y2": 1,
+				"z2": 0.375,
+				"rotateY": 90
+			}
+		]
+
+	},
+		"heldTpIdleAnimation": "holdbothhandslarge",
+		"heldTpUseAnimation": "twohandplaceblock",
+		"tpHandTransform": {
+			"translation": {
+				"x": -1.23,
+				"y": -0.91,
+				"z": -0.8
+			},
+			"rotation": {
+				"x": -2,
+				"y": 25,
+				"z": -78
+			},
+			"scale": 0.4
+		}
+	}

@@ -8,6 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="assets\confession\blocktypes\stone\archway\archway_small_window.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="assets\confession\blocktypes\stone\archway\archway_small_window.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="VintagestoryAPI">
       <HintPath>$(VINTAGE_STORY)/VintagestoryAPI.dll</HintPath>
       <Private>false</Private>

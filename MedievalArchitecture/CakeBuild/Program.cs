@@ -1,5 +1,3 @@
-using System;
-using System.IO;
 using Cake.Common;
 using Cake.Common.IO;
 using Cake.Common.Tools.DotNet;
@@ -10,6 +8,8 @@ using Cake.Frosting;
 using Cake.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
+using System.IO;
 using Vintagestory.API.Common;
 
 namespace CakeBuild
