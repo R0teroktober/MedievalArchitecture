@@ -1,0 +1,76 @@
+{
+	"enabled": true,
+	"code": "construction_small",
+	"class":  "BlockArchwayConstruction",
+	"maxStackSize": 64,
+	"blockmaterial": "Wood",
+	"resistance": 1,
+	"renderPass": "OpaqueNoCull",
+	"facecullmode": "nevercull",
+	"lightabsorption": 0,
+	"sideopaque": {"all": false},
+	"sideao": {"all": true},
+	"sidesolid": {"all":  false},
+	"variantgroups": [{ "code": "orientation", "states": ["ns", "we"] }],
+	"attributes": {
+		"handbook": {"groupBy": [ "construction_small-*" ],"excludeByType": {"*-we": true}},
+		"sound":  "game:sounds/block/rock-break-pickaxe",
+		"brickAmount": 3,
+    "timeToConstruct": 2
+	},
+	"entityBehaviors": [ { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" } ],
+	"behaviors": [
+		{"name": "AttributeRenderingLibrary.NWOrientable" },
+		{"name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
+			"properties": {
+				"name": {
+					"*": [ "Small Archway frame" ]
+				},
+				"textures": {
+
+					"state-2::rock-*": {
+						"rim": {"base": "game:block/stone/rock/{rock}1"},
+						"rim2": {"base": "game:block/stone/rock/{rock}1"},
+						"plaster": {"base": "game:block/stone/rock/{rock}1","blendedOverlays": [{"base": "game:block/clay/fireclay","blendMode": "Lighten"}]}
+					},
+					"state-1::rock-*": {
+						"rim": {"base": "game:block/stone/rock/{rock}1"},
+						"rim3": {"base": "game:block/stone/rock/{rock}1"},
+						"plaster": { "base":  "game:block/transparent" }
+					}	
+				},
+				"shape": { 
+				"style-B": { "base": "confession:block/stone/construction-s-b", "rotateYByType": { "*-we": 90 }},
+				//"style-C": { "base": "confession:block/stone/construction-s-c", "overlays": [ { "base": "block/stone/arch-s-c", "rotateYByType": { "*-we": 90 } }] },
+				//"style-D": { "base": "confession:block/stone/construction-s-d", "overlays": [ { "base": "block/stone/arch-s-d", "rotateYByType": { "*-we": 90 } }] }
+				}
+			}
+		}
+	],
+	"creativeinventoryStacksByType": {
+			"*-ns": [
+				{
+					"tabs": [ "general", "decorative", "confession" ],
+					"stacks": [ 
+					{ "type": "block", "code": "construction_small-ns" }, 
+					{ "type": "block", "code": "construction_small-ns", "attributes": { "types": { "rock":  "limestone", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-ns", "attributes": { "types": { "rock":  "granite", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-ns", "attributes": { "types": { "rock":  "granite", "state": "2" } } },
+					{ "type": "block", "code": "construction_small-ns", "attributes":  { "types":  {"style":  "B"}}}, 
+					{ "type": "block", "code": "construction_small-ns", "attributes": { "types": {"style":  "B", "rock":  "limestone", "state": "1" } }},
+					{ "type": "block", "code": "construction_small-ns", "attributes": { "types": {"style":  "B", "rock":  "granite", "state": "2" } }}
+					]
+				}
+			]
+		},
+	"shape": { "base": "block/stone/construction-s-a", "rotateYByType": { "*-we": 90 }},
+	"textures": { 
+		"rim": { "base": "game:block/transparent" },
+		"rim2": { "base": "game:block/transparent" },
+		"rim3": { "base": "game:block/transparent" },
+		"plaster": { "base": "game:block/transparent" },
+		"iron1": { "base": "game:block/metal/sheet-plain/iron1" }, 
+		"generic": { "base": "game:block/wood/planks/generic" } },
+		"collisionBox": { "x1": 0, "y1": 0.5, "z1": 0, "x2": 1, "y2": 1, "z2": 1 }
+
+}
