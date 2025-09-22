@@ -1,19 +1,28 @@
 {
 	"enabled": true,
-	"code": "arch-s",
+	"code": "arch-s-ng",
 	"maxStackSize": 1,
-	"behavior": [
+	"blockmaterial": "Stone",
+	"shape": { "base": "confession:block/stone/arch-s-gothic" },
+	"textures": { "stone": { "base": "game:block/stone/rock/granite1" } },
+	"entityBehaviors": [{ "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" }],
+	"behaviors": [
 		{
 			"name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
 			"properties": {
-				"textures": {
-					"noglass-*": {
-						"stone": { "base": "game:block/stone/rock/{stone}" }
-					}
+				"name": {
+					"*": [ "Gothic archway", " (", "material-{material}", ")" ]
 				},
-				//"shape": {
-				//	"gothic-*": { "base": "confession:block/stone/arch-s-{type}" }
-				//}
+				"textures": {
+					"material-glass": {
+						"stone": { "base": "game:block/stone/rock/{material}1" },
+						"glass": { "base": "game:block/glass/{glass}" }
+					},
+					"material-noglass": {
+						"stone": { "base": "game:block/stone/rock/{material}1" },
+						"glass": { "base": "game:block/transparent" }
+					}
+				}
 			}
 		}
 	],
@@ -31,63 +40,18 @@
 
 				{
 					"type": "block",
-					"code": "arch-s",
-					"attributes": { "types": { "stone": "granite1" } }
+					"code": "arch-s-ng",
+					"attributes": { "types": {"material": "bauxite", "glass":  "red" } }
 				},
 				{
 					"type": "block",
-					"code": "arch-s",
-					"attributes": { "types": { "stone": "andesite" } }
+					"code": "arch-s-ng",
+					"attributes": { "types": { "material": "andesite", "glass":  "transparent" } }
 				},
 				{
 					"type": "block",
-					"code": "arch-s",
-					"attributes": { "types": { "stone": "conglomerate" } }
-				},
-				{
-					"type": "block",
-					"code": "arch-s",
-					"attributes": { "types": { "stone": "claystone" } }
-				},
-				{
-					"type": "block",
-					"code": "arch-s",
-					"attributes": { "types": { "stone": "limestone" } }
-				},
-				{
-					"type": "block",
-					"code": "arch-s",
-					"attributes": { "types": { "stone": "chert" } }
-				},
-				{
-					"type": "block",
-					"code": "arch-s",
-					"attributes": { "types": { "stone": "basalt" } }
-				},
-				{
-					"type": "block",
-					"code": "arch-s",
-					"attributes": { "types": { "stone": "slate" } }
-				},
-				{
-					"type": "block",
-					"code": "arch-s",
-					"attributes": { "types": { "stone": "peridotite" } }
-				},
-				{
-					"type": "block",
-					"code": "arch-s",
-					"attributes": { "types": { "stone": "phyllite" } }
-				},
-				{
-					"type": "block",
-					"code": "arch-s",
-					"attributes": { "types": { "stone": "sandstone" } }
-				},
-				{
-					"type": "block",
-					"code": "arch-s",
-					"attributes": { "types": { "stone": "bauxite1" } }
+					"code": "arch-s-ng",
+					"attributes": { "types": { "material": "limestone", "glass":  "leaded" } }
 				}
 			]
 		}

@@ -8,9 +8,6 @@
 	"textureSizes": {
 		"stone": [16,16]
 	},
-	"textures": {
-		"stone": "/Users/Lenovo/Pictures/vintage story/stone"
-	},
 	"elements": [
 		{
 			"name": "origin",
