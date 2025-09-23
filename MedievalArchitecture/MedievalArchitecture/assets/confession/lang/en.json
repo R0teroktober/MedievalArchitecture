@@ -1,4 +1,3 @@
 { "game:tabname-confession": "Medieval Architecture", 
-  "confession:block-arch_small-*": "Small Archway A ( granite rock)",
-  "confession:block-arch_small_window-*": "Small Archway A ( plain glass + granite rock)",
-  "confession:blockdesc-arch_small_window-*": "<font color=\"#D6B56D\">Used to decorate various items</font>" }
+  "confession:block-arch_small-*": "DEBUG: Missing attribute / attribute mismatch",
+  "confession:block-arch_small_window-*": "DEBUG: Missing attribute / attribute mismatch" }
