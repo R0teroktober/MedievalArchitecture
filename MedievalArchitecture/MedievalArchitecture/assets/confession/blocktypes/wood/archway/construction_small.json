@@ -11,16 +11,13 @@
 	"sideopaque": {"all": false},
 	"sideao": {"all": true},
 	"sidesolid": {"all":  false},
-	"variantgroups": [{ "code": "orientation", "states": ["ns", "we"] }],
+	"variantgroups": [{"code": "side","loadFromProperties": "abstract/horizontalorientation"}],
 	"attributes": {
-		"handbook": {"groupBy": [ "construction_small-*" ],"excludeByType": {"*-we": true}},
-		"sound":  "game:sounds/block/rock-break-pickaxe",
-		"brickAmount": 3,
-    "timeToConstruct": 2
+		"handbook": {"groupBy": [ "construction_small-*" ],"excludeByType": {"*-west": true, "east": true, "south": true}}
 	},
 	"entityBehaviors": [ { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" } ],
 	"behaviors": [
-		{"name": "AttributeRenderingLibrary.NWOrientable" },
+		{ "name": "AttributeRenderingLibrary.HorizontalOrientable" },
 		{"name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
 			"properties": {
 				"name": {
@@ -30,40 +27,210 @@
 
 					"state-2::rock-*": {
 						"rim": {"base": "game:block/stone/rock/{rock}1"},
-						"rim2": {"base": "game:block/stone/rock/{rock}1"},
+						"rim2": { "base": "game:block/stone/rock/{rock}1" },
+						"rim3": {"base": "game:block/transparent"},
 						"plaster": {"base": "game:block/stone/rock/{rock}1","blendedOverlays": [{"base": "game:block/clay/fireclay","blendMode": "Lighten"}]}
 					},
 					"state-1::rock-*": {
-						"rim": {"base": "game:block/stone/rock/{rock}1"},
+						"rim": { "base": "game:block/stone/rock/{rock}1" },
+						"rim2": { "base": "game:block/transparent" },
 						"rim3": {"base": "game:block/stone/rock/{rock}1"},
 						"plaster": { "base":  "game:block/transparent" }
-					}	
+					},
+					"state-0::rock-*": {
+						"rim": {"base": "game:block/transparent"},
+						"rim2": { "base": "game:block/transparent" },
+						"rim3": {"base": "game:block/transparent"},
+						"plaster": {"base": "game:block/transparent"}
+					},
 				},
-				"shape": { 
-				"style-B": { "base": "confession:block/stone/construction-s-b", "rotateYByType": { "*-we": 90 }},
-				//"style-C": { "base": "confession:block/stone/construction-s-c", "overlays": [ { "base": "block/stone/arch-s-c", "rotateYByType": { "*-we": 90 } }] },
-				//"style-D": { "base": "confession:block/stone/construction-s-d", "overlays": [ { "base": "block/stone/arch-s-d", "rotateYByType": { "*-we": 90 } }] }
+				"shape": {
+					"style-a": { "base": "confession:block/wood/construction-s-a", "rotateYByType": { "*-east": 90, "south": 180, "west": 270 } },
+					"style-b": { "base": "confession:block/wood/construction-s-b", "rotateYByType": { "*-east": 90, "south": 180, "west": 270 } }
+					}
+					//"style-C": { "base": "confession:block/stone/construction-s-c", "overlays": [ { "base": "block/stone/arch-s-c", "rotateYByType": { "*-we": 90 } }] },
+					//"style-D": { "base": "confession:block/stone/construction-s-d", "overlays": [ { "base": "block/stone/arch-s-d", "rotateYByType": { "*-we": 90 } }] }
 				}
 			}
-		}
 	],
 	"creativeinventoryStacksByType": {
-			"*-ns": [
+			"*-north": [
 				{
 					"tabs": [ "general", "decorative", "confession" ],
 					"stacks": [ 
-					{ "type": "block", "code": "construction_small-ns" }, 
-					{ "type": "block", "code": "construction_small-ns", "attributes": { "types": { "rock":  "limestone", "state": "1" } } },
-					{ "type": "block", "code": "construction_small-ns", "attributes": { "types": { "rock":  "granite", "state": "1" } } },
-					{ "type": "block", "code": "construction_small-ns", "attributes": { "types": { "rock":  "granite", "state": "2" } } },
-					{ "type": "block", "code": "construction_small-ns", "attributes":  { "types":  {"style":  "B"}}}, 
-					{ "type": "block", "code": "construction_small-ns", "attributes": { "types": {"style":  "B", "rock":  "limestone", "state": "1" } }},
-					{ "type": "block", "code": "construction_small-ns", "attributes": { "types": {"style":  "B", "rock":  "granite", "state": "2" } }}
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "andesite", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "andesite", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "andesite", "state": "2" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "andesite", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "andesite", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": { "style": "b", "rock": "andesite", "state": "2" } } },
+
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "basalt", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "basalt", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "basalt", "state": "2" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "basalt", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "basalt", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": { "style": "b", "rock": "basalt", "state": "2" } } },
+
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "bauxite", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "bauxite", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "bauxite", "state": "2" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "bauxite", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "bauxite", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "bauxite", "state": "2" } } },
+					
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "chalk", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "chalk", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "chalk", "state": "2" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "chalk", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "chalk", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "chalk", "state": "2" } } },
+					
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "chert", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "chert", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "chert", "state": "2" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "chert", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "chert", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "chert", "state": "2" } } },
+					
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "claystone", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "claystone", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "claystone", "state": "2" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "claystone", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "claystone", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "claystone", "state": "2" } } },
+					
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "conglomerate", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "conglomerate", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "conglomerate", "state": "2" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "conglomerate", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "conglomerate", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "conglomerate", "state": "2" } } },
+					
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "granite", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "granite", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "granite", "state": "2" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "granite", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "granite", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "granite", "state": "2" } } },
+					
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "greenmarble", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "greenmarble", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "greenmarble", "state": "2" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "greenmarble", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "greenmarble", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "greenmarble", "state": "2" } } },
+					
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "halite", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "halite", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "halite", "state": "2" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "halite", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "halite", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "halite", "state": "2" } } },
+					
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "kimberlite", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "kimberlite", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "kimberlite", "state": "2" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "kimberlite", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "kimberlite", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "kimberlite", "state": "2" } } },
+					
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "limestone", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "limestone", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "limestone", "state": "2" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "limestone", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "limestone", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "limestone", "state": "2" } } },
+					
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "obsidian", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "obsidian", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "obsidian", "state": "2" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "obsidian", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "obsidian", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "obsidian", "state": "2" } } },
+					
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "peridotite", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "peridotite", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "peridotite", "state": "2" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "peridotite", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "peridotite", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "peridotite", "state": "2" } } },
+					
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "phyllite", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "phyllite", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "phyllite", "state": "2" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "phyllite", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "phyllite", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "phyllite", "state": "2" } } },
+					
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "redmarble", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "redmarble", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "redmarble", "state": "2" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "redmarble", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "redmarble", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "redmarble", "state": "2" } } },
+					
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "sandstone", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "sandstone", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "sandstone", "state": "2" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "sandstone", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "sandstone", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "sandstone", "state": "2" } } },
+					
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "scoria", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "scoria", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "scoria", "state": "2" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "scoria", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "scoria", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "scoria", "state": "2" } } },
+					
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "shale", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "shale", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "shale", "state": "2" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "shale", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "shale", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "shale", "state": "2" } } },
+					
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "slate", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "slate", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "slate", "state": "2" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "slate", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "slate", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "slate", "state": "2" } } },
+					
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "suevite", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "suevite", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "suevite", "state": "2" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "suevite", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "suevite", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "suevite", "state": "2" } } },
+					
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "tuff", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "tuff", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "tuff", "state": "2" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "tuff", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "tuff", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "tuff", "state": "2" } } },
+					
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "whitemarble", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "whitemarble", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "whitemarble", "state": "2" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "whitemarble", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "whitemarble", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "whitemarble", "state": "2" } } },
+					
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "meteorite-iron", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "meteorite-iron", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "meteorite-iron", "state": "2" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "meteorite-iron", "state": "0" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "meteorite-iron", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "meteorite-iron", "state": "2" } } },
+					
 					]
 				}
 			]
 		},
-	"shape": { "base": "block/stone/construction-s-a", "rotateYByType": { "*-we": 90 }},
+	"shape": { "base": "game:block/basic/invisible" },
 	"textures": { 
 		"rim": { "base": "game:block/transparent" },
 		"rim2": { "base": "game:block/transparent" },

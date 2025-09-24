@@ -1,0 +1,115 @@
+{
+	"enabled": true,
+	"code": "window",
+	"maxStackSize": 64,
+	"blockmaterial": "Wood",
+	"resistance": 1,
+	"renderPass": "OpaqueNoCull",
+	"facecullmode": "nevercull",
+	"lightabsorption": 0,
+	"sideopaque": {"all": false},
+	"sideao": {"all": true},
+	"sidesolid": {"all":  false},
+	"variantgroups": [{"code": "side","loadFromProperties": "abstract/horizontalorientation"}],
+	"attributes": {
+		"handbook": {"groupBy": [ "window-*" ],"excludeByType": {"*-west": true, "*-east": true, "*-south": true}}
+	},
+	"entityBehaviors": [ { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" } ],
+	"behaviors": [
+		{"name": "AttributeRenderingLibrary.HorizontalOrientable" },
+		{"name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
+			"properties": {
+				"name": {
+					"glass-*": [ "Window ( ", "{glass}", " glass)" ],
+					"*": [ "DEBUG: Attribute mismatch. No exact name found"]
+				},
+				
+				"description": {
+					"style-*::glass-*": ["<font color=\"#D6B56D\">Glass: </font>", "{glass}<br>","<font color=\"#D6B56D\">Shape: </font>", "{style}<br>"],
+					"*":  ["DEBUG: No exact description found"]
+				},
+				"textures": {
+					"glass-*": {
+						"frame": { "base": "game:block/wood/debarked/veryaged"},
+						"putty": { "base": "game:block/metal/ingot/lead"},
+						"black": { "base": "game:block/black"},
+						"glass": { "base": "game:block/glass/{glass}", "overlays": [ "game:block/glass/leaded" ] }
+
+					}
+				},
+				"shape": {
+					"style-*": {"base": "confession:block/glass/window-{style}","rotateYByType": {"*-north": 0,"*-east": 270,"*-south": 180,"*-west": 90}}
+
+				}
+
+
+			}}],
+	"creativeinventoryStacksByType": {
+			"*-north": [
+				{
+					"tabs": [ "general", "decorative", "confession" ],
+					"stacks": [
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "single","glass": "blue"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "top","glass": "blue"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "middle","glass": "blue"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "bottom","glass": "blue"}}},
+
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "single","glass": "brown"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "top","glass": "brown"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "middle","glass": "brown"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "bottom","glass": "brown"}}},
+
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "single","glass": "green"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "top","glass": "green"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "middle","glass": "green"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "bottom","glass": "green"}}},
+
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "single","glass": "pink"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "top","glass": "pink"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "middle","glass": "pink"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "bottom","glass": "pink"}}},
+
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "single","glass": "plain"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "top","glass": "plain"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "middle","glass": "plain"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "bottom","glass": "plain"}}},
+
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "single","glass": "quartz"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "top","glass": "quartz"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "middle","glass": "quartz"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "bottom","glass": "quartz"}}},
+
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "single","glass": "red"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "top","glass": "red"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "middle","glass": "red"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "bottom","glass": "red"}}},
+
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "single","glass": "vintage"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "top","glass": "vintage"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "middle","glass": "vintage"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "bottom","glass": "vintage"}}},
+
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "single","glass": "violet"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "top","glass": "violet"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "middle","glass": "violet"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "bottom","glass": "violet"}}},
+
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "single","glass": "yellow"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "top","glass": "yellow"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "middle","glass": "yellow"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "bottom","glass": "yellow"}}}
+					]
+				}
+			]
+	},
+	"shape": { "base": "game:block/basic/invisible" },
+	"textures": {
+						"frame": { "base": "game:block/transparent"},
+						"putty": { "base": "game:block/transparent"},
+						"black": { "base": "game:block/transparent"},
+						"glass": { "base": "game:block/transparent" }
+
+					},
+	"collisionBox": { "x1": 0, "y1": 0, "z1": 0.1875, "x2": 1, "y2": 1, "z2": 0.4375, "rotateYByType": {"*-north": 0,"*-east": 270,"*-south": 180,"*-west": 90 }}
+
+}

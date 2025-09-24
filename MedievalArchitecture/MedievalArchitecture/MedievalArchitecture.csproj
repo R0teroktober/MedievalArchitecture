@@ -40,6 +40,9 @@
 <ItemGroup>
 	<PackageReference Include="CraluminumMods.VintageStory.AttributeRenderingLibrary" Version="2.3.0" PrivateAssets="all" />
 </ItemGroup>
+<ItemGroup>
+  <Folder Include="assets\confession\shapes\block\glass\" />
+</ItemGroup>
 <ProjectExtensions><VisualStudio><UserProperties assets_4confession_4blocktypes_4stone_4archway_4archway_3small_3window_1json__JsonSchema="json" /></VisualStudio></ProjectExtensions>
 
 </Project>
