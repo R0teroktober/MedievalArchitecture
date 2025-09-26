@@ -1,0 +1,49 @@
+{
+	"enabled": true,
+	"code": "roof",
+	"maxStackSize": 64,
+	"blockmaterial": "Wood",
+	"resistance": 1,
+	"renderPass": "OpaqueNoCull",
+	"facecullmode": "nevercull",
+	"lightabsorption": 0,
+	"sideopaque": {"all": false},
+	"sideao": {"all": true},
+	"sidesolid": {"all":  false},
+	"variantgroups": [
+		{"code":  "level", "states":  ["0", "1", "2"]},
+		{"code": "side","loadFromProperties": "abstract/horizontalorientation"},
+		{ "code": "cover", "states": ["free", "snow"] }
+
+	],
+	"attributes": {
+		"handbook": {"groupBy": [ "roof-*" ],"excludeByType": {"*-west": true, "*-east": true, "*-south": true}}
+	},
+	"entityBehaviors": [ { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" } ],
+	"behaviors": [
+		{"name": "AttributeRenderingLibrary.HorizontalOrientable" },
+		{"name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
+			"properties": {
+				"name": {
+					"*": [ "DEBUG: Attribute mismatch. No exact name found"]
+				},
+				
+				"description": {
+					"*":  ["DEBUG: No exact description found"]
+				},
+				"textures": {
+					"*": {
+						"frame": { "base": "game:block/wood/debarked/veryaged"},
+						"putty": { "base": "game:block/metal/ingot/lead"},
+						"black": { "base": "game:block/black"},
+						"glass": { "base": "game:block/glass/{glass}", "overlays": [ "game:block/glass/leaded" ] }
+
+					}
+				},
+				"shape": {
+					"style-*": {"base": "confession:block/glass/window-{style}","rotateYByType": {"*-north": 0,"*-east": 270,"*-south": 180,"*-west": 90}}
+
+				}
+
+
+			}}],
