@@ -45,8 +45,8 @@
 					},
 				},
 				"shape": {
-					"style-a": { "base": "confession:block/wood/construction-s-a", "rotateYByType": { "*-east": 90, "south": 180, "west": 270 } },
-					"style-b": { "base": "confession:block/wood/construction-s-b", "rotateYByType": { "*-east": 90, "south": 180, "west": 270 } }
+					"style-a": { "base": "confession:block/wood/construction-s-a", "rotateYByType": { "*-east": 90, "*-south": 180, "*-west": 270 } },
+					"style-b": { "base": "confession:block/wood/construction-s-b", "rotateYByType": { "*-east": 90, "*-south": 180, "*-west": 270 } }
 					}
 					//"style-C": { "base": "confession:block/stone/construction-s-c", "overlays": [ { "base": "block/stone/arch-s-c", "rotateYByType": { "*-we": 90 } }] },
 					//"style-D": { "base": "confession:block/stone/construction-s-d", "overlays": [ { "base": "block/stone/arch-s-d", "rotateYByType": { "*-we": 90 } }] }
