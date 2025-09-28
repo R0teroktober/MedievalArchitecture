@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "patches": {
+    "integer": {},
+    "float": {},
+    "boolean": {
+        "confession:blocktypes/stone/archway/archway_small.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
+        "confession:blocktypes/stone/archway/archway_small_window.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
+        "confession:blocktypes/wood/archway/construction_small.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
+        "confession:blocktypes/wood/roof/roof.json": {"enabled": "ENABLE_ROOFS" },
+        "confession:blocktypes/glass/window.json": {"enabled": "ENABLE_WINDOWS" }
+        
+      }, 
+      "other": {}
+  },
+   "settings": {
+    "integer": {},
+    "float": {},
+    "boolean": {
+      "ENABLE_SMALL_ARCHWAYS": {
+        "name": "enable-small-archways",
+        "ingui": "confession:setting-enable-small-archways",
+        "weight": 2.1,
+        "comment": "Enable/ Disable all Small Archways",
+        "default": true
+      },
+      "ENABLE_ROOFS": {
+        "name": "enable-roofs",
+        "ingui": "confession:setting-enable-roof",
+        "weight": 2.2,
+        "comment": "Enable/ Disable all roof blocks",
+        "default": true
+      },
+      "ENABLE_WINDOWS": {
+        "name": "enable-windows",
+        "ingui": "confession:setting-enable-windows",
+        "weight": 2.3,
+        "comment": "Enable/ Disable windows",
+        "default": true
+      },
+    },
+    "other": {
+    }
+
+  },
+  "formatting": [
+    {
+        "type": "separator",
+        "title": "Medieval Architecture Settings",
+        "weight": 1.0
+    },
+    {
+        "type": "separator",
+        "text": "Disable certain blocks",
+        "weight": 2
+    }
+  ]
+}

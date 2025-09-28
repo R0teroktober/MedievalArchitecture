@@ -1,3 +1,6 @@
 { "game:tabname-confession": "Medieval Architecture", 
   "confession:block-arch_small-*": "DEBUG: Missing attribute / attribute mismatch",
-  "confession:block-arch_small_window-*": "DEBUG: Missing attribute / attribute mismatch" }
+  "confession:block-arch_small_window-*": "DEBUG: Missing attribute / attribute mismatch",
+  "confession:block-roof-*": "DEBUG: Missing attribute / attribute mismatch",
+  "confessionblockdesc-roof-*": "DEBUG: Missing attribute / attribute mismatch"
+}
