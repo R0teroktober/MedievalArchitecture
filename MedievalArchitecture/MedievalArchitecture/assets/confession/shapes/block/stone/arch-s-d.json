@@ -8,11 +8,6 @@
 	"textureHeight": 16,
 	"textureSizes": {
 	},
-	"textures": {
-		"black": "C:/Users/Wanja/Pictures/vintage story textures/black",
-		"frame": "C:/Users/Wanja/Pictures/vintage story textures/frame",
-		"putty": "C:/Users/Wanja/Pictures/vintage story textures/putty"
-	},
 	"elements": [
 		{
 			"name": "originCoverstones",

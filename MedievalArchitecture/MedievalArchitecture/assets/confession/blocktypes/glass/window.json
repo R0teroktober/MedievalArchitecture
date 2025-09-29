@@ -20,13 +20,11 @@
 		{"name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
 			"properties": {
 				"name": {
-					"glass-*": [ "Window ( ", "{glass}", " glass)" ],
-					"*": [ "DEBUG: Attribute mismatch. No exact name found"]
+					"*": [ "confession:block-window-name1", "block-glass-{glass}", "confession:block-window-name2"]
 				},
 				
 				"description": {
-					"style-*::glass-*": ["<font color=\"#D6B56D\">Glass: </font>", "{glass}<br>","<font color=\"#D6B56D\">Shape: </font>", "{style}<br>"],
-					"*":  ["DEBUG: No exact description found"]
+					"*":  ["confession:block-window-description1", "block-glass-{glass}", "confession:block-window-description2", "confession:window-{style}"]
 				},
 				"textures": {
 					"glass-*": {

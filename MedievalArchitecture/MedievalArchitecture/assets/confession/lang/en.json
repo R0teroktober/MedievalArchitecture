@@ -1,6 +1,109 @@
-{ "game:tabname-confession": "Medieval Architecture", 
-  "confession:block-arch_small-*": "DEBUG: Missing attribute / attribute mismatch",
-  "confession:block-arch_small_window-*": "DEBUG: Missing attribute / attribute mismatch",
-  "confession:block-roof-*": "DEBUG: Missing attribute / attribute mismatch",
-  "confessionblockdesc-roof-*": "DEBUG: Missing attribute / attribute mismatch"
+{ 
+  //// Important: PAY ATTENTION TO SPACES INFRONT / BEHIND ""
+  
+  // handbook
+
+  // header
+  "game:tabname-confession": "Medieval Architecture", 
+  "confession:block-linebreak": "<br>",
+
+  //debug
+  "confession:block-debug-noname": "DEBUG: Attribute mismatch. No exact name found",
+  "confession:block-debug-description": "DEBUG: Attribute mismatch. No exact name found",
+
+  //materials and colors
+  "game:rock-meteorite-iron": "Meteoric iron",
+  "game:rock-none": "None",
+  "confession:ash": "ash",
+  "confession:blue": "blue",
+  "confession:brown": "brown",
+  "confession:browngolden": "browngolden",
+  "confession:brownlight": "brownlight",
+  "confession:brownweathered": "brownweathered",
+  "confession:green": "green",
+  "confession:orange": "orange",
+  "confession:pink": "pink",
+  "confession:tan": "tan",
+  "confession:yellow": "yellow",
+  "confession:acacia-wood": "Acacia",
+  "confession:aged-wood": "Aged",
+  "confession:baldcypress-wood": "Baldcypress",
+  "confession:birch-wood": "Birch",
+  "confession:ebony-wood": "Ebony",
+  "confession:kapok-wood": "Kapok",
+  "confession:larch-wood": "Larch",
+  "confession:maple-wood": "Maple",
+  "confession:oak-wood": "Oak",
+  "confession:pine-wood": "Pine",
+  "confession:purpleheart-wood": "Purpleheart",
+  "confession:redwood-wood": "Redwood",
+  "confession:walnut-wood": "Walnut",
+  "confession:none-wood": "None",
+
+  // blocks
+  // archways
+  "confession:block-arch_small_window-*": "Small archway (Placeholder)",
+  "confession:block-construction_small-*": "Archway frame (Placeholder)",
+  "confession:block-arch_small-name-plaster1": "Small plaster & ", "confession:block-arch_small-name-plaster2": " archway",
+  "confession:block-arch_small-name1": "Small ",
+  "confession:block-arch_small-name-daub1": " daub & ",
+  "confession:block-arch_small-name-daub2": " archway",
+  "confession:block-arch_small-name-rock1": " rock archway",
+  "confession:block-arch_small-name-cobblestone1": " cobblestone archway",
+  "confession:block-arch_small-name-brick1": " brick archway",
+  "confession:block-arch_small-description1": "<font color=\"#D6B56D\">Stone: </font>",
+  "confession:block-arch_small-description-plaster1": " rock & plaster",
+  "confession:block-arch_small-description-daub1": " rock & ",
+  "confession:block-arch_small-description-daub2": " daub",
+  "confession:block-arch_small-description-rock1": " rock",
+  "confession:block-arch_small-description-cobblestone1": " cobblestone",
+  "confession:block-arch_small-description-brick1": " brick",
+  "confession:block-arch_small-description2": "<br><font color=\"#D6B56D\">Shape: </font>",
+  "confession:block-arch_small-description3": "<br><font color=\"#D6B56D\">Glass: </font>None<br>",
+  "confession:block-arch_small-description4": "<br><font color=\"#D6B56D\">Glass: </font>",
+  "confession:block-construction_small-name1": "Small Archway frame ",
+  "confession:block-construction_small-name2": "/3",
+  "confession:0": "0",
+  "confession:1": "1",
+  "confession:2": "2",
+  "confession:a": "A",
+  "confession:b": "B",
+  "confession:c": "C",
+  "confession:d": "D",
+  "confession:block-arch_small-*": "Small archway (Placeholder)",
+
+
+  // roofs
+  "confession:block-roof-name-rafter1": " rafter block",
+  "confession:block-roof-name-roof1": " roof",
+  "confession:block-roof-description-roof1": "<br><font color=\"#D6B56D\">Rafter material: </font>",
+  "confession:block-roof-description-roof2": "<br><font color=\"#D6B56D\">Shingle material: </font>",
+  "confession:block-roof-description-roof3": " (half block)",
+  "confession:block-roof-description-roof4": " (full block)",
+  "confession:block-roof-description-30roof": "30° ",
+  "confession:block-roof-description-45roof": "45° ",
+  "confession:block-roof-description-60roof": "60° ",
+  "confession:block-roof-name-style-*normal": "Straight",
+  "confession:block-roof-name-style-*inner": "Inner corner",
+  "confession:block-roof-name-style-*outer": "Outer corner",
+  "confession:block-roof-name-style-*point": "Spire",
+  "confession:block-roof-name-style-*ridge": "Ridge",
+  "confession:block-roof-0-*": "Rafter block (Placeholder)",
+  "confession:block-roof-1-*": "Roof block (Placeholder)",
+
+
+  // windows
+  "confession:block-window-*": "Window (Placeholder)",
+  "confession:window-single": "Single part",
+  "confession:window-top": "Top part",
+  "confession:window-middle": "Middle part",
+  "confession:window-bottom": "Bottom part",
+  "confession:block-window-name1": "Window (", "confession:block-window-name2": ")", "confession:block-window-name3": " (",
+
+  "confession:block-window-description1": "<font color=\"#D6B56D\">Glass: </font>", "confession:block-window-description2": "<br><font color=\"#D6B56D\">Shape: </font>",
+
+  // configs
+  "confession:setting-enable-small-archways": "Enable small archways",
+  "confession:setting-enable-roof": "Enable roofs",
+  "confession:setting-enable-windows": "Enable windows"
 }

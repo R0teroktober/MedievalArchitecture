@@ -8,9 +8,6 @@
 	"textureHeight": 16,
 	"textureSizes": {
 	},
-	"textures": {
-		"frame": "C:/Users/Wanja/Pictures/vintage story textures/frame"
-	},
 	"elements": [
 		{
 			"name": "Glass",

@@ -23,20 +23,20 @@
 		{"name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
 			"properties": {
 				"name": {
-					"style-*::rock-*::plaster-plain": [ "Small plaster & ","{rock}", " archway"],
-					"style-*::rock-*::daub-*": [ "Small ", "{daub}", " daub & ","{rock}", " archway"],
-					"style-*::rock-*": [ "Small ","{rock}", " rock archway" ],
-					"style-*::cobblestone-*": [ "Small ", "{cobblestone}", " cobblestone archway"],
-					"style-*::brick-*": [ "Small ", "{brick}", " brick archway" ],
-					"*": [ "DEBUG: Attribute mismatch. No exact name found"]
+					"style-*::rock-*::plaster-plain": [ "confession:block-arch_small-name-plaster1","rock-{rock}", "confession:block-arch_small-name-plaster2"],
+					"style-*::rock-*::daub-*": [ "confession:block-arch_small-name1", "confession:{daub}", "confession:block-arch_small-name-daub1","rock-{rock}", "confession:block-arch_small-name-daub2"],
+					"style-*::rock-*": [ "confession:block-arch_small-name1","rock-{rock}", "confession:block-arch_small-name-rock1" ],
+					"style-*::cobblestone-*": [ "confession:block-arch_small-name1", "rock-{cobblestone}", "confession:block-arch_small-name-cobblestone1"],
+					"style-*::brick-*": [ "confession:block-arch_small-name1", "rock-{brick}", "confession:block-arch_small-name-brick1" ],
+					"*": [ "confession:block-debug-noname"]
 				},
 				"description":  {
-					"style-*::rock-*::plaster-plain": [ "<font color=\"#D6B56D\">Stone: </font>", "{rock}", " rock & plaster<br>","<font color=\"#D6B56D\">Shape: </font>","{style}<br>","<font color=\"#D6B56D\">Glass: </font>none<br>"],
-					"style-*::rock-*::daub-*": [ "<font color=\"#D6B56D\">Stone: </font>", "{rock}", " rock & ", "{daub}", " daub<br>","<font color=\"#D6B56D\">Shape: </font>","{style}<br>","<font color=\"#D6B56D\">Glass: </font>none<br>"],
-					"style-*::rock-*": [ "<font color=\"#D6B56D\">Stone: </font>", "{rock}", " rock<br>","<font color=\"#D6B56D\">Shape: </font>","{style}<br>","<font color=\"#D6B56D\">Glass: </font>none<br>"],
-					"style-*::cobblestone-*": [ "<font color=\"#D6B56D\">Stone: </font>", "{cobblestone}"," cobblestone<br>","<font color=\"#D6B56D\">Shape: </font>","{style}<br>","<font color=\"#D6B56D\">Glass: </font>none<br>"],
-					"style-*::brick-*": [ "<font color=\"#D6B56D\">Stone: </font>", "{brick}", " brick<br>","<font color=\"#D6B56D\">Shape: </font>","{style}<br>","<font color=\"#D6B56D\">Glass: </font>none<br>"],	
-					"*":  ["DEBUG: No exact description found"]
+					"style-*::rock-*::plaster-plain": [ "confession:block-arch_small-description1", "rock-{rock}", "confession:block-arch_small-description-plaster1","confession:block-arch_small-description2","confession:{style}","confession:block-arch_small-description3"],
+					"style-*::rock-*::daub-*": [ "confession:block-arch_small-description1", "rock-{rock}", "confession:block-arch_small-description-daub1", "confession:{daub}", "confession:block-arch_small-description-daub2","confession:block-arch_small-description2","confession:{style}","confession:block-arch_small-description3"],
+					"style-*::rock-*": [ "confession:block-arch_small-description1", "rock-{rock}", "confession:block-arch_small-description-rock1","confession:block-arch_small-description2","confession:{style}","confession:block-arch_small-description3"],
+					"style-*::cobblestone-*": [ "confession:block-arch_small-description1", "rock-{cobblestone}","confession:block-arch_small-description-cobblestone1","confession:block-arch_small-description2","confession:{style}","confession:block-arch_small-description3"],
+					"style-*::brick-*": [ "confession:block-arch_small-description1", "rock-{brick}", "confession:block-arch_small-description-brick1","confession:block-arch_small-description2","confession:{style}","confession:block-arch_small-description3"],	
+					"*":  ["confession:block-debug-nodescription"]
 
 				},
 				"textures": {

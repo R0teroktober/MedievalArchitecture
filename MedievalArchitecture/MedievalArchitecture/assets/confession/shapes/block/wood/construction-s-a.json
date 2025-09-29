@@ -8,12 +8,6 @@
 	"textureHeight": 16,
 	"textureSizes": {
 	},
-	"textures": {
-		"rim2": "C:/Users/Wanja/Pictures/vintage story textures/rim2",
-		"rim3": "C:/Users/Wanja/Pictures/vintage story textures/rim3",
-		"iron1": "D:/Games/VintagestoryPRE1.20/assets/survival/textures/block/metal/sheet-plain/iron1",
-		"generic": "D:/Games/VintagestoryPRE1.20/assets/survival/textures/block/wood/planks/generic"
-	},
 	"elements": [
 		{
 			"name": "origin",

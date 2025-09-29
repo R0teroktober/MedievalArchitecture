@@ -25,15 +25,15 @@
 		{"name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
 			"properties": {
 				"name": {
-					"shinglematerial-none::style-*": ["Rafter block"],
-					"style-*":  ["Roof block"],
-					"*": [ "DEBUG: Attribute mismatch. No exact name found"]
+					"shinglematerial-none::style-*::trussmaterial-*": ["confession:block-roof-name-style-{style}", "confession:block-roof-name-rafter1"],
+					"style-*::shinglematerial-*":  ["confession:block-roof-name-style-{style}", "confession:block-roof-name-roof1"],
+					"*": [ "confession:block-debug-noname"]
 				},
 				
 				"description": {
-					"style-l30*::trussmaterial-*::shinglematerial-*":  ["<font color=\"#D6B56D\">Shape: </font>30° slope (low profile)<br>", "<font color=\"#D6B56D\">Rafter material: </font>", "{trussmaterial}<br>", "<font color=\"#D6B56D\">Shingle material: </font>", "{shinglematerial}<br>"],
-					"style-u30*":  ["<font color=\"#D6B56D\">Shape: </font>30° slope (high profile)<br>", "<font color=\"#D6B56D\">Rafter material: </font>", "{trussmaterial}<br>", "<font color=\"#D6B56D\">Shingle material: </font>", "{shinglematerial}<br>"],
-					"*":  ["DEBUG: No exact description found"]
+					"style-l*::trussmaterial-*::shinglematerial-*":  ["confession:block-arch_small-description2", "confession:block-roof-description-30roof", "confession:block-roof-name-style-{style}","confession:block-roof-description-roof3", "confession:block-roof-description-roof1", "confession:{trussmaterial}-wood", "confession:block-roof-description-roof2", "confession:{shinglematerial}-wood", "confession:block-linebreak"],
+					"style-u*::trussmaterial-*::shinglematerial-*":  ["confession:block-arch_small-description2", "confession:block-roof-description-30roof", "confession:block-roof-name-style-{style}","confession:block-roof-description-roof4", "confession:block-roof-description-roof1", "confession:{trussmaterial}-wood", "confession:block-roof-description-roof2", "confession:{shinglematerial}-wood", "confession:block-linebreak"],
+					"*":  ["confession:block-debug-nodescription"]
 				},
 				"texturesByType": {
 					"*-1-*": {
