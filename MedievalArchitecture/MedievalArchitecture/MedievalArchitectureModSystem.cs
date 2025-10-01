@@ -8,7 +8,7 @@ namespace MedievalArchitecture
         public override void Start(ICoreAPI api)
         {
             base.Start(api);
-            api.RegisterBlockClass("BlockArchwayConstruction", typeof(BlockArchwayConstruction));
+            api.RegisterBlockBehaviorClass("BlockBehaviorConstructible", typeof(BlockBehaviorConstructible));
         }
     }
 }

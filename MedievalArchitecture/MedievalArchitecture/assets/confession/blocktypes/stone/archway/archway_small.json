@@ -19,7 +19,7 @@
 	"attributes": {"handbook": {"groupBy": [ "arch_small-*" ],"excludeByType": {"*-west": true,"*-east": true,"*-south": true}}},
 	"entityBehaviors": [ { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" } ],
 	"behaviors": [
-		{ "name": "AttributeRenderingLibrary.HorizontalOrientable" },
+		{"name": "AttributeRenderingLibrary.HorizontalOrientable", "properties":{"dropBlockFace": "*-north"} },
 		{"name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
 			"properties": {
 				"name": {
