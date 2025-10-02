@@ -1,83 +1,79 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using Vintagestory.API;
-using Vintagestory.API.Client;
+using AttributeRenderingLibrary;
 using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
-using Vintagestory.API.Util;
-using Vintagestory.GameContent;
+using Vintagestory.Datastructures;
 
-namespace MedievalArchitecture
+
+public class BlockBehaviorConstructionStateChanger : BlockBehavior
 {
-    public class BlockBehaviorConstructible : BlockBehavior
+    public BlockBehaviorConstructionStateChanger(Block block) : base(block) { }
+
+
+    public override bool OnBlockInteractStart(BlockPos pos, IPlayer byPlayer, BlockSelection blockSel, ItemSlot itemslot, ref EnumHandHandling handling)
     {
-        [DocumentAsJson("Required")]
-        AssetLocation[] ConstructLevel1blockCodes;
+        ItemStack heldItem = itemslot?.Itemstack;
+        if (heldItem == null) return false;
 
-        [DocumentAsJson("Required")]
-        string actionlangcode;
-        public BlockBehaviorConstructible(Block block) : base(block) { }
+        var world = byPlayer.Entity.World;
+        var be = world.BlockAccessor.GetBlockEntity(pos);
+        if (be == null) return false;
 
-        public override void Initialize(JsonObject properties)
+        // Hole das Behavior aus Attribute Rendering Library
+        var beh = be.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
+        if (beh == null) return false;
+
+
+        var attr = beh.Variants;
+
+        // Aktuellen state herausfinden
+        int state = attr.FindByVariant("state-0", );
+        string heldItemCode = heldItem.Collectible.Code.ToString();
+
+        // === Schritt 1: State 0 -> 1 mit rock-* ===
+        if (state == 0 && heldItemCode.StartsWith("game:rock-"))
         {
+            string rockType = heldItem.Collectible.Code.Path;  // z. B. "rock-granite"
+            if (rockType.StartsWith("rock-")) rockType = rockType.Substring(5);
 
-            if (properties["ConstructLevel1Materials"].Exists)
-            {
+            attr.SetInt("state", 1);
+            attr.SetString("rock", rockType);
 
-                string[] ConstructLevel1Materials = properties["ConstructLevel1Materials"].AsArray<string>();
-                this.ConstructLevel1blockCodes = new AssetLocation[ConstructLevel1Materials.Length];
-                for (int i = 0; i < ConstructLevel1Materials.Length; i++)
-                {
-                    this.ConstructLevel1blockCodes[i] = AssetLocation.Create(ConstructLevel1Materials[i], "game");
-
-                }
-
-            }
-            //actionlangcode = properties["actionLangCode"].AsString();
-            base.Initialize(properties);
-
+            be.MarkDirty(true);
+            handling = EnumHandHandling.PreventDefault;
+            return true;
         }
 
-        public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handling)
+        // === Schritt 2: State 1 -> 2 mit Mörtel ===
+        if (state == 1 && heldItemCode == "game:mortar")
         {
-            if (!world.Claims.TryAccess(byPlayer, blockSel.Position, EnumBlockAccessFlags.Use))
-            {
-                return false;
-            }
+            attr.SetInt("state", 2);
 
-
-            if (!byPlayer.InventoryManager.ActiveHotbarSlot.Empty)
-            {
-                Block constructionBlock = blockSel.Block;
-                AssetLocation activeBlockCode = byPlayer.InventoryManager.ActiveHotbarSlot.Itemstack?.Collectible?.Code;
-
-                if (constructionBlock != null && activeBlockCode != null && ConstructLevel1blockCodes.Contains(activeBlockCode))
-                {
-                    handling = EnumHandling.PreventDefault;
-
-                    if (constructionBlock.Attributes.KeyExists("rock"))
-                    {
-                        return true;
-
-                    }
-                    else
-                    {
-                        return false;
-                    }
-
-                }
-                else {
-                    handling = EnumHandling.PassThrough;
-                    return true; }
-
-            }
-            else return true;
-
+            be.MarkDirty(true);
+            handling = EnumHandHandling.PreventDefault;
+            return true;
         }
 
+        // === Schritt 3: Fertigstellung mit stone-* Block ===
+        if (state == 2 && heldItemCode.StartsWith("game:stone-"))
+        {
+            Block newBlock = world.BlockAccessor.GetBlock(new AssetLocation("confession:arch_small"));
+            if (newBlock != null)
+            {
+                world.BlockAccessor.SetBlock(newBlock.BlockId, pos);
+                world.BlockAccessor.RemoveBlockEntity(pos);
+            }
+
+            handling = EnumHandHandling.PreventDefault;
+            return true;
+        }
+
+        return false;
     }
+    public override bool OnBlockInteractStep(float secondsUsed, BlockPos pos, IPlayer byPlayer, BlockSelection blockSel, ItemSlot itemslot, ref EnumHandHandling handling)
+    { return true; }
 }
+
