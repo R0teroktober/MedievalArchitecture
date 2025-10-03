@@ -21,7 +21,7 @@
 	},
 	"entityBehaviors": [ { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" } ],
 	"behaviors": [
-		{"name": "AttributeRenderingLibrary.HorizontalOrientable", "properties":{"dropBlockFace": "*-north-free"} },
+		{"name": "AttributeRenderingLibrary.HorizontalOrientable", "properties":{"dropBlockFace": "north"} },
 		{"name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
 			"properties": {
 				"name": {

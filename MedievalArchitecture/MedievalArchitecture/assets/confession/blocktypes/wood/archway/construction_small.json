@@ -16,8 +16,13 @@
 	},
 	"entityBehaviors": [ { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" } ],
 	"behaviors": [
-		{ "name": "AttributeRenderingLibrary.HorizontalOrientable", "properties":{"dropBlockFace": "*-north"} },
-		{"name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
+		{ "name": "BlockBehaviorConstructible", "properties":{
+				"ConstructLevel1Materials":["plank-oak", "plank-walnut"],
+				"ConstructLevel2Materials":["plank-oak", "plank-walnut"],
+				"ConstructLevel3Materials":["plank-oak", "plank-walnut"], 
+				"attributeNames": ["state", "state", "rock"]}},
+		{ "name": "AttributeRenderingLibrary.HorizontalOrientable", "properties":{"dropBlockFace": "north"} },
+		{ "name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
 			"properties": {
 				"name": {
 					"state-*": ["confession:block-construction_small-name1", "confession:{state}","confession:block-construction_small-name2"],
