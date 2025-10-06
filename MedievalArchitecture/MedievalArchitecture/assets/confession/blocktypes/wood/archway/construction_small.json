@@ -16,11 +16,7 @@
 	},
 	"entityBehaviors": [ { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" } ],
 	"behaviors": [
-		{ "name": "BlockBehaviorConstructible", "properties":{
-				"ConstructLevel1Materials":["plank-oak", "plank-walnut"],
-				"ConstructLevel2Materials":["plank-oak", "plank-walnut"],
-				"ConstructLevel3Materials":["plank-oak", "plank-walnut"], 
-				"attributeNames": ["state", "state", "rock"]}},
+		{ "name": "BlockBehaviorConstructionStateChanger"},
 		{ "name": "AttributeRenderingLibrary.HorizontalOrientable", "properties":{"dropBlockFace": "north"} },
 		{ "name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
 			"properties": {
