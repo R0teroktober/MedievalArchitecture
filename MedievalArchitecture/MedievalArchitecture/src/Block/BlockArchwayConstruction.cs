@@ -1,8 +1,9 @@
 ﻿using AttributeRenderingLibrary;
+using System;
 using System.Collections;
-using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
@@ -22,7 +23,6 @@ namespace MedievalArchitecture
 
         public Dictionary<string, string> stateCodeByType = new();
         public Dictionary<string, string> rockCodeByType = new();
-        public Dictionary<string, string> originblockCodeByType = new();
         public Dictionary<string, string> styleCodeByType = new();
 
         public override void Initialize(JsonObject properties)
@@ -60,21 +60,7 @@ namespace MedievalArchitecture
             rockCodeByType.Add("rock-suevite", "suevite");
             rockCodeByType.Add("rock-tuff", "tuff");
             rockCodeByType.Add("rock-whitemarble", "whitemarble");
-            originblockCodeByType.Add("originblock-rock", "rock");
-            originblockCodeByType.Add("originblock-cobblestone", "cobblestone");
-            originblockCodeByType.Add("originblock-brick", "brick");
-            originblockCodeByType.Add("originblock-plaster", "plaster");
-            originblockCodeByType.Add("originblock-ash", "ash");
-            originblockCodeByType.Add("originblock-blue", "blue");
-            originblockCodeByType.Add("originblock-brown", "brown");
-            originblockCodeByType.Add("originblock-browngolden", "browngolden");
-            originblockCodeByType.Add("originblock-brownlight", "brownlight");
-            originblockCodeByType.Add("originblock-brownweathered", "brownweathered");
-            originblockCodeByType.Add("originblock-green", "green");
-            originblockCodeByType.Add("originblock-orange", "orange");
-            originblockCodeByType.Add("originblock-pink", "pink");
-            originblockCodeByType.Add("originblock-tan", "tan");
-            originblockCodeByType.Add("originblock-yellow", "yellow");
+
 
 
 
@@ -86,7 +72,7 @@ namespace MedievalArchitecture
             ItemStack heldItem = byPlayer.InventoryManager.ActiveHotbarSlot.Itemstack;
             if (heldItem == null) return false;
 
-   
+
             var be = world.BlockAccessor.GetBlockEntity(blockSel.Position);
             if (be == null) return false;
 
@@ -98,7 +84,7 @@ namespace MedievalArchitecture
             var attr = beh.Variants;
 
             // Aktuellen state herausfinden
-            attr.FindByVariant(stateCodeByType, out string state );
+            attr.FindByVariant(stateCodeByType, out string state);
             {
                 string heldItemCode = heldItem.Collectible.Code.ToString();
                 if (state == "0" && heldItemCode.StartsWith("game:stone-"))
@@ -121,65 +107,76 @@ namespace MedievalArchitecture
                     return true;
 
                 }
-                else if (state == "2" && heldItemCode.StartsWith("game:rock-")|| state == "2" && heldItemCode.StartsWith("game:cobblestone-")|| state == "2" && heldItemCode.StartsWith("game:stonebricks-")|| state == "2" && heldItemCode.StartsWith("game:plaster-")|| state == "2" && heldItemCode.StartsWith("game:daub-"))
+                else if (state == "2")
                 {
-                    string materialType = heldItem.Collectible.Code.Path;
-                    var Oldattr =attr.Clone();
-                    var orientation = blockSel.Block.Variant["side"];
-                    var newBlock = world.GetBlock(new AssetLocation("confession:arch_small-" + orientation));
-                    world.BlockAccessor.SetBlock(newBlock.BlockId, blockSel.Position);
-                    var newBe = world.BlockAccessor.GetBlockEntity(blockSel.Position);
-                    var newBeh = newBe?.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
-                    if (newBeh != null)
+                    var originblockCode = "none";
+                    var handMaterial = "none";
+                    if (heldItemCode.StartsWith("game:rock-"))
                     {
-                        Oldattr.FindByVariant(styleCodeByType, out string oldstyle);
-                        {
-                            newBeh.Variants.Set("style", oldstyle);
-                        }
-                        Oldattr.FindByVariant(rockCodeByType, out string oldrock);
-                        {
-                            newBeh.Variants.Set("rock", oldrock);
-                            if (materialType.StartsWith("rock-") && materialType.Substring(5) == oldrock)
-                            {
-                                newBeh.Variants.Set("originblock", "rock");
-                            }
-                            else if (materialType.StartsWith("plaster-"))
-                            {
-                                newBeh.Variants.Set("originblock", "plaster");
-                            }
-                            else if (materialType.StartsWith("stonebricks-") && materialType.Substring(12) == oldrock)
-                            {
-                                newBeh.Variants.Set("originblock", "brick");
-                            }
-                            else if (materialType.StartsWith("cobblestone-") && materialType.Substring(12) == oldrock)
-                            {
-                                newBeh.Variants.Set("originblock", "cobblestone");
-                            }
-                            else if (materialType.StartsWith("daub-"))
-                            {
-                                var daubVariant = materialType.Substring(5);
-                                newBeh.Variants.Set("originblock", daubVariant);
-                            }
-                            else return false;
+                        originblockCode = "rock";
+                        handMaterial = heldItemCode.Substring(10);
 
-
-                        }
-
-                        UpdateVariants(world, newBe, newBeh);
                     }
+                    else if (heldItemCode.StartsWith("game:cobblestone-"))
+                    {
+                        originblockCode = "cobblestone";
+                        handMaterial = heldItemCode.Substring(17);
+                    }
+                    else if (heldItemCode.StartsWith("game:stonebricks-"))
+                    {
+                        originblockCode = "brick";
+                        handMaterial = heldItemCode.Substring(17);
+                    }
+                    else if (heldItemCode.StartsWith("game:plaster-"))
+                    {
+                        originblockCode = "plaster";
+                        handMaterial = originblockCode;
+                    }
+                    else if (heldItemCode.StartsWith("game:daubraw-"))
+                    {
+                        originblockCode = heldItemCode.Substring(13);
+                        handMaterial = originblockCode;
 
-              
-                    return true;
+                    }
+                    else return false;
+                    if (originblockCode != "none" && handMaterial != "none")
+                    {
+                        var oldattr = attr.Clone();
+                        var orientation = blockSel.Block.Variant["side"];
+                        oldattr.FindByVariant(styleCodeByType, out string oldstyle);
+                        oldattr.FindByVariant(rockCodeByType, out string oldrock);
+                        var newStyle = oldstyle;
+                        var newRock = oldrock;
+                        if (newRock == handMaterial || heldItemCode.StartsWith("game:daubraw-") || heldItemCode.StartsWith("game:plaster-"))
+                        {
+                            var newBlock = world.GetBlock(new AssetLocation("confession:arch_small-" + orientation));
+                            world.BlockAccessor.SetBlock(newBlock.BlockId, blockSel.Position);
+                            var newBe = world.BlockAccessor.GetBlockEntity(blockSel.Position);
+                            var newBeh = newBe?.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
+                            if (newBeh != null && newBe != null)
+                            {
+                                newBeh.Variants.Set("style", newStyle);
+                                newBeh.Variants.Set("rock", newRock);
+                                newBeh.Variants.Set("originblock", originblockCode);
+                                UpdateVariants(world, newBe, newBeh);
+
+                            }
+
+                        }
+                    }
+                    else return false;
                 }
+                else return false;
 
             }
-
-
-
-            return false;
+            return true;
         }
+
+
         private void UpdateVariants(IWorldAccessor world, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh)
         {
+            
+
             be.MarkDirty(true);
             if (world.Side == EnumAppSide.Client)
             {
