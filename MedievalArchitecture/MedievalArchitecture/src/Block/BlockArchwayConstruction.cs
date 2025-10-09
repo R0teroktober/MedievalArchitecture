@@ -4,7 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Metadata;
 using System.Text;
+using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
@@ -20,7 +22,7 @@ namespace MedievalArchitecture
         public BlockBehaviorConstructionStateChanger(Block block) : base(block) { }
 
 
-
+        public int rimStoneAmount;
         public Dictionary<string, string> stateCodeByType = new();
         public Dictionary<string, string> rockCodeByType = new();
         public Dictionary<string, string> styleCodeByType = new();
@@ -29,6 +31,7 @@ namespace MedievalArchitecture
 
         {
             base.Initialize(properties);
+            rimStoneAmount = block.Attributes["rimStoneAmount"].AsInt(6);
             stateCodeByType.Add("state-0", "0");
             stateCodeByType.Add("state-1", "1");
             stateCodeByType.Add("state-2", "2");
@@ -67,110 +70,193 @@ namespace MedievalArchitecture
 
 
         }
+        public override bool OnBlockInteractCancel(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, EnumItemUseCancelReason cancelReason)
+        {
+            return true;
+
+        }
         public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handling)
         {
+            // Wenn Client, erlauben wir die Interaktion visuell (Rückgabe true), aber wir machen Logik nur auf Server
+            if (world.Side == EnumAppSide.Client)
+            {
+                handling = EnumHandling.PreventDefault;
+                return true;
+            }
+
+            // Server-Logik: prüfen, ob Interagieren erlaubt ist
+            handling = EnumHandling.PreventDefault;
+
+            if (byPlayer == null || byPlayer.InventoryManager?.ActiveHotbarSlot?.Itemstack == null) return false;
+            if (blockSel == null) return false;
+            if (world.BlockAccessor?.GetBlockEntity(blockSel.Position) == null) return false;
+
+            // Weitere Bedingungen hier (z. B. Shift gedrückt, passender Block, etc.)
+            // Wenn alle Bedingungen erfüllt:
+            return true;
+        }
+        public override bool OnBlockInteractStep(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handled)
+        {
+            handled = EnumHandling.PreventDefault;
+
+            if (blockSel == null) return false;
+
+            // 🎬 Nur auf dem Client Animation & Sound
+            if (world.Side == EnumAppSide.Client)
+            {
+                (byPlayer as IClientPlayer)?.TriggerFpAnimation(EnumHandInteract.BlockInteract);
+
+                if (world.Rand.NextDouble() < 0.05)
+                {
+                    var sound = AssetLocation.Create("sounds/effect/stonecrush");
+                    if (sound != null) world.PlaySoundAt(sound, blockSel.Position, 0, byPlayer);
+                }
+            }
+
+            return secondsUsed < 2;
+        }
+
+        public override void OnBlockInteractStop(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handled)
+        {
+            handled = EnumHandling.PreventDefault;
+
+            // Nur auf dem Server ausführen – verhindert doppelte Aufrufe & Client-NREs
+            if (world.Side != EnumAppSide.Server) return;
+
+            // Sicherheitsprüfungen
+            if (byPlayer == null || byPlayer.InventoryManager == null || blockSel == null) return;
+            if (byPlayer.InventoryManager.ActiveHotbarSlot == null) return;
+
             ItemStack heldItem = byPlayer.InventoryManager.ActiveHotbarSlot.Itemstack;
-            if (heldItem == null) return false;
+            if (heldItem == null || heldItem.Collectible == null) return;
 
+            // BlockEntity + Behavior holen
+            var be = world.BlockAccessor?.GetBlockEntity(blockSel.Position);
+            if (be == null) return;
 
-            var be = world.BlockAccessor.GetBlockEntity(blockSel.Position);
-            if (be == null) return false;
-
-            // Hole das Behavior aus Attribute Rendering Library
             var beh = be.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
-            if (beh == null) return false;
-
+            if (beh == null || beh.Variants == null) return;
 
             var attr = beh.Variants;
+            if (!attr.FindByVariant(stateCodeByType, out string state)) return;
 
-            // Aktuellen state herausfinden
-            attr.FindByVariant(stateCodeByType, out string state);
+            string heldItemCode = heldItem.Collectible.Code.ToString();
+            var block = blockSel.Block;
+
+            // Status 0 = Steine hinzufügen
+            if (state == "0" && heldItemCode.StartsWith("game:stone-"))
             {
-                string heldItemCode = heldItem.Collectible.Code.ToString();
-                if (state == "0" && heldItemCode.StartsWith("game:stone-"))
+                string rockType = heldItem.Collectible.Code.Path.Substring(6);
+
+                if (heldItem.StackSize >= rimStoneAmount)
                 {
-                    string rockType = heldItem.Collectible.Code.Path;  // z. B. "rock-granite"
-                    if (rockType.StartsWith("stone-")) rockType = rockType.Substring(6);
+                    if (byPlayer.WorldData.CurrentGameMode != EnumGameMode.Creative)
+                    {
+                        byPlayer.InventoryManager.ActiveHotbarSlot.TakeOut(rimStoneAmount);
+                    }
 
                     attr.Set("state", "1");
                     attr.Set("rock", rockType);
 
                     UpdateVariants(world, be, beh);
-                    handling = EnumHandling.PreventDefault;
-                    return true;
                 }
-                else if (state == "1" && heldItemCode == "game:mortar")
+            }
+
+            // Status 1 = Mörtel hinzufügen
+            else if (state == "1" && heldItemCode == "game:mortar")
+            {
+                if (heldItem.StackSize >= 1)
                 {
+                    if (byPlayer.WorldData.CurrentGameMode != EnumGameMode.Creative)
+                    {
+                        byPlayer.InventoryManager.ActiveHotbarSlot.TakeOut(1);
+                    }
+
                     attr.Set("state", "2");
                     UpdateVariants(world, be, beh);
-                    handling = EnumHandling.PreventDefault;
-                    return true;
-
                 }
-                else if (state == "2")
-                {
-                    var originblockCode = "none";
-                    var handMaterial = "none";
-                    if (heldItemCode.StartsWith("game:rock-"))
-                    {
-                        originblockCode = "rock";
-                        handMaterial = heldItemCode.Substring(10);
-
-                    }
-                    else if (heldItemCode.StartsWith("game:cobblestone-"))
-                    {
-                        originblockCode = "cobblestone";
-                        handMaterial = heldItemCode.Substring(17);
-                    }
-                    else if (heldItemCode.StartsWith("game:stonebricks-"))
-                    {
-                        originblockCode = "brick";
-                        handMaterial = heldItemCode.Substring(17);
-                    }
-                    else if (heldItemCode.StartsWith("game:plaster-"))
-                    {
-                        originblockCode = "plaster";
-                        handMaterial = originblockCode;
-                    }
-                    else if (heldItemCode.StartsWith("game:daubraw-"))
-                    {
-                        originblockCode = heldItemCode.Substring(13);
-                        handMaterial = originblockCode;
-
-                    }
-                    else return false;
-                    if (originblockCode != "none" && handMaterial != "none")
-                    {
-                        var oldattr = attr.Clone();
-                        var orientation = blockSel.Block.Variant["side"];
-                        oldattr.FindByVariant(styleCodeByType, out string oldstyle);
-                        oldattr.FindByVariant(rockCodeByType, out string oldrock);
-                        var newStyle = oldstyle;
-                        var newRock = oldrock;
-                        if (newRock == handMaterial || heldItemCode.StartsWith("game:daubraw-") || heldItemCode.StartsWith("game:plaster-"))
-                        {
-                            var newBlock = world.GetBlock(new AssetLocation("confession:arch_small-" + orientation));
-                            world.BlockAccessor.SetBlock(newBlock.BlockId, blockSel.Position);
-                            var newBe = world.BlockAccessor.GetBlockEntity(blockSel.Position);
-                            var newBeh = newBe?.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
-                            if (newBeh != null && newBe != null)
-                            {
-                                newBeh.Variants.Set("style", newStyle);
-                                newBeh.Variants.Set("rock", newRock);
-                                newBeh.Variants.Set("originblock", originblockCode);
-                                UpdateVariants(world, newBe, newBeh);
-
-                            }
-
-                        }
-                    }
-                    else return false;
-                }
-                else return false;
-
             }
-            return true;
+
+            // Status 2 = Block hinzufügen und zu fertigem Torbogen transformieren
+            else if (state == "2")
+            {
+                string originblockCode = "none";
+                string handMaterial = "none";
+
+                if (heldItemCode.StartsWith("game:rock-"))
+                {
+                    originblockCode = "rock";
+                    handMaterial = heldItemCode.Substring(10);
+                }
+                else if (heldItemCode.StartsWith("game:cobblestone-"))
+                {
+                    originblockCode = "cobblestone";
+                    handMaterial = heldItemCode.Substring(17);
+                }
+                else if (heldItemCode.StartsWith("game:stonebricks-"))
+                {
+                    originblockCode = "brick";
+                    handMaterial = heldItemCode.Substring(17);
+                }
+                else if (heldItemCode.StartsWith("game:plaster-"))
+                {
+                    originblockCode = "plaster";
+                    handMaterial = originblockCode;
+                }
+                else if (heldItemCode.StartsWith("game:daubraw-"))
+                {
+                    originblockCode = heldItemCode.Substring(13);
+                    handMaterial = originblockCode;
+                }
+
+                if (originblockCode != "none" && handMaterial != "none")
+                {
+                    var oldattr = attr.Clone();
+                    var orientation = block.Variant.TryGetValue("side");
+                    oldattr.FindByVariant(styleCodeByType, out string oldstyle);
+                    oldattr.FindByVariant(rockCodeByType, out string oldrock);
+
+                    string newStyle = oldstyle;
+                    string newRock = oldrock;
+                    int takeStackSize = 1;
+
+                    bool hasEnough =
+                        (newRock == handMaterial && heldItem.StackSize >= 1)
+                        || (heldItemCode.StartsWith("game:daubraw-") && heldItem.StackSize >= 4)
+                        || (heldItemCode.StartsWith("game:plaster-") && heldItem.StackSize >= 1);
+
+                    if (hasEnough)
+                    {
+                        var newBlock = world.GetBlock(new AssetLocation("confession:arch_small-" + orientation));
+                        if (newBlock == null) return;
+
+                        world.BlockAccessor.SetBlock(newBlock.BlockId, blockSel.Position);
+
+                        var newBe = world.BlockAccessor.GetBlockEntity(blockSel.Position);
+                        if (newBe == null) return;
+
+                        var newBeh = newBe.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
+                        if (newBeh == null) return;
+
+                        if (byPlayer.WorldData.CurrentGameMode != EnumGameMode.Creative)
+                        {
+                            if (heldItemCode.StartsWith("game:daubraw-"))
+                            {
+                                takeStackSize = 4;
+                            }
+                            byPlayer.InventoryManager.ActiveHotbarSlot.TakeOut(takeStackSize);
+                        }
+
+                        newBeh.Variants.Set("style", newStyle);
+                        newBeh.Variants.Set("rock", newRock);
+                        newBeh.Variants.Set("originblock", originblockCode);
+
+                        UpdateVariants(world, newBe, newBeh);
+                    }
+                }
+            }
         }
+
 
 
         private void UpdateVariants(IWorldAccessor world, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh)

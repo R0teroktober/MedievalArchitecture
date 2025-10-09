@@ -16,7 +16,7 @@
 		"*-west": {"all": false,"up": true,"north": true,"south": true}
 	},
 	"variantgroups": [{"code": "side","loadFromProperties": "abstract/horizontalorientation"}],
-	"attributes": {"handbook": {"groupBy": [ "arch_small-*" ],"excludeByType": {"*-west": true,"*-east": true,"*-south": true}}},
+	"attributes": {"handbook": {"groupBy": [ "arch_small-*" ],"excludeByType": {"*-west": true,"*-east": true,"*-south": true}}, "rimStoneAmount": 5},
 	"entityBehaviors": [ { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" } ],
 	"behaviors": [
 		{"name": "AttributeRenderingLibrary.HorizontalOrientable", "properties":{"dropBlockFace": "north"} },
