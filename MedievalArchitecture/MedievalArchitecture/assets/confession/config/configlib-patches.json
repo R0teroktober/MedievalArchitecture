@@ -37,7 +37,7 @@
         "weight": 2.3,
         "comment": "Enable/ Disable windows",
         "default": true
-      },
+      }
     },
     "other": {
     }

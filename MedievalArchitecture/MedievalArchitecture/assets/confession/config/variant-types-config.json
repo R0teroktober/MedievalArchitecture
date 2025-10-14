@@ -1,0 +1,54 @@
+{
+  "RimStoneAmount": 6,
+  "RockCodeByType": {
+    "rock-andesite": "andesite",
+    "rock-basalt": "basalt",
+    "rock-bauxite": "bauxite",
+    "rock-chert": "chert",
+    "rock-chalk": "chalk",
+    "rock-claystone": "claystone",
+    "rock-conglomerate": "conglomerate",
+    "rock-granite": "granite",
+    "rock-greenmarble": "greenmarble",
+    "rock-halite": "halite",
+    "rock-kimberlite": "kimberlite",
+    "rock-limestone": "limestone",
+    "rock-meteorite-iron": "meteorite-iron",
+    "rock-obsidian": "obsidian",
+    "rock-peridotite": "peridotite",
+    "rock-phyllite": "phyllite",
+    "rock-redmarble": "redmarble",
+    "rock-sandstone": "sandstone",
+    "rock-scoria": "scoria",
+    "rock-shale": "shale",
+    "rock-slate": "slate",
+    "rock-suevite": "suevite",
+    "rock-tuff": "tuff",
+    "rock-whitemarble": "whitemarble",
+    "rock-plaster": "plaster",
+    "rock-ash": "ash",
+    "rock-blue": "blue",
+    "rock-brown": "brown",
+    "rock-browngolden": "browngolden",
+    "rock-brownlight": "brownlight",
+    "rock-brownweathered": "brownweathered",
+    "rock-green": "green",
+    "rock-orange": "orange",
+    "rock-pink": "pink",
+    "rock-tan": "tan",
+    "rock-yellow": "yellow"
+
+
+  },
+  "StateCodeByType": {
+    "state-0": "0",
+    "state-1": "1",
+    "state-2": "2"
+  },
+  "StyleCodeByType": {
+    "style-a": "a",
+    "style-b": "b",
+    "style-c": "c",
+    "style-d": "d"
+  }
+}
