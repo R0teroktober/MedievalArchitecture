@@ -47,6 +47,11 @@
 				{
 					"tabs": [ "general", "decorative", "confession" ],
 					"stacks": [
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "single","glass": "plain"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "top","glass": "plain"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "middle","glass": "plain"}}},
+						{"type": "block","code": "window-north","attributes": {"types": {"style": "bottom","glass": "plain"}}},
+
 						{"type": "block","code": "window-north","attributes": {"types": {"style": "single","glass": "blue"}}},
 						{"type": "block","code": "window-north","attributes": {"types": {"style": "top","glass": "blue"}}},
 						{"type": "block","code": "window-north","attributes": {"types": {"style": "middle","glass": "blue"}}},
@@ -66,11 +71,6 @@
 						{"type": "block","code": "window-north","attributes": {"types": {"style": "top","glass": "pink"}}},
 						{"type": "block","code": "window-north","attributes": {"types": {"style": "middle","glass": "pink"}}},
 						{"type": "block","code": "window-north","attributes": {"types": {"style": "bottom","glass": "pink"}}},
-
-						{"type": "block","code": "window-north","attributes": {"types": {"style": "single","glass": "plain"}}},
-						{"type": "block","code": "window-north","attributes": {"types": {"style": "top","glass": "plain"}}},
-						{"type": "block","code": "window-north","attributes": {"types": {"style": "middle","glass": "plain"}}},
-						{"type": "block","code": "window-north","attributes": {"types": {"style": "bottom","glass": "plain"}}},
 
 						{"type": "block","code": "window-north","attributes": {"types": {"style": "single","glass": "quartz"}}},
 						{"type": "block","code": "window-north","attributes": {"types": {"style": "top","glass": "quartz"}}},

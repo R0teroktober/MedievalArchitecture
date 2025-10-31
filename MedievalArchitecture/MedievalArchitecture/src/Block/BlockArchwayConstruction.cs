@@ -2,13 +2,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Numerics;
 using System.Reflection;
-using System.Reflection.Metadata;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
@@ -17,29 +12,31 @@ using Vintagestory.API.MathTools;
 using Vintagestory.Datastructures;
 using Vintagestory.GameContent;
 using Vintagestory.ServerMods.NoObf;
+using System.Reflection;
+using Vintagestory.API.Server;
 
 
 
 namespace MedievalArchitecture
 {
-    public class BlockBehaviorConstructionStateChanger : BlockBehavior, IInteractable
+    public class BlockBehaviorConstructionStateChanger(Block block) : BlockBehavior(block), IInteractable
     {
-        public BlockBehaviorConstructionStateChanger(Block block) : base(block) { }
-
-
         public int rimStoneAmount;
-        public Dictionary<string, string> stateCodeByType;
-        public Dictionary<string, string> rockCodeByType;
-        public Dictionary<string, string> styleCodeByType;
-        AssetLocation sound;
-        ITreeAttribute tree;
+        public Dictionary<string, string> stateCodeByType = new();
+        public Dictionary<string, string> rockCodeByType = new();
+        public Dictionary<string, string> styleCodeByType = new();
+
+        AssetLocation finishSound;
+        public float lastUsedDuration;
+
 
         public override void Initialize(JsonObject properties)
 
         {
             base.Initialize(properties);
             var config = MedievalArchitectureModSystem.Config;
-            sound = AssetLocation.Create("sounds/effect/stonecrush");
+            finishSound = AssetLocation.Create("sounds/effect/stonecrush");
+
 
             rimStoneAmount = config.RimStoneAmount;
             stateCodeByType = new Dictionary<string, string>(config.StateCodeByType);
@@ -51,6 +48,8 @@ namespace MedievalArchitecture
 
 
         }
+
+       
 
  
         public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handling)
@@ -68,134 +67,197 @@ namespace MedievalArchitecture
         public override bool OnBlockInteractStep(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handled)
         {
             handled = EnumHandling.PreventDefault;
-            if (blockSel == null) return false;
+
+            
+            if (byPlayer.CurrentBlockSelection == null) return false;
             //  Nur auf dem Client Animation
             if (world.Side == EnumAppSide.Client)
             {
                 (byPlayer as IClientPlayer)?.TriggerFpAnimation(EnumHandInteract.BlockInteract);
 
             }
-     
-
             return secondsUsed < 1;
+ 
         }
 
         public override void OnBlockInteractStop(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handled)
         {
-  
-
+            
+            if (secondsUsed < 1) return;
             handled = EnumHandling.PreventDefault;
             
-            if (secondsUsed < 0.9) return;
-            // Sicherheitsprüfungen (Guard Clauses)
-            if (byPlayer?.InventoryManager?.ActiveHotbarSlot?.Itemstack == null || blockSel == null) return;
-            
-            var heldItem = byPlayer.InventoryManager.ActiveHotbarSlot.Itemstack;
-            var be = world.BlockAccessor?.GetBlockEntity(blockSel.Position);
-            if (be == null) return;
 
-            var beh = be.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
-            if (beh?.Variants == null) return;
+                // Bauzeit
 
-            if (!beh.Variants.FindByVariant(stateCodeByType, out string state)) return;
-            string heldItemCode = heldItem.Collectible.Code.ToString();
-            be.ToTreeAttributes(tree);
-            switch (state)
+                // Baumaterial
+                if (byPlayer?.InventoryManager?.ActiveHotbarSlot?.Itemstack == null || blockSel == null) return;
+                var heldItem = byPlayer.InventoryManager.ActiveHotbarSlot.Itemstack;
+                string heldItemCode = heldItem.Collectible.Code.ToString();
+                // Block
+                var be = world.BlockAccessor?.GetBlockEntity(blockSel.Position);
+                if (be == null) return;
+                // Blockbehavior
+                var beh = be.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
+                if (beh?.Variants == null) return;
+                if (!beh.Variants.FindByVariant(stateCodeByType, out string state)) return;
+                secondsUsed = 0;
+            if (world.Side == EnumAppSide.Server)
             {
-                case "0":
-                    
-                    TryAddRimStones(world, byPlayer, be, beh, heldItem, heldItemCode, blockSel, tree );
-                    break;
 
-                case "1":
-                    TryAddMortar(world, byPlayer,be , beh, heldItem, heldItemCode, blockSel, tree);
-                    break;
 
-                case "2":
-                    TryCompleteArch(world, byPlayer, blockSel, beh, heldItem, heldItemCode, tree);
-                    break;
+                // TreeAttribute lesen - nötig?
+                //beh.Variants.ToTreeAttributes(tree);
+                switch (state)
+                {
+                    case "0":
+
+                        TryAddRimStones(world, byPlayer, be, beh, heldItem, heldItemCode);
+                        break;
+
+                    case "1":
+                        TryAddMortar(world, byPlayer, be, beh, heldItem, heldItemCode);
+                        break;
+
+                    case "2":
+                        TryCompleteArch(world, byPlayer, beh, heldItem, heldItemCode);
+                        break;
+
+                }
             }
-            
-        }
-        private void UpdateVariants(IWorldAccessor world, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, BlockSelection blockSel, ITreeAttribute tree)
-        {
-            if (world.Side == EnumAppSide.Client) be.MarkDirty(true);
-            world.BlockAccessor.MarkBlockDirty(blockSel.Position);
-            Variants.FromTreeAttribute(tree);
-            if (world.Side == EnumAppSide.Client) beh.OwnBehavior.GetOrCreateMesh(beh.Variants);
+            RebuildArlMeshIfPossible(beh);
+
+#if DEBUG
+            world.Logger.Notification($"[ConstructionStateChanger] OnBlockInteractStop called on {world.Side} at {blockSel?.Position}");
+#endif
+
+
+
 
         }
-
-        private void TryAddRimStones(IWorldAccessor world, IPlayer player, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string heldItemCode, BlockSelection blockSel, ITreeAttribute tree)
+        private void UpdateVariants(IWorldAccessor world, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, BlockPos pos, IPlayer player)
         {
-            if (!heldItemCode.StartsWith("game:stone-")) return;
-            if (heldItem.StackSize < rimStoneAmount) return;
+            if (world == null || be == null || beh == null || pos == null) return;
+           // var tree = beh.Blockentity.FromTreeAttributes(I)
+            //beh.Variants.ToTreeAttribute(be.Block.);
+            world.Logger.Event($"[ConstructionStateChanger] {world.Side}: UpdateVariants called at {pos}");
 
+
+            // --- SERVER SIDE ---
+            if (world.Side == EnumAppSide.Server)
+            {
+ 
+                //beh.Variants.ToTreeAttribute(be.Api)
+#if DEBUG
+                world.Logger.Event($"[ConstructionStateChanger] SERVER: marking block & BE dirty at {pos}");
+#endif
+                world.BlockAccessor.MarkBlockDirty(pos);
+                world.BlockAccessor.MarkBlockEntityDirty(pos);
+                be.MarkDirty(true); // triggers BE sync to client
+
+            }
+
+            // --- CLIENT SIDE ---
+            if (world.Side == EnumAppSide.Client)
+            {
+                try
+                {
+                    world.PlaySoundAt(new AssetLocation(finishSound), pos.X, pos.Y, pos.Z, player);
+#if DEBUG
+                    world.Logger.Notification($"[ConstructionStateChanger] CLIENT: playing sound at {pos}");
+#endif
+                }
+                catch { /* ignore audio errors */ }
+
+                // Defer one tick: wait until attribute sync from server has arrived
+            }
+        }
+
+
+        private void TryAddRimStones(IWorldAccessor world, IPlayer player, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string heldItemCode)
+        {
+            if (!heldItemCode.StartsWith("game:stone-") || heldItem.StackSize < rimStoneAmount) return;
+            // Creative Check
             if (player.WorldData.CurrentGameMode != EnumGameMode.Creative)
                 player.InventoryManager.ActiveHotbarSlot.TakeOut(rimStoneAmount);
 
             string rockType = heldItem.Collectible.Code.Path.Substring(6);
-
-            beh.Variants.Set("state", "1");
-            beh.Variants.Set("rock", rockType);
-            beh.Variants.ToTreeAttribute(tree);
-            UpdateVariants(world, be, beh, blockSel, tree);
+            //if (world.Side == EnumAppSide.Server)
+            //{
+                beh.Variants.Set("state", "1");
+                beh.Variants.Set("rock", rockType);
+            //}
+            UpdateVariants(world, be, beh, player.CurrentBlockSelection.Position, player);
         }
 
-        private void TryAddMortar(IWorldAccessor world, IPlayer player, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string heldItemCode, BlockSelection blockSel, ITreeAttribute tree)
+        private void TryAddMortar(IWorldAccessor world, IPlayer player, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string heldItemCode)
         {
             if (heldItemCode != "game:mortar" || heldItem.StackSize < 1) return;
 
+            // Creative Check
             if (player.WorldData.CurrentGameMode != EnumGameMode.Creative)
                 player.InventoryManager.ActiveHotbarSlot.TakeOut(1);
-
-            beh.Variants.Set("state", "2");
-            beh.ToTreeAttributes(tree);
-            UpdateVariants(world, be, beh, blockSel, tree);
-
+            //if (world.Side == EnumAppSide.Server)
+            //{
+                beh.Variants.Set("state", "2");
+            //}
+            UpdateVariants(world, be, beh, player.CurrentBlockSelection.Position, player);
 
         }
-        private void TryCompleteArch(IWorldAccessor world, IPlayer player, BlockSelection blockSel, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string heldItemCode, ITreeAttribute tree)
+        private void TryCompleteArch(IWorldAccessor world, IPlayer player, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string heldItemCode)
         {
-            
-                var (originBlock, handMaterial, requiredAmount) = GetMaterialInfo(heldItemCode);
-                if (originBlock == null) return;
-                if (heldItem.StackSize < requiredAmount) return;
 
-                var block = blockSel.Block;
-                //block.CodeWithVariant("state", "1");
-                if (block == null) return;
 
-                string orientation = block.Variant.TryGetValue("side");
+            // Baumaterial
+            var (originBlock, handMaterial, requiredAmount) = GetMaterialInfo(heldItemCode);
+            if (heldItem.StackSize < requiredAmount) return;
 
-                var oldAttr = beh.Variants.Clone();
-                oldAttr.FindByVariant(styleCodeByType, out string style);
-                oldAttr.FindByVariant(rockCodeByType, out string rock);
+            // Block
+            if (originBlock == null) return;
+            var block = player.CurrentBlockSelection.Block;
+            if (block == null) return;
+            string orientation = block.Variant.TryGetValue("side");
 
-                var newBlock = world.GetBlock(new AssetLocation($"confession:arch_small-{orientation}"));
-                if (newBlock == null) return;
+            // Varianten lesen
+            var oldAttr = beh.Variants.Clone();
+            oldAttr.FindByVariant(styleCodeByType, out string style);
+            oldAttr.FindByVariant(rockCodeByType, out string rock);
 
-                // Setzen und Attribute übertragen
-                world.BlockAccessor.SetBlock(newBlock.BlockId, blockSel.Position);
-                world.BlockAccessor.TriggerNeighbourBlockUpdate(blockSel.Position);
-                var newBe = world.BlockAccessor?.GetBlockEntity(blockSel.Position);
+            // Neuer Block
+            var newBlock = world.GetBlock(new AssetLocation($"confession:arch_small-{orientation}"));
+            if (newBlock == null) return;
+
+            // Setzen und Attribute übertragen
+            BlockPos newBlockPos = player.CurrentBlockSelection.Position.Copy();
+            //if (world.Side == EnumAppSide.Server)
+            //{
+                
+                world.BlockAccessor.SetBlock(newBlock.BlockId, newBlockPos);
+                world.BlockAccessor.TriggerNeighbourBlockUpdate(newBlockPos);
+            //world.BlockAccessor.MarkBlockDirty(newBlockPos);
+            //}
+
+
+            world.RegisterCallback(dt =>
+            {
+                var newBe = world.BlockAccessor?.GetBlockEntity(newBlockPos);
                 var newBeh = newBe?.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
                 if (newBeh == null) return;
 
                 if (player.WorldData.CurrentGameMode != EnumGameMode.Creative)
                     player.InventoryManager.ActiveHotbarSlot.TakeOut(requiredAmount);
+                //if (world.Side == EnumAppSide.Server)
+                //{
+                    newBeh.Variants.Set("style", style);
+                    newBeh.Variants.Set("rock", rock);
+                    newBeh.Variants.Set("originblock", originBlock);
+                //}
+                // Make sure we mark the new block's entity dirty on the server and rebuild on client (UpdateVariants handles side checks)
+                UpdateVariants(world, newBe, newBeh, newBlockPos, player);
+            }, 0);
+            
 
-                newBeh.Variants.Set("style", style);
-                newBeh.Variants.Set("rock", rock);
-                newBeh.Variants.Set("originblock", originBlock);
-
-                beh.ToTreeAttributes(tree);
-            UpdateVariants(world, newBe, newBeh, blockSel, tree  );
 
 
-            //beh.OwnBehavior.GetOrCreateMesh(beh.Variants);
-
-            // Soundeffekt (nur Server)
 
 
 
@@ -215,41 +277,85 @@ namespace MedievalArchitecture
 
             return (null, null, 0);
         }
-
-
-
         private void RebuildArlMeshIfPossible(BlockEntityBehaviorShapeTexturesFromAttributes beh)
         {
             if (beh == null) return;
 
-            // 1) Versuch: private Init() aufrufen (Init ruft intern GetOrCreateMesh)
+#if DEBUG
+            var worldField = beh.GetType().GetField("api", BindingFlags.Instance | BindingFlags.NonPublic);
+            var api = worldField?.GetValue(beh) as ICoreAPI;
+            api?.Logger?.Notification("[ConstructionStateChanger] Attempting ARL mesh rebuild via reflection...");
+#endif
+
+            // 1) Try calling the non-public Init() which internally creates the mesh
             var initM = beh.GetType().GetMethod("Init", BindingFlags.Instance | BindingFlags.NonPublic);
             if (initM != null)
             {
-                try { initM.Invoke(beh, null); return; }
-                catch { /* swallow - fallback versucht werden soll */ }
+                try
+                {
+                    initM.Invoke(beh, null);
+#if DEBUG
+                    api?.Logger?.Notification("[ConstructionStateChanger] ARL mesh rebuilt successfully via Init()");
+#endif
+                    return;
+                }
+                catch (Exception e)
+                {
+#if DEBUG
+                    api?.Logger?.Warning($"[ConstructionStateChanger] Init() failed, falling back: {e.Message}");
+#endif
+                    // fall through to fallback
+                }
             }
 
-            // 2) Fallback: OwnBehavior.GetOrCreateMesh(Variants) und protected field "mesh" setzen
+            // 2) Fallback: call OwnBehavior.GetOrCreateMesh(Variants) and set private "mesh" field
             var own = beh.OwnBehavior;
             if (own != null)
             {
-                var getMeshM = own.GetType().GetMethod("GetOrCreateMesh", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                var getMeshM = own.GetType().GetMethod("GetOrCreateMesh",
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+
                 if (getMeshM != null)
                 {
                     try
                     {
                         var newMesh = getMeshM.Invoke(own, new object[] { beh.Variants });
                         var meshField = beh.GetType().GetField("mesh", BindingFlags.Instance | BindingFlags.NonPublic);
+
                         if (meshField != null && newMesh != null)
                         {
                             meshField.SetValue(beh, newMesh);
+#if DEBUG
+                            api?.Logger?.Notification("[ConstructionStateChanger] ARL mesh rebuilt successfully via fallback method");
+#endif
                         }
                     }
-                    catch { /* ignore failure */ }
+                    catch (Exception e)
+                    {
+#if DEBUG
+                        api?.Logger?.Error($"[ConstructionStateChanger] Fallback mesh rebuild failed: {e.Message}");
+#endif
+                    }
+                }
+                else
+                {
+#if DEBUG
+                    api?.Logger?.Warning("[ConstructionStateChanger] GetOrCreateMesh() not found on OwnBehavior.");
+#endif
                 }
             }
+            else
+            {
+#if DEBUG
+                api?.Logger?.Warning("[ConstructionStateChanger] OwnBehavior is null, cannot rebuild mesh.");
+#endif
+            }
         }
+
+
+
+
+
         public override WorldInteraction[] GetPlacedBlockInteractionHelp(IWorldAccessor world, BlockSelection selection, IPlayer forPlayer, ref EnumHandling handled)
         {
             return new WorldInteraction[]

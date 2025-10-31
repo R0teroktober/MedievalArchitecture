@@ -15,10 +15,13 @@
 		"*-east": {"all": false,"up":  true,"north": true,"south": true},
 		"*-west": {"all": false,"up": true,"north": true,"south": true}
 	},
+	"class": "BlockGeneric",
+	"entityClass": "BlockEntitySmallArchwayConstruction",
 	"variantgroups": [{"code": "side","loadFromProperties": "abstract/horizontalorientation"}],
-	"attributes": {"handbook": {"groupBy": [ "arch_small-*" ],"excludeByType": {"*-west": true,"*-east": true,"*-south": true}}, "rimStoneAmount": 5},
+	"attributes": {"handbook": {"groupBy": [ "arch_small-*" ],"excludeByType": {"west": true,"east": true,"south": true}}, "rimStoneAmount": 5},
 	"entityBehaviors": [ { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" } ],
 	"behaviors": [
+		{"name": "BlockBehaviorSmallArchway"},
 		{"name": "AttributeRenderingLibrary.HorizontalOrientable", "properties":{"dropBlockFace": "north"} },
 		{"name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
 			"properties": {
@@ -30,11 +33,8 @@
 					"*": [ "confession:block-debug-noname"]
 				},
 				"description":  {
-					"style-*::rock-*::originblock-rock": [ "confession:block-arch_small-description1", "rock-{rock}", "confession:originblock-{originblock}","confession:block-arch_small-description2","confession:{style}","confession:block-arch_small-description3"],
-					"style-*::rock-*::originblock-cobblestone": [ "confession:block-arch_small-description1", "rock-{rock}", "confession:originblock-{originblock}","confession:block-arch_small-description2","confession:{style}","confession:block-arch_small-description3"],
-					"style-*::rock-*::originblock-brick": [ "confession:block-arch_small-description1", "rock-{rock}", "confession:originblock-{originblock}","confession:block-arch_small-description2","confession:{style}","confession:block-arch_small-description3"],
 					"style-*::rock-*::originblock-*": [ "confession:block-arch_small-description1", "rock-{rock}","confession:block-arch_small-description2","confession:{style}","confession:block-arch_small-description3"],
-
+					"*":  ["confession:block-debug-nodescription"]
 
 				},
 				"textures": {
@@ -63,7 +63,7 @@
 						"material": {"base": "game:block/clay/daub/{originblock}/normal1"},
 						"rim": {"base": "game:block/stone/rock/{rock}1","overlays": [ "game:block/overlay/crackedcobblestone1" ]},
 						"plaster": {"base": "game:block/stone/rock/{rock}1","blendedOverlays": [{"base": "game:block/clay/fireclay","blendMode": "Lighten"}]}
-					},
+					}
 				},
 				"shape": {
 					"style-a": {"base": "confession:block/stone/arch-s-a","rotateYByType": {"*-north": 0,"*-east": 270,"*-south": 180,"*-west": 90}},
@@ -77,7 +77,7 @@
 	"creativeinventoryStacksByType": {
 			"*-north": [
 				{
-					"tabs": [ "general", "decorative", "confession" ],
+					"tabs": ["confession" ],
 					"stacks": [
 					
 						// type a rock
@@ -104,7 +104,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "rock", "rock": "suevite","style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "rock", "rock": "tuff","style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "rock", "rock": "whitemarble","style": "a"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "rock", "rock": "meteorite-iron","style": "a"}}},
+						
 
 						// type b rock
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "rock", "rock": "andesite","style": "b"}}},
@@ -130,7 +130,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "rock", "rock": "suevite","style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "rock", "rock": "tuff","style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "rock", "rock": "whitemarble","style": "b"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "rock", "rock": "meteorite-iron","style": "b"}}},
+						
 						// type c rock
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "rock", "rock": "andesite","style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "rock", "rock": "basalt","style": "c"}}},
@@ -155,7 +155,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "rock", "rock": "suevite","style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "rock", "rock": "tuff","style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "rock", "rock": "whitemarble","style": "c"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "rock", "rock": "meteorite-iron","style": "c"}}},
+						
 						// type d rock
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "rock", "rock": "andesite","style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "rock", "rock": "basalt","style": "d"}}},
@@ -180,7 +180,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "rock", "rock": "suevite","style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "rock", "rock": "tuff","style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "rock", "rock": "whitemarble","style": "d"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "rock", "rock": "meteorite-iron","style": "d"}}},
+						
 						
 						// type a "cobblestone"
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "cobblestone", "rock": "andesite","style": "a"}}},
@@ -206,7 +206,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "cobblestone", "rock": "suevite","style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "cobblestone", "rock": "tuff","style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "cobblestone", "rock": "whitemarble","style": "a"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "cobblestone", "rock": "meteorite-iron","style": "a"}}},
+						
 
 						// type b "cobblestone"
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "cobblestone", "rock": "andesite","style": "b"}}},
@@ -232,7 +232,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "cobblestone", "rock": "suevite","style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "cobblestone", "rock": "tuff","style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "cobblestone", "rock": "whitemarble","style": "b"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "cobblestone", "rock": "meteorite-iron","style": "b"}}},
+						
 						// type c "cobblestone"
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "cobblestone", "rock": "andesite","style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "cobblestone", "rock": "basalt","style": "c"}}},
@@ -257,7 +257,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "cobblestone", "rock": "suevite","style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "cobblestone", "rock": "tuff","style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "cobblestone", "rock": "whitemarble","style": "c"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "cobblestone", "rock": "meteorite-iron","style": "c"}}},
+						
 						// type d "cobblestone"
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "cobblestone", "rock": "andesite","style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "cobblestone", "rock": "basalt","style": "d"}}},
@@ -282,7 +282,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "cobblestone", "rock": "suevite","style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "cobblestone", "rock": "tuff","style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "cobblestone", "rock": "whitemarble","style": "d"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "cobblestone", "rock": "meteorite-iron","style": "d"}}},
+						
 						// type a "brick"
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "andesite","style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "basalt","style": "a"}}},
@@ -292,22 +292,14 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "claystone","style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "conglomerate","style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "granite","style": "a"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "greenmarble","style": "a"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "halite","style": "a"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "kimberlite","style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "limestone","style": "a"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "obsidian","style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "peridotite","style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "phyllite","style": "a"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "redmarble","style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "sandstone","style": "a"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "scoria","style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "shale","style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "slate","style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "suevite","style": "a"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "tuff","style": "a"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "whitemarble","style": "a"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "meteorite-iron","style": "a"}}},
+
 
 						// type b "brick"
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "andesite","style": "b"}}},
@@ -318,22 +310,14 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "claystone","style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "conglomerate","style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "granite","style": "b"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "greenmarble","style": "b"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "halite","style": "b"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "kimberlite","style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "limestone","style": "b"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "obsidian","style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "peridotite","style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "phyllite","style": "b"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "redmarble","style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "sandstone","style": "b"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "scoria","style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "shale","style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "slate","style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "suevite","style": "b"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "tuff","style": "b"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "whitemarble","style": "b"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "meteorite-iron","style": "b"}}},
+
 						// type c "brick"
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "andesite","style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "basalt","style": "c"}}},
@@ -343,22 +327,14 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "claystone","style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "conglomerate","style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "granite","style": "c"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "greenmarble","style": "c"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "halite","style": "c"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "kimberlite","style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "limestone","style": "c"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "obsidian","style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "peridotite","style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "phyllite","style": "c"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "redmarble","style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "sandstone","style": "c"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "scoria","style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "shale","style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "slate","style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "suevite","style": "c"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "tuff","style": "c"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "whitemarble","style": "c"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "meteorite-iron","style": "c"}}},
+
 						// type d "brick"
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "andesite","style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "basalt","style": "d"}}},
@@ -368,22 +344,14 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "claystone","style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "conglomerate","style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "granite","style": "d"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "greenmarble","style": "d"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "halite","style": "d"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "kimberlite","style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "limestone","style": "d"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "obsidian","style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "peridotite","style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "phyllite","style": "d"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "redmarble","style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "sandstone","style": "d"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "scoria","style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "shale","style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "slate","style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "suevite","style": "d"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "tuff","style": "d"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "whitemarble","style": "d"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brick", "rock": "meteorite-iron","style": "d"}}},
+
 						// type a plaster
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "plaster", "rock": "andesite", "style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "plaster", "rock": "basalt", "style": "a"}}},
@@ -408,7 +376,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "plaster", "rock": "suevite", "style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "plaster", "rock": "tuff", "style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "plaster", "rock": "whitemarble", "style": "a"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "plaster", "rock": "meteorite-iron", "style": "a"}}},
+						
 						// type b plaster
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "plaster", "rock": "andesite", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "plaster", "rock": "basalt", "style": "b"}}},
@@ -433,7 +401,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "plaster", "rock": "suevite", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "plaster", "rock": "tuff", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "plaster", "rock": "whitemarble", "style": "b"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "plaster", "rock": "meteorite-iron", "style": "b"}}},
+						
 						// type c plaster
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "plaster", "rock": "andesite", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "plaster", "rock": "basalt", "style": "c"}}},
@@ -458,7 +426,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "plaster", "rock": "suevite", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "plaster", "rock": "tuff", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "plaster", "rock": "whitemarble", "style": "c"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "plaster", "rock": "meteorite-iron", "style": "c"}}},
+						
 						// type d plaster
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "plaster", "rock": "andesite", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "plaster", "rock": "basalt", "style": "d"}}},
@@ -483,7 +451,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "plaster", "rock": "suevite", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "plaster", "rock": "tuff", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "plaster", "rock": "whitemarble", "style": "d"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "plaster", "rock": "meteorite-iron", "style": "d"}}},
+						
 
 
 
@@ -514,7 +482,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "ash", "rock": "suevite", "style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "ash", "rock": "tuff", "style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "ash", "rock": "whitemarble", "style": "a"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "ash", "rock": "meteorite-iron", "style": "a"}}},
+						
 						// type b ash daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "ash", "rock": "andesite", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "ash", "rock": "basalt", "style": "b"}}},
@@ -539,7 +507,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "ash", "rock": "suevite", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "ash", "rock": "tuff", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "ash", "rock": "whitemarble", "style": "b"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "ash", "rock": "meteorite-iron", "style": "b"}}},
+						
 						// type c ash daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "ash", "rock": "andesite", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "ash", "rock": "basalt", "style": "c"}}},
@@ -564,7 +532,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "ash", "rock": "suevite", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "ash", "rock": "tuff", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "ash", "rock": "whitemarble", "style": "c"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "ash", "rock": "meteorite-iron", "style": "c"}}},
+						
 						// type d ash daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "ash", "rock": "andesite", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "ash", "rock": "basalt", "style": "d"}}},
@@ -589,7 +557,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "ash", "rock": "suevite", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "ash", "rock": "tuff", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "ash", "rock": "whitemarble", "style": "d"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "ash", "rock": "meteorite-iron", "style": "d"}}},
+						
 
 
 
@@ -619,7 +587,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "blue", "rock": "suevite", "style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "blue", "rock": "tuff", "style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "blue", "rock": "whitemarble", "style": "a"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "blue", "rock": "meteorite-iron", "style": "a"}}},
+						
 						// type b blue daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "blue", "rock": "andesite", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "blue", "rock": "basalt", "style": "b"}}},
@@ -644,7 +612,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "blue", "rock": "suevite", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "blue", "rock": "tuff", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "blue", "rock": "whitemarble", "style": "b"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "blue", "rock": "meteorite-iron", "style": "b"}}},
+						
 						// type c blue daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "blue", "rock": "andesite", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "blue", "rock": "basalt", "style": "c"}}},
@@ -669,7 +637,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "blue", "rock": "suevite", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "blue", "rock": "tuff", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "blue", "rock": "whitemarble", "style": "c"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "blue", "rock": "meteorite-iron", "style": "c"}}},
+						
 						// type d blue daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "blue", "rock": "andesite", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "blue", "rock": "basalt", "style": "d"}}},
@@ -694,7 +662,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "blue", "rock": "suevite", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "blue", "rock": "tuff", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "blue", "rock": "whitemarble", "style": "d"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "blue", "rock": "meteorite-iron", "style": "d"}}},
+						
 
 
 
@@ -722,7 +690,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brown", "rock": "suevite", "style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brown", "rock": "tuff", "style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brown", "rock": "whitemarble", "style": "a"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brown", "rock": "meteorite-iron", "style": "a"}}},
+						
 						// type b brown daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brown", "rock": "andesite", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brown", "rock": "basalt", "style": "b"}}},
@@ -747,7 +715,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brown", "rock": "suevite", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brown", "rock": "tuff", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brown", "rock": "whitemarble", "style": "b"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brown", "rock": "meteorite-iron", "style": "b"}}},
+						
 						// type c brown daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brown", "rock": "andesite", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brown", "rock": "basalt", "style": "c"}}},
@@ -772,7 +740,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brown", "rock": "suevite", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brown", "rock": "tuff", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brown", "rock": "whitemarble", "style": "c"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brown", "rock": "meteorite-iron", "style": "c"}}},
+						
 						// type d brown daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brown", "rock": "andesite", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brown", "rock": "basalt", "style": "d"}}},
@@ -797,7 +765,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brown", "rock": "suevite", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brown", "rock": "tuff", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brown", "rock": "whitemarble", "style": "d"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brown", "rock": "meteorite-iron", "style": "d"}}},
+						
 
 
 
@@ -826,7 +794,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "browngolden", "rock": "suevite", "style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "browngolden", "rock": "tuff", "style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "browngolden", "rock": "whitemarble", "style": "a"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "browngolden", "rock": "meteorite-iron", "style": "a"}}},
+						
 						// type b browngolden daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "browngolden", "rock": "andesite", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "browngolden", "rock": "basalt", "style": "b"}}},
@@ -851,7 +819,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "browngolden", "rock": "suevite", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "browngolden", "rock": "tuff", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "browngolden", "rock": "whitemarble", "style": "b"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "browngolden", "rock": "meteorite-iron", "style": "b"}}},
+						
 						// type c browngolden
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "browngolden", "rock": "andesite", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "browngolden", "rock": "basalt", "style": "c"}}},
@@ -876,7 +844,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "browngolden", "rock": "suevite", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "browngolden", "rock": "tuff", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "browngolden", "rock": "whitemarble", "style": "c"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "browngolden", "rock": "meteorite-iron", "style": "c"}}},
+						
 						// type d browngolden
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "browngolden", "rock": "andesite", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "browngolden", "rock": "basalt", "style": "d"}}},
@@ -901,7 +869,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "browngolden", "rock": "suevite", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "browngolden", "rock": "tuff", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "browngolden", "rock": "whitemarble", "style": "d"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "browngolden", "rock": "meteorite-iron", "style": "d"}}},
+						
 
 
 
@@ -931,7 +899,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownlight", "rock": "suevite", "style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownlight", "rock": "tuff", "style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownlight", "rock": "whitemarble", "style": "a"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownlight", "rock": "meteorite-iron", "style": "a"}}},
+						
 						// type b brownlight daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownlight", "rock": "andesite", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownlight", "rock": "basalt", "style": "b"}}},
@@ -956,7 +924,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownlight", "rock": "suevite", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownlight", "rock": "tuff", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownlight", "rock": "whitemarble", "style": "b"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownlight", "rock": "meteorite-iron", "style": "b"}}},
+						
 						// type c brownlight daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownlight", "rock": "andesite", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownlight", "rock": "basalt", "style": "c"}}},
@@ -981,7 +949,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownlight", "rock": "suevite", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownlight", "rock": "tuff", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownlight", "rock": "whitemarble", "style": "c"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownlight", "rock": "meteorite-iron", "style": "c"}}},
+						
 						// type d brownlight daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownlight", "rock": "andesite", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownlight", "rock": "basalt", "style": "d"}}},
@@ -1006,7 +974,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownlight", "rock": "suevite", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownlight", "rock": "tuff", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownlight", "rock": "whitemarble", "style": "d"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownlight", "rock": "meteorite-iron", "style": "d"}}},
+						
 
 
 
@@ -1034,7 +1002,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownweathered", "rock": "suevite", "style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownweathered", "rock": "tuff", "style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownweathered", "rock": "whitemarble", "style": "a"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownweathered", "rock": "meteorite-iron", "style": "a"}}},
+						
 						// type b brownweathered daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownweathered", "rock": "andesite", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownweathered", "rock": "basalt", "style": "b"}}},
@@ -1059,7 +1027,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownweathered", "rock": "suevite", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownweathered", "rock": "tuff", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownweathered", "rock": "whitemarble", "style": "b"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownweathered", "rock": "meteorite-iron", "style": "b"}}},
+						
 						//type c brownweathered daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownweathered", "rock": "andesite", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownweathered", "rock": "basalt", "style": "c"}}},
@@ -1084,7 +1052,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownweathered", "rock": "suevite", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownweathered", "rock": "tuff", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownweathered", "rock": "whitemarble", "style": "c"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownweathered", "rock": "meteorite-iron", "style": "c"}}},
+						
 						// type d brownweathered daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownweathered", "rock": "andesite", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownweathered", "rock": "basalt", "style": "d"}}},
@@ -1109,7 +1077,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownweathered", "rock": "suevite", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownweathered", "rock": "tuff", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownweathered", "rock": "whitemarble", "style": "d"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "brownweathered", "rock": "meteorite-iron", "style": "d"}}},
+						
 
 
 
@@ -1137,7 +1105,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "green", "rock": "suevite", "style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "green", "rock": "tuff", "style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "green", "rock": "whitemarble", "style": "a"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "green", "rock": "meteorite-iron", "style": "a"}}},
+						
 						// type b green daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "green", "rock": "andesite", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "green", "rock": "basalt", "style": "b"}}},
@@ -1162,7 +1130,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "green", "rock": "suevite", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "green", "rock": "tuff", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "green", "rock": "whitemarble", "style": "b"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "green", "rock": "meteorite-iron", "style": "b"}}},
+						
 						// type c green daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "green", "rock": "andesite", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "green", "rock": "basalt", "style": "c"}}},
@@ -1187,7 +1155,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "green", "rock": "suevite", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "green", "rock": "tuff", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "green", "rock": "whitemarble", "style": "c"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "green", "rock": "meteorite-iron", "style": "c"}}},
+						
 						// type d green daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "green", "rock": "andesite", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "green", "rock": "basalt", "style": "d"}}},
@@ -1212,7 +1180,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "green", "rock": "suevite", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "green", "rock": "tuff", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "green", "rock": "whitemarble", "style": "d"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "green", "rock": "meteorite-iron", "style": "d"}}},
+						
 
 
 
@@ -1242,7 +1210,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "orange", "rock": "suevite", "style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "orange", "rock": "tuff", "style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "orange", "rock": "whitemarble", "style": "a"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "orange", "rock": "meteorite-iron", "style": "a"}}},
+						
 						// type b orange daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "orange", "rock": "andesite", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "orange", "rock": "basalt", "style": "b"}}},
@@ -1267,7 +1235,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "orange", "rock": "suevite", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "orange", "rock": "tuff", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "orange", "rock": "whitemarble", "style": "b"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "orange", "rock": "meteorite-iron", "style": "b"}}},
+						
 						// type c orange daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "orange", "rock": "andesite", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "orange", "rock": "basalt", "style": "c"}}},
@@ -1292,7 +1260,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "orange", "rock": "suevite", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "orange", "rock": "tuff", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "orange", "rock": "whitemarble", "style": "c"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "orange", "rock": "meteorite-iron", "style": "c"}}},
+						
 						// type d orange daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "orange", "rock": "andesite", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "orange", "rock": "basalt", "style": "d"}}},
@@ -1317,7 +1285,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "orange", "rock": "suevite", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "orange", "rock": "tuff", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "orange", "rock": "whitemarble", "style": "d"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "orange", "rock": "meteorite-iron", "style": "d"}}},
+						
 
 
 
@@ -1346,7 +1314,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "pink", "rock": "suevite", "style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "pink", "rock": "tuff", "style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "pink", "rock": "whitemarble", "style": "a"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "pink", "rock": "meteorite-iron", "style": "a"}}},
+						
 						// type b pink daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "pink", "rock": "andesite", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "pink", "rock": "basalt", "style": "b"}}},
@@ -1371,7 +1339,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "pink", "rock": "suevite", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "pink", "rock": "tuff", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "pink", "rock": "whitemarble", "style": "b"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "pink", "rock": "meteorite-iron", "style": "b"}}},
+						
 						// type c pink daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "pink", "rock": "andesite", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "pink", "rock": "basalt", "style": "c"}}},
@@ -1396,7 +1364,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "pink", "rock": "suevite", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "pink", "rock": "tuff", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "pink", "rock": "whitemarble", "style": "c"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "pink", "rock": "meteorite-iron", "style": "c"}}},
+						
 						// type d pink daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "pink", "rock": "andesite", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "pink", "rock": "basalt", "style": "d"}}},
@@ -1421,7 +1389,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "pink", "rock": "suevite", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "pink", "rock": "tuff", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "pink", "rock": "whitemarble", "style": "d"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "pink", "rock": "meteorite-iron", "style": "d"}}},
+						
 
 
 
@@ -1449,7 +1417,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "tan", "rock": "suevite", "style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "tan", "rock": "tuff", "style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "tan", "rock": "whitemarble", "style": "a"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "tan", "rock": "meteorite-iron", "style": "a"}}},
+						
 						// type b tan daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "tan", "rock": "andesite", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "tan", "rock": "basalt", "style": "b"}}},
@@ -1474,7 +1442,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "tan", "rock": "suevite", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "tan", "rock": "tuff", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "tan", "rock": "whitemarble", "style": "b"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "tan", "rock": "meteorite-iron", "style": "b"}}},
+						
 						// type c tan daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "tan", "rock": "andesite", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "tan", "rock": "basalt", "style": "c"}}},
@@ -1499,7 +1467,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "tan", "rock": "suevite", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "tan", "rock": "tuff", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "tan", "rock": "whitemarble", "style": "c"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "tan", "rock": "meteorite-iron", "style": "c"}}},
+						
 						// type d tan daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "tan", "rock": "andesite", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "tan", "rock": "basalt", "style": "d"}}},
@@ -1524,7 +1492,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "tan", "rock": "suevite", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "tan", "rock": "tuff", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "tan", "rock": "whitemarble", "style": "d"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "tan", "rock": "meteorite-iron", "style": "d"}}},
+						
 
 
 
@@ -1554,7 +1522,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "yellow", "rock": "suevite", "style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "yellow", "rock": "tuff", "style": "a"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "yellow", "rock": "whitemarble", "style": "a"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "yellow", "rock": "meteorite-iron", "style": "a"}}},
+						
 						// type b yellow daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "yellow", "rock": "andesite", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "yellow", "rock": "basalt", "style": "b"}}},
@@ -1579,7 +1547,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "yellow", "rock": "suevite", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "yellow", "rock": "tuff", "style": "b"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "yellow", "rock": "whitemarble", "style": "b"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "yellow", "rock": "meteorite-iron", "style": "b"}}},
+						
 						// type c yellow daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "yellow", "rock": "andesite", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "yellow", "rock": "basalt", "style": "c"}}},
@@ -1604,7 +1572,7 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "yellow", "rock": "suevite", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "yellow", "rock": "tuff", "style": "c"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "yellow", "rock": "whitemarble", "style": "c"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "yellow", "rock": "meteorite-iron", "style": "c"}}},
+						
 						// type d yellow daub
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "yellow", "rock": "andesite", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "yellow", "rock": "basalt", "style": "d"}}},
@@ -1628,8 +1596,8 @@
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "yellow", "rock": "slate", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "yellow", "rock": "suevite", "style": "d"}}},
 						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "yellow", "rock": "tuff", "style": "d"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "yellow", "rock": "whitemarble", "style": "d"}}},
-						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "yellow", "rock": "meteorite-iron", "style": "d"}}},
+						{"type": "block","code": "arch_small-north","attributes": {"types": {"originblock": "yellow", "rock": "whitemarble", "style": "d"}}}
+						
 
 
 
@@ -1640,7 +1608,6 @@
 				}
 			]
 		},
-	//"shape": {"base": "block/stone/arch-s-a","rotateYByType": {"*-north": 0,"*-east": 270,"*-south": 180,"*-west": 90}},
 	"textures": {
 		"material": { "base": "game:block/transparent" },
 		"rim": {"base": "game:block/transparent"},
@@ -1648,7 +1615,8 @@
 		"plaster": {"base": "game:block/stone/rock/granite1","blendedOverlays": [{"base": "game:block/clay/fireclay","blendMode": "Lighten"}]},
 		"putty": { "base": "game:block/transparent" },
 		"frame": { "base": "game:block/transparent" },
-		"black": { "base": "game:block/transparent" }
+		"black": { "base": "game:block/transparent" },
+		"wood": { "base": "game:block/transparent" }
 	},
 	"shape": { "base": "game:block/basic/invisible" },
 	"collisionBoxes": [

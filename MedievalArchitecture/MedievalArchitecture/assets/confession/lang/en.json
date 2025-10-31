@@ -46,13 +46,18 @@
   "confession:block-construction_small-*": "Archway frame (Placeholder)",
   "confession:block-arch_small-name-plaster1": "Small plaster & ", "confession:block-arch_small-name-plaster2": " archway",
   "confession:block-arch_small-name1": "Small ",
+  "confession:block-arch_tiny-name1": "Tiny ",
+  "confession:block-arch_tiny-name2": " window",
   "confession:block-arch_small-name-daub1": " daub & ",
   "confession:block-arch_small-name-daub2": " archway",
   "confession:block-arch_small-name": " archway",
-  "confession:block-arch_small-description1": "<font color=\"#D6B56D\">Material: </font>",
+  "confession:block-arch_small-name2": " (Door lintel)",
+  "confession:block-arch_small-description1": "<font color=\"#D6B56D\">Rim: </font>",
   "confession:block-arch_small-description2": "<br><font color=\"#D6B56D\">Shape: </font>",
   "confession:block-arch_small-description3": "<br><font color=\"#D6B56D\">Glass: </font>None<br>",
   "confession:block-arch_small-description4": "<br><font color=\"#D6B56D\">Glass: </font>",
+  "confession:block-arch_small-description5": "<br><font color=\"#D6B56D\">Wood: </font>",
+  "confession:block-arch_small-description6": "<font color=\"#D6B56D\">Material: </font>",
   "confession:block-construction_small-name1": "Small Archway frame ",
   "confession:block-construction_small-name2": "/3",
   "confession:0": "0",
@@ -101,11 +106,13 @@
 
 
   // windows
+  "confession:block-windowsill-name": " windowsill",
+
   "confession:block-window-*": "Window (Placeholder)",
-  "confession:window-single": "Single part",
-  "confession:window-top": "Top part",
-  "confession:window-middle": "Middle part",
-  "confession:window-bottom": "Bottom part",
+  "confession:window-single": "Single part<br>",
+  "confession:window-top": "Top part<br>",
+  "confession:window-middle": "Middle part<br>",
+  "confession:window-bottom": "Bottom part<br>",
   "confession:block-window-name1": "Window (", "confession:block-window-name2": ")", "confession:block-window-name3": " (",
 
   "confession:block-window-description1": "<font color=\"#D6B56D\">Glass: </font>", "confession:block-window-description2": "<br><font color=\"#D6B56D\">Shape: </font>",

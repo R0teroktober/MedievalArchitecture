@@ -11,7 +11,10 @@ namespace MedievalArchitecture
         public override void Start(ICoreAPI api)
         {
             base.Start(api);
-            api.RegisterBlockBehaviorClass("BlockBehaviorConstructionStateChanger", typeof(BlockBehaviorConstructionStateChanger));
+            api.RegisterBlockBehaviorClass("BlockBehaviorSmallArchway", typeof(BlockBehaviorSmallArchway));
+            api.RegisterBlockBehaviorClass("BlockBehaviorCancelInteraction", typeof(BlockBehaviorCancelInteraction));
+            api.RegisterBlockBehaviorClass("BlockBehaviorSmallArchwayConstruction", typeof(BlockBehaviorSmallArchwayConstruction));
+            api.RegisterBlockEntityClass("BlockEntitySmallArchwayConstruction", typeof(BlockEntitySmallArchwayConstruction));
             Config = api.LoadModConfig<VariantTypesConfig>("variant-types-config.json");
             if (Config == null)
             {
@@ -69,7 +72,53 @@ namespace MedievalArchitecture
                         { "rock-pink", "pink" },
                         { "rock-tan", "tan" },
                         { "rock-yellow", "yellow" }
-                }
+                    },
+                    WoodCodeByType = new()
+                    {
+                        {"wood-acacia", "acacia" },
+                        {"wood-aged", "aged"},
+                        {"wood-baldcypress", "baldcypress"},
+                        {"wood-birch", "birch"},
+                        {"wood-ebony", "ebony"},
+                        {"wood-kapok", "kapok"},
+                        {"wood-larch", "larch"},
+                        {"wood-maple", "maple"},
+                        {"wood-oak", "oak"},
+                        {"wood-pine", "pine"},
+                        {"wood-purpleheart", "purpleheart"},
+                        {"wood-redwood", "redwood"},
+                        {"wood-walnut", "walnut" }
+                    },
+                    GlassCodeByType = new()
+                    {
+                        { "glass-plain", "plain"},
+                        {"glass-blue", "blue"},
+                        {"glass-brown", "brown"},
+                        {"glass-green", "green"},
+                        {"glass-pink", "pink"},
+                        {"glass-quartz", "quartz"},
+                        {"glass-red", "red"},
+                        {"glass-vintage", "vintage"},
+                        {"glass-yellow", "yellow"}
+                    },
+                    OriginblockCodeByType = new()
+                    {
+                    {"originblock-rock", "rock" },
+                    {"originblock-cobblestone", "cobblestone"},
+                    {"originblock-brick", "brick"},
+                    {"originblock-plaster", "plaster"},
+                    {"originblock-ash", "ash"},
+                    {"originblock-blue", "blue"},
+                    {"originblock-brown", "brown"},
+                    {"originblock-browngolden", "browngolden"},
+                    {"originblock-brownlight", "brownlight"},
+                    {"originblock-brownweathered", "brownweathered"},
+                    {"originblock-green", "green"},
+                    {"originblock-orange", "orange"},
+                    {"originblock-pink", "pink"},
+                    {"originblock-tan", "tan"},
+                    {"originblock-yellow", "yellow"}
+                    }
                 };
 
                 api.StoreModConfig(Config, "medievalarchitecture.json");

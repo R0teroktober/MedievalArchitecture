@@ -1,0 +1,88 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+	},
+	"textures": {
+	},
+	"elements": [
+		{
+			"name": "Base",
+			"from": [ 0.0, 0.0, 3.0 ],
+			"to": [ 16.0, 14.0, 13.0 ],
+			"rotationOrigin": [ 0.0, 0.0, 3.0 ],
+			"faces": {
+				"east": { "texture": "#material", "uv": [ 3.0, 2.0, 13.0, 16.0 ] },
+				"west": { "texture": "#material", "uv": [ 3.0, 2.0, 13.0, 16.0 ] },
+				"down": { "texture": "#material", "uv": [ 0.0, 3.5, 16.0, 13.5 ], "windMode": [-1,-1,-1,-1] }
+			},
+			"children": [
+				{
+					"name": "slope1",
+					"from": [ 0.0, 0.0, -3.0 ],
+					"to": [ 16.0, 1.0, 0.0 ],
+					"rotationOrigin": [ 7.9, 0.0, -3.0 ],
+					"faces": {
+						"north": { "texture": "#material", "uv": [ 0.0, 15.0, 16.0, 16.0 ] },
+						"east": { "texture": "#material", "uv": [ 13.0, 14.0, 16.0, 15.0 ] },
+						"west": { "texture": "#material", "uv": [ 0.0, 14.0, 3.0, 15.0 ] },
+						"down": { "texture": "#material", "uv": [ 0.0, 0.0, 16.0, 3.0 ] }
+					}
+				},
+				{
+					"name": "slope1.1",
+					"from": [ 0.01, 1.0, -3.0 ],
+					"to": [ 15.99, 16.3, 0.0 ],
+					"rotationOrigin": [ 7.9, 1.0, -3.0 ],
+					"rotationX": 11.0,
+					"faces": {
+						"north": { "texture": "#material", "uv": [ 0.0, 0.0, 16.0, 15.0 ], "autoUv": false },
+						"east": { "texture": "#material", "uv": [ 13.0, 0.0, 16.0, 15.0 ] },
+						"west": { "texture": "#material", "uv": [ 0.0, 0.0, 3.0, 15.0 ] }
+					}
+				},
+				{
+					"name": "slope2",
+					"from": [ 0.0, 0.01, 10.0 ],
+					"to": [ 16.0, 1.01, 13.0 ],
+					"rotationOrigin": [ 7.9, 0.0, 10.0 ],
+					"faces": {
+						"east": { "texture": "#material", "uv": [ 0.0, 15.0, 3.0, 16.0 ] },
+						"south": { "texture": "#material", "uv": [ 0.0, 15.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1] },
+						"west": { "texture": "#material", "uv": [ 13.0, 15.0, 16.0, 16.0 ] },
+						"down": { "texture": "#material", "uv": [ 0.0, 13.0, 16.0, 16.0 ] }
+					}
+				},
+				{
+					"name": "slope2.1",
+					"from": [ 0.01, 1.0, 9.0 ],
+					"to": [ 15.99, 16.3, 13.0 ],
+					"rotationOrigin": [ 7.9, 1.0, 13.0 ],
+					"rotationX": -11.0,
+					"faces": {
+						"east": { "texture": "#material", "uv": [ 0.0, 0.5, 4.0, 15.5 ] },
+						"south": { "texture": "#material", "uv": [ 0.0, 0.0, 16.0, 15.25 ], "autoUv": false },
+						"west": { "texture": "#material", "uv": [ 12.0, 0.0, 16.0, 15.0 ] }
+					}
+				},
+				{
+					"name": "Sill",
+					"from": [ 0.0, 14.0, -1.0 ],
+					"to": [ 16.0, 16.0, 11.0 ],
+					"rotationOrigin": [ 0.0, 14.0, -1.0 ],
+					"faces": {
+						"north": { "texture": "#sill", "uv": [ 0.0, 0.0, 16.0, 2.0 ] },
+						"east": { "texture": "#sill", "uv": [ 0.0, 0.0, 12.0, 2.0 ] },
+						"south": { "texture": "#sill", "uv": [ 0.0, 0.0, 16.0, 2.0 ] },
+						"west": { "texture": "#sill", "uv": [ 0.0, 0.0, 12.0, 2.0 ] },
+						"up": { "texture": "#sill", "uv": [ 0.0, 0.0, 16.0, 12.0 ] },
+						"down": { "texture": "#sill", "uv": [ 0.0, 0.0, 16.0, 12.0 ] }
+					}
+				}
+			]
+		}
+	]}

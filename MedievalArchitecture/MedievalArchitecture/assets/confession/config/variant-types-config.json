@@ -50,5 +50,53 @@
     "style-b": "b",
     "style-c": "c",
     "style-d": "d"
+  },
+
+  "WoodCodeByType": {
+    "wood-acacia": "acacia",
+    "wood-aged": "aged",
+    "wood-baldcypress": "baldcypress",
+    "wood-birch": "birch",
+    "wood-ebony": "ebony",
+    "wood-kapok": "kapok",
+    "wood-larch": "larch",
+    "wood-maple": "maple",
+    "wood-oak": "oak",
+    "wood-pine": "pine",
+    "wood-purpleheart": "purpleheart",
+    "wood-redwood": "redwood",
+    "wood-walnut": "walnut"
+
+  },
+  "GlasCodeByType": {
+    "glass-plain": "plain",
+    "glass-blue": "blue",
+    "glass-brown": "brown",
+    "glass-green": "green",
+    "glass-pink": "pink",
+    "glass-quartz": "quartz",
+    "glass-red": "red",
+    "glass-vintage": "vintage",
+    "glass-yellow": "yellow"
+
+  },
+  "OriginblockCodeByType": {
+    "originblock-rock": "rock",
+    "originblock-cobblestone": "cobblestone",
+    "originblock-brick": "brick",
+    "originblock-plaster": "plaster",
+    "originblock-ash": "ash",
+    "originblock-blue": "blue",
+    "originblock-brown": "brown",
+    "originblock-browngolden": "browngolden",
+    "originblock-brownlight": "brownlight",
+    "originblock-brownweathered": "brownweathered",
+    "originblock-green": "green",
+    "originblock-orange": "orange",
+    "originblock-pink": "pink",
+    "originblock-tan": "tan",
+    "originblock-yellow": "yellow"
+
+
   }
 }

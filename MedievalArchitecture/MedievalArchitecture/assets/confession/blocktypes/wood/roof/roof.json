@@ -96,7 +96,7 @@
 	"creativeinventoryStacksByType": {
 			"*-0-north-free": [
 				{
-					"tabs": [ "general", "decorative", "confession" ],
+					"tabs": ["confession" ],
 					"stacks": [ 
 
 	// just rafter types

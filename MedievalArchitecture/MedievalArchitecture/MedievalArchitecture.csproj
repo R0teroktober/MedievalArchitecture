@@ -6,6 +6,9 @@
     <OutputPath>bin\$(Configuration)\Mods\mod</OutputPath>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
+		<DefineConstants>DEBUG;TRACE</DefineConstants>
+	</PropertyGroup>
 
   <ItemGroup>
     <Reference Include="VintagestoryAPI">
@@ -25,7 +28,6 @@
       <Private>False</Private>
     </Reference>
   </ItemGroup>
-
 <ItemGroup>
   <Content Include="modinfo.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -44,6 +46,9 @@
 <ItemGroup>
   <Folder Include="assets\confession\shapes\block\glass\" />
 </ItemGroup>
+	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
+  <DefineConstants>DEBUG;TRACE</DefineConstants>
+</PropertyGroup>
 <ProjectExtensions><VisualStudio><UserProperties assets_4confession_4blocktypes_4stone_4archway_4archway_3small_3window_1json__JsonSchema="json" /></VisualStudio></ProjectExtensions>
 
 </Project>

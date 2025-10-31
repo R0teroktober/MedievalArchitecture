@@ -10,13 +10,14 @@
 	"sideopaque": {"all": false},
 	"sideao": {"all": true},
 	"sidesolid": {"all":  false},
+	"entityClass": "BlockEntitySmallArchwayConstruction",
 	"variantgroups": [{"code": "side","loadFromProperties": "abstract/horizontalorientation"}],
 	"attributes": {
-		"handbook": {"groupBy": [ "construction_small-*" ],"excludeByType": {"*-west": true, "east": true, "south": true}}
+		"handbook": {"groupBy": [ "construction_small-*" ],"excludeByType": {"west": true, "east": true, "south": true}}
 	},
 	"entityBehaviors": [ { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" } ],
 	"behaviors": [
-		{ "name": "BlockBehaviorConstructionStateChanger"},
+		{ "name": "BlockBehaviorSmallArchwayConstruction", "blockCodeBaseString": "confession:arch_small"},
 		{ "name": "AttributeRenderingLibrary.HorizontalOrientable", "properties":{"dropBlockFace": "north"} },
 		{ "name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
 			"properties": {
@@ -69,7 +70,7 @@
 	"creativeinventoryStacksByType": {
 			"*-north": [
 				{
-					"tabs": [ "general", "decorative", "confession" ],
+					"tabs": ["confession" ],
 					"stacks": [ 
 					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "none", "state": "0" } } },
 					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "none", "state": "0" } } },

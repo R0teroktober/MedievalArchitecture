@@ -1,12 +1,15 @@
 {
 	"editor": {
-		"collapsedPaths": "Root/OriginBack/putty21,Root/Origin/Origin2,Root/Frame/FrameA2/LeadA,Root/OriginFront/putty11,Root/Origin/viewblocker",
+		"collapsedPaths": "Root/Origin/Origin2,Root/OriginCenter,Root/OriginBack,Root/originAll/insideorigin,Root/Frame2,Root/origin/Bottom-board1/top-board1,Root/Frame,Root/originAll/Frame2,Root/originAll/plaster1,Root/Front,Root/insideorigin,Root/originAll/Frame,Root/Origin/viewblocker,Root/Front/RightArchOrigin,Root/Front/LeftArchOrigin,Root/plaster1,Root/originAll/Front,Root/OriginFront",
 		"allAngles": false,
 		"entityTextureMode": false
 	},
 	"textureWidth": 16,
 	"textureHeight": 16,
 	"textureSizes": {
+	},
+	"textures": {
+		"wood": "C:/Users/Wanja/Pictures/vintage story textures/wood"
 	},
 	"elements": [
 		{
@@ -1377,5 +1380,91 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "origin",
+			"from": [ 8.0, -14.0, 7.79 ],
+			"to": [ 8.0, -14.0, 7.79 ],
+			"rotationOrigin": [ 1.0, -14.0, 15.0 ],
+			"faces": {
+			},
+			"children": [
+				{
+					"name": "top-board2",
+					"from": [ -4.0, 16.0, 6.2 ],
+					"to": [ 0.0, 30.0, 8.2 ],
+					"rotationOrigin": [ -2.0, 16.0, 7.2 ],
+					"faces": {
+						"north": { "texture": "#wood", "uv": [ 8.0, 0.0, 12.0, 14.0 ] },
+						"east": { "texture": "#wood", "uv": [ 14.0, 0.0, 16.0, 14.0 ] },
+						"south": { "texture": "#wood", "uv": [ 8.0, 0.0, 12.0, 14.0 ] },
+						"west": { "texture": "#wood", "uv": [ 12.5, 0.0, 14.5, 14.0 ], "windMode": [-1,-1,-1,-1], "windData": [2,2,3,3] }
+					}
+				},
+				{
+					"name": "top-board1",
+					"from": [ -8.0, 16.0, 6.0 ],
+					"to": [ -4.0, 30.0, 8.0 ],
+					"rotationOrigin": [ -6.0, 16.0, 6.0 ],
+					"faces": {
+						"north": { "texture": "#wood", "uv": [ 4.0, 0.0, 8.0, 14.0 ] },
+						"east": { "texture": "#wood", "uv": [ 13.0, 0.0, 15.0, 14.0 ], "windMode": [-1,-1,-1,-1], "windData": [2,3,3,2] },
+						"south": { "texture": "#wood", "uv": [ 4.0, 0.0, 8.0, 14.0 ] }
+					}
+				},
+				{
+					"name": "top-board4",
+					"from": [ 4.0, 16.0, 6.0 ],
+					"to": [ 8.0, 30.0, 8.0 ],
+					"rotationOrigin": [ 6.0, 16.0, 7.0 ],
+					"faces": {
+						"north": { "texture": "#wood", "uv": [ 4.0, 0.0, 8.0, 14.0 ] },
+						"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 4.0, 14.0 ] },
+						"west": { "texture": "#wood", "uv": [ 13.0, 0.0, 15.0, 14.0 ] }
+					}
+				},
+				{
+					"name": "top-board3",
+					"from": [ 0.0, 16.0, 5.8 ],
+					"to": [ 4.0, 30.0, 7.8 ],
+					"rotationOrigin": [ 2.0, 16.0, 6.8 ],
+					"faces": {
+						"north": { "texture": "#wood", "uv": [ 0.0, 0.0, 4.0, 14.0 ] },
+						"east": { "texture": "#wood", "uv": [ 12.0, 0.0, 14.0, 14.0 ] },
+						"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 4.0, 14.0 ] },
+						"west": { "texture": "#wood", "uv": [ 14.0, 0.0, 16.0, 14.0 ] }
+					}
+				},
+				{
+					"name": "top-beam",
+					"from": [ -8.0, 14.0, 5.41 ],
+					"to": [ 8.0, 16.0, 8.41 ],
+					"rotationOrigin": [ -8.0, 14.0, 5.41 ],
+					"faces": {
+						"north": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "rotation": 90 },
+						"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "rotation": 90 },
+						"up": { "texture": "#wood", "uv": [ 2.0, 0.0, 5.0, 16.0 ], "rotation": 90 },
+						"down": { "texture": "#wood", "uv": [ 2.0, 0.0, 5.0, 16.0 ], "rotation": 90 }
+					}
+				}
+			]
 		}
-	]}
+	],
+	"animations": [
+		{
+			"name": "opened",
+			"code": "opened",
+			"quantityframes": 2,
+			"onActivityStopped": "Rewind",
+			"onAnimationEnd": "Hold",
+			"keyframes": [
+				{
+					"frame": 0,
+					"elements": {
+						"origin": { "rotationX": 0.0, "rotationY": 90.0, "rotationZ": 0.0 }
+					}
+				}
+			]
+		}
+	]
+}
