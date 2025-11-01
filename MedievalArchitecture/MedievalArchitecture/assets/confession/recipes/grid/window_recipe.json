@@ -1,0 +1,141 @@
+[
+
+   {
+        "ingredientPattern": "SH,MC",
+        "ingredients": {
+            "M": { "type": "block", "code": "game:rock-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble", "halite", "kimberlite", "limestone", "obsidian", "peridotite", "phyylite", "redmarble", "sandstone", "scoria", "shale", "slate", "suevite", "tuff", "whitemarble"] },
+            "C": { "type": "item", "code": "game:chisel-*", "isTool": true  },
+            "H": { "type": "item", "code": "game:hammer-*", "isTool": true  },
+            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble", "halite", "kimberlite", "limestone", "obsidian", "peridotite", "phyylite", "redmarble", "sandstone", "scoria", "shale", "slate", "suevite", "tuff", "whitemarble"] },
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "block",
+            "code": "confession:windowsill_a-ns", 
+            // the important part is to include attributes with desired types
+            "attributes": {
+              "types": {
+                "originblock":  "rock",
+                "rock":  "{rock}"
+
+              }
+            }
+        }
+    },
+   {
+        "ingredientPattern": "SH,MC",
+        "ingredients": {
+            "M": { "type": "block", "code": "game:plaster-plain"},
+            "C": { "type": "item", "code": "game:chisel-*", "isTool": true  },
+            "H": { "type": "item", "code": "game:hammer-*", "isTool": true  },
+            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble", "halite", "kimberlite", "limestone", "obsidian", "peridotite", "phyylite", "redmarble", "sandstone", "scoria", "shale", "slate", "suevite", "tuff", "whitemarble"] },
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "block",
+            "code": "confession:windowsill_a-ns", 
+            // the important part is to include attributes with desired types
+            "attributes": {
+              "types": {
+                "originblock":  "plaster",
+                "rock":  "{rock}"
+
+              }
+            }
+        }
+    },
+   {
+        "ingredientPattern": "SH,MC",
+        "ingredients": {
+            "M": { "type": "block", "code": "game:daub-*-normal", "name": "originblock", "allowedVariants": ["ash", "blue", "brown", "browngolden", "brownlight", "brownweathered", "green", "orange", "pink", "tan", "yellow" ] },
+            "C": { "type": "item", "code": "game:chisel-*", "isTool": true  },
+            "H": { "type": "item", "code": "game:hammer-*", "isTool": true  },
+            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble", "halite", "kimberlite", "limestone", "obsidian", "peridotite", "phyylite", "redmarble", "sandstone", "scoria", "shale", "slate", "suevite", "tuff", "whitemarble"] },
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "block",
+            "code": "confession:windowsill_a-ns", 
+            // the important part is to include attributes with desired types
+            "attributes": {
+              "types": {
+                "originblock":  "{originblock}",
+                "rock":  "{rock}"
+
+              }
+            }
+        }
+    },
+   {
+        "ingredientPattern": "SH,MC",
+        "ingredients": {
+            "M": { "type": "block", "code": "game:cobblestone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble", "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone", "shale", "slate", "suevite", "whitemarble"] },
+            "C": { "type": "item", "code": "game:chisel-*", "isTool": true  },
+            "H": { "type": "item", "code": "game:hammer-*", "isTool": true  },
+            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble", "halite", "kimberlite", "limestone", "obsidian", "peridotite", "phyylite", "redmarble", "sandstone", "scoria", "shale", "slate", "suevite", "tuff", "whitemarble"] },
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "block",
+            "code": "confession:windowsill_a-ns", 
+            // the important part is to include attributes with desired types
+            "attributes": {
+              "types": {
+                "originblock":  "cobblestone",
+                "rock":  "{rock}"
+
+              }
+            }
+        }
+    },
+   {
+        "ingredientPattern": "SH,MC",
+        "ingredients": {
+            "M": { "type": "block", "code": "game:stonebricks-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "limestone", "peridotite", "phyylite", "sandstone", "shale", "slate", "suevite"] },
+            "C": { "type": "item", "code": "game:chisel-*", "isTool": true  },
+            "H": { "type": "item", "code": "game:hammer-*", "isTool": true  },
+            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "limestone", "peridotite", "phyylite", "sandstone", "shale", "slate", "suevite"] },
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "block",
+            "code": "confession:windowsill_a-ns", 
+            // the important part is to include attributes with desired types
+            "attributes": {
+              "types": {
+                "originblock":  "brick",
+                "rock":  "{rock}"
+
+              }
+            }
+        }
+    },
+   {
+        "ingredientPattern": "LP_,PGP,_P_",
+        "ingredients": {
+            "G": { "type": "block", "code": "game:glassslab-*-down-free", "name": "glass", "allowedVariants": ["plain", "blue", "brown", "green", "pink", "quartz", "red", "vintage", "violet", "yellow"] },
+            "L": { "type": "item", "code": "game:metalbit-lead", "quantity": 5 },
+            "P": { "type": "item", "code": "game:plank-*"  }
+        },
+        "width": 3,
+        "height": 3,
+        "output": {
+            "type": "block",
+            "code": "confession:windowsill_a-ns", 
+            // the important part is to include attributes with desired types
+            "attributes": {
+              "types": {
+                "style":  "single",
+                "glass":  "{glass}"
+                
+
+              }
+            }
+        }
+    },
+]

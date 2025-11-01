@@ -71,10 +71,7 @@
 						}
 				},
 				"shape": {
-					"style-a": {"base": "confession:block/stone/window-t-a","rotateYByType": {"*-north": 0,"*-east": 270,"*-south": 180,"*-west": 90}},
-					"style-b": {"base": "confession:block/stone/window-t-b","rotateYByType": {"*-north": 0,"*-east": 270,"*-south": 180,"*-west": 90}},
-					"style-c": {"base": "confession:block/stone/window-t-c","rotateYByType": {"*-north": 0,"*-east": 270,"*-south": 180,"*-west": 90}},
-					"style-d": {"base": "confession:block/stone/window-t-d","rotateYByType": {"*-north": 0,"*-east": 270,"*-south": 180,"*-west": 90}}
+					"style-*": {"base": "confession:block/stone/window-t-{style}","rotateYByType": {"*-north": 0,"*-east": 270,"*-south": 180,"*-west": 90}}
 				}
 			}
 		}
