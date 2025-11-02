@@ -8,7 +8,7 @@ using AttributeRenderingLibrary;
 
 namespace MedievalArchitecture
 {
-    public class BlockEntitySmallArchwayConstruction : BlockEntity
+    public class BlockEntityConstructable : BlockEntity
     {
         private BlockEntityBehaviorShapeTexturesFromAttributes arlBeh;
 

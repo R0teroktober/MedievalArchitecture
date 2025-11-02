@@ -11,7 +11,7 @@
 	"sideao": { "all": true  },
 	"sidesolid": { "all": true },
 	"class": "BlockGeneric",
-	"entityClass": "BlockEntitySmallArchwayConstruction",
+	"entityClass": "BlockEntityConstructable",
 	"variantgroups": [  { "code": "side", "loadFromProperties": "abstract/horizontalorientation"  } ],
 	"attributes": { "handbook": { "groupBy": ["arch_small_wood-*"], "excludeByType": { "west": true, "east": true, "south": true  },"extraSections": [
                 { "title": "confession:archway-addwood-help-title", "text": "confession:archway-addwood-help-text" }

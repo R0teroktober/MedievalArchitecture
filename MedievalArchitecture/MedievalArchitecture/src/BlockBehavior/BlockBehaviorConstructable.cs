@@ -15,9 +15,11 @@ using Vintagestory.GameContent;
 
 namespace MedievalArchitecture
 {
-    public class BlockBehaviorSmallArchway(Block block) : BlockBehavior(block), IInteractable
+    public class BlockBehaviorConstructable(Block block) : BlockBehavior(block), IInteractable
     {
         private bool constructionInProgress = false;
+        private string blockCodeWithGlass;
+        private string blockCodeWithLintel;
         AssetLocation finishSound = new AssetLocation();
         AssetLocation finishGlassSound = new AssetLocation();
         public Dictionary<string, string> glassCodeByType = new();
@@ -39,14 +41,24 @@ namespace MedievalArchitecture
             rockCodeByType = new Dictionary<string, string>(config.RockCodeByType);
             originblockCodeByType = new Dictionary<string, string>(config.OriginblockCodeByType);
             finishSound = AssetLocation.Create("sounds/block/planks");
+            blockCodeWithGlass = properties["blockCodeWithGlass"].AsString();
+            blockCodeWithLintel = properties["blockCodeWithLintel"].AsString();
+
 
 
         }
 
         public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handling)
         {
-            handling = EnumHandling.PreventDefault;
-            return true;
+            if (byPlayer.Entity.Controls.CtrlKey)
+            {
+                handling = EnumHandling.PreventDefault;
+               return true;
+            } else 
+                
+               return base.OnBlockInteractStart(world, byPlayer, blockSel, ref handling);
+
+
         }
         public override bool OnBlockInteractCancel(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handling)
         {
@@ -58,69 +70,81 @@ namespace MedievalArchitecture
 
         public override bool OnBlockInteractStep(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handled)
         {
-            handled = EnumHandling.PreventDefault;
-
-
-            if (byPlayer.CurrentBlockSelection == null) return false;
-            //  Nur auf dem Client Animation
-            if (world.Side == EnumAppSide.Client)
+            if (byPlayer.Entity.Controls.CtrlKey)
             {
-                (byPlayer as IClientPlayer)?.TriggerFpAnimation(EnumHandInteract.BlockInteract);
+                handled = EnumHandling.PreventDefault;
+
+
+                if (byPlayer.CurrentBlockSelection == null) return false;
+                //  Nur auf dem Client Animation
+                if (world.Side == EnumAppSide.Client)
+                {
+                    (byPlayer as IClientPlayer)?.TriggerFpAnimation(EnumHandInteract.BlockInteract);
+
+                }
+                return secondsUsed < 0.5;
 
             }
-            return secondsUsed < 0.5;
+            else
+            return base.OnBlockInteractStep(secondsUsed, world, byPlayer, blockSel, ref handled);
+             
 
         }
         public override void OnBlockInteractStop(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handled)
         {
-            handled = EnumHandling.PreventDefault;
-
-
-            if (secondsUsed < 0.5) return; // Bauzeit
-            if (constructionInProgress) return;
-            constructionInProgress = true;
-            // Baumaterial
-            if (byPlayer?.InventoryManager?.ActiveHotbarSlot?.Itemstack == null || blockSel == null) return;
-            var heldItem = byPlayer.InventoryManager.ActiveHotbarSlot.Itemstack;
-            string heldItemCode = heldItem.Collectible.Code.ToString();
-
-            // Block
-            var be = world.BlockAccessor?.GetBlockEntity(blockSel.Position);
-            if (be == null) return;
-            // Blockbehavior
-            var beh = be.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
-            if (beh?.Variants == null) return;
-            var oldVariants = beh.Variants.Clone();
-            oldVariants.FindByVariant(styleCodeByType, out string style);
-            oldVariants.FindByVariant(rockCodeByType, out string rock);
-            oldVariants.FindByVariant(originblockCodeByType, out string originblock);
-            var block = byPlayer.CurrentBlockSelection.Block;
-            if (block == null) return;
-            string orientation = block.Variant.TryGetValue("side");
-            secondsUsed = 0; // Bauzeit zurücksetzten
-
-
-
-            if (heldItemCode.StartsWith("game:plank-"))
+            if (!byPlayer.Entity.Controls.CtrlKey) base.OnBlockInteractStop(secondsUsed, world, byPlayer, blockSel, ref handled);
+            else
             {
-                TryAddPlanks(world, byPlayer, be, beh, heldItem, orientation, style, rock, originblock);
-            } else if (heldItemCode.StartsWith("confession:window-"))
-            { 
-                TryAddGlass(world, byPlayer, be, beh, heldItem,orientation, style, rock, originblock);
+
+                handled = EnumHandling.PreventDefault;
+
+
+                if (secondsUsed < 0.5) return; // Bauzeit
+                if (constructionInProgress) return;
+                constructionInProgress = true;
+                // Baumaterial
+                if (byPlayer?.InventoryManager?.ActiveHotbarSlot?.Itemstack == null || blockSel == null) return;
+                var heldItem = byPlayer.InventoryManager.ActiveHotbarSlot.Itemstack;
+                string heldItemCode = heldItem.Collectible.Code.ToString();
+
+                // Block
+                var be = world.BlockAccessor?.GetBlockEntity(blockSel.Position);
+                if (be == null) return;
+                // Blockbehavior
+                var beh = be.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
+                if (beh?.Variants == null) return;
+                var oldVariants = beh.Variants.Clone();
+                oldVariants.FindByVariant(styleCodeByType, out string style);
+                oldVariants.FindByVariant(rockCodeByType, out string rock);
+                oldVariants.FindByVariant(originblockCodeByType, out string originblock);
+                var block = byPlayer.CurrentBlockSelection.Block;
+                if (block == null) return;
+                string orientation = block.Variant.TryGetValue("side");
+                secondsUsed = 0; // Bauzeit zurücksetzten
+
+
+
+                if (heldItemCode.StartsWith("game:plank-") && blockCodeWithLintel != null)
+                {
+                    TryAddPlanks(world, byPlayer, be, beh, heldItem, orientation, style, rock, originblock);
+                }
+                else if (heldItemCode.StartsWith("confession:window-") && blockCodeWithGlass != null)
+                {
+                    TryAddGlass(world, byPlayer, be, beh, heldItem, orientation, style, rock, originblock);
+                }
             }
 
         }
 
 
-        private void TryAddPlanks(IWorldAccessor world, IPlayer player, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem,string orientation, string style, string rock, string originblock)
+        private void TryAddPlanks(IWorldAccessor world, IPlayer player, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string orientation, string style, string rock, string originblock)
         {
             // Item
             string heldItemCode = heldItem.Collectible.Code.ToString();
             string wood = heldItemCode.Substring(11);
 
             // Neuer Block
-            var newBlock = world.GetBlock(new AssetLocation($"confession:arch_small_wood-{orientation}"));
-            if (newBlock == null) return;
+            var newBlock = world.GetBlock(new AssetLocation(blockCodeWithLintel + "-" + orientation));
 
             // Setzen und Attribute übertragen
             BlockPos newBlockPos = player.CurrentBlockSelection.Position.Copy();
@@ -133,7 +157,7 @@ namespace MedievalArchitecture
                 var newBe = world.BlockAccessor?.GetBlockEntity(newBlockPos);
                 var newBeh = newBe?.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
                 if (newBeh == null) return;
-                var newMyBe = newBe as BlockEntitySmallArchwayConstruction;
+                var newMyBe = newBe as BlockEntityConstructable;
                 if (player.WorldData.CurrentGameMode != EnumGameMode.Creative) player.InventoryManager.ActiveHotbarSlot.TakeOut(1);
                 if (newMyBe != null)
                 {
@@ -170,7 +194,7 @@ namespace MedievalArchitecture
             }
 
             constructionInProgress = false;
-
+            
         }
         private void TryAddGlass(IWorldAccessor world, IPlayer player, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem,string orientation, string style, string rock, string originblock)
         {
@@ -179,8 +203,11 @@ namespace MedievalArchitecture
             glassVariants.FindByVariant(glassCodeByType, out string glass);
 
             // Neuer Block
-            var newBlock = world.GetBlock(new AssetLocation($"confession:arch_small_window-{orientation}"));
+
+            var newBlock = world.GetBlock(new AssetLocation(blockCodeWithGlass + "-" +  orientation));
             if (newBlock == null) return;
+
+
 
             // Setzen und Attribute übertragen
             BlockPos newBlockPos = player.CurrentBlockSelection.Position.Copy();
@@ -193,7 +220,7 @@ namespace MedievalArchitecture
                 var newBe = world.BlockAccessor?.GetBlockEntity(newBlockPos);
                 var newBeh = newBe?.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
                 if (newBeh == null) return;
-                var newMyBe = newBe as BlockEntitySmallArchwayConstruction;
+                var newMyBe = newBe as BlockEntityConstructable;
                 if (player.WorldData.CurrentGameMode != EnumGameMode.Creative) player.InventoryManager.ActiveHotbarSlot.TakeOut(1);
                 if (newMyBe != null)
                 {

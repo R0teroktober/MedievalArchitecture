@@ -16,7 +16,7 @@
 		"*-west": {"all": false,"up": true,"north": true,"south": true}
 	},
 	"class": "BlockGeneric",
-	"entityClass": "BlockEntitySmallArchwayConstruction",
+	"entityClass": "BlockEntityConstructable",
 	"variantgroups": [{"code": "side","loadFromProperties": "abstract/horizontalorientation"}],
 	"attributes": {
 		"handbook": {
@@ -31,7 +31,7 @@
 	},
 	"entityBehaviors": [ { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" } ],
 	"behaviors": [
-		{"name": "BlockBehaviorSmallArchway"},
+		{"name": "BlockBehaviorConstructable", "properties": { "blockCodeWithGlass": "confession:arch_half_tiny_window"}},
 		{"name": "AttributeRenderingLibrary.HorizontalOrientable", "properties":{"dropBlockFace": "north"} },
 		{"name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
 			"properties": {

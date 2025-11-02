@@ -1,6 +1,7 @@
 ﻿using AttributeRenderingLibrary;
 using Microsoft.VisualBasic;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -17,21 +18,21 @@ namespace MedievalArchitecture
 {
     public class BlockBehaviorSmallArchwayConstruction(Block block) : BlockBehavior(block), IInteractable
     {
-        public int rimStoneAmount;
+        private int rimStoneAmount;
         public Dictionary<string, string> stateCodeByType = new();
         public Dictionary<string, string> rockCodeByType = new();
         public Dictionary<string, string> styleCodeByType = new();
-        string blockCodeBaseString;
         private bool constructionInProgress = false;
         AssetLocation finishSound = new AssetLocation();
+        WorldInteraction[] _interactions;
 
+       
 
         public override void Initialize(JsonObject properties)
 
         {
             base.Initialize(properties);
             var config = MedievalArchitectureModSystem.Config;
-            string blockCodeBaseString = properties["blockCodeBaseString"].AsString("arch_small_construction_");
             finishSound = AssetLocation.Create("sounds/effect/stonecrush");
 
 
@@ -40,42 +41,70 @@ namespace MedievalArchitecture
             styleCodeByType = new Dictionary<string, string>(config.StyleCodeByType);
             rockCodeByType = new Dictionary<string, string>(config.RockCodeByType);
 
-
+            _interactions = new WorldInteraction[]
+            {
+                new WorldInteraction()
+                {
+                ActionLangCode = "blockhelp-yourmod-interact", // für die Übersetzung
+                MouseButton = EnumMouseButton.Right
+                }
+    };
 
 
 
         }
         public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handling)
         {
-            handling = EnumHandling.PreventDefault;
-            return true;
+            if (byPlayer.Entity.Controls.CtrlKey)
+            {
+                handling = EnumHandling.PreventDefault;
+                return true;
+            }
+            else
+                return base.OnBlockInteractStart(world, byPlayer, blockSel,ref handling);
+
+
         }
 
         public override bool OnBlockInteractCancel(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handling)
         {
-            handling = EnumHandling.PreventDefault;
-            secondsUsed = 0;
-            constructionInProgress = false;
-            return true;
+            if (byPlayer.Entity.Controls.CtrlKey)
+            {
+                handling = EnumHandling.PreventDefault;
+                secondsUsed = 0;
+                constructionInProgress = false;
+                return true;
+            }
+            else
+                return base.OnBlockInteractCancel(secondsUsed, world, byPlayer, blockSel, ref handling);
+            
         }
 
         public override bool OnBlockInteractStep(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handled)
         {
-            handled = EnumHandling.PreventDefault;
-
-
-            if (byPlayer.CurrentBlockSelection == null) return false;
-            //  Nur auf dem Client Animation
-            if (world.Side == EnumAppSide.Client)
+            if (byPlayer.Entity.Controls.CtrlKey)
             {
-                (byPlayer as IClientPlayer)?.TriggerFpAnimation(EnumHandInteract.BlockInteract);
+                handled = EnumHandling.PreventDefault;
 
+
+                if (byPlayer.CurrentBlockSelection == null) return false;
+                //  Nur auf dem Client Animation
+                if (world.Side == EnumAppSide.Client)
+                {
+                    (byPlayer as IClientPlayer)?.TriggerFpAnimation(EnumHandInteract.BlockInteract);
+
+                }
+                return secondsUsed < 0.5;
             }
-            return secondsUsed < 0.5;
+            else
+                return base.OnBlockInteractStep(secondsUsed, world, byPlayer, blockSel, ref handled);
+            
+           
 
         }
         public override void OnBlockInteractStop(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handled)
         {
+            if (!byPlayer.Entity.Controls.CtrlKey) base.OnBlockInteractStop(secondsUsed, world, byPlayer, blockSel, ref handled);
             handled = EnumHandling.PreventDefault;
 
 
@@ -124,7 +153,7 @@ namespace MedievalArchitecture
             if (player.WorldData.CurrentGameMode != EnumGameMode.Creative) player.InventoryManager.ActiveHotbarSlot.TakeOut(rimStoneAmount);
 
             string rockType = heldItem.Collectible.Code.Path.Substring(6);
-            var myBe = be as BlockEntitySmallArchwayConstruction;
+            var myBe = be as BlockEntityConstructable;
             if (myBe != null)
             {
                 myBe.SetVariants(new Dictionary<string, string> {
@@ -162,7 +191,7 @@ namespace MedievalArchitecture
             // Creative Mode Check
             if (player.WorldData.CurrentGameMode != EnumGameMode.Creative) player.InventoryManager.ActiveHotbarSlot.TakeOut(1);
 
-            var myBe = be as BlockEntitySmallArchwayConstruction;
+            var myBe = be as BlockEntityConstructable;
             if (myBe != null)
             {
                 myBe.SetVariant("state", "2");
@@ -206,7 +235,7 @@ namespace MedievalArchitecture
             oldAttr.FindByVariant(rockCodeByType, out string rock);
 
             // Neuer Block
-            var newBlock = world.GetBlock(new AssetLocation($"{blockCodeBaseString}-{orientation}"));
+            var newBlock = world.GetBlock(new AssetLocation("confession:arch_small-" +orientation));
             if (newBlock == null) return;
 
             // Setzen und Attribute übertragen
@@ -224,7 +253,7 @@ namespace MedievalArchitecture
 
                 if (player.WorldData.CurrentGameMode != EnumGameMode.Creative) player.InventoryManager.ActiveHotbarSlot.TakeOut(requiredAmount);
 
-                var newMyBe = newBe as BlockEntitySmallArchwayConstruction;
+                var newMyBe = newBe as BlockEntityConstructable;
                 
                 if (newMyBe != null)
                 {
@@ -279,31 +308,33 @@ namespace MedievalArchitecture
             return (null, null, 0);
         }
 
-       public override WorldInteraction[] GetPlacedBlockInteractionHelp(IWorldAccessor world, BlockSelection selection, IPlayer forPlayer, ref EnumHandling handling)
+        public override WorldInteraction[] GetPlacedBlockInteractionHelp(IWorldAccessor world, BlockSelection selection, IPlayer forPlayer, ref EnumHandling handling)
 
         {
             // 1) Auf den Block zugreifen
-           var be = world.BlockAccessor?.GetBlockEntity(selection.Position);
-           var beh = be?.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
+            var be = world.BlockAccessor?.GetBlockEntity(selection.Position);
+            var beh = be?.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
 
             // 2) Attribut prüfen
-            if (!beh.Variants.FindByVariant(stateCodeByType, out string state)) return null;
-            switch (state)
+            if (beh == null) return base.GetPlacedBlockInteractionHelp(world, selection, forPlayer, ref handling);
+            if (beh.Variants.FindByVariant(stateCodeByType, out string state))
             {
-                case "0": 
+                switch (state)
+                {
+                    case "0":
+                        return _interactions;
+                    case "1":
+                        break;
+                    case "2":
 
-                    break;
-                case "1": 
-                    
-                    break;
-                case "2": 
-                    
-                    break;
+                        break;
+                }
 
-            }
+                // 4) sonst keine Hilfe anzeigen
+                
+            } else
+                return base.GetPlacedBlockInteractionHelp(world, selection, forPlayer, ref handling);
 
-            // 4) sonst keine Hilfe anzeigen
-            return null;
         }
 
 

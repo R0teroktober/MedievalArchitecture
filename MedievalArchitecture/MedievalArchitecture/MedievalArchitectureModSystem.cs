@@ -11,10 +11,10 @@ namespace MedievalArchitecture
         public override void Start(ICoreAPI api)
         {
             base.Start(api);
-            api.RegisterBlockBehaviorClass("BlockBehaviorSmallArchway", typeof(BlockBehaviorSmallArchway));
+            api.RegisterBlockBehaviorClass("BlockBehaviorConstructable", typeof(BlockBehaviorConstructable));
             api.RegisterBlockBehaviorClass("BlockBehaviorCancelInteraction", typeof(BlockBehaviorCancelInteraction));
             api.RegisterBlockBehaviorClass("BlockBehaviorSmallArchwayConstruction", typeof(BlockBehaviorSmallArchwayConstruction));
-            api.RegisterBlockEntityClass("BlockEntitySmallArchwayConstruction", typeof(BlockEntitySmallArchwayConstruction));
+            api.RegisterBlockEntityClass("BlockEntityConstructable", typeof(BlockEntityConstructable));
             Config = api.LoadModConfig<VariantTypesConfig>("variant-types-config.json");
             if (Config == null)
             {
@@ -32,7 +32,11 @@ namespace MedievalArchitecture
                         { "style-a", "a" },
                         { "style-b", "b" },
                         { "style-c", "c" },
-                        { "style-d", "d" }
+                        { "style-d", "d" },
+                        { "style-e", "e" },
+                        { "style-f", "f" },
+                        { "style-g", "g" },
+                        { "style-h", "h" }
                     },
                     RockCodeByType = new()
                     {
@@ -48,8 +52,6 @@ namespace MedievalArchitecture
                         { "rock-halite", "halite" },
                         { "rock-kimberlite", "kimberlite" },
                         { "rock-limestone", "limestone" },
-                        { "rock-meteorite-iron", "meteorite-iron" },
-                        { "rock-obsidian", "obsidian" },
                         { "rock-peridotite", "peridotite" },
                         { "rock-phyllite", "phyllite" },
                         { "rock-redmarble", "redmarble" },
@@ -58,7 +60,6 @@ namespace MedievalArchitecture
                         { "rock-shale", "shale" },
                         { "rock-slate", "slate" },
                         { "rock-suevite", "suevite" },
-                        { "rock-tuff", "tuff" },
                         { "rock-whitemarble", "whitemarble" },
                         { "rock-plaster", "plaster" },
                         { "rock-ash", "ash" },

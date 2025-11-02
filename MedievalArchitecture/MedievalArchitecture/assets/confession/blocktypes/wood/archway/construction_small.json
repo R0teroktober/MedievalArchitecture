@@ -10,7 +10,7 @@
 	"sideopaque": {"all": false},
 	"sideao": {"all": true},
 	"sidesolid": {"all":  false},
-	"entityClass": "BlockEntitySmallArchwayConstruction",
+	"entityClass": "BlockEntityConstructable",
 	"variantgroups": [{"code": "side","loadFromProperties": "abstract/horizontalorientation"}],
 	"attributes": {
 		"handbook": {"groupBy": [ "construction_small-*" ],"excludeByType": {"west": true, "east": true, "south": true}}
