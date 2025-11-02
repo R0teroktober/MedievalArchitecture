@@ -12,7 +12,7 @@
 	"sidesolid": {"all":  false},
 	"variantgroups": [{"code": "side","loadFromProperties": "abstract/horizontalorientation"}],
 	"attributes": {
-		"handbook": {"groupBy": [ "window-*" ],"excludeByType": {"*-west": true, "*-east": true, "*-south": true}}
+		"handbook": {"groupBy": [ "window-*" ],"excludeByType": {"west": true, "east": true, "south": true}}
 	},
 	"entityBehaviors": [ { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" } ],
 	"behaviors": [

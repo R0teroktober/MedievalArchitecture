@@ -110,6 +110,10 @@
 
 
   // windows
+  "confession:archway-addglass-help-title": "How to obtain variant with glass",
+  "confession:archway-addglass-help-text": "You can insert a glass pane by holding the glass in your right hand and interacting with an empty archway",
+  "confession:archway-addwood-help-title": "How to obtain variant with door lintel",
+  "confession:archway-addwood-help-text": "You can cover the area with wood to create a lintel. To do this, hold a plank in your right hand and interact with an empty archway",
   "confession:block-windowsill-name": " windowsill",
 
   "confession:block-window-*": "Window (Placeholder)",

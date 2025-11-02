@@ -18,7 +18,17 @@
 	"class": "BlockGeneric",
 	"entityClass": "BlockEntitySmallArchwayConstruction",
 	"variantgroups": [{"code": "side","loadFromProperties": "abstract/horizontalorientation"}],
-	"attributes": {"handbook": {"groupBy": [ "arch_half_tiny-*" ],"excludeByType": {"west": true,"east": true,"south": true}}, "rimStoneAmount": 5},
+	"attributes": {
+		"handbook": {
+			"groupBy": [ "arch_half_tiny-*" ],
+			"excludeByType": {"west": true,"east": true,"south": true},
+			"extraSections": [
+                { "title": "confession:archway-addglass-help-title", "text": "confession:archway-addglass-help-text" }
+            ]
+	    },
+			"rimStoneAmount": 5
+
+	},
 	"entityBehaviors": [ { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" } ],
 	"behaviors": [
 		{"name": "BlockBehaviorSmallArchway"},
@@ -113,7 +123,7 @@
 					"tabs": ["confession" ],
 					"stacks": [
 					
-						// type e rock
+						// type e rock				
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "rock", "rock": "andesite","style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "rock", "rock": "basalt","style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "rock", "rock": "bauxite","style": "e"}}},
@@ -123,19 +133,19 @@
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "rock", "rock": "conglomerate","style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "rock", "rock": "granite","style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "rock", "rock": "greenmarble","style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "rock", "rock": "halite","style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "rock", "rock": "kimberlite","style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "rock", "rock": "limestone","style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "rock", "rock": "obsidian","style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "rock", "rock": "peridotite","style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "rock", "rock": "phyllite","style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "rock", "rock": "redmarble","style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "rock", "rock": "sandstone","style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "rock", "rock": "scoria","style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "rock", "rock": "shale","style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "rock", "rock": "slate","style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "rock", "rock": "suevite","style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "rock", "rock": "tuff","style": "e"}}},
+
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "rock", "rock": "whitemarble","style": "e"}}},
 						
 						
@@ -149,19 +159,15 @@
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "cobblestone", "rock": "conglomerate","style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "cobblestone", "rock": "granite","style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "cobblestone", "rock": "greenmarble","style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "cobblestone", "rock": "halite","style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "cobblestone", "rock": "kimberlite","style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "cobblestone", "rock": "limestone","style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "cobblestone", "rock": "obsidian","style": "e"}}},
+						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "cobblestone", "rock": "limestone","style": "e"}}},				
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "cobblestone", "rock": "peridotite","style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "cobblestone", "rock": "phyllite","style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "cobblestone", "rock": "redmarble","style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "cobblestone", "rock": "sandstone","style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "cobblestone", "rock": "scoria","style": "e"}}},
+						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "cobblestone", "rock": "sandstone","style": "e"}}},						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "cobblestone", "rock": "shale","style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "cobblestone", "rock": "slate","style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "cobblestone", "rock": "suevite","style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "cobblestone", "rock": "tuff","style": "e"}}},
+						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "cobblestone", "rock": "suevite","style": "e"}}},					
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "cobblestone", "rock": "whitemarble","style": "e"}}},
 						
 
@@ -195,19 +201,19 @@
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "plaster", "rock": "conglomerate", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "plaster", "rock": "granite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "plaster", "rock": "greenmarble", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "plaster", "rock": "halite", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "plaster", "rock": "kimberlite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "plaster", "rock": "limestone", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "plaster", "rock": "obsidian", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "plaster", "rock": "peridotite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "plaster", "rock": "phyllite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "plaster", "rock": "redmarble", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "plaster", "rock": "sandstone", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "plaster", "rock": "scoria", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "plaster", "rock": "shale", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "plaster", "rock": "slate", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "plaster", "rock": "suevite", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "plaster", "rock": "tuff", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "plaster", "rock": "whitemarble", "style": "e"}}},
 						
 						
@@ -225,19 +231,19 @@
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "ash", "rock": "conglomerate", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "ash", "rock": "granite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "ash", "rock": "greenmarble", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "ash", "rock": "halite", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "ash", "rock": "kimberlite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "ash", "rock": "limestone", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "ash", "rock": "obsidian", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "ash", "rock": "peridotite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "ash", "rock": "phyllite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "ash", "rock": "redmarble", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "ash", "rock": "sandstone", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "ash", "rock": "scoria", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "ash", "rock": "shale", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "ash", "rock": "slate", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "ash", "rock": "suevite", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "ash", "rock": "tuff", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "ash", "rock": "whitemarble", "style": "e"}}},
 						
 
@@ -253,19 +259,19 @@
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "blue", "rock": "conglomerate", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "blue", "rock": "granite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "blue", "rock": "greenmarble", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "blue", "rock": "halite", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "blue", "rock": "kimberlite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "blue", "rock": "limestone", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "blue", "rock": "obsidian", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "blue", "rock": "peridotite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "blue", "rock": "phyllite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "blue", "rock": "redmarble", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "blue", "rock": "sandstone", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "blue", "rock": "scoria", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "blue", "rock": "shale", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "blue", "rock": "slate", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "blue", "rock": "suevite", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "blue", "rock": "tuff", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "blue", "rock": "whitemarble", "style": "e"}}},
 						
 
@@ -279,19 +285,19 @@
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brown", "rock": "conglomerate", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brown", "rock": "granite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brown", "rock": "greenmarble", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brown", "rock": "halite", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brown", "rock": "kimberlite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brown", "rock": "limestone", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brown", "rock": "obsidian", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brown", "rock": "peridotite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brown", "rock": "phyllite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brown", "rock": "redmarble", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brown", "rock": "sandstone", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brown", "rock": "scoria", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brown", "rock": "shale", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brown", "rock": "slate", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brown", "rock": "suevite", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brown", "rock": "tuff", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brown", "rock": "whitemarble", "style": "e"}}},
 					
 
@@ -306,19 +312,19 @@
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "browngolden", "rock": "conglomerate", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "browngolden", "rock": "granite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "browngolden", "rock": "greenmarble", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "browngolden", "rock": "halite", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "browngolden", "rock": "kimberlite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "browngolden", "rock": "limestone", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "browngolden", "rock": "obsidian", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "browngolden", "rock": "peridotite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "browngolden", "rock": "phyllite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "browngolden", "rock": "redmarble", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "browngolden", "rock": "sandstone", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "browngolden", "rock": "scoria", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "browngolden", "rock": "shale", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "browngolden", "rock": "slate", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "browngolden", "rock": "suevite", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "browngolden", "rock": "tuff", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "browngolden", "rock": "whitemarble", "style": "e"}}},
 						
 						
@@ -336,19 +342,19 @@
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownlight", "rock": "conglomerate", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownlight", "rock": "granite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownlight", "rock": "greenmarble", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownlight", "rock": "halite", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownlight", "rock": "kimberlite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownlight", "rock": "limestone", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownlight", "rock": "obsidian", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownlight", "rock": "peridotite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownlight", "rock": "phyllite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownlight", "rock": "redmarble", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownlight", "rock": "sandstone", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownlight", "rock": "scoria", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownlight", "rock": "shale", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownlight", "rock": "slate", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownlight", "rock": "suevite", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownlight", "rock": "tuff", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownlight", "rock": "whitemarble", "style": "e"}}},
 						
 						
@@ -364,19 +370,19 @@
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownweathered", "rock": "conglomerate", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownweathered", "rock": "granite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownweathered", "rock": "greenmarble", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownweathered", "rock": "halite", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownweathered", "rock": "kimberlite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownweathered", "rock": "limestone", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownweathered", "rock": "obsidian", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownweathered", "rock": "peridotite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownweathered", "rock": "phyllite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownweathered", "rock": "redmarble", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownweathered", "rock": "sandstone", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownweathered", "rock": "scoria", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownweathered", "rock": "shale", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownweathered", "rock": "slate", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownweathered", "rock": "suevite", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownweathered", "rock": "tuff", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "brownweathered", "rock": "whitemarble", "style": "e"}}},
 						
 						
@@ -393,19 +399,19 @@
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "green", "rock": "conglomerate", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "green", "rock": "granite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "green", "rock": "greenmarble", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "green", "rock": "halite", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "green", "rock": "kimberlite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "green", "rock": "limestone", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "green", "rock": "obsidian", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "green", "rock": "peridotite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "green", "rock": "phyllite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "green", "rock": "redmarble", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "green", "rock": "sandstone", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "green", "rock": "scoria", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "green", "rock": "shale", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "green", "rock": "slate", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "green", "rock": "suevite", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "green", "rock": "tuff", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "green", "rock": "whitemarble", "style": "e"}}},
 						
 						
@@ -424,19 +430,19 @@
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "orange", "rock": "conglomerate", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "orange", "rock": "granite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "orange", "rock": "greenmarble", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "orange", "rock": "halite", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "orange", "rock": "kimberlite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "orange", "rock": "limestone", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "orange", "rock": "obsidian", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "orange", "rock": "peridotite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "orange", "rock": "phyllite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "orange", "rock": "redmarble", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "orange", "rock": "sandstone", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "orange", "rock": "scoria", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "orange", "rock": "shale", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "orange", "rock": "slate", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "orange", "rock": "suevite", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "orange", "rock": "tuff", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "orange", "rock": "whitemarble", "style": "e"}}},
 						
 						
@@ -454,19 +460,19 @@
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "pink", "rock": "conglomerate", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "pink", "rock": "granite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "pink", "rock": "greenmarble", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "pink", "rock": "halite", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "pink", "rock": "kimberlite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "pink", "rock": "limestone", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "pink", "rock": "obsidian", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "pink", "rock": "peridotite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "pink", "rock": "phyllite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "pink", "rock": "redmarble", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "pink", "rock": "sandstone", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "pink", "rock": "scoria", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "pink", "rock": "shale", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "pink", "rock": "slate", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "pink", "rock": "suevite", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "pink", "rock": "tuff", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "pink", "rock": "whitemarble", "style": "e"}}},
 						
 						
@@ -483,19 +489,19 @@
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "tan", "rock": "conglomerate", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "tan", "rock": "granite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "tan", "rock": "greenmarble", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "tan", "rock": "halite", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "tan", "rock": "kimberlite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "tan", "rock": "limestone", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "tan", "rock": "obsidian", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "tan", "rock": "peridotite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "tan", "rock": "phyllite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "tan", "rock": "redmarble", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "tan", "rock": "sandstone", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "tan", "rock": "scoria", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "tan", "rock": "shale", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "tan", "rock": "slate", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "tan", "rock": "suevite", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "tan", "rock": "tuff", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "tan", "rock": "whitemarble", "style": "e"}}},
 						
 						
@@ -514,20 +520,20 @@
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "yellow", "rock": "conglomerate", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "yellow", "rock": "granite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "yellow", "rock": "greenmarble", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "yellow", "rock": "halite", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "yellow", "rock": "kimberlite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "yellow", "rock": "limestone", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "yellow", "rock": "obsidian", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "yellow", "rock": "peridotite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "yellow", "rock": "phyllite", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "yellow", "rock": "redmarble", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "yellow", "rock": "sandstone", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "yellow", "rock": "scoria", "style": "e"}}},
+						
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "yellow", "rock": "shale", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "yellow", "rock": "slate", "style": "e"}}},
 						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "yellow", "rock": "suevite", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "yellow", "rock": "tuff", "style": "e"}}},
-						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "yellow", "rock": "whitemarble", "style": "e"}}},
+						
+						{"type": "block","code": "arch_half_tiny-north","attributes": {"types": {"originblock": "yellow", "rock": "whitemarble", "style": "e"}}}
 						
 						
 

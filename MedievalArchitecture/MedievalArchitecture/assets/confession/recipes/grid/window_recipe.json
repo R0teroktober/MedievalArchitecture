@@ -1,19 +1,17 @@
 [
-
    {
         "ingredientPattern": "SH,MC",
         "ingredients": {
-            "M": { "type": "block", "code": "game:rock-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble", "halite", "kimberlite", "limestone", "obsidian", "peridotite", "phyylite", "redmarble", "sandstone", "scoria", "shale", "slate", "suevite", "tuff", "whitemarble"] },
+            "M": { "type": "block", "code": "game:rock-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble",  "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone",  "shale", "slate", "suevite",  "whitemarble"] },
             "C": { "type": "item", "code": "game:chisel-*", "isTool": true  },
             "H": { "type": "item", "code": "game:hammer-*", "isTool": true  },
-            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble", "halite", "kimberlite", "limestone", "obsidian", "peridotite", "phyylite", "redmarble", "sandstone", "scoria", "shale", "slate", "suevite", "tuff", "whitemarble"] },
+            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble",  "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone",  "shale", "slate", "suevite",  "whitemarble"] }
         },
         "width": 2,
         "height": 2,
         "output": {
             "type": "block",
             "code": "confession:windowsill_a-ns", 
-            // the important part is to include attributes with desired types
             "attributes": {
               "types": {
                 "originblock":  "rock",
@@ -29,14 +27,13 @@
             "M": { "type": "block", "code": "game:plaster-plain"},
             "C": { "type": "item", "code": "game:chisel-*", "isTool": true  },
             "H": { "type": "item", "code": "game:hammer-*", "isTool": true  },
-            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble", "halite", "kimberlite", "limestone", "obsidian", "peridotite", "phyylite", "redmarble", "sandstone", "scoria", "shale", "slate", "suevite", "tuff", "whitemarble"] },
+            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble",  "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone",  "shale", "slate", "suevite",  "whitemarble"] }
         },
         "width": 2,
         "height": 2,
         "output": {
             "type": "block",
             "code": "confession:windowsill_a-ns", 
-            // the important part is to include attributes with desired types
             "attributes": {
               "types": {
                 "originblock":  "plaster",
@@ -52,14 +49,12 @@
             "M": { "type": "block", "code": "game:daub-*-normal", "name": "originblock", "allowedVariants": ["ash", "blue", "brown", "browngolden", "brownlight", "brownweathered", "green", "orange", "pink", "tan", "yellow" ] },
             "C": { "type": "item", "code": "game:chisel-*", "isTool": true  },
             "H": { "type": "item", "code": "game:hammer-*", "isTool": true  },
-            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble", "halite", "kimberlite", "limestone", "obsidian", "peridotite", "phyylite", "redmarble", "sandstone", "scoria", "shale", "slate", "suevite", "tuff", "whitemarble"] },
-        },
+            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble",  "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone",  "shale", "slate", "suevite",  "whitemarble"] }        },
         "width": 2,
         "height": 2,
         "output": {
             "type": "block",
             "code": "confession:windowsill_a-ns", 
-            // the important part is to include attributes with desired types
             "attributes": {
               "types": {
                 "originblock":  "{originblock}",
@@ -75,14 +70,13 @@
             "M": { "type": "block", "code": "game:cobblestone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble", "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone", "shale", "slate", "suevite", "whitemarble"] },
             "C": { "type": "item", "code": "game:chisel-*", "isTool": true  },
             "H": { "type": "item", "code": "game:hammer-*", "isTool": true  },
-            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble", "halite", "kimberlite", "limestone", "obsidian", "peridotite", "phyylite", "redmarble", "sandstone", "scoria", "shale", "slate", "suevite", "tuff", "whitemarble"] },
+            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble",  "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone",  "shale", "slate", "suevite",  "whitemarble"] }
         },
         "width": 2,
         "height": 2,
         "output": {
             "type": "block",
             "code": "confession:windowsill_a-ns", 
-            // the important part is to include attributes with desired types
             "attributes": {
               "types": {
                 "originblock":  "cobblestone",
@@ -98,14 +92,13 @@
             "M": { "type": "block", "code": "game:stonebricks-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "limestone", "peridotite", "phyylite", "sandstone", "shale", "slate", "suevite"] },
             "C": { "type": "item", "code": "game:chisel-*", "isTool": true  },
             "H": { "type": "item", "code": "game:hammer-*", "isTool": true  },
-            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "limestone", "peridotite", "phyylite", "sandstone", "shale", "slate", "suevite"] },
+            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "limestone", "peridotite", "phyylite", "sandstone", "shale", "slate", "suevite"] }
         },
         "width": 2,
         "height": 2,
         "output": {
             "type": "block",
             "code": "confession:windowsill_a-ns", 
-            // the important part is to include attributes with desired types
             "attributes": {
               "types": {
                 "originblock":  "brick",
@@ -126,8 +119,7 @@
         "height": 3,
         "output": {
             "type": "block",
-            "code": "confession:windowsill_a-ns", 
-            // the important part is to include attributes with desired types
+            "code": "confession:window-north", 
             "attributes": {
               "types": {
                 "style":  "single",
@@ -138,4 +130,426 @@
             }
         }
     },
+   {
+        "ingredientPattern": "LP_,PGP,___",
+        "ingredients": {
+            "G": { "type": "block", "code": "game:glassslab-*-down-free", "name": "glass", "allowedVariants": ["plain", "blue", "brown", "green", "pink", "quartz", "red", "vintage", "violet", "yellow"] },
+            "L": { "type": "item", "code": "game:metalbit-lead", "quantity": 5 },
+            "P": { "type": "item", "code": "game:plank-*"  }
+        },
+        "width": 3,
+        "height": 3,
+        "output": {
+            "type": "block",
+            "code": "confession:window-north", 
+            "attributes": {
+              "types": {
+                "style":  "top",
+                "glass":  "{glass}"
+                
+
+              }
+            }
+        }
+    },
+   {
+        "ingredientPattern": "L__,PGP,___",
+        "ingredients": {
+            "G": { "type": "block", "code": "game:glassslab-*-down-free", "name": "glass", "allowedVariants": ["plain", "blue", "brown", "green", "pink", "quartz", "red", "vintage", "violet", "yellow"] },
+            "L": { "type": "item", "code": "game:metalbit-lead", "quantity": 5 },
+            "P": { "type": "item", "code": "game:plank-*"  }
+        },
+        "width": 3,
+        "height": 3,
+        "output": {
+            "type": "block",
+            "code": "confession:window-north", 
+            "attributes": {
+              "types": {
+                "style":  "middle",
+                "glass":  "{glass}"
+                
+
+              }
+            }
+        }
+    },
+   {
+        "ingredientPattern": "LP_,PGP,_P_",
+        "ingredients": {
+            "G": { "type": "block", "code": "game:glassslab-*-down-free", "name": "glass", "allowedVariants": ["plain", "blue", "brown", "green", "pink", "quartz", "red", "vintage", "violet", "yellow"] },
+            "L": { "type": "item", "code": "game:metalbit-lead", "quantity": 5 },
+            "P": { "type": "item", "code": "game:plank-*"  }
+        },
+        "width": 3,
+        "height": 3,
+        "output": {
+            "type": "block",
+            "code": "confession:window-north", 
+            "attributes": {
+              "types": {
+                "style":  "bottom",
+                "glass":  "{glass}"
+                
+
+              }
+            }
+        }
+    },
+   {
+        "ingredientPattern": "CST,SMS,P__",
+        "ingredients": {
+            "M": { "type": "block", "code": "game:rock-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble",  "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone",  "shale", "slate", "suevite",  "whitemarble"]  },
+            "C": { "type": "item", "code": "game:chisel-*", "isTool": true  },
+            "T": { "type": "item", "code": "game:saw-*", "isTool": true},
+            "P": { "type": "item", "code": "game:mortar"},
+            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble",  "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone",  "shale", "slate", "suevite",  "whitemarble"]  }
+        },
+        "width": 3,
+        "height": 3,
+        "output": {
+            "type": "block",
+            "code": "confession:arch_half_tiny-north", 
+            "attributes": {
+              "types": {
+                "originblock":  "rock",
+                "rock":  "{rock}",
+                "style": "e"
+
+              }
+            }
+        }
+    },
+   {
+        "ingredientPattern": "CST,SMS,P__",
+        "ingredients": {
+            "M": { "type": "block", "code": "game:cobblestone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble", "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone", "shale", "slate", "suevite", "whitemarble"] },
+            "C": { "type": "item", "code": "game:chisel-*", "isTool": true  },
+            "T": { "type": "item", "code": "game:saw-*", "isTool": true},
+            "P": { "type": "item", "code": "game:mortar"},
+            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble", "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone", "shale", "slate", "suevite", "whitemarble"] }
+        },
+        "width": 3,
+        "height": 3,
+        "output": {
+            "type": "block",
+            "code": "confession:arch_half_tiny-north", 
+            "attributes": {
+              "types": {
+                "originblock":  "cobblestone",
+                "rock":  "{rock}",
+                "style": "e"
+
+              }
+            }
+        }
+    },
+   {
+        "ingredientPattern": "CST,SMS,P__",
+        "ingredients": {
+            "M": { "type": "block", "code": "game:stonebricks-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "limestone", "peridotite", "phyylite", "sandstone", "shale", "slate", "suevite"] },
+            "C": { "type": "item", "code": "game:chisel-*", "isTool": true  },
+            "T": { "type": "item", "code": "game:saw-*", "isTool": true},
+            "P": { "type": "item", "code": "game:mortar"},
+            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "limestone", "peridotite", "phyylite", "sandstone", "shale", "slate", "suevite"] }
+        },
+        "width": 3,
+        "height": 3,
+        "output": {
+            "type": "block",
+            "code": "confession:arch_half_tiny-north", 
+            "attributes": {
+              "types": {
+                "originblock":  "brick",
+                "rock":  "{rock}",
+                "style": "e"
+
+              }
+            }
+        }
+    },
+
+
+   {
+        "ingredientPattern": "CS_,SMS,PS_",
+        "ingredients": {
+            "M": { "type": "block", "code": "game:rock-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble",  "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone",  "shale", "slate", "suevite",  "whitemarble"]  },
+            "C": { "type": "item", "code": "game:chisel-*", "isTool": true  },
+            "P": { "type": "item", "code": "game:mortar"},
+            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble",  "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone",  "shale", "slate", "suevite",  "whitemarble"]  }
+        },
+        "width": 3,
+        "height": 3,
+        "output": {
+            "type": "block",
+            "code": "confession:arch_tiny-north", 
+            "attributes": {
+              "types": {
+                "originblock":  "rock",
+                "rock":  "{rock}",
+                "style": "a"
+
+              }
+            }
+        }
+    },
+   {
+        "ingredientPattern": "CS_,SMS,PS_",
+        "ingredients": {
+            "M": { "type": "block", "code": "game:cobblestone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble", "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone", "shale", "slate", "suevite", "whitemarble"] },
+            "C": { "type": "item", "code": "game:chisel-*", "isTool": true  },
+            "P": { "type": "item", "code": "game:mortar"},
+            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble", "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone", "shale", "slate", "suevite", "whitemarble"] }
+        },
+        "width": 3,
+        "height": 3,
+        "output": {
+            "type": "block",
+            "code": "confession:arch_tiny-north", 
+            "attributes": {
+              "types": {
+                "originblock":  "cobblestone",
+                "rock":  "{rock}",
+                "style": "a"
+
+              }
+            }
+        }
+    },
+   {
+        "ingredientPattern": "CS_,SMS,PS_",
+        "ingredients": {
+            "M": { "type": "block", "code": "game:stonebricks-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "limestone", "peridotite", "phyylite", "sandstone", "shale", "slate", "suevite"] },
+            "C": { "type": "item", "code": "game:chisel-*", "isTool": true  },
+            "P": { "type": "item", "code": "game:mortar"},
+            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "limestone", "peridotite", "phyylite", "sandstone", "shale", "slate", "suevite"] }
+        },
+        "width": 3,
+        "height": 3,
+        "output": {
+            "type": "block",
+            "code": "confession:arch_tiny-north", 
+            "attributes": {
+              "types": {
+                "originblock":  "brick",
+                "rock":  "{rock}",
+                "style": "a"
+
+              }
+            }
+        }
+    },
+
+
+   {
+        "ingredientPattern": "_SC,SMS,P__",
+        "ingredients": {
+            "M": { "type": "block", "code": "game:rock-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble",  "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone",  "shale", "slate", "suevite",  "whitemarble"]  },
+            "C": { "type": "item", "code": "game:chisel-*", "isTool": true  },
+            "P": { "type": "item", "code": "game:mortar"},
+            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble",  "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone",  "shale", "slate", "suevite",  "whitemarble"]  }
+        },
+        "width": 3,
+        "height": 3,
+        "output": {
+            "type": "block",
+            "code": "confession:arch_tiny-north", 
+            "attributes": {
+              "types": {
+                "originblock":  "rock",
+                "rock":  "{rock}",
+                "style": "b"
+
+              }
+            }
+        }
+    },
+   {
+        "ingredientPattern": "_SC,SMS,P__",
+        "ingredients": {
+            "M": { "type": "block", "code": "game:cobblestone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble", "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone", "shale", "slate", "suevite", "whitemarble"] },
+            "C": { "type": "item", "code": "game:chisel-*", "isTool": true  },
+            "T": { "type": "item", "code": "game:saw-*", "isTool": true},
+            "P": { "type": "item", "code": "game:mortar"},
+            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble", "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone", "shale", "slate", "suevite", "whitemarble"] }
+        },
+        "width": 3,
+        "height": 3,
+        "output": {
+            "type": "block",
+            "code": "confession:arch_tiny-north", 
+            "attributes": {
+              "types": {
+                "originblock":  "cobblestone",
+                "rock":  "{rock}",
+                "style": "b"
+
+              }
+            }
+        }
+    },
+   {
+        "ingredientPattern": "_SC,SMS,P__",
+        "ingredients": {
+            "M": { "type": "block", "code": "game:stonebricks-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "limestone", "peridotite", "phyylite", "sandstone", "shale", "slate", "suevite"] },
+            "C": { "type": "item", "code": "game:chisel-*", "isTool": true  },
+            "P": { "type": "item", "code": "game:mortar"},
+            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "limestone", "peridotite", "phyylite", "sandstone", "shale", "slate", "suevite"] }
+        },
+        "width": 3,
+        "height": 3,
+        "output": {
+            "type": "block",
+            "code": "confession:arch_tiny-north", 
+            "attributes": {
+              "types": {
+                "originblock":  "brick",
+                "rock":  "{rock}",
+                "style": "b"
+
+              }
+            }
+        }
+    },
+   {
+        "ingredientPattern": "__C,SMS,P__",
+        "ingredients": {
+            "M": { "type": "block", "code": "game:rock-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble",  "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone",  "shale", "slate", "suevite",  "whitemarble"]  },
+            "C": { "type": "item", "code": "game:chisel-*", "isTool": true  },
+            "P": { "type": "item", "code": "game:mortar"},
+            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble",  "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone",  "shale", "slate", "suevite",  "whitemarble"]  }
+        },
+        "width": 3,
+        "height": 3,
+        "output": {
+            "type": "block",
+            "code": "confession:arch_tiny-north", 
+            "attributes": {
+              "types": {
+                "originblock":  "rock",
+                "rock":  "{rock}",
+                "style": "c"
+
+              }
+            }
+        }
+    },
+   {
+        "ingredientPattern": "__C,SMS,P__",
+        "ingredients": {
+            "M": { "type": "block", "code": "game:cobblestone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble", "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone", "shale", "slate", "suevite", "whitemarble"] },
+            "C": { "type": "item", "code": "game:chisel-*", "isTool": true  },   
+            "P": { "type": "item", "code": "game:mortar"},
+            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble", "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone", "shale", "slate", "suevite", "whitemarble"] }
+        },
+        "width": 3,
+        "height": 3,
+        "output": {
+            "type": "block",
+            "code": "confession:arch_tiny-north", 
+            "attributes": {
+              "types": {
+                "originblock":  "cobblestone",
+                "rock":  "{rock}",
+                "style": "c"
+
+              }
+            }
+        }
+    },
+   {
+        "ingredientPattern": "__C,SMS,P__",
+        "ingredients": {
+            "M": { "type": "block", "code": "game:stonebricks-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "limestone", "peridotite", "phyylite", "sandstone", "shale", "slate", "suevite"] },
+            "C": { "type": "item", "code": "game:chisel-*", "isTool": true  },
+            "P": { "type": "item", "code": "game:mortar"},
+            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "limestone", "peridotite", "phyylite", "sandstone", "shale", "slate", "suevite"] }
+        },
+        "width": 3,
+        "height": 3,
+        "output": {
+            "type": "block",
+            "code": "confession:arch_tiny-north", 
+            "attributes": {
+              "types": {
+                "originblock":  "brick",
+                "rock":  "{rock}",
+                "style": "c"
+
+              }
+            }
+        }
+    },
+
+
+   {
+        "ingredientPattern": "__C,SMS,PS_",
+        "ingredients": {
+            "M": { "type": "block", "code": "game:rock-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble",  "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone",  "shale", "slate", "suevite",  "whitemarble"]  },
+            "C": { "type": "item", "code": "game:chisel-*", "isTool": true  },
+            "P": { "type": "item", "code": "game:mortar"},
+            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble",  "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone",  "shale", "slate", "suevite",  "whitemarble"]  }
+        },
+        "width": 3,
+        "height": 3,
+        "output": {
+            "type": "block",
+            "code": "confession:arch_tiny-north", 
+            "attributes": {
+              "types": {
+                "originblock":  "rock",
+                "rock":  "{rock}",
+                "style": "d"
+
+              }
+            }
+        }
+    },
+   {
+        "ingredientPattern": "__C,SMS,PS_",
+        "ingredients": {
+            "M": { "type": "block", "code": "game:cobblestone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble", "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone", "shale", "slate", "suevite", "whitemarble"] },
+            "C": { "type": "item", "code": "game:chisel-*", "isTool": true  },
+            "T": { "type": "item", "code": "game:saw-*", "isTool": true},
+            "P": { "type": "item", "code": "game:mortar"},
+            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "greenmarble", "kimberlite", "limestone",  "peridotite", "phyylite", "redmarble", "sandstone", "shale", "slate", "suevite", "whitemarble"] }       },
+        "width": 3,
+        "height": 3,
+        "output": {
+            "type": "block",
+            "code": "confession:arch_tiny-north", 
+            "attributes": {
+              "types": {
+                "originblock":  "cobblestone",
+                "rock":  "{rock}",
+                "style": "d"
+
+              }
+            }
+        }
+    },
+   {
+        "ingredientPattern": "__C,SMS,PS_",
+        "ingredients": {
+            "M": { "type": "block", "code": "game:stonebricks-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "limestone", "peridotite", "phyylite", "sandstone", "shale", "slate", "suevite"] },
+            "C": { "type": "item", "code": "game:chisel-*", "isTool": true  },
+            "P": { "type": "item", "code": "game:mortar"},
+            "S": { "type": "item", "code": "game:stone-*", "name": "rock", "allowedVariants": ["andesite", "basalt", "bauxite", "chalk", "chert", "claystone", "conglomerate", "granite", "limestone", "peridotite", "phyylite", "sandstone", "shale", "slate", "suevite"] }
+        },
+        "width": 3,
+        "height": 3,
+        "output": {
+            "type": "block",
+            "code": "confession:arch_tiny-north", 
+            "attributes": {
+              "types": {
+                "originblock":  "brick",
+                "rock":  "{rock}",
+                "style": "d"
+
+              }
+            }
+        }
+    }
+
 ]

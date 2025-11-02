@@ -31,7 +31,7 @@
 				"textures": {
 					"rock-*::originblock-rock": {
 						"material": {"base": "game:block/stone/rock/{rock}1"},
-						"sill": {"base": "game:block/stone/rock/{rock}1"},
+						"sill": {"base": "game:block/stone/rock/{rock}1"}
 
 					},
 					"rock-*::originblock-cobblestone": {
@@ -49,7 +49,7 @@
 					"rock-*::originblock-*": {
 						"material": {"base": "game:block/clay/daub/{originblock}/normal1"},
 						"sill": {"base": "game:block/stone/rock/{rock}1"}
-					},
+					}
 				},
 				"shape": {
 					"*": { "base": "confession:block/stone/windowsill-a", "rotateYByType": { "*-we": 90 } }
@@ -77,19 +77,19 @@
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "rock", "rock":  "conglomerate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "rock", "rock":  "granite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "rock", "rock":  "greenmarble"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "rock", "rock":  "halite"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "rock", "rock":  "kimberlite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "rock", "rock":  "limestone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "rock", "rock":  "obsidian"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "rock", "rock":  "peridotite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "rock", "rock":  "phyllite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "rock", "rock":  "redmarble"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "rock", "rock":  "sandstone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "rock", "rock":  "scoria"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "rock", "rock":  "shale"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "rock", "rock":  "slate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "rock", "rock":  "suevite"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "rock", "rock":  "tuff"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "rock", "rock":  "whitemarble"} } },
 
 
@@ -103,19 +103,19 @@
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "cobblestone", "rock":  "conglomerate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "cobblestone", "rock":  "granite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "cobblestone", "rock":  "greenmarble"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "cobblestone", "rock":  "halite"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "cobblestone", "rock":  "kimberlite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "cobblestone", "rock":  "limestone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "cobblestone", "rock":  "obsidian"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "cobblestone", "rock":  "peridotite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "cobblestone", "rock":  "phyllite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "cobblestone", "rock":  "redmarble"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "cobblestone", "rock":  "sandstone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "cobblestone", "rock":  "scoria"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "cobblestone", "rock":  "shale"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "cobblestone", "rock":  "slate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "cobblestone", "rock":  "suevite"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "cobblestone", "rock":  "tuff"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "cobblestone", "rock":  "whitemarble"} } },
 
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brick", "rock":  "andesite"} } },
@@ -143,19 +143,19 @@
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "plaster", "rock":  "conglomerate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "plaster", "rock":  "granite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "plaster", "rock":  "greenmarble"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "plaster", "rock":  "halite"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "plaster", "rock":  "kimberlite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "plaster", "rock":  "limestone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "plaster", "rock":  "obsidian"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "plaster", "rock":  "peridotite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "plaster", "rock":  "phyllite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "plaster", "rock":  "redmarble"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "plaster", "rock":  "sandstone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "plaster", "rock":  "scoria"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "plaster", "rock":  "shale"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "plaster", "rock":  "slate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "plaster", "rock":  "suevite"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "plaster", "rock":  "tuff"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "plaster", "rock":  "whitemarble"} } },
 
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "ash", "rock":  "andesite"} } },
@@ -167,19 +167,19 @@
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "ash", "rock":  "conglomerate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "ash", "rock":  "granite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "ash", "rock":  "greenmarble"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "ash", "rock":  "halite"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "ash", "rock":  "kimberlite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "ash", "rock":  "limestone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "ash", "rock":  "obsidian"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "ash", "rock":  "peridotite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "ash", "rock":  "phyllite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "ash", "rock":  "redmarble"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "ash", "rock":  "sandstone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "ash", "rock":  "scoria"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "ash", "rock":  "shale"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "ash", "rock":  "slate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "ash", "rock":  "suevite"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "ash", "rock":  "tuff"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "ash", "rock":  "whitemarble"} } },
 
 
@@ -192,19 +192,19 @@
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "blue", "rock":  "conglomerate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "blue", "rock":  "granite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "blue", "rock":  "greenmarble"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "blue", "rock":  "halite"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "blue", "rock":  "kimberlite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "blue", "rock":  "limestone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "blue", "rock":  "obsidian"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "blue", "rock":  "peridotite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "blue", "rock":  "phyllite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "blue", "rock":  "redmarble"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "blue", "rock":  "sandstone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "blue", "rock":  "scoria"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "blue", "rock":  "shale"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "blue", "rock":  "slate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "blue", "rock":  "suevite"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "blue", "rock":  "tuff"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "blue", "rock":  "whitemarble"} } },
 
 
@@ -217,19 +217,19 @@
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "conglomerate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "granite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "greenmarble"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "halite"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "kimberlite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "limestone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "obsidian"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "peridotite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "phyllite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "redmarble"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "sandstone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "scoria"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "shale"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "slate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "suevite"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "tuff"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "whitemarble"} } },
 
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "andesite"} } },
@@ -241,19 +241,19 @@
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "conglomerate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "granite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "greenmarble"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "halite"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "kimberlite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "limestone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "obsidian"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "peridotite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "phyllite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "redmarble"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "sandstone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "scoria"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "shale"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "slate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "suevite"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "tuff"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brown", "rock":  "whitemarble"} } },
 
 
@@ -266,19 +266,19 @@
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownlight", "rock":  "conglomerate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownlight", "rock":  "granite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownlight", "rock":  "greenmarble"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownlight", "rock":  "halite"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownlight", "rock":  "kimberlite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownlight", "rock":  "limestone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownlight", "rock":  "obsidian"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownlight", "rock":  "peridotite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownlight", "rock":  "phyllite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownlight", "rock":  "redmarble"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownlight", "rock":  "sandstone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownlight", "rock":  "scoria"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownlight", "rock":  "shale"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownlight", "rock":  "slate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownlight", "rock":  "suevite"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownlight", "rock":  "tuff"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownlight", "rock":  "whitemarble"} } },
 
 
@@ -291,19 +291,19 @@
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownweathered", "rock":  "conglomerate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownweathered", "rock":  "granite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownweathered", "rock":  "greenmarble"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownweathered", "rock":  "halite"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownweathered", "rock":  "kimberlite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownweathered", "rock":  "limestone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownweathered", "rock":  "obsidian"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownweathered", "rock":  "peridotite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownweathered", "rock":  "phyllite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownweathered", "rock":  "redmarble"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownweathered", "rock":  "sandstone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownweathered", "rock":  "scoria"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownweathered", "rock":  "shale"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownweathered", "rock":  "slate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownweathered", "rock":  "suevite"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownweathered", "rock":  "tuff"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "brownweathered", "rock":  "whitemarble"} } },
 
 
@@ -316,19 +316,19 @@
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "green", "rock":  "conglomerate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "green", "rock":  "granite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "green", "rock":  "greenmarble"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "green", "rock":  "halite"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "green", "rock":  "kimberlite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "green", "rock":  "limestone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "green", "rock":  "obsidian"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "green", "rock":  "peridotite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "green", "rock":  "phyllite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "green", "rock":  "redmarble"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "green", "rock":  "sandstone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "green", "rock":  "scoria"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "green", "rock":  "shale"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "green", "rock":  "slate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "green", "rock":  "suevite"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "green", "rock":  "tuff"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "green", "rock":  "whitemarble"} } },
 
 
@@ -342,19 +342,19 @@
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "orange", "rock":  "conglomerate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "orange", "rock":  "granite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "orange", "rock":  "greenmarble"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "orange", "rock":  "halite"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "orange", "rock":  "kimberlite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "orange", "rock":  "limestone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "orange", "rock":  "obsidian"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "orange", "rock":  "peridotite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "orange", "rock":  "phyllite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "orange", "rock":  "redmarble"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "orange", "rock":  "sandstone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "orange", "rock":  "scoria"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "orange", "rock":  "shale"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "orange", "rock":  "slate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "orange", "rock":  "suevite"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "orange", "rock":  "tuff"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "orange", "rock":  "whitemarble"} } },
 
 
@@ -367,19 +367,19 @@
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "pink", "rock":  "conglomerate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "pink", "rock":  "granite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "pink", "rock":  "greenmarble"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "pink", "rock":  "halite"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "pink", "rock":  "kimberlite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "pink", "rock":  "limestone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "pink", "rock":  "obsidian"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "pink", "rock":  "peridotite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "pink", "rock":  "phyllite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "pink", "rock":  "redmarble"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "pink", "rock":  "sandstone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "pink", "rock":  "scoria"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "pink", "rock":  "shale"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "pink", "rock":  "slate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "pink", "rock":  "suevite"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "pink", "rock":  "tuff"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "pink", "rock":  "whitemarble"} } },
 
 
@@ -392,19 +392,19 @@
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "tan", "rock":  "conglomerate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "tan", "rock":  "granite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "tan", "rock":  "greenmarble"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "tan", "rock":  "halite"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "tan", "rock":  "kimberlite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "tan", "rock":  "limestone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "tan", "rock":  "obsidian"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "tan", "rock":  "peridotite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "tan", "rock":  "phyllite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "tan", "rock":  "redmarble"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "tan", "rock":  "sandstone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "tan", "rock":  "scoria"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "tan", "rock":  "shale"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "tan", "rock":  "slate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "tan", "rock":  "suevite"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "tan", "rock":  "tuff"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "tan", "rock":  "whitemarble"} } },
 
 
@@ -417,20 +417,20 @@
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "yellow", "rock":  "conglomerate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "yellow", "rock":  "granite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "yellow", "rock":  "greenmarble"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "yellow", "rock":  "halite"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "yellow", "rock":  "kimberlite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "yellow", "rock":  "limestone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "yellow", "rock":  "obsidian"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "yellow", "rock":  "peridotite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "yellow", "rock":  "phyllite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "yellow", "rock":  "redmarble"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "yellow", "rock":  "sandstone"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "yellow", "rock":  "scoria"} } },
+					
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "yellow", "rock":  "shale"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "yellow", "rock":  "slate"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "yellow", "rock":  "suevite"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "yellow", "rock":  "tuff"} } },
-					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "yellow", "rock":  "whitemarble"} } },
+					
+					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "yellow", "rock":  "whitemarble"} } }
 
 
 
