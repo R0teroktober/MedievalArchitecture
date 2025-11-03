@@ -1,7 +1,7 @@
 {
   "enabled": true,
 	"code": "arch_half_tiny_window",
-	"maxStackSize": 1,
+	"maxStackSize": 64,
 	"blockmaterial": "Stone",
 	"resistance": 4,
 	"renderPass": "OpaqueNoCull",

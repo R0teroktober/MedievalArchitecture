@@ -92,7 +92,7 @@ namespace MedievalArchitecture
                     },
                     GlassCodeByType = new()
                     {
-                        { "glass-plain", "plain"},
+                        {"glass-plain", "plain"},
                         {"glass-blue", "blue"},
                         {"glass-brown", "brown"},
                         {"glass-green", "green"},

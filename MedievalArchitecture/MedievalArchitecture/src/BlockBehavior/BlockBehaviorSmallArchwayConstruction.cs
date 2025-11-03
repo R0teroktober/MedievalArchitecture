@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using Vintagestory.API;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
@@ -24,9 +25,12 @@ namespace MedievalArchitecture
         public Dictionary<string, string> styleCodeByType = new();
         private bool constructionInProgress = false;
         AssetLocation finishSound = new AssetLocation();
-        WorldInteraction[] _interactions;
+        WorldInteraction[] interactions;
 
-       
+        private static List<ItemStack> mortarItems = new List<ItemStack>();
+        private static List<ItemStack> rimStoneItems = new List<ItemStack>();
+        private static List<ItemStack> originBlocks = new List<ItemStack>();
+
 
         public override void Initialize(JsonObject properties)
 
@@ -35,20 +39,16 @@ namespace MedievalArchitecture
             var config = MedievalArchitectureModSystem.Config;
             finishSound = AssetLocation.Create("sounds/effect/stonecrush");
 
+           
 
             rimStoneAmount = config.RimStoneAmount;
             stateCodeByType = new Dictionary<string, string>(config.StateCodeByType);
             styleCodeByType = new Dictionary<string, string>(config.StyleCodeByType);
             rockCodeByType = new Dictionary<string, string>(config.RockCodeByType);
 
-            _interactions = new WorldInteraction[]
-            {
-                new WorldInteraction()
-                {
-                ActionLangCode = "blockhelp-yourmod-interact", // für die Übersetzung
-                MouseButton = EnumMouseButton.Right
-                }
-    };
+
+         
+        
 
 
 
@@ -317,23 +317,48 @@ namespace MedievalArchitecture
 
             // 2) Attribut prüfen
             if (beh == null) return base.GetPlacedBlockInteractionHelp(world, selection, forPlayer, ref handling);
+            if (mortarItems.Count == 0)   // This is a potentially rather slow wildcard search of all items (especially if mods add many items) therefore we want to run this only once per game
+            {
+                Item mortar = world.Api.(new AssetLocation("game:mortar"));
+                mortarItems.Add(new ItemStack(new AssetLocation("game:mortar"));
+            }
+
             if (beh.Variants.FindByVariant(stateCodeByType, out string state))
             {
                 switch (state)
                 {
                     case "0":
-                        return _interactions;
+                        return new WorldInteraction[] { new WorldInteraction()
+                        {
+                            ActionLangCode = "Rotate",
+                            //Itemstacks = wrenchItems.ToArray(),
+                            MouseButton = EnumMouseButton.Right
+
+                        } };
                     case "1":
-                        break;
+                        return new WorldInteraction[] { new WorldInteraction()
+                        {
+                            ActionLangCode = "Rotate",
+                            //Itemstacks = wrenchItems.ToArray(),
+                            MouseButton = EnumMouseButton.Right
+
+                        } };
                     case "2":
+                        return new WorldInteraction[] { new WorldInteraction()
+                        {
+                            ActionLangCode = "Rotate",
+                            //Itemstacks = wrenchItems.ToArray(),
+                            MouseButton = EnumMouseButton.Right
+
+                        } };
 
                         break;
                 }
 
                 // 4) sonst keine Hilfe anzeigen
-                
-            } else
                 return base.GetPlacedBlockInteractionHelp(world, selection, forPlayer, ref handling);
+            }
+            return base.GetPlacedBlockInteractionHelp(world, selection, forPlayer, ref handling);
 
         }
 

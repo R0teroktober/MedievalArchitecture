@@ -1,7 +1,7 @@
 {
 	"enabled": true,
 	"code": "arch_small",
-	"maxStackSize": 1,
+	"maxStackSize": 64,
 	"blockmaterial": "Stone",
 	"resistance": 4,
 	"renderPass": "OpaqueNoCull",
