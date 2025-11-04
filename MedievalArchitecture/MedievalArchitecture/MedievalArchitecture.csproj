@@ -45,6 +45,7 @@
 </ItemGroup>
 <ItemGroup>
   <Folder Include="assets\confession\shapes\block\glass\" />
+  <Folder Include="src\Block\" />
 </ItemGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
   <DefineConstants>DEBUG;TRACE</DefineConstants>

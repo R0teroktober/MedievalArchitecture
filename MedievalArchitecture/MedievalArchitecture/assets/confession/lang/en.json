@@ -2,6 +2,9 @@
   //// Important: PAY ATTENTION TO SPACES INFRONT / BEHIND ""
   
   // handbook
+  "handbook-introduction-title": "Medieval Architecture Mod",
+  "handbook-introduction-text": "Medieval Architecture<br><br><i>This mod is a test to gather insights for my mod Age of Confession. Except for a few shapefiles, everything in this mod has been rebuild and the entire code has been rewritten. Thanks to the Attribute Rendering Library, I can now add significantly more blocks without compromising performance. <br>I would be very grateful for any feedback, as this will help me make Age of Confession usable for more people again.</i><br><br><strong>Archways</strong><br>To build the archways you have to build a construction frame first. Add 6 stones to it, 1 mortar and then a block of your choice. Currently only the following blocks are allowed: Rock, brick, cobblestone or 4 raw daub items<br><br>You can add windows, or a door lintel to the archways in the same way.",
+
 
   // header
   "game:tabname-confession": "Medieval Architecture", 
@@ -42,6 +45,8 @@
 
   // blocks
   // archways
+  "confession:archway-build-help-title": "How to build archways",
+  "confession:archway-build-help-text": "First build a archway frame and place it where the archway should be constructed. Add 6 stones, 1 mortar and a block of your choice to finish the archway. (WIP Instruction)",
   "confession:block-arch_small_window-*": "Small archway (Placeholder)",
   "confession:block-construction_small-*": "Archway frame (Placeholder)",
   "confession:block-arch_small-name-plaster1": "Small plaster & ", "confession:block-arch_small-name-plaster2": " archway",
@@ -87,6 +92,11 @@
   "confession:originblock-pink": "pink wattle & daub",
   "confession:originblock-tan": "tan wattle & daub",
   "confession:originblock-yellow": "yellow wattle & daub",
+  "confession:block-interaction-add-rimStones": "Add stones",
+  "confession:block-interaction-add-mortar": "Add mortar",
+  "confession:block-interaction-add-block": "Add block to finish archway",
+  "confession:block-interaction-add-glass": "Add window",
+  "confession:block-interaction-add-plank": "Add plank to create a door lintel",
 
 
 
@@ -111,7 +121,7 @@
 
   // windows
   "confession:archway-addglass-help-title": "How to obtain variant with glass",
-  "confession:archway-addglass-help-text": "You can insert a glass pane by holding the glass in your right hand and interacting with an empty archway",
+  "confession:archway-addglass-help-text": "You can insert a glass pane by holding the glass in your right hand and interacting with an empty archway. Currently vanilla glass panes does not work! Use the modded ones please",
   "confession:archway-addwood-help-title": "How to obtain variant with door lintel",
   "confession:archway-addwood-help-text": "You can cover the area with wood to create a lintel. To do this, hold a plank in your right hand and interact with an empty archway",
   "confession:block-windowsill-name": " windowsill",

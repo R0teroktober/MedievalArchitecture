@@ -116,6 +116,9 @@ namespace MedievalArchitecture
             var heldItem = byPlayer.InventoryManager.ActiveHotbarSlot.Itemstack;
             string heldItemCode = heldItem.Collectible.Code.ToString();
 
+
+            
+
             // Block
             var be = world.BlockAccessor?.GetBlockEntity(blockSel.Position);
             if (be == null) return;
@@ -225,6 +228,7 @@ namespace MedievalArchitecture
 
             // Block
             if (originBlock == null) return;
+   
             var block = player.CurrentBlockSelection.Block;
             if (block == null) return;
             string orientation = block.Variant.TryGetValue("side");
@@ -270,7 +274,15 @@ namespace MedievalArchitecture
                     newBeh.Variants.Set("originblock", originBlock);
                     newBe.MarkDirty(true);
                     world.BlockAccessor.MarkBlockDirty(newBe.Pos);
+
+                    
                 }
+                ItemStack stack = new ItemStack(world.GetBlock(new AssetLocation("confession:construction_small-north")));
+                //stack.Attributes.GetTreeAttribute("Variant").SetString("style", style);
+                //stack.Attributes.GetTreeAttribute("Variant").SetString("rock", "none");
+                //stack.Attributes.GetTreeAttribute("Variant").SetString("state", "0");
+                world.SpawnItemEntity(stack, newBe.Pos.ToVec3d().Add(0.5, 0.5, 0.5));
+                
 
 
             }, 0);
@@ -317,42 +329,31 @@ namespace MedievalArchitecture
 
             // 2) Attribut prüfen
             if (beh == null) return base.GetPlacedBlockInteractionHelp(world, selection, forPlayer, ref handling);
-            if (mortarItems.Count == 0)   // This is a potentially rather slow wildcard search of all items (especially if mods add many items) therefore we want to run this only once per game
-            {
-                Item mortar = world.Api.(new AssetLocation("game:mortar"));
-                mortarItems.Add(new ItemStack(new AssetLocation("game:mortar"));
-            }
+    
 
             if (beh.Variants.FindByVariant(stateCodeByType, out string state))
             {
                 switch (state)
                 {
                     case "0":
-                        return new WorldInteraction[] { new WorldInteraction()
+                        if (forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack.Item?.Code.Path.StartsWith("stone-") == true)
                         {
-                            ActionLangCode = "Rotate",
-                            //Itemstacks = wrenchItems.ToArray(),
-                            MouseButton = EnumMouseButton.Right
-
-                        } };
-                    case "1":
-                        return new WorldInteraction[] { new WorldInteraction()
-                        {
-                            ActionLangCode = "Rotate",
-                            //Itemstacks = wrenchItems.ToArray(),
-                            MouseButton = EnumMouseButton.Right
-
-                        } };
-                    case "2":
-                        return new WorldInteraction[] { new WorldInteraction()
-                        {
-                            ActionLangCode = "Rotate",
-                            //Itemstacks = wrenchItems.ToArray(),
-                            MouseButton = EnumMouseButton.Right
-
-                        } };
-
+                            return [new WorldInteraction(){ActionLangCode = "confession:block-interaction-add-rimStones",MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl" }];
+                        }
                         break;
+                        
+                    case "1":
+                        if (forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack.Item?.Code.Path == "mortar")
+                        {
+                            return [new WorldInteraction() { ActionLangCode = "confession:block-interaction-add-mortar", MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl" }];
+                        }
+                        break;
+                      
+                    case "2":
+                       
+                        return [new WorldInteraction() { ActionLangCode = "confession:block-interaction-add-block", MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl" }];
+
+
                 }
 
                 // 4) sonst keine Hilfe anzeigen

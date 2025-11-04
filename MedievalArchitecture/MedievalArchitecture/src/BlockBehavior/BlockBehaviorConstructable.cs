@@ -53,10 +53,11 @@ namespace MedievalArchitecture
             if (byPlayer.Entity.Controls.CtrlKey)
             {
                 handling = EnumHandling.PreventDefault;
-               return true;
-            } else 
-                
-               return base.OnBlockInteractStart(world, byPlayer, blockSel, ref handling);
+                return true;
+            }
+            else
+
+                return base.OnBlockInteractStart(world, byPlayer, blockSel, ref handling);
 
 
         }
@@ -86,8 +87,8 @@ namespace MedievalArchitecture
 
             }
             else
-            return base.OnBlockInteractStep(secondsUsed, world, byPlayer, blockSel, ref handled);
-             
+                return base.OnBlockInteractStep(secondsUsed, world, byPlayer, blockSel, ref handled);
+
 
         }
         public override void OnBlockInteractStop(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handled)
@@ -194,9 +195,9 @@ namespace MedievalArchitecture
             }
 
             constructionInProgress = false;
-            
+
         }
-        private void TryAddGlass(IWorldAccessor world, IPlayer player, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem,string orientation, string style, string rock, string originblock)
+        private void TryAddGlass(IWorldAccessor world, IPlayer player, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string orientation, string style, string rock, string originblock)
         {
             // Item
             var glassVariants = Variants.FromStack(heldItem);
@@ -204,7 +205,7 @@ namespace MedievalArchitecture
 
             // Neuer Block
 
-            var newBlock = world.GetBlock(new AssetLocation(blockCodeWithGlass + "-" +  orientation));
+            var newBlock = world.GetBlock(new AssetLocation(blockCodeWithGlass + "-" + orientation));
             if (newBlock == null) return;
 
 
@@ -257,10 +258,37 @@ namespace MedievalArchitecture
             }
             constructionInProgress = false;
 
-            
+
 
         }
+        public override WorldInteraction[] GetPlacedBlockInteractionHelp(IWorldAccessor world, BlockSelection selection, IPlayer forPlayer, ref EnumHandling handling)
 
+        {
+            // 1) Auf den Block zugreifen
+            var be = world.BlockAccessor?.GetBlockEntity(selection.Position);
+            var beh = be?.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
+
+            // 2) Attribut prüfen
+            if (beh == null) return base.GetPlacedBlockInteractionHelp(world, selection, forPlayer, ref handling);
+
+
+
+            if (forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Collectible?.Code?.PathStartsWith("window-") == true)
+            {
+                return [new WorldInteraction() { ActionLangCode = "confession:block-interaction-add-glass", MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl" }];
+            }
+            else if (forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Collectible?.Code?.PathStartsWith("plank-") == true)
+            {
+                return [new WorldInteraction() { ActionLangCode = "confession:block-interaction-add-plank", MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl" }];
+
+            }
+            else
+            {
+                // 4) sonst keine Hilfe anzeigen
+                return base.GetPlacedBlockInteractionHelp(world, selection, forPlayer, ref handling);
+
+            }
+        }
     }
     
 }

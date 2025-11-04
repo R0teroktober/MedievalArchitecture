@@ -19,7 +19,8 @@
 	"entityClass": "BlockEntityConstructable",
 	"variantgroups": [{"code": "side","loadFromProperties": "abstract/horizontalorientation"}],
 	"attributes": {"handbook": {"groupBy": [ "arch_small-*" ],"excludeByType": {"west": true,"east": true,"south": true},"extraSections": [
-                { "title": "confession:archway-addglass-help-title", "text": "confession:archway-addglass-help-text" },
+                { "title": "confession:archway-build-help-title", "text": "confession:archway-build-help-text" },
+								{ "title": "confession:archway-addglass-help-title", "text": "confession:archway-addglass-help-text" },
 								{ "title": "confession:archway-addwood-help-title", "text": "confession:archway-addwood-help-text" }
 	                            ]}, "rimStoneAmount": 5},
 	"entityBehaviors": [ { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" } ],
@@ -77,6 +78,40 @@
 			}
 		}
 	],
+	"textures": {
+		"material": { "base": "game:block/transparent" },
+		"rim": {"base": "game:block/transparent"},
+		"glass": { "base": "game:block/transparent" },
+		"plaster": {"base": "game:block/stone/rock/granite1","blendedOverlays": [{"base": "game:block/clay/fireclay","blendMode": "Lighten"}]},
+		"putty": { "base": "game:block/transparent" },
+		"frame": { "base": "game:block/transparent" },
+		"black": { "base": "game:block/transparent" },
+		"wood": { "base": "game:block/transparent" }
+	},
+	"shape": { "base": "game:block/basic/invisible" },
+	"collisionBoxes": [
+		{ "x1": 0, "y1": 0.8, "z1": 0, "x2": 1, "y2": 1, "z2": 1 },
+		{ "x1": 0.95, "y1": 0, "z1": 0, "x2": 1, "y2": 0.6, "z2": 1, "rotateYByType": {"*-east": 270, "*-west": 90 } },
+		{ "x1": 0, "y1": 0, "z1": 0, "x2": 0.05, "y2": 0.6, "z2": 1, "rotateYByType": { "*-east": 270, "*-west": 90 } },
+		{ "x1": 0.7, "y1": 0.6, "z1": 0, "x2": 1, "y2": 0.8, "z2": 1, "rotateYByType": {"*-east": 270, "*-west": 90 } },
+		{ "x1": 0, "y1": 0.6, "z1": 0, "x2": 0.3, "y2": 0.8, "z2": 1, "rotateYByType": {"*-east": 270, "*-west": 90 } }
+		],
+		
+		"heldTpIdleAnimation": "holdbothhandslarge",
+		"heldTpUseAnimation": "twohandplaceblock",
+		"tpHandTransform": {
+			"translation": {
+				"x": -1.23,
+				"y": -0.91,
+				"z": -0.8
+			},
+			"rotation": {
+				"x": -2,
+				"y": 25,
+				"z": -78
+			},
+			"scale": 0.4
+		},
 	"creativeinventoryStacksByType": {
 			"*-north": [
 				{
@@ -1610,39 +1645,5 @@
 					]
 				}
 			]
-		},
-	"textures": {
-		"material": { "base": "game:block/transparent" },
-		"rim": {"base": "game:block/transparent"},
-		"glass": { "base": "game:block/transparent" },
-		"plaster": {"base": "game:block/stone/rock/granite1","blendedOverlays": [{"base": "game:block/clay/fireclay","blendMode": "Lighten"}]},
-		"putty": { "base": "game:block/transparent" },
-		"frame": { "base": "game:block/transparent" },
-		"black": { "base": "game:block/transparent" },
-		"wood": { "base": "game:block/transparent" }
-	},
-	"shape": { "base": "game:block/basic/invisible" },
-	"collisionBoxes": [
-		{ "x1": 0, "y1": 0.8, "z1": 0, "x2": 1, "y2": 1, "z2": 1 },
-		{ "x1": 0.95, "y1": 0, "z1": 0, "x2": 1, "y2": 0.6, "z2": 1, "rotateYByType": {"*-east": 270, "*-west": 90 } },
-		{ "x1": 0, "y1": 0, "z1": 0, "x2": 0.05, "y2": 0.6, "z2": 1, "rotateYByType": { "*-east": 270, "*-west": 90 } },
-		{ "x1": 0.7, "y1": 0.6, "z1": 0, "x2": 1, "y2": 0.8, "z2": 1, "rotateYByType": {"*-east": 270, "*-west": 90 } },
-		{ "x1": 0, "y1": 0.6, "z1": 0, "x2": 0.3, "y2": 0.8, "z2": 1, "rotateYByType": {"*-east": 270, "*-west": 90 } }
-		],
-		
-		"heldTpIdleAnimation": "holdbothhandslarge",
-		"heldTpUseAnimation": "twohandplaceblock",
-		"tpHandTransform": {
-			"translation": {
-				"x": -1.23,
-				"y": -0.91,
-				"z": -0.8
-			},
-			"rotation": {
-				"x": -2,
-				"y": 25,
-				"z": -78
-			},
-			"scale": 0.4
 		}
 	}
