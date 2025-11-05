@@ -246,6 +246,18 @@ namespace MedievalArchitecture
             BlockPos newBlockPos = player.CurrentBlockSelection.Position.Copy();
             world.BlockAccessor.SetBlock(newBlock.BlockId, newBlockPos);
             world.BlockAccessor.TriggerNeighbourBlockUpdate(newBlockPos);
+            // Itemstack drop thanks to Dana
+            ItemStack stack = new ItemStack(world.GetBlock(new AssetLocation("confession:construction_small-north")));
+            Variants variants = Variants.FromStack(stack);
+            var newVariants = new Dictionary<string, string>()
+            {
+                ["style"] = style,
+                ["rock"] = "none",
+                ["state"] = "0"
+            };
+            variants.Set(newVariants);
+            variants.ToStack(stack);
+            world.SpawnItemEntity(stack, newBlockPos.ToVec3d().Add(0.5, 0.5, 0.5));
 
 
             // Callback um auf Blockentity zu warten
@@ -277,12 +289,8 @@ namespace MedievalArchitecture
 
                     
                 }
-                ItemStack stack = new ItemStack(world.GetBlock(new AssetLocation("confession:construction_small-north")));
-                //stack.Attributes.GetTreeAttribute("Variant").SetString("style", style);
-                //stack.Attributes.GetTreeAttribute("Variant").SetString("rock", "none");
-                //stack.Attributes.GetTreeAttribute("Variant").SetString("state", "0");
-                world.SpawnItemEntity(stack, newBe.Pos.ToVec3d().Add(0.5, 0.5, 0.5));
                 
+
 
 
             }, 0);
@@ -329,14 +337,14 @@ namespace MedievalArchitecture
 
             // 2) Attribut prüfen
             if (beh == null) return base.GetPlacedBlockInteractionHelp(world, selection, forPlayer, ref handling);
-    
 
-            if (beh.Variants.FindByVariant(stateCodeByType, out string state))
+
+            if (beh.Variants.FindByVariant(stateCodeByType, out string state) && forPlayer.InventoryManager.ActiveHotbarSlot.Itemstack != null)
             {
                 switch (state)
                 {
                     case "0":
-                        if (forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack.Item?.Code.Path.StartsWith("stone-") == true)
+                        if (forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Item?.Code.Path.StartsWith("stone-") == true)
                         {
                             return [new WorldInteraction(){ActionLangCode = "confession:block-interaction-add-rimStones",MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl" }];
                         }
@@ -352,10 +360,8 @@ namespace MedievalArchitecture
                     case "2":
                        
                         return [new WorldInteraction() { ActionLangCode = "confession:block-interaction-add-block", MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl" }];
-
-
                 }
-
+                
                 // 4) sonst keine Hilfe anzeigen
                 return base.GetPlacedBlockInteractionHelp(world, selection, forPlayer, ref handling);
             }

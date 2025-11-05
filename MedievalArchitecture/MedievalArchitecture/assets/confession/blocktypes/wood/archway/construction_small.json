@@ -13,7 +13,10 @@
 	"entityClass": "BlockEntityConstructable",
 	"variantgroups": [{"code": "side","loadFromProperties": "abstract/horizontalorientation"}],
 	"attributes": {
-		"handbook": {"groupBy": [ "construction_small-*" ],"excludeByType": {"west": true, "east": true, "south": true}}
+		"handbook": {"groupBy": [ "construction_small-*" ],
+								"excludeByType": {"west": true, "east": true, "south": true},
+								"extraSections": [{"title": "confession:construction-drop-help-title", "text": "confession:construction-drop-help-text"}]
+		}
 	},
 	"entityBehaviors": [ { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" } ],
 	"behaviors": [

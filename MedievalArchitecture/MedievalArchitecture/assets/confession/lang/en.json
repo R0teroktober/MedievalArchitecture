@@ -3,7 +3,7 @@
   
   // handbook
   "handbook-introduction-title": "Medieval Architecture Mod",
-  "handbook-introduction-text": "Medieval Architecture<br><br><i>This mod is a test to gather insights for my mod Age of Confession. Except for a few shapefiles, everything in this mod has been rebuild and the entire code has been rewritten. Thanks to the Attribute Rendering Library, I can now add significantly more blocks without compromising performance. <br>I would be very grateful for any feedback, as this will help me make Age of Confession usable for more people again.</i><br><br><strong>Archways</strong><br>To build the archways you have to build a construction frame first. Add 6 stones to it, 1 mortar and then a block of your choice. Currently only the following blocks are allowed: Rock, brick, cobblestone or 4 raw daub items<br><br>You can add windows, or a door lintel to the archways in the same way.",
+  "handbook-introduction-text": "Medieval Architecture<br><br><i>This mod is a test to gather insights for my mod Age of Confession. Except for a few shapefiles, everything in this mod has been rebuild and the entire code has been rewritten. Thanks to the Attribute Rendering Library, I can now add significantly more blocks without compromising performance. <br>I would be very grateful for any feedback, as this will help me make Age of Confession usable for more people again.</i><br><br><strong>Archways</strong><br>To build the archways you have to build a construction frame first. Add 6 stones to it, 1 mortar and then a block of your choice. Currently only the following blocks are allowed: Rock, brick, cobblestone or 4 raw daub items. You will get the frame back, once the archway is completed.<br><br>You can add windows, or a door lintel to the archways in the same way.",
 
 
   // header
@@ -97,7 +97,8 @@
   "confession:block-interaction-add-block": "Add block to finish archway",
   "confession:block-interaction-add-glass": "Add window",
   "confession:block-interaction-add-plank": "Add plank to create a door lintel",
-
+  "confession:construction-drop-help-title": "Drops when constructed",
+  "confession:construction-drop-help-text": "The empty frame will drop, when the archway is fully constructed",
 
 
   // roofs
