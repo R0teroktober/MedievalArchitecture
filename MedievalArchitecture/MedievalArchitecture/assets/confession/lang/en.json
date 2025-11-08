@@ -139,5 +139,8 @@
   // configs
   "confession:setting-enable-small-archways": "Enable small archways",
   "confession:setting-enable-roof": "Enable roofs",
-  "confession:setting-enable-windows": "Enable windows"
+  "confession:setting-enable-windows": "Enable windows",
+
+  // configs 1.0.2
+   "confession:setting-enable-windowsill": "Enable windowsill"
 }

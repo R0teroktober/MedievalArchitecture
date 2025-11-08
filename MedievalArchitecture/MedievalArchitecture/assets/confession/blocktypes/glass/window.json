@@ -45,7 +45,7 @@
 	"creativeinventoryStacksByType": {
 			"*-north": [
 				{
-					"tabs": [ "general", "decorative", "confession" ],
+					"tabs": ["confession" ],
 					"stacks": [
 						{"type": "block","code": "window-north","attributes": {"types": {"style": "single","glass": "plain"}}},
 						{"type": "block","code": "window-north","attributes": {"types": {"style": "top","glass": "plain"}}},

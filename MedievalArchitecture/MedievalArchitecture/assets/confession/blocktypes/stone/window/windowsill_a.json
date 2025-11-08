@@ -21,7 +21,7 @@
 		{ "name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
 			"properties": {
 				"name": {
-					"rock-*::originblock-*": ["rock-{rock}","confession:originblock-{originblock}", "confession:block-windowsill-name"],
+					"rock-*::originblock-*": ["rock-{rock}"," ","confession:originblock-{originblock}", "confession:block-windowsill-name"],
 					"*": [ "confession:block-debug-noname" ]
 				},
 				"description":  {
