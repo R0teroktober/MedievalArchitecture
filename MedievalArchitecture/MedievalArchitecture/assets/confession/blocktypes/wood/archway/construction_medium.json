@@ -1,0 +1,107 @@
+{
+	"enabled": true,
+	"code": "construction_medium",
+	"maxStackSize": 64,
+	"blockmaterial": "wood",
+	"resistance": 1,
+	"renderPass": "OpaqueNoCull",
+	"facecullmode": "nevercull",
+	"lightabsorption": 0,
+	"sideopaque": {"all": false},
+	"sideao": {"all": true},
+	"sidesolid": {"all":  false},
+	//"entityClass": "BlockEntityConstructable",
+	"variantgroups": [{"code": "side","loadFromProperties": "abstract/horizontalorientation"}],
+	"attributes": {
+		"handbook": {"groupBy": [ "construction_medium-*" ],
+								"excludeByType": {"west": true, "east": true, "south": true},
+								"extraSections": [{"title": "confession:construction-drop-help-title", "text": "confession:construction-drop-help-text"}]
+		}
+	},
+	"entityBehaviors": [ { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" } ],
+	"behaviors": [
+		{ "name": "Multiblock", "propertiesByType": {
+		"*-east": { "sizex": 1, "sizey": 2, "sizez": 2, "cposition": { "x": 0, "y": 1, "z": 0 }},
+		"*-west": { "sizex": 1, "sizey": 2, "sizez": 2, "cposition": { "x": 0, "y": 1, "z": 1 }},
+		"*-south": { "sizex": 2, "sizey": 2, "sizez": 1, "cposition": { "x": 1, "y": 1, "z": 0 }},
+		"*-north": { "sizex": 2, "sizey": 2, "sizez": 1, "cposition": { "x": 0, "y": 1, "z": 0 }}
+		}},
+		{ "name": "AttributeRenderingLibrary.HorizontalOrientable", "properties":{"dropBlockFace": "north"} },
+		{ "name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
+			"properties": {
+				"name": {
+					"state-*": ["confession:block-construction_small-name1", "confession:{state}","confession:block-construction_small-name2"],
+					"*": [ "confession:block-debug-noname" ]
+				},
+				"description":  {
+					"rock-*::style-*": ["confession:block-arch_small-description1", "rock-{rock}","confession:block-arch_small-description2","confession:{style}", "confession:block-linebreak"],
+					"*": ["confession:block-debug-nodescription"]
+				},
+				"textures": {
+					"rock-none": {
+						"rim": { "base": "game:block/transparent" },
+						"plaster": { "base": "game:block/transparent" },
+						"gravel": {"base": "game:block/transparent"}
+						},
+					"state-*::rock-*": {
+						"rim": {"base": "game:block/stone/rock/{rock}1","overlays": [ "game:block/overlay/crackedcobblestone1" ]},
+						"gravel": {"base": "game:block/stone/agedbrick/{rock}1"},
+						"plaster": {"base": "game:block/stone/rock/{rock}1","blendedOverlays": [{"base": "game:block/clay/fireclay","blendMode": "Lighten"}]}
+						}
+				},
+				"shape": {
+					"state-*::style-*": { "base": "confession:block/wood/construction-m-{state}-{style}","rotateYByType": {"*-north": 0,"*-east": 270,"*-south": 180,"*-west": 90}}
+				}
+			}
+		}
+	],
+	"shape": { "base": "confession:block/wood/construction-m-0-a","rotateYByType": {"*-north": 0,"*-east": 270,"*-south": 180,"*-west": 90}},
+	"textures": { 
+		"rim": { "base": "game:block/transparent" },
+		"plaster": { "base": "game:block/transparent" },
+		"gravel": { "base": "game:block/transparent" },
+		"metal": { "base": "game:block/metal/sheet-plain/iron1" }, 
+		"wood": { "base": "game:block/wood/debarked/aged", "rotation": 90 },
+		"planks": { "base": "game:block/wood/planks/generic" } 
+
+	},
+	"collisionBox": { "x1": 0, "y1": 0.5, "z1": 0, "x2": 1, "y2": 1, "z2": 1 },
+	"heldTpIdleAnimation": "holdbothhandslarge", "heldTpUseAnimation": "twohandplaceblock",
+	"fpHandTransform": {
+		"translation": { "x": -1.5, "y": -1.15, "z": 0.5 },
+		"rotation": { "x": 4, "y": 40, "z": -2 },
+		"scale": 1.57
+	},
+	"tpHandTransform": {
+		"translation": { "x": -0.03, "y": -0.7099, "z": -0.7 },
+		"rotation": { "x": 106, "y": -6, "z": -79 },
+		"origin": { "x": 0, "y": 0.9, "z": 1.4 },
+		"scale": 0.61
+	},
+	"guiTransform": {
+		"rotation": { "x": 0, "y": 0, "z": 0 },
+		"origin": { "x": 1, "y": -0, "z": 0.5 },
+		"scale": 0.58
+	},
+	"creativeinventoryStacksByType": {
+			"*-north": [
+				{
+					"tabs": ["confession" ],
+					"stacks": [ 
+					{ "type": "block", "code": "construction_medium-north", "attributes": { "types": {"style":  "a", "rock":  "none", "state": "0" } } },
+					{ "type": "block", "code": "construction_medium-north", "attributes": { "types": {"style":  "a", "rock":  "granite", "state": "1" } } },
+					{ "type": "block", "code": "construction_medium-north", "attributes": { "types": {"style":  "a", "rock":  "sandstone", "state": "1" } } },
+					{ "type": "block", "code": "construction_medium-north", "attributes": { "types": {"style":  "a", "rock":  "limestone", "state": "1" } } },
+					{ "type": "block", "code": "construction_medium-north", "attributes": { "types": {"style":  "a", "rock":  "granite", "state": "2" } } },
+					{ "type": "block", "code": "construction_medium-north", "attributes": { "types": {"style":  "a", "rock":  "sandstone", "state": "2" } } },
+					{ "type": "block", "code": "construction_medium-north", "attributes": { "types": {"style":  "a", "rock":  "limestone", "state": "2" } } }
+
+		
+
+
+					]
+				}
+			]
+		}
+
+}

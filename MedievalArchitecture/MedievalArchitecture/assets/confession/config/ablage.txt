@@ -1,420 +1,418 @@
-						////////// NEW GLASS TYPE //////////////
+"					////////// NEW GLASS TYPE //////////////
 
-						// type a rock "glass": "yellow"
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "andesite","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "basalt","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "bauxite","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "chalk","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "chert","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "claystone","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "conglomerate","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "granite","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "greenmarble","style": "a", "glass": "yellow"}}},
+						// type a rock "none" glass
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "andesite","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "basalt","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "bauxite","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "chalk","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "chert","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "claystone","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "conglomerate","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "granite","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "greenmarble","style": "a", "glass": "none"}}},
 
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "kimberlite","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "limestone","style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "kimberlite","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "limestone","style": "a", "glass": "none"}}},
 
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "peridotite","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "phyllite","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "redmarble","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "sandstone","style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "peridotite","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "phyllite","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "redmarble","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "sandstone","style": "a", "glass": "none"}}},
 
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "shale","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "slate","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "suevite","style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "shale","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "slate","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "suevite","style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "whitemarble","style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "rock", "rock": "whitemarble","style": "a", "glass": "none"}}},
 
-
-						
-						// type a "cobblestone" "glass": "yellow"
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "andesite","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "basalt","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "bauxite","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "chalk","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "chert","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "claystone","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "conglomerate","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "granite","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "greenmarble","style": "a", "glass": "yellow"}}},
-
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "kimberlite","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "limestone","style": "a", "glass": "yellow"}}},
-
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "peridotite","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "phyllite","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "redmarble","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "sandstone","style": "a", "glass": "yellow"}}},
-
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "shale","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "slate","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "suevite","style": "a", "glass": "yellow"}}},
-
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "whitemarble","style": "a", "glass": "yellow"}}},
 
 						
-						// type a "brick" "glass": "yellow"
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "andesite","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "basalt","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "bauxite","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "chalk","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "chert","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "claystone","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "conglomerate","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "granite","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "limestone","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "peridotite","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "phyllite","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "sandstone","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "shale","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "slate","style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "suevite","style": "a", "glass": "yellow"}}},
+						// type a "cobblestone" "none" glass
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "andesite","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "basalt","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "bauxite","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "chalk","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "chert","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "claystone","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "conglomerate","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "granite","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "greenmarble","style": "a", "glass": "none"}}},
+
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "kimberlite","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "limestone","style": "a", "glass": "none"}}},
+
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "peridotite","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "phyllite","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "redmarble","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "sandstone","style": "a", "glass": "none"}}},
+
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "shale","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "slate","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "suevite","style": "a", "glass": "none"}}},
+
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "cobblestone", "rock": "whitemarble","style": "a", "glass": "none"}}},
+
+						
+						// type a "brick" "none" glass
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "andesite","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "basalt","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "bauxite","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "chalk","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "chert","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "claystone","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "conglomerate","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "granite","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "limestone","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "peridotite","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "phyllite","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "sandstone","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "shale","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "slate","style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brick", "rock": "suevite","style": "a", "glass": "none"}}},
 
 
 
-						// type a plaster "glass": "yellow"
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "andesite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "basalt", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "bauxite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "chalk", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "chert", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "claystone", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "conglomerate", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "granite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "greenmarble", "style": "a", "glass": "yellow"}}},
+						// type a plaster "none" glass
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "andesite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "basalt", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "bauxite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "chalk", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "chert", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "claystone", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "conglomerate", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "granite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "greenmarble", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "kimberlite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "limestone", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "kimberlite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "limestone", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "peridotite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "phyllite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "redmarble", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "sandstone", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "peridotite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "phyllite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "redmarble", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "sandstone", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "shale", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "slate", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "suevite", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "shale", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "slate", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "suevite", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "whitemarble", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "plaster", "rock": "whitemarble", "style": "a", "glass": "none"}}},
 						// type b plaster
 						
 
 
-						// type a ash daub "glass": "yellow"
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "andesite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "basalt", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "bauxite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "chalk", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "chert", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "claystone", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "conglomerate", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "granite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "greenmarble", "style": "a", "glass": "yellow"}}},
+						// type a ash daub "none" glass
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "andesite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "basalt", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "bauxite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "chalk", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "chert", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "claystone", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "conglomerate", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "granite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "greenmarble", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "kimberlite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "limestone", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "kimberlite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "limestone", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "peridotite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "phyllite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "redmarble", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "sandstone", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "peridotite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "phyllite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "redmarble", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "sandstone", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "shale", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "slate", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "suevite", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "shale", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "slate", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "suevite", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "whitemarble", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "ash", "rock": "whitemarble", "style": "a", "glass": "none"}}},
 
 
 
-						// type a blue daub "glass": "yellow"
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "andesite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "basalt", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "bauxite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "chalk", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "chert", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "claystone", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "conglomerate", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "granite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "greenmarble", "style": "a", "glass": "yellow"}}},
+						// type a blue daub "none" glass
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "andesite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "basalt", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "bauxite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "chalk", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "chert", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "claystone", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "conglomerate", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "granite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "greenmarble", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "kimberlite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "limestone", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "kimberlite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "limestone", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "peridotite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "phyllite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "redmarble", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "sandstone", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "peridotite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "phyllite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "redmarble", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "sandstone", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "shale", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "slate", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "suevite", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "shale", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "slate", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "suevite", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "whitemarble", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "blue", "rock": "whitemarble", "style": "a", "glass": "none"}}},
 
 						
 
-						// type a brown daub "glass": "yellow"
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "andesite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "basalt", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "bauxite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "chalk", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "chert", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "claystone", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "conglomerate", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "granite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "greenmarble", "style": "a", "glass": "yellow"}}},
+						// type a brown daub "none" glass
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "andesite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "basalt", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "bauxite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "chalk", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "chert", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "claystone", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "conglomerate", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "granite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "greenmarble", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "kimberlite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "limestone", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "kimberlite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "limestone", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "peridotite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "phyllite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "redmarble", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "sandstone", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "peridotite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "phyllite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "redmarble", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "sandstone", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "shale", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "slate", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "suevite", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "shale", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "slate", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "suevite", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "whitemarble", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brown", "rock": "whitemarble", "style": "a", "glass": "none"}}},
 
 						
 
-						// type a browngolden daub "glass": "yellow"
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "andesite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "basalt", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "bauxite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "chalk", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "chert", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "claystone", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "conglomerate", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "granite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "greenmarble", "style": "a", "glass": "yellow"}}},
+						// type a browngolden daub "none" glass
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "andesite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "basalt", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "bauxite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "chalk", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "chert", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "claystone", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "conglomerate", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "granite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "greenmarble", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "kimberlite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "limestone", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "kimberlite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "limestone", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "peridotite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "phyllite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "redmarble", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "sandstone", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "peridotite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "phyllite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "redmarble", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "sandstone", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "shale", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "slate", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "suevite", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "shale", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "slate", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "suevite", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "whitemarble", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "browngolden", "rock": "whitemarble", "style": "a", "glass": "none"}}},
 
 						
 
-						// type a brownlight daub "glass": "yellow"
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "andesite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "basalt", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "bauxite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "chalk", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "chert", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "claystone", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "conglomerate", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "granite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "greenmarble", "style": "a", "glass": "yellow"}}},
+						// type a brownlight daub "none" glass
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "andesite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "basalt", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "bauxite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "chalk", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "chert", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "claystone", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "conglomerate", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "granite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "greenmarble", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "kimberlite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "limestone", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "kimberlite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "limestone", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "peridotite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "phyllite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "redmarble", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "sandstone", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "peridotite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "phyllite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "redmarble", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "sandstone", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "shale", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "slate", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "suevite", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "shale", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "slate", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "suevite", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "whitemarble", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownlight", "rock": "whitemarble", "style": "a", "glass": "none"}}},
 					
 						
 
-							// type a brownweathered daub "glass": "yellow"
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "andesite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "basalt", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "bauxite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "chalk", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "chert", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "claystone", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "conglomerate", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "granite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "greenmarble", "style": "a", "glass": "yellow"}}},
+							// type a brownweathered daub "none" glass
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "andesite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "basalt", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "bauxite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "chalk", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "chert", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "claystone", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "conglomerate", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "granite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "greenmarble", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "kimberlite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "limestone", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "kimberlite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "limestone", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "peridotite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "phyllite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "redmarble", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "sandstone", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "peridotite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "phyllite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "redmarble", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "sandstone", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "shale", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "slate", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "suevite", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "shale", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "slate", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "suevite", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "whitemarble", "style": "a", "glass": "yellow"}}},
-						
-
-							// type a green daub "glass": "yellow"
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "andesite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "basalt", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "bauxite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "chalk", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "chert", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "claystone", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "conglomerate", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "granite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "greenmarble", "style": "a", "glass": "yellow"}}},
-						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "kimberlite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "limestone", "style": "a", "glass": "yellow"}}},
-						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "peridotite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "phyllite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "redmarble", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "sandstone", "style": "a", "glass": "yellow"}}},
-						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "shale", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "slate", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "suevite", "style": "a", "glass": "yellow"}}},
-						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "whitemarble", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "brownweathered", "rock": "whitemarble", "style": "a", "glass": "none"}}},
 						
 
-
-						// type a orange daub "glass": "yellow"
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "andesite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "basalt", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "bauxite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "chalk", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "chert", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "claystone", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "conglomerate", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "granite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "greenmarble", "style": "a", "glass": "yellow"}}},
+							// type a green daub "none" glass
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "andesite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "basalt", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "bauxite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "chalk", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "chert", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "claystone", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "conglomerate", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "granite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "greenmarble", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "kimberlite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "limestone", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "kimberlite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "limestone", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "peridotite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "phyllite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "redmarble", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "sandstone", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "peridotite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "phyllite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "redmarble", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "sandstone", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "shale", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "slate", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "suevite", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "shale", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "slate", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "suevite", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "whitemarble", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "green", "rock": "whitemarble", "style": "a", "glass": "none"}}},
 						
 
 
-							// type a pink daub "glass": "yellow"
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "andesite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "basalt", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "bauxite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "chalk", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "chert", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "claystone", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "conglomerate", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "granite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "greenmarble", "style": "a", "glass": "yellow"}}},
+						// type a orange daub "none" glass
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "andesite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "basalt", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "bauxite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "chalk", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "chert", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "claystone", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "conglomerate", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "granite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "greenmarble", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "kimberlite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "limestone", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "kimberlite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "limestone", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "peridotite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "phyllite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "redmarble", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "sandstone", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "peridotite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "phyllite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "redmarble", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "sandstone", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "shale", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "slate", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "suevite", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "shale", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "slate", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "suevite", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "whitemarble", "style": "a", "glass": "yellow"}}},
-						
-
-							// type a tan daub "glass": "yellow"
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "andesite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "basalt", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "bauxite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "chalk", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "chert", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "claystone", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "conglomerate", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "granite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "greenmarble", "style": "a", "glass": "yellow"}}},
-						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "kimberlite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "limestone", "style": "a", "glass": "yellow"}}},
-						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "peridotite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "phyllite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "redmarble", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "sandstone", "style": "a", "glass": "yellow"}}},
-						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "shale", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "slate", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "suevite", "style": "a", "glass": "yellow"}}},
-						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "whitemarble", "style": "a", "glass": "yellow"}}},
-						
-						
-						
-						// type b tan daub "glass": "yellow"
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "andesite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "basalt", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "bauxite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "chalk", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "chert", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "claystone", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "conglomerate", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "granite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "greenmarble", "style": "a", "glass": "yellow"}}},
-						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "kimberlite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "limestone", "style": "a", "glass": "yellow"}}},
-						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "peridotite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "phyllite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "redmarble", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "sandstone", "style": "a", "glass": "yellow"}}},
-						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "shale", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "slate", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "suevite", "style": "a", "glass": "yellow"}}},
-						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "whitemarble", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "orange", "rock": "whitemarble", "style": "a", "glass": "none"}}},
 						
 
 
-							// type a yellow daub "glass": "yellow"
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "andesite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "basalt", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "bauxite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "chalk", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "chert", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "claystone", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "conglomerate", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "granite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "greenmarble", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "kimberlite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "limestone", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "peridotite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "phyllite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "redmarble", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "sandstone", "style": "a", "glass": "yellow"}}},
+							// type a pink daub "none" glass
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "andesite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "basalt", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "bauxite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "chalk", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "chert", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "claystone", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "conglomerate", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "granite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "greenmarble", "style": "a", "glass": "none"}}},
 						
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "shale", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "slate", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "suevite", "style": "a", "glass": "yellow"}}},
-						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "whitemarble", "style": "a", "glass": "yellow"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "kimberlite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "limestone", "style": "a", "glass": "none"}}},
+						
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "peridotite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "phyllite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "redmarble", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "sandstone", "style": "a", "glass": "none"}}},
+						
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "shale", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "slate", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "suevite", "style": "a", "glass": "none"}}},
+						
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "pink", "rock": "whitemarble", "style": "a", "glass": "none"}}},
+						
+
+							// type a tan daub "none" glass
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "andesite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "basalt", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "bauxite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "chalk", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "chert", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "claystone", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "conglomerate", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "granite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "greenmarble", "style": "a", "glass": "none"}}},
+						
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "kimberlite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "limestone", "style": "a", "glass": "none"}}},
+						
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "peridotite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "phyllite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "redmarble", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "sandstone", "style": "a", "glass": "none"}}},
+						
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "shale", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "slate", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "suevite", "style": "a", "glass": "none"}}},
+						
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "whitemarble", "style": "a", "glass": "none"}}},
 						
 						
+						
+						// type b tan daub "none" glass
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "andesite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "basalt", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "bauxite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "chalk", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "chert", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "claystone", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "conglomerate", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "granite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "greenmarble", "style": "a", "glass": "none"}}},
+						
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "kimberlite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "limestone", "style": "a", "glass": "none"}}},
+						
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "peridotite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "phyllite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "redmarble", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "sandstone", "style": "a", "glass": "none"}}},
+						
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "shale", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "slate", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "suevite", "style": "a", "glass": "none"}}},
+						
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "tan", "rock": "whitemarble", "style": "a", "glass": "none"}}},
+						
+
+
+							// type a yellow daub "none" glass
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "andesite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "basalt", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "bauxite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "chalk", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "chert", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "claystone", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "conglomerate", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "granite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "greenmarble", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "kimberlite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "limestone", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "peridotite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "phyllite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "redmarble", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "sandstone", "style": "a", "glass": "none"}}},
+						
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "shale", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "slate", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "suevite", "style": "a", "glass": "none"}}},
+						{"type": "block","code": "arch2x2-north","attributes": {"types": {"originblock": "yellow", "rock": "whitemarble", "style": "a", "glass": "none"}}},"

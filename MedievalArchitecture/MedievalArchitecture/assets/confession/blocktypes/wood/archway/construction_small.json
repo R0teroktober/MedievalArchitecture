@@ -33,54 +33,51 @@
 					"*": ["confession:block-debug-nodescription"]
 				},
 				"textures": {
-
-					"state-2::rock-*": {
-						"rim": {"base": "game:block/stone/rock/{rock}1"},
-						"rim2": { "base": "game:block/stone/rock/{rock}1" },
-						"rim3": {"base": "game:block/transparent"},
+					"rock-none": {
+						"rim": { "base": "game:block/transparent" },
+						"plaster": { "base": "game:block/transparent" },
+						"gravel": {"base": "game:block/transparent"}
+						},
+					"state-*::rock-*": {
+						"rim": {"base": "game:block/stone/rock/{rock}1","overlays": [ "game:block/overlay/crackedcobblestone1" ]},
+						"gravel": {"base": "game:block/stone/agedbrick/{rock}1"},
 						"plaster": {"base": "game:block/stone/rock/{rock}1","blendedOverlays": [{"base": "game:block/clay/fireclay","blendMode": "Lighten"}]}
-					},
-					"state-1::rock-*": {
-						"rim": { "base": "game:block/stone/rock/{rock}1" },
-						"rim2": { "base": "game:block/transparent" },
-						"rim3": {"base": "game:block/stone/rock/{rock}1"},
-						"plaster": { "base":  "game:block/transparent" }
-					},
-					"state-0::rock-none": {
-						"rim": {"base": "game:block/transparent"},
-						"rim2": { "base": "game:block/transparent" },
-						"rim3": {"base": "game:block/transparent"},
-						"plaster": {"base": "game:block/transparent"}
-					}
+						}
 				},
 				"shape": {
-					"style-*": { "base": "confession:block/wood/construction-s-{style}", "rotateYByType": { "*-east": 90, "*-south": 180, "*-west": 270 } }
-					}
+					"state-*::style-*": { "base": "confession:block/wood/construction-s-{state}-{style}", "rotateYByType": { "*-east": 90, "*-south": 180, "*-west": 270 } }
+					//"state-*::style-*": { "base": "confession:block/wood/construction-s-{style}", "rotateYByType": { "*-east": 90, "*-south": 180, "*-west": 270 } }
 					//"style-C": { "base": "confession:block/stone/construction-s-c", "overlays": [ { "base": "block/stone/arch-s-c", "rotateYByType": { "*-we": 90 } }] },
 					//"style-D": { "base": "confession:block/stone/construction-s-d", "overlays": [ { "base": "block/stone/arch-s-d", "rotateYByType": { "*-we": 90 } }] }
 				}
 			}
+		}
 	],
 	"shape": { "base": "game:block/basic/invisible" },
 	"textures": { 
 		"rim": { "base": "game:block/transparent" },
-		"rim2": { "base": "game:block/transparent" },
-		"rim3": { "base": "game:block/transparent" },
 		"plaster": { "base": "game:block/transparent" },
-		"iron1": { "base": "game:block/metal/sheet-plain/iron1" }, 
-		"generic": { "base": "game:block/wood/planks/generic" } },
+		"gravel": { "base": "game:block/transparent" },
+		"metal": { "base": "game:block/metal/sheet-plain/iron1" }, 
+		"wood": { "base": "game:block/wood/debarked/aged"},
+		"planks": { "base": "game:block/wood/planks/generic" }
+	},
 	"collisionBox": { "x1": 0, "y1": 0.5, "z1": 0, "x2": 1, "y2": 1, "z2": 1 },
 	"creativeinventoryStacksByType": {
 			"*-north": [
 				{
 					"tabs": ["confession" ],
 					"stacks": [ 
+
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "limestone", "state": "1" } } },
+					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "limestone", "state": "2" } } },
+
 					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "none", "state": "0" } } },
-					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "none", "state": "0" } } },
-					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "c", "rock":  "none", "state": "0" } } },
-					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "d", "rock":  "none", "state": "0" } } },
+					//{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "none", "state": "0" } } },
+					//{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "c", "rock":  "none", "state": "0" } } },
+					//{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "d", "rock":  "none", "state": "0" } } },
 
-
+/*
 					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "andesite", "state": "1" } } },
 					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "andesite", "state": "2" } } },
 					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "andesite", "state": "1" } } },
@@ -262,7 +259,7 @@
 					{ "type": "block", "code": "construction_small-north", "attributes": { "types": { "style": "c", "rock": "whitemarble", "state": "2" } } },
 					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "d", "rock":  "whitemarble", "state": "1" } } },
 					{ "type": "block", "code": "construction_small-north", "attributes": { "types": { "style": "d", "rock": "whitemarble", "state": "2" } } }
-
+*/
 
 					]
 				}
