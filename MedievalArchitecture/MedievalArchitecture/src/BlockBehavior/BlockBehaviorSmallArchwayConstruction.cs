@@ -20,6 +20,8 @@ namespace MedievalArchitecture
     public class BlockBehaviorSmallArchwayConstruction(Block block) : BlockBehavior(block), IInteractable
     {
         private int rimStoneAmount;
+        private int intMultiplicator;
+        private string blockCodeBaseString;
         public Dictionary<string, string> stateCodeByType = new();
         public Dictionary<string, string> rockCodeByType = new();
         public Dictionary<string, string> styleCodeByType = new();
@@ -35,20 +37,21 @@ namespace MedievalArchitecture
         public override void Initialize(JsonObject properties)
 
         {
-            base.Initialize(properties);
+            
             var config = MedievalArchitectureModSystem.Config;
             finishSound = AssetLocation.Create("sounds/effect/stonecrush");
 
-           
+            intMultiplicator = properties["intMultiplicator"].AsInt(1);
+            blockCodeBaseString = properties["blockCodeBaseString"].AsString();
 
             rimStoneAmount = config.RimStoneAmount;
             stateCodeByType = new Dictionary<string, string>(config.StateCodeByType);
             styleCodeByType = new Dictionary<string, string>(config.StyleCodeByType);
             rockCodeByType = new Dictionary<string, string>(config.RockCodeByType);
 
+            base.Initialize(properties);
 
-         
-        
+
 
 
 
@@ -151,9 +154,9 @@ namespace MedievalArchitecture
         }
         private void TryAddRimStones(IWorldAccessor world, IPlayer player, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string heldItemCode)
         {
-            if (!heldItemCode.StartsWith("game:stone-") || heldItem.StackSize < rimStoneAmount) return;
+            if (!heldItemCode.StartsWith("game:stone-") || heldItem.StackSize < (rimStoneAmount * intMultiplicator)) return;
             // Creative Mode Check
-            if (player.WorldData.CurrentGameMode != EnumGameMode.Creative) player.InventoryManager.ActiveHotbarSlot.TakeOut(rimStoneAmount);
+            if (player.WorldData.CurrentGameMode != EnumGameMode.Creative) player.InventoryManager.ActiveHotbarSlot.TakeOut(rimStoneAmount* intMultiplicator);
 
             string rockType = heldItem.Collectible.Code.Path.Substring(6);
             var myBe = be as BlockEntityConstructable;
@@ -189,10 +192,10 @@ namespace MedievalArchitecture
 
         private void TryAddMortar(IWorldAccessor world, IPlayer player, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string heldItemCode)
         {
-            if (heldItemCode != "game:mortar" || heldItem.StackSize < 1) return;
+            if (heldItemCode != "game:mortar" || heldItem.StackSize < intMultiplicator) return;
 
             // Creative Mode Check
-            if (player.WorldData.CurrentGameMode != EnumGameMode.Creative) player.InventoryManager.ActiveHotbarSlot.TakeOut(1);
+            if (player.WorldData.CurrentGameMode != EnumGameMode.Creative) player.InventoryManager.ActiveHotbarSlot.TakeOut(intMultiplicator);
 
             var myBe = be as BlockEntityConstructable;
             if (myBe != null)
@@ -239,7 +242,7 @@ namespace MedievalArchitecture
             oldAttr.FindByVariant(rockCodeByType, out string rock);
 
             // Neuer Block
-            var newBlock = world.GetBlock(new AssetLocation("confession:arch_small-" +orientation));
+            var newBlock = world.GetBlock(new AssetLocation(blockCodeBaseString +"-"+ orientation));
             if (newBlock == null) return;
 
             // Setzen und Attribute übertragen
@@ -247,17 +250,29 @@ namespace MedievalArchitecture
             world.BlockAccessor.SetBlock(newBlock.BlockId, newBlockPos);
             world.BlockAccessor.TriggerNeighbourBlockUpdate(newBlockPos);
             // Itemstack drop thanks to Dana
-            ItemStack stack = new ItemStack(world.GetBlock(new AssetLocation("confession:construction_small-north")));
-            Variants variants = Variants.FromStack(stack);
-            var newVariants = new Dictionary<string, string>()
+            ItemStack stack = new ItemStack();
+            switch (blockCodeBaseString)
             {
-                ["style"] = style,
-                ["rock"] = "none",
-                ["state"] = "0"
-            };
-            variants.Set(newVariants);
-            variants.ToStack(stack);
-            world.SpawnItemEntity(stack, newBlockPos.ToVec3d().Add(0.5, 0.5, 0.5));
+                case "confession:arch_small":
+                    stack = new ItemStack(world.GetBlock(new AssetLocation("confession:construction_small-north")));
+                    break;
+                case "confession:arch2x2":
+                    stack = new ItemStack(world.GetBlock(new AssetLocation("confession:construction_medium2x2-north")));
+                    break;
+            }
+            if (stack != null) {
+                Variants variants = Variants.FromStack(stack);
+                var newVariants = new Dictionary<string, string>()
+                {
+                    ["style"] = style,
+                    ["rock"] = "none",
+                    ["state"] = "0"
+                };
+                variants.Set(newVariants);
+                variants.ToStack(stack);
+                world.SpawnItemEntity(stack, newBlockPos.ToVec3d().Add(0.5, 0.5, 0.5));
+            }
+            
 
 
             // Callback um auf Blockentity zu warten
@@ -276,7 +291,8 @@ namespace MedievalArchitecture
                     newMyBe.SetVariants(new Dictionary<string, string> {
             { "style", style },
             { "rock", rock },
-            { "originblock", originBlock }
+            { "originblock", originBlock },
+            { "glass", "none" }
         });
                 }
                 else
@@ -284,6 +300,7 @@ namespace MedievalArchitecture
                     newBeh.Variants.Set("style", style);
                     newBeh.Variants.Set("rock", rock);
                     newBeh.Variants.Set("originblock", originBlock);
+                    newBeh.Variants.Set("glass", "none");
                     newBe.MarkDirty(true);
                     world.BlockAccessor.MarkBlockDirty(newBe.Pos);
 
@@ -315,15 +332,15 @@ namespace MedievalArchitecture
         private (string originBlock, string handMaterial, int requiredAmount) GetMaterialInfo(string itemCode)
         {
             if (itemCode.StartsWith("game:rock-"))
-                return ("rock", itemCode.Substring(10), 1);
+                return ("rock", itemCode.Substring(10), intMultiplicator);
             if (itemCode.StartsWith("game:cobblestone-"))
-                return ("cobblestone", itemCode.Substring(17), 1);
+                return ("cobblestone", itemCode.Substring(17), intMultiplicator);
             if (itemCode.StartsWith("game:stonebricks-"))
-                return ("brick", itemCode.Substring(17), 1);
+                return ("brick", itemCode.Substring(17), intMultiplicator);
             if (itemCode.StartsWith("game:plaster-"))
-                return ("plaster", "plaster", 1);
+                return ("plaster", "plaster", intMultiplicator);
             if (itemCode.StartsWith("game:daubraw-"))
-                return (itemCode.Substring(13), itemCode.Substring(13), 4);
+                return (itemCode.Substring(13), itemCode.Substring(13), (4 * intMultiplicator));
 
             return (null, null, 0);
         }

@@ -1,6 +1,6 @@
 {
 	"enabled": true,
-	"code": "construction_medium",
+	"code": "construction_medium2x2",
 	"maxStackSize": 64,
 	"blockmaterial": "wood",
 	"resistance": 1,
@@ -10,10 +10,9 @@
 	"sideopaque": {"all": false},
 	"sideao": {"all": true},
 	"sidesolid": {"all":  false},
-	//"entityClass": "BlockEntityConstructable",
 	"variantgroups": [{"code": "side","loadFromProperties": "abstract/horizontalorientation"}],
 	"attributes": {
-		"handbook": {"groupBy": [ "construction_medium-*" ],
+		"handbook": {"groupBy": [ "construction_medium2x2-*" ],
 								"excludeByType": {"west": true, "east": true, "south": true},
 								"extraSections": [{"title": "confession:construction-drop-help-title", "text": "confession:construction-drop-help-text"}]
 		}
@@ -26,6 +25,7 @@
 		"*-south": { "sizex": 2, "sizey": 2, "sizez": 1, "cposition": { "x": 1, "y": 1, "z": 0 }},
 		"*-north": { "sizex": 2, "sizey": 2, "sizez": 1, "cposition": { "x": 0, "y": 1, "z": 0 }}
 		}},
+		{ "name": "BlockBehaviorSmallArchwayConstruction", "properties": {"blockCodeBaseString": "confession:arch2x2", "intMultiplicator": 2}},
 		{ "name": "AttributeRenderingLibrary.HorizontalOrientable", "properties":{"dropBlockFace": "north"} },
 		{ "name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
 			"properties": {
@@ -88,13 +88,13 @@
 				{
 					"tabs": ["confession" ],
 					"stacks": [ 
-					{ "type": "block", "code": "construction_medium-north", "attributes": { "types": {"style":  "a", "rock":  "none", "state": "0" } } },
-					{ "type": "block", "code": "construction_medium-north", "attributes": { "types": {"style":  "a", "rock":  "granite", "state": "1" } } },
-					{ "type": "block", "code": "construction_medium-north", "attributes": { "types": {"style":  "a", "rock":  "sandstone", "state": "1" } } },
-					{ "type": "block", "code": "construction_medium-north", "attributes": { "types": {"style":  "a", "rock":  "limestone", "state": "1" } } },
-					{ "type": "block", "code": "construction_medium-north", "attributes": { "types": {"style":  "a", "rock":  "granite", "state": "2" } } },
-					{ "type": "block", "code": "construction_medium-north", "attributes": { "types": {"style":  "a", "rock":  "sandstone", "state": "2" } } },
-					{ "type": "block", "code": "construction_medium-north", "attributes": { "types": {"style":  "a", "rock":  "limestone", "state": "2" } } }
+					{ "type": "block", "code": "construction_medium2x2-north", "attributes": { "types": {"style":  "a", "rock":  "none", "state": "0" } } },
+					{ "type": "block", "code": "construction_medium2x2-north", "attributes": { "types": {"style":  "a", "rock":  "granite", "state": "1" } } },
+					{ "type": "block", "code": "construction_medium2x2-north", "attributes": { "types": {"style":  "a", "rock":  "sandstone", "state": "1" } } },
+					{ "type": "block", "code": "construction_medium2x2-north", "attributes": { "types": {"style":  "a", "rock":  "limestone", "state": "1" } } },
+					{ "type": "block", "code": "construction_medium2x2-north", "attributes": { "types": {"style":  "a", "rock":  "granite", "state": "2" } } },
+					{ "type": "block", "code": "construction_medium2x2-north", "attributes": { "types": {"style":  "a", "rock":  "sandstone", "state": "2" } } },
+					{ "type": "block", "code": "construction_medium2x2-north", "attributes": { "types": {"style":  "a", "rock":  "limestone", "state": "2" } } }
 
 		
 

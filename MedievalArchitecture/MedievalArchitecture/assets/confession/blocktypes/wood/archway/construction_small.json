@@ -20,7 +20,7 @@
 	},
 	"entityBehaviors": [ { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" } ],
 	"behaviors": [
-		{ "name": "BlockBehaviorSmallArchwayConstruction", "blockCodeBaseString": "confession:arch_small"},
+		{ "name": "BlockBehaviorSmallArchwayConstruction", "properties": { "blockCodeBaseString": "confession:arch_small", "intMultiplicator": 1}},
 		{ "name": "AttributeRenderingLibrary.HorizontalOrientable", "properties":{"dropBlockFace": "north"} },
 		{ "name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
 			"properties": {
