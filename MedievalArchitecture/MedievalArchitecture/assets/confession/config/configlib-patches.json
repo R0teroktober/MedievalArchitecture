@@ -35,7 +35,7 @@
         "ingui": "confession:setting-enable-roof",
         "weight": 2.2,
         "comment": "Enable/ Disable all roof blocks",
-        "default": true
+        "default": false
       },
       "ENABLE_WINDOWS": {
         "name": "enable-windows",
