@@ -358,11 +358,13 @@ namespace MedievalArchitecture
 
             if (beh.Variants.FindByVariant(stateCodeByType, out string state) && forPlayer.InventoryManager.ActiveHotbarSlot.Itemstack != null)
             {
+
                 switch (state)
                 {
                     case "0":
                         if (forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Item?.Code.Path.StartsWith("stone-") == true)
                         {
+                           
                             return [new WorldInteraction(){ActionLangCode = "confession:block-interaction-add-rimStones",MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl" }];
                         }
                         break;
