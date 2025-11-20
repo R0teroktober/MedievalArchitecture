@@ -88,13 +88,7 @@
 				{
 					"tabs": ["confession" ],
 					"stacks": [ 
-					{ "type": "block", "code": "construction_medium2x2-north", "attributes": { "types": {"style":  "a", "rock":  "none", "state": "0" } } },
-					{ "type": "block", "code": "construction_medium2x2-north", "attributes": { "types": {"style":  "a", "rock":  "granite", "state": "1" } } },
-					{ "type": "block", "code": "construction_medium2x2-north", "attributes": { "types": {"style":  "a", "rock":  "sandstone", "state": "1" } } },
-					{ "type": "block", "code": "construction_medium2x2-north", "attributes": { "types": {"style":  "a", "rock":  "limestone", "state": "1" } } },
-					{ "type": "block", "code": "construction_medium2x2-north", "attributes": { "types": {"style":  "a", "rock":  "granite", "state": "2" } } },
-					{ "type": "block", "code": "construction_medium2x2-north", "attributes": { "types": {"style":  "a", "rock":  "sandstone", "state": "2" } } },
-					{ "type": "block", "code": "construction_medium2x2-north", "attributes": { "types": {"style":  "a", "rock":  "limestone", "state": "2" } } }
+					{ "type": "block", "code": "construction_medium2x2-north", "attributes": { "types": {"style":  "a", "rock":  "none", "state": "0" } } }
 
 		
 
