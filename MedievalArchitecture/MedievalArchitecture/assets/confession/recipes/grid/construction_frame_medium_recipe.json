@@ -1,0 +1,98 @@
+[
+  {
+        "ingredientPattern": "P_N,BBB,LLL",
+        "ingredients": {
+            "L": { "type": "block", "code": "game:debarkedlog-*"},
+            "B": { "type": "item", "code": "game:plank-*", "quantity": 2},
+            "N": { "type": "item", "code": "game:metalnailsandstrips-*", "quantity": 2},
+            "P": { "type": "item", "code": "game:plumbandsquare", "returnedStack": { "type": "item", "code": "game:plumbandsquare"}}
+        },
+        "width": 3,
+        "height": 3,
+        "output": {
+            "type": "block",
+            "code": "construction_medium2x1-north", 
+            // the important part is to include attributes with desired types
+            "attributes": {
+              "types": {
+                "style":  "b",
+                "rock":  "none",
+                "state": "0" 
+
+              }
+            }
+        }
+    },
+    { 
+        "ingredientPattern": "PBN,B_B,LLL",
+        "ingredients": {
+            "B": { "type": "block", "code": "game:supportbeam-*", "quantity": 3},
+            "L": { "type": "block", "code": "game:debarkedlog-*"},
+            "N": { "type": "item", "code": "game:metalnailsandstrips-*", "quantity": 2},
+            "P": { "type": "item", "code": "game:plumbandsquare", "returnedStack": { "type": "item", "code": "game:plumbandsquare"}}
+        },
+        "width": 3,
+        "height": 3,
+        "output": {
+            "type": "block",
+            "code": "construction_medium2x2-north", 
+            // the important part is to include attributes with desired types
+            "attributes": {
+              "types": {
+                "style":  "a",
+                "rock":  "none",
+                "state": "0" 
+
+              }
+            }
+        }
+    },
+    {
+        "ingredientPattern": "PB_,C_C,B_B",
+        "ingredients": {
+            "B": { "type": "item", "code": "game:bamboostakes", "quantity": 2},
+            "C": { "type": "item", "code": "game:cattailtops", "quantity": 4},
+            "P": { "type": "item", "code": "game:plumbandsquare", "returnedStack": { "type": "item", "code": "game:plumbandsquare"}}
+        },
+        "width": 3,
+        "height": 3,
+        "output": {
+            "type": "block",
+            "code": "construction_small-north", 
+            // the important part is to include attributes with desired types
+            "attributes": {
+              "types": {
+                "style":  "c",
+                "rock":  "none",
+                "state": "0" 
+
+              }
+            }
+        }
+    },
+    { 
+        "ingredientPattern": "P_S,RFR,BBB",
+        "ingredients": {
+            "B": { "type": "item", "code": "game:plank-*"},
+            "S": { "type": "item", "code": "game:saw-*", "isTool": true},
+            "R": { "type": "item", "code": "game:rope" },
+            "F": { "type": "block", "code": "game:barrel"},
+            "P": { "type": "item", "code": "game:plumbandsquare", "returnedStack": { "type": "item", "code": "game:plumbandsquare"}}
+        },
+        "width": 3,
+        "height": 3,
+        "output": {
+            "type": "block",
+            "code": "construction_small-north", 
+            // the important part is to include attributes with desired types
+            "attributes": {
+              "types": {
+                "style":  "d",
+                "rock":  "none",
+                "state": "0" 
+
+              }
+            }
+        }
+    }
+]

@@ -1,5 +1,5 @@
 {
-	"enabled": true,
+	"enabled": false,
 	"code": "roof",
 	"maxStackSize": 64,
 	"blockmaterial": "Wood",

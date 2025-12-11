@@ -25,12 +25,12 @@
 		"*-south": { "sizex": 2, "sizey": 2, "sizez": 1, "cposition": { "x": 1, "y": 1, "z": 0 }},
 		"*-north": { "sizex": 2, "sizey": 2, "sizez": 1, "cposition": { "x": 0, "y": 1, "z": 0 }}
 		}},
-		{ "name": "BlockBehaviorSmallArchwayConstruction", "properties": {"blockCodeBaseString": "confession:arch2x2", "intMultiplicator": 2}},
+		{ "name": "BlockBehaviorArchwayFrame", "properties": {"blockCodeBaseString": "confession:arch2x2", "intMultiplicator": 2}},
 		{ "name": "AttributeRenderingLibrary.HorizontalOrientable", "properties":{"dropBlockFace": "north"} },
 		{ "name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
 			"properties": {
 				"name": {
-					"state-*": ["confession:block-construction_small-name1", "confession:{state}","confession:block-construction_small-name2"],
+					"state-*": ["confession:block-construction_medium-name1", "confession:{state}","confession:block-construction_small-name2"],
 					"*": [ "confession:block-debug-noname" ]
 				},
 				"description":  {
@@ -39,26 +39,38 @@
 				},
 				"textures": {
 					"rock-none": {
-						"rim": { "base": "game:block/transparent" },
-						"plaster": { "base": "game:block/transparent" },
+						"rimstones": { "base": "game:block/transparent" },
+						"freshPlaster": { "base": "game:block/transparent" },
 						"gravel": {"base": "game:block/transparent"}
 						},
 					"state-*::rock-*": {
-						"rim": {"base": "game:block/stone/rock/{rock}1","overlays": [ "game:block/overlay/crackedcobblestone1" ]},
+						"rimstones": {"base": "game:block/stone/rock/{rock}1","overlays": [ "game:block/overlay/crackedcobblestone1" ]},
 						"gravel": {"base": "game:block/stone/agedbrick/{rock}1"},
-						"plaster": {"base": "game:block/stone/rock/{rock}1","blendedOverlays": [{"base": "game:block/clay/fireclay","blendMode": "Lighten"}]}
+						"freshPlaster": {"base": "game:block/stone/rock/{rock}1","blendedOverlays": [{"base": "game:block/clay/fireclay","blendMode": "Lighten"}]}
 						}
 				},
 				"shape": {
 					"state-*::style-*": { "base": "confession:block/wood/construction-m-{state}-{style}","rotateYByType": {"*-north": 0,"*-east": 270,"*-south": 180,"*-west": 90}}
+				},
+				"shapeinventory": {
+					"state-0::style-*": {"base": "confession:block/stone/arch-m-{style}","rotateYByType": {"*-north": 0,"*-east": 270,"*-south": 180,"*-west": 90}}
 				}
 			}
 		}
 	],
-	"shape": { "base": "confession:block/wood/construction-m-0-a","rotateYByType": {"*-north": 0,"*-east": 270,"*-south": 180,"*-west": 90}},
+	"shape": { "base": "game:block/basic/invisible" ,"rotateYByType": {"*-north": 0,"*-east": 270,"*-south": 180,"*-west": 90}},
 	"textures": { 
-		"rim": { "base": "game:block/transparent" },
-		"plaster": { "base": "game:block/transparent" },
+		"rim": { "base": "game:block/liquid/dye/gray"},
+		"plaster": { "base": "game:block/liquid/dye/gray"},
+		"material": { "base": "game:block/liquid/dye/gray"},
+		"lintel": { "base": "game:block/transparent" },
+		"black": { "base": "game:block/transparent" },
+		"frame": { "base": "game:block/transparent" },
+		"putty": { "base": "game:block/transparent" },
+		"glass-top": { "base": "game:block/transparent" },
+		"glass-bottom": { "base": "game:block/transparent" },
+		"rimstones": { "base": "game:block/transparent" },
+		"freshPlaster": { "base": "game:block/transparent" },
 		"gravel": { "base": "game:block/transparent" },
 		"metal": { "base": "game:block/metal/sheet-plain/iron1" }, 
 		"wood": { "base": "game:block/wood/debarked/aged", "rotation": 90 },
@@ -73,9 +85,9 @@
 		"scale": 1.57
 	},
 	"tpHandTransform": {
-		"translation": { "x": -0.03, "y": -0.7099, "z": -0.7 },
-		"rotation": { "x": 106, "y": -6, "z": -79 },
-		"origin": { "x": 0, "y": 0.9, "z": 1.4 },
+		"translation": { "x": -1.53, "y": -0.9099, "z": -1.3 },
+		"rotation": { "x": -89, "y": 22, "z": -107 },
+		"origin": { "x": -0, "y": 0.5, "z": 0.6 },
 		"scale": 0.61
 	},
 	"guiTransform": {
@@ -86,9 +98,10 @@
 	"creativeinventoryStacksByType": {
 			"*-north": [
 				{
-					"tabs": ["confession" ],
+					"tabs": ["confession", "construction", "general" ],
 					"stacks": [ 
-					{ "type": "block", "code": "construction_medium2x2-north", "attributes": { "types": {"style":  "a", "rock":  "none", "state": "0" } } }
+					{ "type": "block", "code": "construction_medium2x2-north", "attributes": { "types": {"style":  "a", "rock":  "none", "state": "0" } } },
+
 
 		
 

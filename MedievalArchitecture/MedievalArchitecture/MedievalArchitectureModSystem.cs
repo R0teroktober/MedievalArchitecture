@@ -11,9 +11,10 @@ namespace MedievalArchitecture
         public override void Start(ICoreAPI api)
         {
             base.Start(api);
-            api.RegisterBlockBehaviorClass("BlockBehaviorConstructable", typeof(BlockBehaviorConstructable));
+            api.RegisterBlockClass("BlockMultiblockArchway", typeof(BlockMultiblockArchway));
+            api.RegisterBlockBehaviorClass("BlockBehaviorArchway", typeof(BlockBehaviorArchway));
             api.RegisterBlockBehaviorClass("BlockBehaviorCancelInteraction", typeof(BlockBehaviorCancelInteraction));
-            api.RegisterBlockBehaviorClass("BlockBehaviorSmallArchwayConstruction", typeof(BlockBehaviorSmallArchwayConstruction));
+            api.RegisterBlockBehaviorClass("BlockBehaviorArchwayFrame", typeof(BlockBehaviorArchwayFrame));
             api.RegisterBlockEntityClass("BlockEntityConstructable", typeof(BlockEntityConstructable));
             Config = api.LoadModConfig<VariantTypesConfig>("variant-types-config.json");
             if (Config == null)
@@ -49,7 +50,6 @@ namespace MedievalArchitecture
                         { "rock-conglomerate", "conglomerate" },
                         { "rock-granite", "granite" },
                         { "rock-greenmarble", "greenmarble" },
-                        { "rock-halite", "halite" },
                         { "rock-kimberlite", "kimberlite" },
                         { "rock-limestone", "limestone" },
                         { "rock-peridotite", "peridotite" },
@@ -104,6 +104,7 @@ namespace MedievalArchitecture
                     },
                     OriginblockCodeByType = new()
                     {
+                    {"originblock-none", "none" },
                     {"originblock-rock", "rock" },
                     {"originblock-cobblestone", "cobblestone"},
                     {"originblock-brick", "brick"},

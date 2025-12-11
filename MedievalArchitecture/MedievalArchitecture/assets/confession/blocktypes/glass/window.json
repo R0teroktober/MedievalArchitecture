@@ -27,11 +27,11 @@
 					"*":  ["confession:block-window-description1", "block-glass-{glass}", "confession:block-window-description2", "confession:window-{style}"]
 				},
 				"textures": {
-					"glass-*": {
+					"glass-*::style-*": {
 						"frame": { "base": "game:block/wood/debarked/veryaged"},
 						"putty": { "base": "game:block/metal/ingot/lead"},
 						"black": { "base": "game:block/black"},
-						"glass": { "base": "game:block/glass/{glass}", "overlays": [ "game:block/glass/leaded" ] }
+						"glass": { "base": "game:block/glass/{glass}", "blendedOverlays": [ { "base":"confession:block/glass/window-{style}", "blendMode": "Overlay" } ] }
 
 					}
 				},

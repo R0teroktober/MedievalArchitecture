@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ using Vintagestory.GameContent;
 
 namespace MedievalArchitecture
 {
-    public class BlockBehaviorSmallArchwayConstruction(Block block) : BlockBehavior(block), IInteractable
+    public class BlockBehaviorArchwayFrame(Block block) : BlockBehavior(block), IInteractable
     {
         private int rimStoneAmount;
         private int intMultiplicator;
@@ -25,8 +26,9 @@ namespace MedievalArchitecture
         public Dictionary<string, string> stateCodeByType = new();
         public Dictionary<string, string> rockCodeByType = new();
         public Dictionary<string, string> styleCodeByType = new();
-        private bool constructionInProgress = false;
-        AssetLocation finishSound = new AssetLocation();
+        AssetLocation finishSound= new AssetLocation();
+        AssetLocation soundAddStone = new AssetLocation();
+        AssetLocation soundAddMortar = new AssetLocation();
         WorldInteraction[] interactions;
 
         private static List<ItemStack> mortarItems = new List<ItemStack>();
@@ -39,7 +41,9 @@ namespace MedievalArchitecture
         {
             
             var config = MedievalArchitectureModSystem.Config;
-            finishSound = AssetLocation.Create("sounds/effect/stonecrush");
+            soundAddStone = AssetLocation.Create("sounds/effect/stonecrush");
+            soundAddMortar = AssetLocation.Create("sounds/block/sand");
+            finishSound = AssetLocation.Create("sounds/block/rock-break-pickaxe");
 
             intMultiplicator = properties["intMultiplicator"].AsInt(1);
             blockCodeBaseString = properties["blockCodeBaseString"].AsString();
@@ -75,7 +79,6 @@ namespace MedievalArchitecture
             {
                 handling = EnumHandling.PreventDefault;
                 secondsUsed = 0;
-                constructionInProgress = false;
                 return true;
             }
             else
@@ -89,7 +92,7 @@ namespace MedievalArchitecture
             {
                 handled = EnumHandling.PreventDefault;
 
-
+                
                 if (byPlayer.CurrentBlockSelection == null) return false;
                 //  Nur auf dem Client Animation
                 if (world.Side == EnumAppSide.Client)
@@ -97,7 +100,7 @@ namespace MedievalArchitecture
                     (byPlayer as IClientPlayer)?.TriggerFpAnimation(EnumHandInteract.BlockInteract);
 
                 }
-                return secondsUsed < 0.5;
+                return true;
             }
             else
                 return base.OnBlockInteractStep(secondsUsed, world, byPlayer, blockSel, ref handled);
@@ -107,18 +110,15 @@ namespace MedievalArchitecture
         }
         public override void OnBlockInteractStop(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handled)
         {
-            if (!byPlayer.Entity.Controls.CtrlKey) base.OnBlockInteractStop(secondsUsed, world, byPlayer, blockSel, ref handled);
+            //if (secondsUsed < 0.5) base.OnBlockInteractStop(secondsUsed, world, byPlayer, blockSel, ref handled); // Bauzeit
+            //secondsUsed = 0;
             handled = EnumHandling.PreventDefault;
-            if (constructionInProgress) return;
-            if (secondsUsed < 0.5) return; // Bauzeit
-            secondsUsed = 0; // Bauzeit zurücksetzten
-            if (world.Side == EnumAppSide.Client) return;
-            constructionInProgress = true;
             // Baumaterial
             if (byPlayer?.InventoryManager?.ActiveHotbarSlot?.Itemstack == null || blockSel == null) return;
             var heldItem = byPlayer.InventoryManager.ActiveHotbarSlot.Itemstack;
             string heldItemCode = heldItem.Collectible.Code.ToString();
             // Block
+          
             var be = world.BlockAccessor?.GetBlockEntity(blockSel.Position);
             if (be == null) return;
             // Blockbehavior
@@ -132,98 +132,172 @@ namespace MedievalArchitecture
                 switch (state)
                 {
                     case "0":
+                    if (RequirementsMet(heldItem, 1, byPlayer)) {
+                        if (world.Side == EnumAppSide.Client)
+                        {
+                            try
+                            {
+                                world.PlaySoundAt(soundAddStone, byPlayer.CurrentBlockSelection.Position, 1, byPlayer);
+                            }
+                            catch { }
+                        }
 
                         TryAddRimStones(world, byPlayer, be, beh, heldItem, heldItemCode);
-                        break;
+                    }
+                    break;
 
                     case "1":
+                    if (RequirementsMet(heldItem, 2, byPlayer))
+                    {
+                        if (world.Side == EnumAppSide.Client)
+                        {
+                            try
+                            {
+                                world.PlaySoundAt(soundAddMortar, byPlayer.CurrentBlockSelection.Position, 1, byPlayer);
+                            }
+                            catch { }
+                        }
                         TryAddMortar(world, byPlayer, be, beh, heldItem, heldItemCode);
-                        break;
+                    }
+                    break;
 
                     case "2":
+                    if (RequirementsMet(heldItem, 3, byPlayer))
+                    {
+                        if (world.Side == EnumAppSide.Client)
+                        {
+                            try
+                            {
+                                world.PlaySoundAt(finishSound, byPlayer.CurrentBlockSelection.Position, 1, byPlayer);
+                            }
+                            catch { }
+                        }
                         TryCompleteArch(world, byPlayer, beh, heldItem, heldItemCode);
-                        break;
+                    }
+                    break;
 
                 }
-            //}
-           
-        }
-        private void TryAddRimStones(IWorldAccessor world, IPlayer player, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string heldItemCode)
-        {
-            constructionInProgress = false;
-            if (!heldItemCode.StartsWith("game:stone-") || heldItem.StackSize < (rimStoneAmount * intMultiplicator)) return;
-            // Creative Mode Check
-            if (player.WorldData.CurrentGameMode != EnumGameMode.Creative) player.InventoryManager.ActiveHotbarSlot.TakeOut(rimStoneAmount* intMultiplicator);
-            string rockType = heldItem.Collectible.Code.Path.Substring(6);
-            var myBe = be as BlockEntityConstructable;
-            if (myBe != null)
-            {
-                myBe.SetVariants(new Dictionary<string, string> {
-            { "state", "1" },
-            { "rock", rockType }
-        });
-            }
-            else
-            {
-                // Fallback: falls BE noch nicht gesetzt ist
-                beh.Variants.Set("state", "1");
-                beh.Variants.Set("rock", rockType);
-                be.MarkDirty(true);
-                world.BlockAccessor.MarkBlockDirty(be.Pos);
-            }
             
+            // Bauzeit zurücksetzten
+            //}
+
         }
+
+
+        private bool RequirementsMet(ItemStack heldItem, int phase, IPlayer byPlayer)
+        {
+            if (!byPlayer.Entity.Controls.CtrlKey) return false;
+            if (phase == 1)
+            {
+                if (!heldItem.Collectible.Code.Path.StartsWith("stone")) return false;
+                if (heldItem.StackSize < (rimStoneAmount * intMultiplicator)) return false;
+                return true;
+            }
+            else if (phase == 2)
+            {
+                if (heldItem.Collectible.Code.Path != "mortar") return false;
+                if (heldItem.StackSize < intMultiplicator) return false;
+                return true;
+            }
+             else if (phase == 3)
+            {
+                var (originBlock, handMaterial, requiredAmount) = GetMaterialInfo(heldItem.Collectible.Code.ToString());
+                if (requiredAmount == 0) return false;
+                if (heldItem.StackSize < requiredAmount) return false;
+                return true;
+            } else return false;
+        }
+
+        private void TryAddRimStones(IWorldAccessor world, IPlayer player, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string heldItemCode)
+        { 
+            
+            string rockType = heldItem.Collectible.Code.Path.Substring(6);
+            if (world.Side == EnumAppSide.Server)
+            {
+                 var myBe = be as BlockEntityConstructable;
+                 if (myBe != null)
+                 {
+                       myBe.SetVariants(new Dictionary<string, string> {
+                                { "state", "1" },
+                                { "rock", rockType }
+                        });
+                 }
+                 else
+                 {
+                            // Fallback: falls BE noch nicht gesetzt ist
+                            beh.Variants.Set("state", "1");
+                            beh.Variants.Set("rock", rockType);
+                            be.MarkDirty(true);
+                 }
+
+                // Creative Mode Check
+                if (player.WorldData.CurrentGameMode != EnumGameMode.Creative)
+                {
+                    var slot = player.InventoryManager.ActiveHotbarSlot;
+                    slot.TakeOut(rimStoneAmount * intMultiplicator);
+                    slot.MarkDirty();
+                }
+            }
+                    
+
+                }
 
 
         private void TryAddMortar(IWorldAccessor world, IPlayer player, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string heldItemCode)
         {
-            constructionInProgress = false;
-            if (heldItemCode != "game:mortar" || heldItem.StackSize < intMultiplicator) return;
 
-            // Creative Mode Check
-            if (player.WorldData.CurrentGameMode != EnumGameMode.Creative) player.InventoryManager.ActiveHotbarSlot.TakeOut(intMultiplicator);
+            if (world.Side == EnumAppSide.Server)
+            {
 
-            var myBe = be as BlockEntityConstructable;
-            if (myBe != null)
-            {
-                myBe.SetVariant("state", "2");
-            }
-            else
-            {
-                beh.Variants.Set("state", "2");
-                be.MarkDirty(true);
-                world.BlockAccessor.MarkBlockDirty(be.Pos);
+                var myBe = be as BlockEntityConstructable;
+                if (myBe != null)
+                {
+                    myBe.SetVariant("state", "2");
+                }
+                else
+                {
+                    beh.Variants.Set("state", "2");
+                    be.MarkDirty(true);
+                }
+                // Creative Mode Check
+                if (player.WorldData.CurrentGameMode != EnumGameMode.Creative)
+                {
+                    var slot = player.InventoryManager.ActiveHotbarSlot;
+                    slot.TakeOut(intMultiplicator);
+                    slot.MarkDirty();
+                }
             }
         }
         private void TryCompleteArch(IWorldAccessor world, IPlayer player, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string heldItemCode)
         {
-            constructionInProgress = false;
 
             // Baumaterial
             var (originBlock, handMaterial, requiredAmount) = GetMaterialInfo(heldItemCode);
-            if (heldItem.StackSize < requiredAmount) return;
-            
-                // Block
-                if (originBlock == null) return;
+            // Block
+            if (originBlock == null) return;
 
-                var block = player.CurrentBlockSelection.Block;
-                if (block == null) return;
-                string orientation = block.Variant.TryGetValue("side");
+            var block = player.CurrentBlockSelection.Block;
+            if (block == null) return;
+            if (block.Code.PathStartsWith("game:multiblock")) return;
+            string orientation = block.Variant.TryGetValue("side");
 
-                // Varianten lesen
-                var oldAttr = beh.Variants.Clone();
-                oldAttr.FindByVariant(styleCodeByType, out string style);
-                oldAttr.FindByVariant(rockCodeByType, out string rock);
+            // Varianten lesen
+            var oldAttr = beh.Variants.Clone();
+            oldAttr.FindByVariant(styleCodeByType, out string style);
+            oldAttr.FindByVariant(rockCodeByType, out string rock);
 
-                // Neuer Block
-                var newBlock = world.GetBlock(new AssetLocation(blockCodeBaseString + "-" + orientation));
-                if (newBlock == null) return;
-
+            // Neuer Block
+            var newBlock = world.GetBlock(new AssetLocation(blockCodeBaseString + "-" + orientation));
+            if (newBlock == null) return;
+            if (world.Side == EnumAppSide.Server)
+            {
+     
                 // Setzen und Attribute übertragen
                 BlockPos newBlockPos = player.CurrentBlockSelection.Position.Copy();
                 world.BlockAccessor.SetBlock(newBlock.BlockId, newBlockPos);
+                world.BlockAccessor.MarkBlockDirty(newBlockPos);
                 world.BlockAccessor.TriggerNeighbourBlockUpdate(newBlockPos);
-                
+
                 // Itemstack drop thanks to Dana
                 ItemStack stack = new ItemStack();
                 switch (blockCodeBaseString)
@@ -233,6 +307,9 @@ namespace MedievalArchitecture
                         break;
                     case "confession:arch2x2":
                         stack = new ItemStack(world.GetBlock(new AssetLocation("confession:construction_medium2x2-north")));
+                        break;
+                    case "confession:arch2x1":
+                        stack = new ItemStack(world.GetBlock(new AssetLocation("confession:construction_medium2x1-north")));
                         break;
                 }
                 if (stack != null && world.Side == EnumAppSide.Server)
@@ -250,7 +327,6 @@ namespace MedievalArchitecture
                 }
 
 
-
                 // Callback um auf Blockentity zu warten
                 world.RegisterCallback(dt =>
                 {
@@ -258,7 +334,12 @@ namespace MedievalArchitecture
                     var newBeh = newBe?.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
                     if (newBeh == null) return;
 
-                    if (player.WorldData.CurrentGameMode != EnumGameMode.Creative) player.InventoryManager.ActiveHotbarSlot.TakeOut(requiredAmount);
+                    if (player.WorldData.CurrentGameMode != EnumGameMode.Creative)
+                    {
+                        var slot = player.InventoryManager.ActiveHotbarSlot;
+                        slot.TakeOut(requiredAmount);
+                        slot.MarkDirty();
+                    }
 
                     var newMyBe = newBe as BlockEntityConstructable;
 
@@ -278,13 +359,15 @@ namespace MedievalArchitecture
                         newBeh.Variants.Set("originblock", originBlock);
                         newBeh.Variants.Set("glass", "none");
                         newBe.MarkDirty(true);
-                        world.BlockAccessor.MarkBlockDirty(newBe.Pos);
 
 
                     }
 
 
-                }, 0);
+                }, 100);
+                
+            }
+            
 
         }
 

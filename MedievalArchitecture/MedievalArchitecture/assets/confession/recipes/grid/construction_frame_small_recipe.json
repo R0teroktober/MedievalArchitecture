@@ -46,10 +46,10 @@
         }
     },
     {
-        "ingredientPattern": "_BP,BNB,B_B",
+        "ingredientPattern": "PB_,C_C,B_B",
         "ingredients": {
-            "B": { "type": "item", "code": "game:plank-*"},
-            "N": { "type": "item", "code": "game:metalnailsandstrips-*"},
+            "B": { "type": "item", "code": "game:bamboostakes", "quantity": 2},
+            "C": { "type": "item", "code": "game:cattailtops", "quantity": 4},
             "P": { "type": "item", "code": "game:plumbandsquare", "returnedStack": { "type": "item", "code": "game:plumbandsquare"}}
         },
         "width": 3,
@@ -69,10 +69,12 @@
         }
     },
     { 
-        "ingredientPattern": "__P,BBB,BNB",
+        "ingredientPattern": "P_S,RFR,BBB",
         "ingredients": {
             "B": { "type": "item", "code": "game:plank-*"},
-            "N": { "type": "item", "code": "game:metalnailsandstrips-*"},
+            "S": { "type": "item", "code": "game:saw-*", "isTool": true},
+            "R": { "type": "item", "code": "game:rope" },
+            "F": { "type": "block", "code": "game:barrel"},
             "P": { "type": "item", "code": "game:plumbandsquare", "returnedStack": { "type": "item", "code": "game:plumbandsquare"}}
         },
         "width": 3,
