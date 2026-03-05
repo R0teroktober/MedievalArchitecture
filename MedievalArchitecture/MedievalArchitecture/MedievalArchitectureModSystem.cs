@@ -16,6 +16,7 @@ namespace MedievalArchitecture
             api.RegisterBlockBehaviorClass("BlockBehaviorCancelInteraction", typeof(BlockBehaviorCancelInteraction));
             api.RegisterBlockBehaviorClass("BlockBehaviorArchwayFrame", typeof(BlockBehaviorArchwayFrame));
             api.RegisterBlockEntityClass("BlockEntityConstructable", typeof(BlockEntityConstructable));
+            api.RegisterBlockEntityBehaviorClass("BEBehaviorToggleState", typeof(BEBehaviorToggleState));
             Config = api.LoadModConfig<VariantTypesConfig>("variant-types-config.json");
             if (Config == null)
             {

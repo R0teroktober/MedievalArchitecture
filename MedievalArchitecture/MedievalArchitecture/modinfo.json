@@ -4,12 +4,12 @@
     "modid": "medievalarchitecture",
     "name": "MedievalArchitecture",
     "authors": [
-        "Roteroktober", "12Port"
+        "Roteroktober", "12Port", "Craluminum2413 (Dana)"
     ],
-    "description": "Medieval themed architexture mod.",
-    "version": "1.0.1",
+    "description": "Medieval themed architecture mod.",
+    "version": "1.0.2",
     "dependencies": {
-      "game": "1.21.5",
+      "game": "1.21.6",
       "attributerenderinglibrary":  "2.4.0"
     }
 }

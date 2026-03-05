@@ -11,8 +11,16 @@
         "confession:blocktypes/stone/window/archway_tiny_window.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
         "confession:blocktypes/stone/window/archway_half_tiny.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
         "confession:blocktypes/stone/window/archway_half_tiny_window.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
+        "confession:blocktypes/stone/window/archway2x1.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
+        "confession:blocktypes/stone/window/archway2x1_window.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
+        "confession:blocktypes/stone/window/archway2x1_wood.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
+        "confession:blocktypes/stone/window/archway2x2.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
+        "confession:blocktypes/stone/window/archway2x2_window.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
+        "confession:blocktypes/stone/window/archway2x2_wood.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
         "confession:blocktypes/wood/archway/construction_small.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
-        "confession:blocktypes/wood/roof/roof.json": {"enabled": "ENABLE_ROOFS" },
+        "confession:blocktypes/wood/archway/construction_medium2x1.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
+        "confession:blocktypes/wood/archway/construction_medium2x2.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
+        "confession:blocktypes/wood/roof/roof.json": {"disabled": "ENABLE_ROOFS" },
         "confession:blocktypes/glass/window.json": {"enabled": "ENABLE_WINDOWS" },
         "confession:blocktypes/stone/window/windowsill_a.json": {"enabled": "ENABLE_WINDOWSILL" }
         
