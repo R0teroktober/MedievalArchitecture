@@ -112,14 +112,19 @@ namespace MedievalArchitecture
         {
             //if (secondsUsed < 0.5) base.OnBlockInteractStop(secondsUsed, world, byPlayer, blockSel, ref handled); // Bauzeit
             //secondsUsed = 0;
+            
             handled = EnumHandling.PreventDefault;
+            
             // Baumaterial
             if (byPlayer?.InventoryManager?.ActiveHotbarSlot?.Itemstack == null || blockSel == null) return;
             var heldItem = byPlayer.InventoryManager.ActiveHotbarSlot.Itemstack;
-            string heldItemCode = heldItem.Collectible.Code.ToString();
-            // Block
-          
-            var be = world.BlockAccessor?.GetBlockEntity(blockSel.Position);
+             string heldItemCode = heldItem.Collectible.Code.ToString();
+            // Control position wenn dummy Block
+            BlockPos controlPos = ResolveControlPos(world, blockSel);
+            if (controlPos == null) return;
+
+            // BlockEntity
+            var be = world.BlockAccessor?.GetBlockEntity(controlPos);
             if (be == null) return;
             // Blockbehavior
             var beh = be.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
@@ -137,7 +142,7 @@ namespace MedievalArchitecture
                         {
                             try
                             {
-                                world.PlaySoundAt(soundAddStone, byPlayer.CurrentBlockSelection.Position, 1, byPlayer);
+                                world.PlaySoundAt(soundAddStone, controlPos, 1, byPlayer);
                             }
                             catch { }
                         }
@@ -153,7 +158,7 @@ namespace MedievalArchitecture
                         {
                             try
                             {
-                                world.PlaySoundAt(soundAddMortar, byPlayer.CurrentBlockSelection.Position, 1, byPlayer);
+                                world.PlaySoundAt(soundAddMortar, controlPos, 1, byPlayer);
                             }
                             catch { }
                         }
@@ -168,11 +173,11 @@ namespace MedievalArchitecture
                         {
                             try
                             {
-                                world.PlaySoundAt(finishSound, byPlayer.CurrentBlockSelection.Position, 1, byPlayer);
+                                world.PlaySoundAt(finishSound, controlPos, 1, byPlayer);
                             }
                             catch { }
                         }
-                        TryCompleteArch(world, byPlayer, beh, heldItem, heldItemCode);
+                        TryCompleteArch(world, byPlayer, beh, heldItem, heldItemCode, controlPos);
                     }
                     break;
 
@@ -268,7 +273,7 @@ namespace MedievalArchitecture
                 }
             }
         }
-        private void TryCompleteArch(IWorldAccessor world, IPlayer player, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string heldItemCode)
+        private void TryCompleteArch(IWorldAccessor world, IPlayer player, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string heldItemCode, BlockPos controlPos)
         {
 
             // Baumaterial
@@ -276,9 +281,8 @@ namespace MedievalArchitecture
             // Block
             if (originBlock == null) return;
 
-            var block = player.CurrentBlockSelection.Block;
+            var block = world.BlockAccessor.GetBlock(controlPos);
             if (block == null) return;
-            if (block.Code.PathStartsWith("game:multiblock")) return;
             string orientation = block.Variant.TryGetValue("side");
 
             // Varianten lesen
@@ -293,7 +297,7 @@ namespace MedievalArchitecture
             {
      
                 // Setzen und Attribute übertragen
-                BlockPos newBlockPos = player.CurrentBlockSelection.Position.Copy();
+                BlockPos newBlockPos = controlPos.Copy();
                 world.BlockAccessor.SetBlock(newBlock.BlockId, newBlockPos);
                 world.BlockAccessor.MarkBlockDirty(newBlockPos);
                 world.BlockAccessor.TriggerNeighbourBlockUpdate(newBlockPos);
@@ -398,7 +402,11 @@ namespace MedievalArchitecture
             var be = world.BlockAccessor?.GetBlockEntity(selection.Position);
             var beh = be?.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
 
-            // 2) Attribut prüfen
+            // 2) Itemstack
+            ItemStack displayStack;
+            int amount = 0;
+
+            // 3) Attribut prüfen
             if (beh == null) return base.GetPlacedBlockInteractionHelp(world, selection, forPlayer, ref handling);
 
 
@@ -410,21 +418,23 @@ namespace MedievalArchitecture
                     case "0":
                         if (forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Item?.Code.Path.StartsWith("stone-") == true)
                         {
-                           
-                            return [new WorldInteraction(){ActionLangCode = "confession:block-interaction-add-rimStones",MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl" }];
+                            amount = rimStoneAmount * intMultiplicator;
+                            displayStack = GetRequiredDisplayStack(forPlayer, amount);
+                            return [new WorldInteraction(){ActionLangCode = "confession:block-interaction-add-rimStones",MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl", Itemstacks = displayStack == null ? null : new[] { displayStack } }];
                         }
                         break;
                         
                     case "1":
                         if (forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack.Item?.Code.Path == "mortar")
                         {
-                            return [new WorldInteraction() { ActionLangCode = "confession:block-interaction-add-mortar", MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl" }];
+                            amount = intMultiplicator;
+                            displayStack = GetRequiredDisplayStack(forPlayer, amount);
+                            return [new WorldInteraction() { ActionLangCode = "confession:block-interaction-add-mortar", MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl", Itemstacks = displayStack == null ? null : new[] { displayStack } }];
                         }
                         break;
                       
                     case "2":
-                       
-                        return [new WorldInteraction() { ActionLangCode = "confession:block-interaction-add-block", MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl" }];
+                        return [new WorldInteraction() { ActionLangCode = "confession:block-interaction-add-block", MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl"}];
                 }
                 
                 // 4) sonst keine Hilfe anzeigen
@@ -432,6 +442,35 @@ namespace MedievalArchitecture
             }
             return base.GetPlacedBlockInteractionHelp(world, selection, forPlayer, ref handling);
 
+        }
+        private BlockPos ResolveControlPos(IWorldAccessor world, BlockSelection blockSel)
+        {
+            if (blockSel == null) return null;
+
+            BlockPos pos = blockSel.Position.Copy();
+            Block dummyBlock = world.BlockAccessor.GetBlock(pos);
+
+            IMultiblockOffset mbo =
+                dummyBlock as IMultiblockOffset
+                ?? dummyBlock?.GetInterface<IMultiblockOffset>(world, pos);
+
+            if (mbo != null)
+            {
+                pos = mbo.GetControlBlockPos(pos);
+            }
+
+            return pos;
+        }
+        private ItemStack GetRequiredDisplayStack(IPlayer forPlayer, int amount)
+        {
+            var heldStack = forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack;
+            if (heldStack == null) return null;
+
+            if (amount <= 0) return null;
+
+            ItemStack displayStack = heldStack.Clone();
+            displayStack.StackSize = amount;
+            return displayStack;
         }
 
 

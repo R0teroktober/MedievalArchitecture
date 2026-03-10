@@ -23,7 +23,6 @@ namespace MedievalArchitecture
         private string blockCodeWithLintel;
         private int glassSize;
         private int lintelSize;
-        private int requiredAmount = 0;
         public Dictionary<string, string> glassCodeByType = new();
         public Dictionary<string, string> woodCodeByType = new();
         public Dictionary<string, string> stateCodeByType = new();
@@ -116,8 +115,12 @@ namespace MedievalArchitecture
                     var heldItem = byPlayer.InventoryManager.ActiveHotbarSlot.Itemstack;
                     string heldItemCode = heldItem.Collectible.Code.ToString();
 
-                    // Block
-                    var be = world.BlockAccessor?.GetBlockEntity(blockSel.Position);
+            // Control position wenn dummy Block
+            BlockPos controlPos = ResolveControlPos(world, blockSel);
+            if (controlPos == null) return;
+
+            // Block
+            var be = world.BlockAccessor?.GetBlockEntity(controlPos);
                     if (be == null) return;
                     // Blockbehavior
                     var beh = be.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
@@ -126,9 +129,8 @@ namespace MedievalArchitecture
                     oldVariants.FindByVariant(styleCodeByType, out string style);
                     oldVariants.FindByVariant(rockCodeByType, out string rock);
                     oldVariants.FindByVariant(originblockCodeByType, out string originblock);
-                    var block = byPlayer.CurrentBlockSelection.Block;
+                    var block = world.BlockAccessor.GetBlock(controlPos);
                     if (block == null) return;
-            if (block.Code.FirstCodePart() == "multiblock") return;
            
                     string orientation = block.Variant.TryGetValue("side");
 
@@ -139,52 +141,48 @@ namespace MedievalArchitecture
                         if (heldItemCode.StartsWith("game:plank-") && blockCodeWithLintel != null)
                         {
                             if (heldItem.StackSize < lintelSize) return;
-                            TryAddPlanks(world, byPlayer, be, beh, heldItem, orientation, style, rock, originblock, lintelSize);
+                            TryAddPlanks(world, byPlayer, be, beh, heldItem, orientation, style, rock, originblock, controlPos, lintelSize);
                         }
-                        else if (heldItemCode.StartsWith("confession:window-") && blockCodeWithGlass != null)
+                        else if (heldItemCode.StartsWith("confession:window-") && blockCodeWithGlass != null || heldItemCode.StartsWith("game:glasspane-") && blockCodeWithGlass != null)
                         {
                             if (heldItem.StackSize < glassSize) return;
-                            TryAddGlass(world, byPlayer, be, beh, heldItem, orientation, style, rock, originblock, glassSize);
+                            TryAddGlass(world, byPlayer, be, beh, heldItem, orientation, style, rock, originblock, controlPos, glassSize);
                         }
                     }
                     else
                     {
                         if (heldItemCode.StartsWith("game:rock-"))
                         {
-                            originblock = "rock";
-                            requiredAmount = 1 * glassSize;
-                            if (heldItem.StackSize < requiredAmount) return;
-                            TryComplete(world, byPlayer, be, beh, heldItem, orientation, style, rock, originblock, requiredAmount);
+          
+                            if (heldItem.StackSize <  glassSize) return;
+                            TryComplete(world, byPlayer, blockSel, be, beh, heldItem, orientation, style, rock, originblock, controlPos, glassSize);
                         }
 
                         if (heldItemCode.StartsWith("game:cobblestone-"))
                         {
                             originblock = "cobblestone";
-                            requiredAmount = 1 * glassSize;
-                            if (heldItem.StackSize < requiredAmount) return;
-                            TryComplete(world, byPlayer, be, beh, heldItem, orientation, style, rock, originblock, requiredAmount);
+                            if (heldItem.StackSize < glassSize) return;
+                            TryComplete(world, byPlayer, blockSel, be, beh, heldItem, orientation, style, rock, originblock, controlPos, glassSize);
                         }
 
                         if (heldItemCode.StartsWith("game:stonebricks-"))
                         {
                             originblock = "brick";
-                            requiredAmount = 1 * glassSize;
-                            if (heldItem.StackSize < requiredAmount) return;
-                            TryComplete(world, byPlayer, be, beh, heldItem, orientation, style, rock, originblock, requiredAmount);
+                            if (heldItem.StackSize < glassSize) return;
+                            TryComplete(world, byPlayer, blockSel, be, beh, heldItem, orientation, style, rock, originblock, controlPos, glassSize);
                         }
                         if (heldItemCode.StartsWith("game:plaster-"))
                         {
                             originblock = "plaster";
-                            requiredAmount = 1 * glassSize;
-                            if (heldItem.StackSize < requiredAmount) return;
-                            TryComplete(world, byPlayer, be, beh, heldItem, orientation, style, rock, originblock, requiredAmount);
+                            if (heldItem.StackSize < glassSize) return;
+                            TryComplete(world, byPlayer, blockSel, be, beh, heldItem, orientation, style, rock, originblock, controlPos, glassSize);
                         }
                         if (heldItemCode.StartsWith("game:daubraw-"))
                         {
                             originblock = heldItemCode.Substring(13);
-                            requiredAmount = 4 * glassSize;
-                            if (heldItem.StackSize < requiredAmount) return;
-                            TryComplete(world, byPlayer, be, beh, heldItem, orientation, style, rock, originblock, requiredAmount);
+                            var newGlassSize = 4 * glassSize;
+                            if (heldItem.StackSize < newGlassSize) return;
+                            TryComplete(world, byPlayer, blockSel, be, beh, heldItem, orientation, style, rock, originblock, controlPos, newGlassSize);
                         }
                     
             }
@@ -194,7 +192,7 @@ namespace MedievalArchitecture
         }
 
 
-        private void TryAddPlanks(IWorldAccessor world, IPlayer player, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string orientation, string style, string rock, string originblock, int lintelSize)
+        private void TryAddPlanks(IWorldAccessor world, IPlayer player, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string orientation, string style, string rock, string originblock, BlockPos controlPos, int lintelSize)
         {
             // Item
             string heldItemCode = heldItem.Collectible.Code.ToString();
@@ -203,7 +201,7 @@ namespace MedievalArchitecture
             {
                 try
                 {
-                    world.PlaySoundAt(soundAddWood, player.CurrentBlockSelection.Position, 0.5, player);
+                    world.PlaySoundAt(soundAddWood, controlPos, 0.5, player);
                 }
                 catch { }
             }
@@ -213,7 +211,7 @@ namespace MedievalArchitecture
             {
 
                 // Setzen und Attribute übertragen
-                BlockPos newBlockPos = player.CurrentBlockSelection.Position.Copy();
+                BlockPos newBlockPos = controlPos.Copy();
 
                 world.BlockAccessor.SetBlock(newBlock.BlockId, newBlockPos);
                 world.BlockAccessor.MarkBlockDirty(newBlockPos);
@@ -257,18 +255,19 @@ namespace MedievalArchitecture
             
 
         }
-        private void TryAddGlass(IWorldAccessor world, IPlayer player, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string orientation, string style, string rock, string originblock, int glassSize)
+        private void TryAddGlass(IWorldAccessor world, IPlayer player, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string orientation, string style, string rock, string originblock,BlockPos controlPos, int glassSize)
         {
             // Item
             var glassVariants = Variants.FromStack(heldItem);
             glassVariants.FindByVariant(glassCodeByType, out string glass);
+            if (glass == null) glass = "plain";
 
             
             
             if (world.Side == EnumAppSide.Client)
             {
 
-                world.PlaySoundAt(soundAddGlass, player.CurrentBlockSelection.Position, 0.5, player);
+                world.PlaySoundAt(soundAddGlass, controlPos, 0.5, player);
 
             }
             // Neuer Block
@@ -280,7 +279,7 @@ namespace MedievalArchitecture
 
 
                 // Setzen und Attribute übertragen
-                BlockPos newBlockPos = player.CurrentBlockSelection.Position.Copy();
+                BlockPos newBlockPos = controlPos.Copy();
                 world.BlockAccessor.SetBlock(newBlock.BlockId, newBlockPos);
                 world.BlockAccessor.MarkBlockDirty(newBlockPos);
                 world.BlockAccessor.TriggerNeighbourBlockUpdate(newBlockPos);
@@ -326,13 +325,13 @@ namespace MedievalArchitecture
 
 
         }
-        private void TryComplete(IWorldAccessor world, IPlayer player, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string orientation, string style, string rock, string originblock, int requiredAmount)
+        private void TryComplete(IWorldAccessor world, IPlayer player, BlockSelection blockSel, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string orientation, string style, string rock, string originblock, BlockPos controlPos, int requiredAmount)
         {
             if (world.Side == EnumAppSide.Client)
             {
                 try
                 {
-                    world.PlaySoundAt(finishSound, player.CurrentBlockSelection.Position, 0.5, player);
+                    world.PlaySoundAt(finishSound, controlPos, 0.5, player);
                 }
                 catch { }
             }
@@ -366,7 +365,10 @@ namespace MedievalArchitecture
             // 1) Auf den Block zugreifen
             var be = world.BlockAccessor?.GetBlockEntity(selection.Position);
             var beh = be?.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
-            // 2) Attribut prüfen
+            // 2) Itemstack 
+            ItemStack displayStack;
+            int amount = 0;
+            // 3) Attribut prüfen
             if (beh is null) return base.GetPlacedBlockInteractionHelp(world, selection, forPlayer, ref handling); // 4) sonst keine Hilfe anzeigen
 
                 beh.Variants.FindByVariant(originblockCodeByType, out string originblock);
@@ -375,17 +377,53 @@ namespace MedievalArchitecture
 
                 if (forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Collectible?.Code?.PathStartsWith("window-") == true && originblock != "none" && blockCodeWithGlass != null)
                 {
-                    return [new WorldInteraction() { ActionLangCode = "confession:block-interaction-add-glass", MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl" }];
+                    amount = glassSize;
+                    displayStack = GetRequiredDisplayStack(forPlayer, amount);
+                    return [new WorldInteraction() { ActionLangCode = "confession:block-interaction-add-glass", MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl", Itemstacks = displayStack == null ? null : new[] { displayStack } }];
+                }
+                else if (forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Collectible?.Code?.PathStartsWith("glasspane-") == true && originblock != "none" && blockCodeWithGlass != null)
+                {
+                    amount = glassSize; ;
+                    displayStack = GetRequiredDisplayStack(forPlayer, amount);
+                    return [new WorldInteraction() { ActionLangCode = "confession:block-interaction-add-glass", MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl", Itemstacks = displayStack == null ? null : new[] { displayStack } }];
                 }
                 else if (forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Collectible?.Code?.PathStartsWith("plank-") == true && originblock != "none" && blockCodeWithLintel != null)
                 {
-                    return [new WorldInteraction() { ActionLangCode = "confession:block-interaction-add-plank", MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl" }];
+                    amount = glassSize;
+                    displayStack = GetRequiredDisplayStack(forPlayer, amount);
+                    return [new WorldInteraction() { ActionLangCode = "confession:block-interaction-add-plank", MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl", Itemstacks = displayStack == null ? null : new[] { displayStack } }];
                 }
-                else if (originblock == "none") 
-                {
-                    return [new WorldInteraction() { ActionLangCode = "confession:block-interaction-add-block", MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl" }];
-                } else return base.GetPlacedBlockInteractionHelp(world, selection, forPlayer, ref handling); // 4) sonst keine Hilfe anzeigen
+                else { return base.GetPlacedBlockInteractionHelp(world, selection, forPlayer, ref handling); } 
 
+        }
+        private BlockPos ResolveControlPos(IWorldAccessor world, BlockSelection blockSel)
+        {
+            if (blockSel == null) return null;
+
+            BlockPos pos = blockSel.Position.Copy();
+            Block dummyBlock = world.BlockAccessor.GetBlock(pos);
+
+            IMultiblockOffset mbo =
+                dummyBlock as IMultiblockOffset
+                ?? dummyBlock?.GetInterface<IMultiblockOffset>(world, pos);
+
+            if (mbo != null)
+            {
+                pos = mbo.GetControlBlockPos(pos);
+            }
+
+            return pos;
+        }
+        private ItemStack GetRequiredDisplayStack(IPlayer forPlayer, int amount)
+        {
+            var heldStack = forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack;
+            if (heldStack == null) return null;
+
+            if (amount <= 0) return null;
+
+            ItemStack displayStack = heldStack.Clone();
+            displayStack.StackSize = amount;
+            return displayStack;
         }
     }
     
