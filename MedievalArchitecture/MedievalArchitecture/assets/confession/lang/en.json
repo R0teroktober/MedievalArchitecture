@@ -124,10 +124,10 @@
 
 
   // windows
-  "confession:archway-addglass-help-title": "How to obtain variant with glass",
-  "confession:archway-addglass-help-text": "You can insert a glass pane by holding the glass in your right hand and interacting with an empty archway. Currently vanilla glass panes does not work! Use the modded ones please",
-  "confession:archway-addwood-help-title": "How to obtain variant with door lintel",
-  "confession:archway-addwood-help-text": "You can cover the area with wood to create a lintel. To do this, hold a plank in your right hand and interact with an empty archway",
+  "confession:archway-addglass-help-title": "How to create a window",
+  "confession:archway-addglass-help-text": "After you finished the archway you can insert a glass pane by holding the glass in your right hand and interacting with an empty archway.",
+  "confession:archway-addwood-help-title": "How to create a gate",
+  "confession:archway-addwood-help-text": "To close off the finished archway with a door or a gate, you need a normal door and some boards. Interact with the archway while holding boards of any type of wood in your hand. This will give the archway a lintel. Together with the door, you will then have a perfect closure. ",
   "confession:block-windowsill-name": " windowsill",
 
   "confession:block-window-*": "Window (Placeholder)",
@@ -140,14 +140,17 @@
   "confession:block-window-description1": "<font color=\"#D6B56D\">Glass: </font>", "confession:block-window-description2": "<br><font color=\"#D6B56D\">Shape: </font>",
   // trapdoors
 
-  "confession:blockhelp-trapdoor-openclose": "Open/Close tradoor",
+  "confession:block-trapdoor_small-*": "Trapdoor",
+  "confession:block-trapdoor_small_sloped-*": "Slanted trapdoor",
 
 
   // configs
   "confession:setting-enable-small-archways": "Enable small archways",
   "confession:setting-enable-roof": "Enable roofs",
   "confession:setting-enable-windows": "Enable windows",
+  "confession:setting-enable-windowsill": "Enable windowsill",
+  "confession:setting-enable-trapdoors": "Enable trapdoors"
 
-  // configs 1.0.2
-   "confession:setting-enable-windowsill": "Enable windowsill"
+
+
 }

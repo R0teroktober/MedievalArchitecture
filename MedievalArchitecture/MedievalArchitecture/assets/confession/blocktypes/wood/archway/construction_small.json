@@ -15,7 +15,7 @@
 	"attributes": {
 		"handbook": {"groupBy": [ "construction_small-*" ],
 								"excludeByType": {"west": true, "east": true, "south": true},
-								"extraSections": [{"title": "confession:construction-drop-help-title", "text": "confession:construction-drop-help-text"}]
+								"extraSections": [{"title": "confession:construction-drop-help-title", "text": "confession:construction-drop-help-text"},{"title": "confession:archway-addglass-help-title", "text": "confession:archway-addglass-help-text"},{"title": "confession:archway-addwood-help-title", "text": "confession:archway-addwood-help-text"}]
 		} 
 	},
 	"entityBehaviors": [ { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" } ],
