@@ -9,7 +9,7 @@
     "description": "Medieval themed architecture mod.",
     "version": "1.0.2",
     "dependencies": {
-      "game": "1.21.6",
-      "attributerenderinglibrary":  "2.4.0"
+      "game": "1.22.0-pre.1",
+      "attributerenderinglibrary":  "3.0.0-pre.3"
     }
 }

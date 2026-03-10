@@ -1,6 +1,6 @@
 {
 	"enabled": true,
-	"code": "trapdoor_small",
+	"code": "trapdoor_small_sloped",
 	"maxStackSize": 64,
 	"blockmaterial": "Wood",
 	"resistance": 1,
@@ -25,24 +25,24 @@
 		"height": 0,
 		"openSound": "game:sounds/block/door",
 		"closeSound": "game:sounds/block/door",
-		"easingSpeed": 10,
 		"openedCollisionBoxes": [
-			[0, 0, 0, 1, 0.2, 0.1],
-			[0, 0, 0.9, 1.0, 0.2, 1.0]
+			[0, 0, 0, 1, 0.8, 0.1],
+			[0, 0, 0.9, 1.0, 0.8, 1.0],
+			[0.9, 0, 0.1, 1, 0.5, 0.9]
 			]
 	},
 	"behaviors": [
 		{ "name": "Lockable" },
 		{ "name": "DoubleTrapDoor" }
 	],
-	"shape": { "base": "block/wood/trapdoor/trapdoor-small" },
+	"shape": { "base": "block/wood/trapdoor/trapdoor-small-sloped" },
 	"textures": { 
     "materialplanks": { "base": "game:block/wood/planks/{wood}1"},
     "material": { "base": "game:block/wood/debarked/{wood}"},
     "generic": { "base": "game:block/wood/planks/generic"},
     "metal": { "base": "game:block/metal/sheet-plain/iron1"}
 	},
-	"collisionBoxes": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.2, "z2": 1 }],
+	"collisionBoxes": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.5, "z2": 1 }],
 	"creativeinventory": { "confession": ["*"]}
 
 }
