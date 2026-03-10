@@ -37,12 +37,13 @@
 	],
 	"shape": { "base": "block/wood/trapdoor/trapdoor-small" },
 	"textures": { 
-    "materialplanks": { "base": "game:block/wood/planks/{wood}1"},
-    "material": { "base": "game:block/wood/debarked/{wood}"},
-    "generic": { "base": "game:block/wood/planks/generic"},
-    "metal": { "base": "game:block/metal/sheet-plain/iron1"}
+		"materialplanks": { "base": "game:block/wood/planks/{wood}1"},
+		"material": { "base": "game:block/wood/debarked/{wood}"},
+		"generic": { "base": "game:block/wood/planks/generic"},
+		"metal": { "base": "game:block/metal/sheet-plain/iron1"}
 	},
 	"collisionBoxes": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.2, "z2": 1 }],
+	"guiTransform": {"origin": { x: 0.5, y: 0.2, z: 0.5 }},
 	"creativeinventory": { "confession": ["*"]}
 
 }
