@@ -22,7 +22,9 @@
         "confession:blocktypes/wood/archway/construction_medium2x2.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
         "confession:blocktypes/wood/roof/roof.json": {"disabled": "ENABLE_ROOFS" },
         "confession:blocktypes/glass/window.json": {"enabled": "ENABLE_WINDOWS" },
-        "confession:blocktypes/stone/window/windowsill_a.json": {"enabled": "ENABLE_WINDOWSILL" }
+        "confession:blocktypes/stone/window/windowsill_a.json": {"enabled": "ENABLE_WINDOWSILL" },
+        "confession:blocktypes/wood/trapdoor/trapdoor_small.json": {"enabled": "ENABLE_TRAPDOORS" },
+        "confession:blocktypes/wood/trapdoor/trapdoor_small_sloped.json": {"enabled": "ENABLE_TRAPDOORS" },
         
       }, 
       "other": {}
@@ -57,6 +59,13 @@
         "ingui": "confession:setting-enable-windowsill",
         "weight": 2.4,
         "comment": "Enable/ Disable windowsills",
+        "default": true
+      },
+      "ENABLE_WINDOWSILL": {
+        "name": "enable-trapdoors",
+        "ingui": "confession:setting-enable-trapdoors",
+        "weight": 2.5,
+        "comment": "Enable/ Disable trapdoors",
         "default": true
       }
     },
