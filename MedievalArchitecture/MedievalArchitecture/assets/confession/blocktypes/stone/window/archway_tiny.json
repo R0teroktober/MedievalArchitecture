@@ -18,9 +18,7 @@
 	"class": "BlockGeneric",
 	"entityClass": "BlockEntityConstructable",
 	"variantgroups": [{"code": "side","loadFromProperties": "abstract/horizontalorientation"}],
-	"attributes": {"handbook": {"groupBy": [ "arch_tiny-*" ],"excludeByType": {"west": true,"east": true,"south": true},"extraSections": [
-                { "title": "confession:archway-addglass-help-title", "text": "confession:archway-addglass-help-text" }
-            ]}},
+	"attributes": {"handbook": {"groupBy": [ "arch_tiny-*" ],"excludeByType": {"west": true,"east": true,"south": true},"extraSections": [{"title": "confession:window-build-help-title", "text": "confession:window-build-help-text"},{ "title": "confession:archway-addglass-help-title", "text": "confession:archway-addglass-help-text" }]}},
 	"entityBehaviors": [ { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" } ],
 	"behaviors": [
 		{"name": "BlockBehaviorArchway", "properties": { "blockCodeWithGlass": "confession:arch_tiny_window", "glassSize": 1}},
@@ -126,7 +124,7 @@
 	"creativeinventoryStacksByType": {
 			"*-north": [
 				{
-					"tabs": ["confession" ],
+					"tabs": ["confession", "construction", "general" ],
 					"stacks": [
 					
 						// type a rock

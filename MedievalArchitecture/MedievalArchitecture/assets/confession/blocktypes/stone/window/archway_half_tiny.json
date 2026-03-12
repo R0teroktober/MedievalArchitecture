@@ -17,13 +17,7 @@
 		"handbook": {
 			"groupBy": [ "arch_half_tiny-*" ],
 			"excludeByType": {"west": true,"east": true,"south": true},
-			"extraSections": [
-                { "title": "confession:archway-addglass-help-title", "text": "confession:archway-addglass-help-text" }
-            ]
-	    },
-			"rimStoneAmount": 5
-
-	},
+			"extraSections": [{"title": "confession:window-build-help-title", "text": "confession:window-build-help-text"},{ "title": "confession:archway-addglass-help-title", "text": "confession:archway-addglass-help-text" }]}},
 	"entityBehaviors": [ { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" } ],
 	"behaviors": [
 		{"name": "BlockBehaviorArchway", "properties": { "blockCodeWithGlass": "confession:arch_half_tiny_window", "glassSize": 1}},
@@ -132,7 +126,7 @@
 	"creativeinventoryStacksByType": {
 			"*-north": [
 				{
-					"tabs": ["confession" ],
+					"tabs": ["confession", "construction", "general" ],
 					"stacks": [
 					
 						// type e rock				

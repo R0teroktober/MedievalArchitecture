@@ -66,7 +66,7 @@
 	"creativeinventoryStacksByType": {
 			"*-ns": [
 				{
-					"tabs": ["confession" ],
+					"tabs": ["confession", "construction", "general" ],
 					"stacks": [ 
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "rock", "rock":  "andesite"} } },
 					{ "type": "block", "code": "windowsill_a-ns", "attributes": { "types": {"originblock":  "rock", "rock":  "basalt"} } },
