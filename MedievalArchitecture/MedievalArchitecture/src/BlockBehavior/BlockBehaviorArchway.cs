@@ -155,6 +155,7 @@ namespace MedievalArchitecture
                         {
           
                             if (heldItem.StackSize <  glassSize) return;
+                            originblock = "rock";
                             TryComplete(world, byPlayer, blockSel, be, beh, heldItem, orientation, style, rock, originblock, controlPos, glassSize);
                         }
 
@@ -177,12 +178,14 @@ namespace MedievalArchitecture
                             if (heldItem.StackSize < glassSize) return;
                             TryComplete(world, byPlayer, blockSel, be, beh, heldItem, orientation, style, rock, originblock, controlPos, glassSize);
                         }
-                        if (heldItemCode.StartsWith("game:daubraw-"))
+                        if (heldItemCode.StartsWith("game:daub-"))
                         {
-                            originblock = heldItemCode.Substring(13);
-                            var newGlassSize = 4 * glassSize;
-                            if (heldItem.StackSize < newGlassSize) return;
-                            TryComplete(world, byPlayer, blockSel, be, beh, heldItem, orientation, style, rock, originblock, controlPos, newGlassSize);
+  
+                            var daubString = heldItemCode.Substring(10);
+                            var i = daubString.Length;
+                            originblock = daubString.Remove((i - 7), 7);
+                            if (heldItem.StackSize < glassSize) return;
+                            TryComplete(world, byPlayer, blockSel, be, beh, heldItem, orientation, style, rock, originblock, controlPos, glassSize);
                         }
                     
             }
@@ -337,7 +340,7 @@ namespace MedievalArchitecture
             }
             // Item
             string heldItemCode = heldItem.Collectible.Code.ToString();
-            string originblockType = heldItemCode.Substring(11);
+            string originblockType = heldItemCode.Substring(10);
             if (world.Side == EnumAppSide.Server) {
                 var myBe = be as BlockEntityConstructable;
                 if (myBe != null)
@@ -374,23 +377,29 @@ namespace MedievalArchitecture
                 beh.Variants.FindByVariant(originblockCodeByType, out string originblock);
                 beh.Variants.FindByVariant(rockCodeByType, out string rock);
 
-
-                if (forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Collectible?.Code?.PathStartsWith("window-") == true && originblock != "none" && blockCodeWithGlass != null)
+                if (originblock == "none")
                 {
-                    amount = glassSize;
-                    displayStack = GetRequiredDisplayStack(forPlayer, amount);
+                    if (forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Block?.Code.Path.StartsWith("cobblestone") == true ||forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Block?.Code.Path.StartsWith("rock") == true ||forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Block?.Code.Path.StartsWith("stonebricks") == true ||forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Block?.Code.Path.StartsWith("plaster") == true ||forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Block?.Code.Path.StartsWith("daub") == true)
+                    {
+                        displayStack = GetRequiredDisplayStack(forPlayer, glassSize);
+                        return [new WorldInteraction() { ActionLangCode = "confession:block-interaction-add-block", MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl", Itemstacks = displayStack == null ? null : new[] { displayStack } }];
+                    } else return base.GetPlacedBlockInteractionHelp(world, selection, forPlayer, ref handling);
+               
+
+                }
+                else if (forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Collectible?.Code?.PathStartsWith("window-") == true && originblock != "none" && blockCodeWithGlass != null)
+                {
+                    displayStack = GetRequiredDisplayStack(forPlayer, glassSize);
                     return [new WorldInteraction() { ActionLangCode = "confession:block-interaction-add-glass", MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl", Itemstacks = displayStack == null ? null : new[] { displayStack } }];
                 }
                 else if (forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Collectible?.Code?.PathStartsWith("glasspane-") == true && originblock != "none" && blockCodeWithGlass != null)
                 {
-                    amount = glassSize; ;
-                    displayStack = GetRequiredDisplayStack(forPlayer, amount);
+                    displayStack = GetRequiredDisplayStack(forPlayer, glassSize);
                     return [new WorldInteraction() { ActionLangCode = "confession:block-interaction-add-glass", MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl", Itemstacks = displayStack == null ? null : new[] { displayStack } }];
                 }
                 else if (forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Collectible?.Code?.PathStartsWith("plank-") == true && originblock != "none" && blockCodeWithLintel != null)
                 {
-                    amount = glassSize;
-                    displayStack = GetRequiredDisplayStack(forPlayer, amount);
+                    displayStack = GetRequiredDisplayStack(forPlayer, glassSize);
                     return [new WorldInteraction() { ActionLangCode = "confession:block-interaction-add-plank", MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl", Itemstacks = displayStack == null ? null : new[] { displayStack } }];
                 }
                 else { return base.GetPlacedBlockInteractionHelp(world, selection, forPlayer, ref handling); } 

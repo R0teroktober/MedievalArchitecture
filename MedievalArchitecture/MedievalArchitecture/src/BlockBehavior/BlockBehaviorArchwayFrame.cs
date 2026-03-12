@@ -389,8 +389,15 @@ namespace MedievalArchitecture
                 return ("brick", itemCode.Substring(17), intMultiplicator);
             if (itemCode.StartsWith("game:plaster-"))
                 return ("plaster", "plaster", intMultiplicator);
-            if (itemCode.StartsWith("game:daubraw-"))
-                return (itemCode.Substring(13), itemCode.Substring(13), (4 * intMultiplicator));
+            if (itemCode.StartsWith("game:daub-"))
+            {
+                var daubString = itemCode.Substring(10);
+                var i = daubString.Length;
+                daubString = daubString.Remove((i-7), 7);
+                return (daubString, daubString, intMultiplicator);
+            }
+
+                
 
             return (null, null, 0);
         }
@@ -434,7 +441,18 @@ namespace MedievalArchitecture
                         break;
                       
                     case "2":
-                        return [new WorldInteraction() { ActionLangCode = "confession:block-interaction-add-block", MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl"}];
+                        if (
+                        forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Block?.Code.Path.StartsWith("cobblestone")  == true ||
+                        forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Block?.Code.Path.StartsWith("rock") == true ||
+                        forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Block?.Code.Path.StartsWith("stonebricks") == true ||
+                        forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Block?.Code.Path.StartsWith("plaster") == true ||
+                        forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Block?.Code.Path.StartsWith("daub") == true)
+                        {
+                            amount = intMultiplicator;
+                            displayStack = GetRequiredDisplayStack(forPlayer, amount);
+                            return [new WorldInteraction() { ActionLangCode = "confession:block-interaction-add-block", MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl", Itemstacks = displayStack == null ? null : new[] { displayStack } }];
+                        }
+                        break;
                 }
                 
                 // 4) sonst keine Hilfe anzeigen
