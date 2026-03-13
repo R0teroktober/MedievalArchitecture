@@ -4,71 +4,83 @@
     "integer": {},
     "float": {},
     "boolean": {
-        "confession:blocktypes/stone/archway/archway_small.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
-        "confession:blocktypes/stone/archway/archway_small_window.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
-        "confession:blocktypes/stone/archway/archway_small_wood.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
-        "confession:blocktypes/stone/window/archway_tiny.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
-        "confession:blocktypes/stone/window/archway_tiny_window.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
-        "confession:blocktypes/stone/window/archway_half_tiny.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
-        "confession:blocktypes/stone/window/archway_half_tiny_window.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
-        "confession:blocktypes/stone/window/archway2x1.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
-        "confession:blocktypes/stone/window/archway2x1_window.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
-        "confession:blocktypes/stone/window/archway2x1_wood.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
-        "confession:blocktypes/stone/window/archway2x2.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
-        "confession:blocktypes/stone/window/archway2x2_window.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
-        "confession:blocktypes/stone/window/archway2x2_wood.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
-        "confession:blocktypes/wood/archway/construction_small.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
-        "confession:blocktypes/wood/archway/construction_medium2x1.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
-        "confession:blocktypes/wood/archway/construction_medium2x2.json": {"enabled": "ENABLE_SMALL_ARCHWAYS" },
-        "confession:blocktypes/wood/roof/roof.json": {"disabled": "ENABLE_ROOFS" },
-        "confession:blocktypes/glass/window.json": {"enabled": "ENABLE_WINDOWS" },
-        "confession:blocktypes/stone/window/windowsill_a.json": {"enabled": "ENABLE_WINDOWSILL" },
-        "confession:blocktypes/wood/trapdoor/trapdoor_small.json": {"enabled": "ENABLE_TRAPDOORS" },
-        "confession:blocktypes/wood/trapdoor/trapdoor_small_sloped.json": {"enabled": "ENABLE_TRAPDOORS" },
-        "confession:blocktypes/wood/trapdoor/trapdoor.json": {"enabled": "ENABLE_TRAPDOORS" },
-        
-      }, 
+        "confession:blocktypes/stone/archway/archway_small.json": { "enabled": "ENABLE_SMALL_ARCHWAY" },
+        "confession:blocktypes/stone/archway/archway_small_window.json": { "enabled": "ENABLE_SMALL_ARCHWAY" },
+        "confession:blocktypes/stone/archway/archway_small_wood.json": { "enabled": "ENABLE_SMALL_ARCHWAY" },
+        "confession:blocktypes/stone/window/archway_tiny.json": { "enabled": "ENABLE_SMALL_ARCHWAY" },
+        "confession:blocktypes/stone/window/archway_tiny_window.json": { "enabled": "ENABLE_SMALL_ARCHWAY" },
+        "confession:blocktypes/stone/window/archway_half_tiny.json": { "enabled": "ENABLE_SMALL_ARCHWAY" },
+        "confession:blocktypes/stone/window/archway_half_tiny_window.json": { "enabled": "ENABLE_SMALL_ARCHWAY" },
+        "confession:blocktypes/stone/window/archway2x1.json": { "enabled": "ENABLE_SMALL_ARCHWAY" },
+        "confession:blocktypes/stone/window/archway2x1_window.json": { "enabled": "ENABLE_SMALL_ARCHWAY" },
+        "confession:blocktypes/stone/window/archway2x1_wood.json": { "enabled": "ENABLE_SMALL_ARCHWAY" },
+        "confession:blocktypes/stone/window/archway2x2.json": { "enabled": "ENABLE_SMALL_ARCHWAY" },
+        "confession:blocktypes/stone/window/archway2x2_window.json": { "enabled": "ENABLE_SMALL_ARCHWAY" },
+        "confession:blocktypes/stone/window/archway2x2_wood.json": { "enabled": "ENABLE_SMALL_ARCHWAY" },
+        "confession:blocktypes/wood/archway/construction_small.json": { "enabled": "ENABLE_SMALL_ARCHWAY" },
+        "confession:blocktypes/wood/archway/construction_medium2x1.json": { "enabled": "ENABLE_SMALL_ARCHWAY" },
+        "confession:blocktypes/wood/archway/construction_medium2x2.json": { "enabled": "ENABLE_SMALL_ARCHWAY" },
+        "confession:blocktypes/wood/roof/roof.json": { "disabled": "ENABLE_ROOF" },
+        "confession:blocktypes/glass/window.json": { "enabled": "ENABLE_WINDOW" },
+        "confession:blocktypes/stone/window/windowsill_a.json": { "enabled": "ENABLE_WINDOWSILL" },
+        "confession:blocktypes/wood/trapdoor/trapdoor_small.json": { "enabled": "ENABLE_TRAPDOOR" },
+        "confession:blocktypes/wood/trapdoor/trapdoor_small_sloped.json": { "enabled": "ENABLE_TRAPDOOR" },
+        "confession:blocktypes/wood/trapdoor/trapdoor.json": { "enabled": "ENABLE_TRAPDOOR" },
+        "confession:recipes/grid/trapdoor_recipe.json": { "enabled": "ENABLE_TRAPDOOR" },
+        "confession:blocktypes/metal/brazier.json": { "enabled": "ENABLE_BRAZIER" },
+        "confession:itemtypes/part/brazierpart.json": { "enabled": "ENABLE_BRAZIER" },
+        "confession:recipes/grid/brazier_recipe.json": { "enabled": "ENABLE_BRAZIER" },
+        "confession:recipes/smithing/brazierpart_recipe.json": { "enabled": "ENABLE_BRAZIER" }
+
+    }, 
       "other": {}
   },
    "settings": {
     "integer": {},
     "float": {},
     "boolean": {
-      "ENABLE_SMALL_ARCHWAYS": {
-        "name": "enable-small-archways",
-        "ingui": "confession:setting-enable-small-archways",
-        "weight": 2.1,
-        "comment": "Enable/ Disable all small archways and tiny windows",
-        "default": true
-      },
-      "ENABLE_ROOFS": {
-        "name": "enable-roofs",
-        "ingui": "confession:setting-enable-roof",
-        "weight": 2.2,
-        "comment": "Enable/ Disable all roof blocks",
-        "default": false
-      },
-      "ENABLE_WINDOWS": {
-        "name": "enable-windows",
-        "ingui": "confession:setting-enable-windows",
-        "weight": 2.3,
-        "comment": "Enable/ Disable window panes",
-        "default": true
-      },
-       "ENABLE_WINDOWSILL": {
-        "name": "enable-windowsill",
-        "ingui": "confession:setting-enable-windowsill",
-        "weight": 2.4,
-        "comment": "Enable/ Disable windowsills",
-        "default": true
-      },
-      "ENABLE_WINDOWSILL": {
-        "name": "enable-trapdoors",
-        "ingui": "confession:setting-enable-trapdoors",
-        "weight": 2.5,
-        "comment": "Enable/ Disable trapdoors",
-        "default": true
-      }
+        "ENABLE_SMALL_ARCHWAY": {
+            "name": "enable-small-archways",
+            "ingui": "confession:setting-enable-small-archways",
+            "weight": 2.1,
+            "comment": "Enable/ Disable all small archways and tiny windows",
+            "default": true
+        },
+        "ENABLE_ROOF": {
+            "name": "enable-roofs",
+            "ingui": "confession:setting-enable-roof",
+            "weight": 2.2,
+            "comment": "Enable/ Disable all roof blocks",
+            "default": false
+        },
+        "ENABLE_WINDOW": {
+            "name": "enable-windows",
+            "ingui": "confession:setting-enable-windows",
+            "weight": 2.3,
+            "comment": "Enable/ Disable window panes",
+            "default": true
+        },
+        "ENABLE_WINDOWSILL": {
+            "name": "enable-windowsill",
+            "ingui": "confession:setting-enable-windowsill",
+            "weight": 2.4,
+            "comment": "Enable/ Disable windowsills",
+            "default": true
+        },
+        "ENABLE_TRAPDOOR": {
+            "name": "enable-trapdoors",
+            "ingui": "confession:setting-enable-trapdoors",
+            "weight": 2.5,
+            "comment": "Enable/ Disable trapdoors",
+            "default": true
+        },
+        "ENABLE_BRAZIER": {
+            "name": "enable-brazier",
+            "ingui": "confession:setting-enable-brazier",
+            "weight": 2.6,
+            "comment": "Enable/ Disable brazier",
+            "default": true
+        }
     },
     "other": {
     }

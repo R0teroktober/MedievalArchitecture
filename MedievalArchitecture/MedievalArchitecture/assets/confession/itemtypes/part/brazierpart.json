@@ -1,0 +1,14 @@
+{
+    "enabled": true,
+    "code": "brazierpart",
+    "maxstacksize": 64,
+    "shape":  { "base": "block/metal/brazier/brazier-construct0" },
+    "textures": { "metal": { "base": "game:block/metal/plate/blackbronze" } },
+    "storageFlags": 5,
+    "creativeinventory": {"general": [ "*" ], "confession": [ "*" ]},
+    "heldTpUseAnimation": "interactstatic",
+    "fpHandTransform": {"translation": {"x": -0.2,"y": -0.1,"z": 0.5},"rotation": {"x": -148,"y": 10,"z": 89},"origin": {"x": 0.5,"y": 0.4,"z": 0.4},"scale": 2.38},
+    "guiTransform": {"translation": {"x": 0,"y": 0,"z": 100},"rotation": {"x": -25,"y": 28,"z": 180},"origin": {"x": 0.43,"y": 0.04,"z": 0.3},"scale": 2.46},
+    "groundTransform": {"translation": {"x": 0,"y": 0.31,"z": 0},"rotation": {"x": 0,"y": 0,"z": 0},"origin": {"x": 0.81,"y": 0.45,"z": 0.42},"scale": 3.5},
+    "tpHandTransform": {"translation": {"x": -0.3,"y": 0.19,"z": -0.1},"rotation": {"x": 6,"y": 90,"z": 7},"origin": {"x": 0.4,"y": -0.7,"z": -0},"scale": 0.74}
+}

@@ -1,0 +1,30 @@
+{
+    "ingredient": {
+        "type": "item",
+        "code": "game:ingot-*",
+        "name": "metal",
+        "allowedVariants": [ "copper", "tinbronze", "bismuthbronze", "blackbronze", "silver", "gold", "iron", "meteoriciron", "steel" ]
+    },
+    "pattern": [
+        [
+            "###########",
+            "###########"
+
+        ],
+        [
+            "#__________",
+            "#__________"
+
+        ],
+        [
+            "#__________",
+            "#__________"
+
+        ]
+    ],
+    "name": "Brazier part",
+    "output": {
+        "type": "item",
+        "code": "brazierpart"
+    }
+}

@@ -26,7 +26,9 @@ namespace MedievalArchitecture
         public double extinguishedTotalHours = -99.0;
 
         // Configuration
-        public virtual float BurnDurationModifier => 10f;
+
+        // burn duration is multiplied by this value to get actual burn time in seconds - e.g. 24s * 75 = 30 minutes of burn time for a piece of firewood
+        public virtual float BurnDurationModifier => 75f;
         public virtual float HeatModifier => 1f;
         public float emptyFirepitBurnTimeMulBonus = 4f;
 

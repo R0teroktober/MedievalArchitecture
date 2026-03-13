@@ -1,0 +1,150 @@
+{
+    "enabled": true,
+    "code": "brazier",
+    "class": "BlockBrazier",
+    "entityClass": "BlockEntityBrazier",
+    "maxStackSize": 8,
+    "blockmaterial": "Metal",
+    "resistance": 3.5,
+    "renderPass": "OpaqueNoCull",
+    "facecullmode": "nevercull",
+    "lightabsorption": 0,
+    "sideopaque": { "all": false },
+    "sideao": { "all": true },
+    "sidesolid": { "all": false },
+
+    "variantgroups": [
+        { "code": "burnstate", "states": ["lit", "unlit"] }
+    ],
+
+    "lightHsvByType": {
+        "*-lit": [7, 7, 16],
+        "*-unlit": [0, 0, 0]
+    },
+
+    "attributes": {
+        "handbook": {
+            "groupBy": ["brazier-*"],
+            "excludeByType": { "*-lit": true },
+            "extraSections": [
+                {
+                    "title": "confession:window-build-help-title",
+                    "text": "confession:archway-brazier-help-text"
+                }]
+        }
+    },
+
+    "entityBehaviors": [
+        { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" }
+    ],
+
+    "behaviors": [
+        {
+            "name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
+            "properties": {
+                "name": {
+                    "state-cold": [ "confession:block-brazier-construct-name3" ],
+                    "state-lit": [ "confession:block-brazier-construct-name3" ],
+                    "state-extinct": [ "confession:block-brazier-construct-name3" ],
+                    "state-*": [ "confession:block-brazier-construct-name1", "confession:{state}"]
+                },
+                "shape": {
+                    //"state-construct0": { "base": "confession:block/metal/brazier/brazier-construct0" }, This is an item
+                    "state-construct1": { "base": "confession:block/metal/brazier/brazier-construct1" },
+                    "state-construct2": { "base": "confession:block/metal/brazier/brazier-construct2" },
+                    "state-construct3": { "base": "confession:block/metal/brazier/brazier-construct3" },
+                    "state-cold": { "base": "confession:block/metal/brazier/brazier-cold" },
+                    "state-lit": { "base": "confession:block/metal/brazier/brazier-lit" },
+                    "state-extinct": { "base": "confession:block/metal/brazier/brazier-extinct" }
+                }
+            }
+        }
+    ],
+
+    "shape": { "base": "game:block/basic/invisible" },
+
+    "textures": {
+        "metal": { "base": "game:block/metal/plate/blackbronze" },
+        "hay": { "base": "game:block/hay/normal-top" },
+        "singlehay": { "base": "game:block/wood/trough/large/singlehay" },
+        "birch": { "base": "game:block/wood/debarked/birch" },
+        "walnut-h": { "base": "game:block/wood/bark/walnut-h" },
+        "ember": { "base": "game:block/coal/ember" },
+        "fire": { "base": "game:block/wood/firepit/fire" }
+    },
+
+    "collisionBox": { "x1": 0.25, "y1": 0, "z1": 0.25, "x2": 0.75, "y2": 1, "z2": 0.75 },
+    "selectionBox": { "x1": 0.25, "y1": 0, "z1": 0.25, "x2": 0.75, "y2": 1, "z2": 0.75 },
+
+    "particlePropertiesByType": {
+        "brazier-lit": [
+            {
+                "hsvaColor": [{ "avg": 30, "var": 20 }, { "avg": 255, "var": 50 }, { "avg": 255, "var": 50 }, { "avg": 255, "var": 0 }],
+                "gravityEffect": { "avg": -0.1, "var": 0.4 },
+                "posOffset": [{ "avg": 0, "var": 0.15 }, { "avg": -0.1, "var": 0 }, { "avg": 0, "var": 0.15 }],
+                "velocity": [{ "avg": 0, "var": 0.15 }, { "avg": 0.5, "var": 0.1 }, { "avg": 0, "var": 0.15 }],
+                "quantity": { "avg": 0.02 },
+                "size": { "avg": 0.4, "var": 0 },
+                "sizeEvolve": { "transform": "quadratic", "factor": -0.7 },
+                "lifeLength": { "avg": 1.5 },
+                "vertexFlags": 128,
+                "windAffectednes": 0.2
+            },
+            {
+                "hsvaColor": [{ "avg": 0, "var": 0 }, { "avg": 0, "var": 0 }, { "avg": 70, "var": 30 }, { "avg": 220, "var": 50 }],
+                "opacityEvolve": { "transform": "linear", "factor": -255 },
+                "gravityEffect": { "avg": 0, "var": 0 },
+                "posOffset": [{ "avg": 0, "var": 0.15 }, { "avg": 0, "var": 0 }, { "avg": 0, "var": 0.15 }],
+                "velocity": [{ "avg": 0, "var": 0.025 }, { "avg": 0.2, "var": 0.05 }, { "avg": 0, "var": 0.025 }],
+                "quantity": { "avg": 0.08 },
+                "size": { "avg": 0.3, "var": 0.05 },
+                "sizeEvolve": { "transform": "linear", "factor": 1.5 },
+                "particleModel": "Quad",
+                "lifeLength": { "avg": 18 },
+                "selfPropelled": true,
+                "windAffectednes": 0.7
+            },
+            {
+                "hsvaColor": [{ "avg": 20, "var": 20 }, { "avg": 255, "var": 50 }, { "avg": 255, "var": 50 }, { "avg": 255, "var": 0 }],
+                "opacityEvolve": { "transform": "quadratic", "factor": -16 },
+                "gravityEffect": { "avg": 0, "var": 0 },
+                "posOffset": [{ "avg": 0, "var": 0.1 }, { "avg": -0.15, "var": 0 }, { "avg": 0, "var": 0.1 }],
+                "velocity": [{ "avg": 0, "var": 0.1 }, { "avg": 0.125, "var": 0.05 }, { "avg": 0, "var": 0.1 }],
+                "quantity": { "avg": 0.3 },
+                "size": { "avg": 0.35, "var": 0.05 },
+                "lifeLength": { "avg": 0.25 },
+                "sizeEvolve": { "transform": "linear", "factor": 0.25 },
+                "particleModel": "Quad",
+                "vertexFlags": 128,
+                "windAffectednes": 0.5
+            }
+        ],
+        "brazier-unlit": []
+    },
+
+    "sounds": {
+        "place": "game:block/anvil",
+        "break": "game:block/anvil"
+    },
+
+    //"combustiblePropsByType": {
+    //    "*-lit": {
+    //        "burnDuration": 24,
+    //        "heatResistance": 700
+    //    }
+    //}, The brazier itself schould not burn
+
+    "creativeinventoryStacksByType": {
+        "*-unlit": [
+            {
+                "tabs": ["confession"],
+                "stacks": [
+                    { "type": "block", "code": "brazier-unlit", "attributes": { "types": { "state": "construct1" } } },
+                    { "type": "block", "code": "brazier-unlit", "attributes": { "types": { "state": "cold" } } }
+                ]
+            }
+        ]
+    },
+
+    "drops": []
+}

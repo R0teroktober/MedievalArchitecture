@@ -1,0 +1,101 @@
+[
+    {
+        "ingredientPattern": "_B_,BPB,_B_",
+        "ingredients": {
+            "B": {
+                "type": "item",
+                "code": "brazierpart",
+                "quantity": 1
+            },
+            "P": {
+                "type": "item",
+                "code": "game:hoop-*",
+                "quantity": 1
+            }
+        },
+        "width": 3,
+        "height": 3,
+        "output": {
+            "type": "block",
+            "code": "brazier-unlit",
+            "attributes": {
+                "types": {
+                    "state": "construct1"
+                }
+            }
+        }
+
+    },
+    {
+        "ingredientPattern": "B,C",
+        "ingredients": {
+            "B": {
+                "type": "block",
+                "code": "game:bowl-*-fired"
+            },
+            "C": {
+                "type": "block",
+                "code": "game:clutter",
+                "attributes": { "type": "brazier1" },
+                "quantity": 1
+            }
+        },
+        "width": 1,
+        "height": 2,
+        "attributes": {
+            "liquidContainerProps": {
+                "requiresContent": {
+                    "type": "item",
+                    "code": "game:acid-full-sulfuric"
+                },
+                "requiresLitres": 1
+            }
+        },
+        "output": {
+            "type": "block",
+            "code": "brazier-unlit",
+            "attributes": {
+                "types": {
+                    "state": "construct1"
+                }
+            }
+        }
+
+    },
+    {
+        "ingredientPattern": "B,C",
+        "ingredients": {
+            "B": {
+                "type": "block",
+                "code": "game:bowl-*-fired"
+            },
+            "C": {
+                "type": "block",
+                "code": "game:clutter",
+                "attributes": { "type": "brazier2" },
+                "quantity": 1
+            }
+        },
+        "width": 1,
+        "height": 2,
+        "attributes": {
+            "liquidContainerProps": {
+                "requiresContent": {
+                    "type": "item",
+                    "code": "game:acid-full-sulfuric"
+                },
+                "requiresLitres": 1
+            }
+        },
+        "output": {
+            "type": "block",
+            "code": "brazier-unlit",
+            "attributes": {
+                "types": {
+                    "state": "construct1"
+                }
+            }
+        }
+
+    }
+]
