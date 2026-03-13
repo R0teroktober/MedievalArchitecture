@@ -29,7 +29,6 @@ namespace MedievalArchitecture
         AssetLocation finishSound= new AssetLocation();
         AssetLocation soundAddStone = new AssetLocation();
         AssetLocation soundAddMortar = new AssetLocation();
-        WorldInteraction[] interactions;
 
         private static List<ItemStack> mortarItems = new List<ItemStack>();
         private static List<ItemStack> rimStoneItems = new List<ItemStack>();
@@ -393,7 +392,14 @@ namespace MedievalArchitecture
             {
                 var daubString = itemCode.Substring(10);
                 var i = daubString.Length;
-                daubString = daubString.Remove((i-7), 7);
+                if (daubString.EndsWith("cracked"))
+                {
+                    daubString = daubString.Remove((i - 8), 8);
+                }
+                else
+                {
+                    daubString = daubString.Remove((i - 7), 7);
+                }
                 return (daubString, daubString, intMultiplicator);
             }
 

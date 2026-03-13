@@ -183,8 +183,18 @@ namespace MedievalArchitecture
   
                             var daubString = heldItemCode.Substring(10);
                             var i = daubString.Length;
-                            originblock = daubString.Remove((i - 7), 7);
-                            if (heldItem.StackSize < glassSize) return;
+                    if (daubString.EndsWith("cracked"))
+                    {
+                        originblock = daubString.Remove((i - 8), 8);
+                    }
+                    else
+                    {
+                        originblock = daubString.Remove((i - 7), 7);
+                    }
+
+
+
+                        if (heldItem.StackSize < glassSize) return;
                             TryComplete(world, byPlayer, blockSel, be, beh, heldItem, orientation, style, rock, originblock, controlPos, glassSize);
                         }
                     
@@ -370,7 +380,6 @@ namespace MedievalArchitecture
             var beh = be?.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
             // 2) Itemstack 
             ItemStack displayStack;
-            int amount = 0;
             // 3) Attribut prüfen
             if (beh is null) return base.GetPlacedBlockInteractionHelp(world, selection, forPlayer, ref handling); // 4) sonst keine Hilfe anzeigen
 
