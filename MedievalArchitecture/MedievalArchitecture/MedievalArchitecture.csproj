@@ -1,57 +1,63 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <OutputPath>bin\$(Configuration)\Mods\mod</OutputPath>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<OutputPath>bin\$(Configuration)\Mods\mod\</OutputPath>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
 	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
 		<DefineConstants>DEBUG;TRACE</DefineConstants>
 	</PropertyGroup>
+
 	<ItemGroup>
-	  <None Remove="assets\confession\shapes\block\stone\1-m-a.json" />
+		<Reference Include="VSSurvivalMod">
+			<HintPath>$(VINTAGE_STORY)\Mods\VSSurvivalMod.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+
+		<Reference Include="VintagestoryAPI">
+			<HintPath>$(VINTAGE_STORY)\VintagestoryAPI.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+
+		<Reference Include="VSEssentials">
+			<HintPath>$(VINTAGE_STORY)\Mods\VSEssentials.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+
+		<Reference Include="VSCreativeMod">
+			<HintPath>$(VINTAGE_STORY)\Mods\VSCreativeMod.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+
+		<Reference Include="Newtonsoft.Json">
+			<HintPath>$(VINTAGE_STORY)\Lib\Newtonsoft.Json.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
 	</ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="VintagestoryAPI">
-      <HintPath>$(VINTAGE_STORY)/VintagestoryAPI.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="VSSurvivalMod">
-      <HintPath>$(VINTAGE_STORY)/Mods/VSSurvivalMod.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="VSEssentials">
-      <HintPath>$(VINTAGE_STORY)/Mods/VSEssentials.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="VSCreativeMod">
-      <HintPath>$(VINTAGE_STORY)/Mods/VSCreativeMod.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-  </ItemGroup>
-<ItemGroup>
-  <Content Include="modinfo.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  </Content>
-</ItemGroup>
+	<ItemGroup>
+		<Content Include="modinfo.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 
-<ItemGroup>
-  <Content Include="modicon.png" Condition="Exists('modicon.png')">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  </Content>
-</ItemGroup>
-<ItemGroup>
-	<PackageReference Include="CraluminumMods.VintageStory.AttributeRenderingLibrary" Version="3.0.0-pre.3" PrivateAssets="all" />
-	<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-</ItemGroup>
-<ItemGroup>
-  <Folder Include="assets\confession\shapes\block\glass\" />
-</ItemGroup>
-	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
-  <DefineConstants>DEBUG;TRACE</DefineConstants>
-</PropertyGroup>
-<ProjectExtensions><VisualStudio><UserProperties assets_4confession_4blocktypes_4stone_4archway_4archway_3small_3window_1json__JsonSchema="json" /></VisualStudio></ProjectExtensions>
+	<ItemGroup>
+		<Content Include="modicon.png" Condition="Exists('modicon.png')">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CraluminumMods.VintageStory.AttributeRenderingLibrary" Version="2.8.1" PrivateAssets="all" />
+	</ItemGroup>
+
+	<ProjectExtensions>
+		<VisualStudio>
+			<UserProperties assets_4confession_4blocktypes_4stone_4archway_4archway_3small_3window_1json__JsonSchema="json" />
+		</VisualStudio>
+	</ProjectExtensions>
 
 </Project>

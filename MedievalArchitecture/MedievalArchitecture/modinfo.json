@@ -7,9 +7,9 @@
         "Roteroktober", "12Port", "Craluminum2413 (Dana)"
     ],
     "description": "Medieval themed architecture mod.",
-    "version": "1.0.2",
+    "version": "1.0.4",
     "dependencies": {
-      "game": "1.22.0-pre.1",
-      "attributerenderinglibrary":  "3.0.0-pre.3"
+      "game": "1.21.6",
+      "attributerenderinglibrary":  "2.8.1"
     }
 }
