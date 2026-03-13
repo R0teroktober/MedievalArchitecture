@@ -3,7 +3,7 @@
   // version 1.0.1
   // handbook
   "handbook-introduction-title": "Medieval Architecture Mod",
-  "handbook-introduction-text": "Medieval Architecture<br><br><i>This mod is a test to gather insights for my mod Age of Confession. Except for a few shapefiles, everything in this mod has been rebuild and the entire code has been rewritten. Thanks to the Attribute Rendering Library, I can now add significantly more blocks without compromising performance. <br>I would be very grateful for any feedback, as this will help me make Age of Confession usable for more people again.</i><br><br><strong>Archways</strong><br>To build the archways you have to build a construction frame first and place it in the world. Add loose stones, mortar and a block of your choice to finish the archway. The amount required depends on the size of the archway. For a 1-block archway, you need 6 loose stones, one batch of mortar and one block. For larger archways, multiply the amount by the area covered by the archway.",
+  "handbook-introduction-text": "Medieval Architecture<br><br><i>This mod is a test to gather insights for my mod Age of Confession. Except for a few shapefiles, everything in this mod has been rebuild and the entire code has been rewritten. Thanks to the Attribute Rendering Library, I can now add significantly more blocks without compromising performance. <br>Even though it may not seem so, this mod is “bigger” than Age of Confession in the sense that it introduces more block variations. For this reason, I am particularly interested in feedback regarding performance. Help me advance this project—the modding community thrives on your input.</i><br><br><strong>Archways</strong><br>To build the archways you have to build a construction frame first and place it in the world. Now follows the three-stage construction process: Add <hk>ctrl</hk> + <hk>rightmouse</hk> loose <a href=\"handbook://item-stone-granite\">stones</a>, <a href=\"handbook://item-mortar\">mortar</a> and a block of your choice to finish the archway. You can use <a href=\"handbook://block-cobblestone-granite\">cobblestone</a>, <a href=\"handbook://block-rock-granite\">rock</a>, <a href=\"handbook://block-stonebricks-granite\">stone bricks</a>, <a href=\"handbook://block-plaster-plain\">plaster</a> or <a href=\"handbook://block-daub-tan-normal\">wattle and daub</a> to finish the archway.<br><br><strong>Tiny Window blocks</strong><br>Tiny window blocks (previously known as embrasures) are built in a similar way to archways. The difference is that there are only two building steps and the material of the rim stones is already determined by the frame. ",
 
 
   // header
@@ -46,7 +46,10 @@
   // blocks
   // archways
   "confession:archway-build-help-title": "How to build archways",
-  "confession:archway-build-help-text": "First build a archway frame and place it where the archway should be constructed. Add loose stones, mortar and a block of your choice to finish the archway. The amount required depends on the size of the archway. For a 1-block archway, you need 6 loose stones, one batch of mortar and one block. For larger archways, multiply the amount by the area covered by the archway. ",
+  "confession:archway-build-help-text": "Place the frame where you want to build the archway. Then add stones (1/3) and mortar (2/3) to build the basic framework. You can then finish the construction (3/3) with any cobblestone, rock, stone brick, plaster or wattle & daub block. The tooltip will appear as soon as you hold a matching block in your hand.",
+  "confession:window-build-help-title": "How to build",
+  "confession:window-build-help-text": "Place the frame where you want to build the window block (1/2) and finish the construction (2/2) with any cobblestone, rock, stone brick, plaster or wattle & daub block. The tooltip will appear as soon as you hold a matching block in your hand.",
+  
   "confession:block-arch_small_window-*": "Small archway (Placeholder)",
   "confession:block-construction_small-*": "Archway frame (Placeholder)",
   "confession:block-arch_small-name-plaster1": "Small plaster & ", "confession:block-arch_small-name-plaster2": " archway",
@@ -140,8 +143,14 @@
   "confession:block-window-description1": "<font color=\"#D6B56D\">Glass: </font>", "confession:block-window-description2": "<br><font color=\"#D6B56D\">Shape: </font>",
   // trapdoors
 
-  "confession:block-trapdoor_small-*": "Trapdoor",
-  "confession:block-trapdoor_small_sloped-*": "Slanted trapdoor",
+  "confession:block-trapdoor_small-*": "Small Trapdoor",
+  "confession:block-trapdoor-double-*": "Big Trapdoor",
+  "confession:block-trapdoor-doublesloped-*": "Big sloped Trapdoor",
+  "confession:block-trapdoor-sloped-*": "Sloped Trapdoor",
+  "confession:block-trapdoor-*": "Trapdoor",
+  "confession:block-trapdoor_small_sloped-*": "Small slanted trapdoor",
+  "confession:blockdesc-trapdoor_small-*": "<font color=\"#D6B56D\">Can also be placed on walls and ceilings</font>",
+  "confession:blockdesc-trapdoor_small_sloped-*": "<font color=\"#D6B56D\">Can also be placed on walls and ceilings</font>",
 
 
   // configs

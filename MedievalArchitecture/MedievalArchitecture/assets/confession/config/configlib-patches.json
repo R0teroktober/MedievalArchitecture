@@ -25,6 +25,7 @@
         "confession:blocktypes/stone/window/windowsill_a.json": {"enabled": "ENABLE_WINDOWSILL" },
         "confession:blocktypes/wood/trapdoor/trapdoor_small.json": {"enabled": "ENABLE_TRAPDOORS" },
         "confession:blocktypes/wood/trapdoor/trapdoor_small_sloped.json": {"enabled": "ENABLE_TRAPDOORS" },
+        "confession:blocktypes/wood/trapdoor/trapdoor.json": {"enabled": "ENABLE_TRAPDOORS" },
         
       }, 
       "other": {}

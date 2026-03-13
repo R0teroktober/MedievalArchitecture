@@ -26,6 +26,64 @@
             "type": "block",
             "code": "confession:trapdoor_small_sloped-{wood}"
         }
-    }
+    },
+    {
+        "ingredientPattern": "_T_,PNP",
+        "ingredients": {
+            "T": { "type": "block", "code": "game:door-solid-*", "name": "wood", "allowedVariants": ["oak", "aged", "pine", "birch", "maple", "kapok", "larch", "ebony", "acacia",  "walnut", "redwood", "baldcypress", "purpleheart"]},
+            "P": { "type": "item", "code": "game:plank-*", "name": "wood", "allowedVariants": ["oak", "aged", "pine", "birch", "maple", "kapok", "larch", "ebony", "acacia",  "walnut", "redwood", "baldcypress", "purpleheart"]},
+            "N": { "type": "item", "code": "game:metalnailsandstrips-*" },
+             },
+        "width": 3,
+        "height": 2,
+        "output": {
+            "type": "block",
+            "code": "confession:trapdoor-flat-{wood}"
+        }
+    },
+    {
+        "ingredientPattern": "PN_,PPT",
+        "ingredients": {
+            "T": { "type": "block", "code": "game:door-solid-*", "name": "wood", "allowedVariants": ["oak", "aged", "pine", "birch", "maple", "kapok", "larch", "ebony", "acacia",  "walnut", "redwood", "baldcypress", "purpleheart"]},
+            "P": { "type": "item", "code": "game:plank-*", "name": "wood", "allowedVariants": ["oak", "aged", "pine", "birch", "maple", "kapok", "larch", "ebony", "acacia",  "walnut", "redwood", "baldcypress", "purpleheart"]},
+            "N": { "type": "item", "code": "game:metalnailsandstrips-*" },
+             },
+        "width": 3,
+        "height": 2,
+        "output": {
+            "type": "block",
+            "code": "confession:trapdoor-sloped-{wood}"
+        }
+    },
+    {
+        "ingredientPattern": "TT,BN",
+        "ingredients": {
+            "T": { "type": "block", "code": "game:door-solid-*", "name": "wood", "allowedVariants": ["oak", "aged", "pine", "birch", "maple", "kapok", "larch", "ebony", "acacia",  "walnut", "redwood", "baldcypress", "purpleheart"]},
+            "P": { "type": "item", "code": "game:plank-*", "name": "wood", "allowedVariants": ["oak", "aged", "pine", "birch", "maple", "kapok", "larch", "ebony", "acacia",  "walnut", "redwood", "baldcypress", "purpleheart"]},
+            "B": { "type": "block", "code": "game:planks-*-ud", "name": "wood", "allowedVariants": ["oak", "aged", "pine", "birch", "maple", "kapok", "larch", "ebony", "acacia",  "walnut", "redwood", "baldcypress", "purpleheart"]},
+            "N": { "type": "item", "code": "game:metalnailsandstrips-*", "quantity": 2 },
+             },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "block",
+            "code": "confession:trapdoor-double-{wood}"
+        }
+    },
+    {
+        "ingredientPattern": "PNT,BPT",
+        "ingredients": {
+            "T": { "type": "block", "code": "game:door-solid-*", "name": "wood", "allowedVariants": ["oak", "aged", "pine", "birch", "maple", "kapok", "larch", "ebony", "acacia",  "walnut", "redwood", "baldcypress", "purpleheart"]},
+            "P": { "type": "item", "code": "game:plank-*", "name": "wood", "allowedVariants": ["oak", "aged", "pine", "birch", "maple", "kapok", "larch", "ebony", "acacia",  "walnut", "redwood", "baldcypress", "purpleheart"]},
+            "B": { "type": "block", "code": "game:planks-*-ud", "name": "wood", "allowedVariants": ["oak", "aged", "pine", "birch", "maple", "kapok", "larch", "ebony", "acacia",  "walnut", "redwood", "baldcypress", "purpleheart"]},
+            "N": { "type": "item", "code": "game:metalnailsandstrips-*", "quantity": 2 },
+             },
+        "width": 3,
+        "height": 2,
+        "output": {
+            "type": "block",
+            "code": "confession:trapdoor-doublesloped-{wood}"
+        }
+    },
     
 ]

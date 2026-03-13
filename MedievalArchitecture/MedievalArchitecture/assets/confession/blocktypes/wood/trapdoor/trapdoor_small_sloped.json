@@ -8,6 +8,9 @@
 	"facecullmode": "nevercull",
 	"lightabsorption": 1,
 	"sideopaque": {"all": false},
+	"sidesolid": {
+		"up": false
+	},
 	"class": "BlockGeneric",
 	"entityClass": "Generic",
 	"entityBehaviors": [ { "name": "DoubleTrapDoorBE" }],
@@ -44,6 +47,6 @@
 	},
 	"collisionBoxes": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.5, "z2": 1 }],
 	"guiTransform": {"origin": { x: 0.5, y: 0.2, z: 0.5 }},
-	"creativeinventory": { "confession": ["*"]}
+	"creativeinventory": { "general": ["*"], "construction": ["*"], "confession": ["*"]}
 
 }
