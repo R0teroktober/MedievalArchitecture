@@ -2294,6 +2294,7 @@
 			"quantityframes": 60,
 			"onActivityStopped": "Rewind",
 			"onAnimationEnd": "Hold",
+			"easeAnimationSpeed": true,
 			"keyframes": [
 				{
 					"frame": 0,

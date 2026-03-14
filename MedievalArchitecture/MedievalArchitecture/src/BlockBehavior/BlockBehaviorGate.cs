@@ -60,7 +60,12 @@ public class BlockBehaviorGate : StrongBlockBehavior, IMultiBlockColSelBoxes, IM
         return GetBE(blockAccessor, childPos.AddCopy(offsetInv.X, offsetInv.Y, offsetInv.Z));
     }
 
-    public override bool CanPlaceBlock(IWorldAccessor world,IPlayer byPlayer,BlockSelection blockSel,ref EnumHandling handling,ref string failureCode)
+    public override bool CanPlaceBlock(
+        IWorldAccessor world,
+        IPlayer byPlayer,
+        BlockSelection blockSel,
+        ref EnumHandling handling,
+        ref string failureCode)
     {
         if (blockSel == null || blockSel.Face != BlockFacing.UP)
         {
@@ -71,38 +76,51 @@ public class BlockBehaviorGate : StrongBlockBehavior, IMultiBlockColSelBoxes, IM
 
         int rotDeg = GetPlacementRotDeg(blockSel);
         IBlockAccessor ba = world.BlockAccessor;
-        bool canPlace = true;
+        BlockPos rootPos = blockSel.Position;
 
-        IterateOverEach(blockSel.Position, rotDeg, pos =>
+        for (int dx = 0; dx < width; dx++)
         {
-            Block existing = ba.GetBlock(pos, BlockLayersAccess.Solid);
-            if (existing.Id != 0 && !existing.IsReplacableBy(block))
+            for (int dy = 0; dy < height; dy++)
             {
-                canPlace = false;
-                return false;
+                for (int dz = 0; dz < length; dz++)
+                {
+                    Vec3i off = RotateOffset(dx, dy, dz, rotDeg);
+                    BlockPos pos = rootPos.AddCopy(off.X, off.Y, off.Z);
+
+                    Block existing = ba.GetBlock(pos, BlockLayersAccess.Solid);
+                    if (existing.Id != 0 && !existing.IsReplacableBy(block))
+                    {
+                        handling = EnumHandling.PreventDefault;
+                        failureCode = "notenoughspace";
+                        return false;
+                    }
+
+                    // Nur unterste Ebene braucht Support
+                    if (dy == 0)
+                    {
+                        BlockPos belowPos = pos.DownCopy();
+                        Block below = ba.GetBlock(belowPos, BlockLayersAccess.Solid);
+
+                        if (below == null || !below.CanAttachBlockAt(ba, block, belowPos, BlockFacing.UP))
+                        {
+                            handling = EnumHandling.PreventDefault;
+                            failureCode = "requirefloor";
+                            return false;
+                        }
+                    }
+                }
             }
-
-            BlockPos belowPos = pos.DownCopy();
-            Block below = ba.GetBlock(belowPos, BlockLayersAccess.Solid);
-            if (below == null || !below.CanAttachBlockAt(ba, block, belowPos, BlockFacing.UP))
-            {
-                canPlace = false;
-                return false;
-            }
-
-            return true;
-        });
-
-        if (!canPlace)
-        {
-            handling = EnumHandling.PreventDefault;
-            return false;
         }
 
         return true;
     }
 
-    public override bool DoPlaceBlock(IWorldAccessor world,IPlayer byPlayer,BlockSelection blockSel,ItemStack byItemStack,ref EnumHandling handling)
+    public override bool DoPlaceBlock(
+        IWorldAccessor world,
+        IPlayer byPlayer,
+        BlockSelection blockSel,
+        ItemStack byItemStack,
+        ref EnumHandling handling)
     {
         if (blockSel == null || blockSel.Face != BlockFacing.UP)
         {
@@ -111,7 +129,7 @@ public class BlockBehaviorGate : StrongBlockBehavior, IMultiBlockColSelBoxes, IM
         }
 
         int rotDeg = GetPlacementRotDeg(blockSel);
-        BlockPos rootPos = blockSel.Position;
+        BlockPos rootPos = blockSel.Position.Copy();
         IBlockAccessor ba = world.BlockAccessor;
 
         ba.SetBlock(block.BlockId, rootPos, byItemStack);
@@ -148,14 +166,10 @@ public class BlockBehaviorGate : StrongBlockBehavior, IMultiBlockColSelBoxes, IM
             int dy = pos.Y - rootPos.Y;
             int dz = pos.Z - rootPos.Z;
 
-            AssetLocation code = new AssetLocation(
-                $"multiblock-monolithic-{ToOffsetCode(dx)}-{ToOffsetCode(dy)}-{ToOffsetCode(dz)}"
-            );
-
-            Block filler = world.GetBlock(code);
+            Block filler = GetMultiblockHelper(world, dx, dy, dz);
             if (filler == null || filler.Id == 0)
             {
-                api.Logger.Warning($"[Gate] Missing multiblock helper block {code} for {block.Code}");
+                api.Logger.Warning($"[Gate] Missing multiblock helper block for dx={dx}, dy={dy}, dz={dz}, block={block.Code}");
                 return false;
             }
 
@@ -165,11 +179,23 @@ public class BlockBehaviorGate : StrongBlockBehavior, IMultiBlockColSelBoxes, IM
         });
     }
 
-    private static string ToOffsetCode(int value)
+    private Block GetMultiblockHelper(IWorldAccessor world, int dx, int dy, int dz)
     {
-        if (value < 0) return "n" + Math.Abs(value);
-        if (value > 0) return "p" + value;
-        return "0";
+        string path = "multiblock-monolithic" + OffsetToString(dx) + OffsetToString(dy) + OffsetToString(dz);
+
+        // Vanilla-nah: erst eigene Domain, dann game:
+        Block helper = world.GetBlock(new AssetLocation(block.Code.Domain, path));
+        if (helper != null && helper.Id != 0) return helper;
+
+        helper = world.GetBlock(new AssetLocation("game", path));
+        return helper;
+    }
+
+    private static string OffsetToString(int value)
+    {
+        if (value == 0) return "-0";
+        if (value < 0) return "-n" + (-value);
+        return "-p" + value;
     }
 
     public override void OnBlockRemoved(IWorldAccessor world, BlockPos pos, ref EnumHandling handling)
@@ -237,12 +263,21 @@ public class BlockBehaviorGate : StrongBlockBehavior, IMultiBlockColSelBoxes, IM
         }
     }
 
-    public override bool OnBlockInteractStart(IWorldAccessor world,IPlayer byPlayer,BlockSelection blockSel,ref EnumHandling handling)
+    public override bool OnBlockInteractStart(
+        IWorldAccessor world,
+        IPlayer byPlayer,
+        BlockSelection blockSel,
+        ref EnumHandling handling)
     {
         return GetBE(world.BlockAccessor, blockSel.Position)?.TryToggle(byPlayer, ref handling) == true;
     }
 
-    public override void Activate(IWorldAccessor world,Caller caller, BlockSelection blockSel,ITreeAttribute activationArgs,ref EnumHandling handled)
+    public override void Activate(
+        IWorldAccessor world,
+        Caller caller,
+        BlockSelection blockSel,
+        ITreeAttribute activationArgs,
+        ref EnumHandling handled)
     {
         var be = GetBE(world.BlockAccessor, blockSel.Position);
         if (be == null) return;
@@ -279,8 +314,11 @@ public class BlockBehaviorGate : StrongBlockBehavior, IMultiBlockColSelBoxes, IM
         var be = GetRootBE(blockAccessor, pos, offset);
         if (be == null) return null;
 
+        // offset = child -> root
+        // für lokalen Part brauchen wir root -> child
         Vec3i worldOffset = new Vec3i(-offset.X, -offset.Y, -offset.Z);
         Vec3i localOffset = InverseRotateOffset(worldOffset.X, worldOffset.Y, worldOffset.Z, be.RotDeg);
+
         return be.GetBoxesForPart(localOffset.X, localOffset.Y, localOffset.Z);
     }
 
@@ -352,7 +390,13 @@ public class BlockBehaviorGate : StrongBlockBehavior, IMultiBlockColSelBoxes, IM
         return 1;
     }
 
-    public bool MBCanAttachBlockAt(IBlockAccessor blockAccessor,Block block,BlockPos pos, BlockFacing blockFace,Cuboidi attachmentArea,Vec3i offsetInv)
+    public bool MBCanAttachBlockAt(
+        IBlockAccessor blockAccessor,
+        Block block,
+        BlockPos pos,
+        BlockFacing blockFace,
+        Cuboidi attachmentArea,
+        Vec3i offsetInv)
     {
         return false;
     }
@@ -361,6 +405,7 @@ public class BlockBehaviorGate : StrongBlockBehavior, IMultiBlockColSelBoxes, IM
     {
         return null;
     }
+
     public override void GetHeldItemName(StringBuilder sb, ItemStack itemStack)
     {
         if (block.Variant.ContainsKey("wood"))

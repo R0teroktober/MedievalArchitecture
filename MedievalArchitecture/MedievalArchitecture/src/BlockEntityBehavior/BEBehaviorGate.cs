@@ -12,9 +12,13 @@ public class BEBehaviorGate : BEBehaviorAnimatable, IInteractable, IRotatable
     private bool opened;
     private MeshData mesh;
 
-    private Cuboidf[] closedBoxes = Array.Empty<Cuboidf>();
+    private Cuboidf[] defaultBoxes = Array.Empty<Cuboidf>();
+
     private Dictionary<string, Cuboidf[]> openedBoxesBaseByPart = new();
+    private Dictionary<string, Cuboidf[]> closedBoxesBaseByPart = new();
+
     private readonly Dictionary<string, Cuboidf[]> openedBoxesByPart = new();
+    private readonly Dictionary<string, Cuboidf[]> closedBoxesByPart = new();
 
     private BlockBehaviorGate gateBh;
 
@@ -31,7 +35,9 @@ public class BEBehaviorGate : BEBehaviorAnimatable, IInteractable, IRotatable
         base.Initialize(api, properties);
 
         gateBh = Blockentity.Block.GetBehavior<BlockBehaviorGate>();
-        openedBoxesBaseByPart = LoadOpenedBoxes(Blockentity.Block.Attributes?["openedCollisionBoxes"]);
+
+        openedBoxesBaseByPart = LoadBoxes(Blockentity.Block.Attributes?["openedCollisionBoxes"]);
+        closedBoxesBaseByPart = LoadBoxes(Blockentity.Block.Attributes?["closedCollisionBoxes"]);
 
         RefreshShape();
 
@@ -50,8 +56,24 @@ public class BEBehaviorGate : BEBehaviorAnimatable, IInteractable, IRotatable
 
     public Cuboidf[] GetBoxesForPart(int dx, int dy, int dz)
     {
-        if (!opened) return closedBoxes;
-        return openedBoxesByPart.TryGetValue(Key(dx, dy, dz), out Cuboidf[] boxes) ? boxes : closedBoxes;
+        string key = Key(dx, dy, dz);
+
+        if (opened)
+        {
+            if (openedBoxesByPart.TryGetValue(key, out Cuboidf[] openedPartBoxes))
+            {
+                return openedPartBoxes;
+            }
+
+            return defaultBoxes;
+        }
+
+        if (closedBoxesByPart.TryGetValue(key, out Cuboidf[] closedPartBoxes))
+        {
+            return closedPartBoxes;
+        }
+
+        return defaultBoxes;
     }
 
     public bool IsSideSolid(BlockFacing face)
@@ -97,7 +119,7 @@ public class BEBehaviorGate : BEBehaviorAnimatable, IInteractable, IRotatable
         AssetLocation sound = opened ? gateBh?.OpenSound : gateBh?.CloseSound;
         float pitch = opened ? 1.1f : 0.9f;
 
-        Api.World.PlaySoundAt(sound,Pos.X,Pos.Y, Pos.Z,byPlayer, EnumSoundType.Sound,pitch);
+        Api.World.PlaySoundAt(sound, Pos.X, Pos.Y, Pos.Z, byPlayer, EnumSoundType.Sound, pitch);
 
         Blockentity.MarkDirty(true);
 
@@ -122,13 +144,16 @@ public class BEBehaviorGate : BEBehaviorAnimatable, IInteractable, IRotatable
         else
         {
             float easingSpeed = Blockentity.Block.Attributes?["easingSpeed"].AsFloat(10) ?? 10;
+            float animationSpeed = Blockentity.Block.Attributes?["animationSpeed"].AsFloat(1) ?? 1;
 
             animUtil.StartAnimation(new AnimationMetaData()
             {
                 Animation = "opened",
                 Code = "opened",
+                AnimationSpeed = animationSpeed,
                 EaseInSpeed = easingSpeed,
-                EaseOutSpeed = easingSpeed
+                EaseOutSpeed = 1f
+
             });
         }
 
@@ -187,12 +212,18 @@ public class BEBehaviorGate : BEBehaviorAnimatable, IInteractable, IRotatable
     {
         Matrixf tf = GetTransformMatrix();
 
-        closedBoxes = TransformBoxes(Blockentity.Block.CollisionBoxes ?? Array.Empty<Cuboidf>(), tf);
+        defaultBoxes = TransformBoxes(Blockentity.Block.CollisionBoxes ?? Array.Empty<Cuboidf>(), tf);
 
         openedBoxesByPart.Clear();
         foreach (var entry in openedBoxesBaseByPart)
         {
             openedBoxesByPart[entry.Key] = TransformBoxes(entry.Value, tf);
+        }
+
+        closedBoxesByPart.Clear();
+        foreach (var entry in closedBoxesBaseByPart)
+        {
+            closedBoxesByPart[entry.Key] = TransformBoxes(entry.Value, tf);
         }
     }
 
@@ -217,7 +248,7 @@ public class BEBehaviorGate : BEBehaviorAnimatable, IInteractable, IRotatable
             .Translate(-0.5f, -0.5f, -0.5f);
     }
 
-    private static Dictionary<string, Cuboidf[]> LoadOpenedBoxes(JsonObject json)
+    private static Dictionary<string, Cuboidf[]> LoadBoxes(JsonObject json)
     {
         var result = new Dictionary<string, Cuboidf[]>();
         if (json == null || !json.Exists) return result;
@@ -271,6 +302,7 @@ public class BEBehaviorGate : BEBehaviorAnimatable, IInteractable, IRotatable
         base.FromTreeAttributes(tree, worldAccessForResolve);
 
         bool beforeOpened = opened;
+        int beforeRotDeg = RotDeg;
 
         RotDeg = tree.GetInt("rotDeg");
         opened = tree.GetBool("opened");
@@ -282,7 +314,11 @@ public class BEBehaviorGate : BEBehaviorAnimatable, IInteractable, IRotatable
 
         if (Api != null && Api.Side == EnumAppSide.Client)
         {
-            UpdateMesh();
+            if (beforeRotDeg != RotDeg)
+            {
+                UpdateMesh();
+            }
+
             UpdateBoxes();
 
             if (opened && !beforeOpened && animUtil != null && !animUtil.activeAnimationsByAnimCode.ContainsKey("opened"))
@@ -301,8 +337,13 @@ public class BEBehaviorGate : BEBehaviorAnimatable, IInteractable, IRotatable
         tree.SetBool("opened", opened);
     }
 
-    public void OnTransformed(IWorldAccessor worldAccessor, ITreeAttribute tree,int degreeRotation,Dictionary<int, AssetLocation> oldBlockIdMapping,Dictionary<int, AssetLocation> oldItemIdMapping,EnumAxis? flipAxis
-)
+    public void OnTransformed(
+        IWorldAccessor worldAccessor,
+        ITreeAttribute tree,
+        int degreeRotation,
+        Dictionary<int, AssetLocation> oldBlockIdMapping,
+        Dictionary<int, AssetLocation> oldItemIdMapping,
+        EnumAxis? flipAxis)
     {
         int rotDeg = tree.GetInt("rotDeg");
         tree.SetInt("rotDeg", GameMath.Mod(rotDeg - degreeRotation, 360));

@@ -168,7 +168,8 @@
     "confession:construct3": "2/3 firewood)",
     "confession:archway-brazier-help-text": "You'll need 4 <a href=\"handbook://item-confession:brazierpart\">brazier parts</a> and 1 <a href=\"handbook://item-hoop-iron\">metal hoop</a> of any kind. Assemble the empty brazier and place it. Add 3 more pieces of firewood until you can light it",
 
-
+    //gates
+  "confession:block-drawbridge-small": "Small drawbridge",
 
     // configs
     "confession:setting-enable-small-archways": "Enable small archways",
