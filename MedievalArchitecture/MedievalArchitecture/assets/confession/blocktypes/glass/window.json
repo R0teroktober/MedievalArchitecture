@@ -9,7 +9,12 @@
 	"lightabsorption": 0,
 	"sideopaque": {"all": false},
 	"sideao": {"all": true},
-	"sidesolid": {"all":  false},
+	"sidesolidByType": {
+		"*-north": {"all": false, "north": true, "south": true},
+		"*-south": {"all": false, "north": true, "south": true},
+		"*-east": {"all": false, "east": true, "west": true},
+		"*-west": {"all": false, "east": true, "west": true}
+	},
 	"variantgroups": [{"code": "side","loadFromProperties": "abstract/horizontalorientation"}],
 	"attributes": {
 		"handbook": {"groupBy": [ "window-*" ],"excludeByType": {"west": true, "east": true, "south": true}}
