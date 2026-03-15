@@ -21,6 +21,7 @@ namespace MedievalArchitecture
             api.RegisterBlockEntityClass("BlockEntityConstructable", typeof(BlockEntityConstructable));
             api.RegisterBlockEntityClass("BlockEntityBrazier", typeof(BlockEntityBrazier));
             api.RegisterBlockEntityBehaviorClass("DoubleTrapDoorBE", typeof(BEBehaviorDoubleTrapDoor));
+            //api.RegisterBlockEntityBehaviorClass("Gate", typeof(BEBehaviorGateold));
             api.RegisterBlockEntityBehaviorClass("Gate", typeof(BEBehaviorGate));
             Config = api.LoadModConfig<VariantTypesConfig>("variant-types-config.json");
             if (Config == null)

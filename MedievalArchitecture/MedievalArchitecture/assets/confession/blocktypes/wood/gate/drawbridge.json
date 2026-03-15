@@ -8,11 +8,12 @@
     "facecullmode": "nevercull",
     "lightabsorption": 1,
     "sideopaque": { "all": false },
-    "sidesolid": {"up": false},
+    "sidesolid": { "up": false },
     "class": "BlockGeneric",
     "entityClass": "Generic",
-    "entityBehaviors": [ { "name": "Gate" } ],
-    "variantgroups": [{"code": "size","states": [ "small" ]}],
+    "entityBehaviors": [
+        { "name": "Gate" }
+    ],
     "attributesByType": {
         "*-small": {
             "handbook": { "groupBy": [ "drawbridge-*" ] },
@@ -21,86 +22,136 @@
             "width": 2,
             "length": 3,
             "height": 3,
-            "openSound": "game:sounds/block/door",
-            "closeSound": "game:sounds/block/door",
+            "openSound": "confession:sounds/block/drawbridgeopen",
+            "closeSound": "confession:sounds/block/drawbridgeclose",
             "easingSpeed": 10,
             "animationSpeed": 0.8,
             "openedCollisionBoxes": { // In this case the drawbridge is actually up (closed) since open = activated!          
                 "0,0,0": [ [ 0, 0, 0, 1, 1, 0.2 ] ], //1
-                "0,0,1": [],  
-                "0,0,2": [],  
+                "0,0,1": [],
+                "0,0,2": [],
                 "1,0,0": [ [ 0, 0, 0, 1, 1, 0.2 ] ],
-                "1,0,1": [], 
-                "1,0,2": [],  //6
+                "1,0,1": [],
+                "1,0,2": [], //6
 
-                "0,1,0": [ [ 0, 0, 0.2, 1, 1, 0.4 ] ],  //7
-                "0,1,1": [],   
-                "0,1,2": [],   
+                "0,1,0": [ [ 0, 0, 0.2, 1, 1, 0.4 ] ], //7
+                "0,1,1": [],
+                "0,1,2": [],
                 "1,1,0": [ [ 0, 0, 0.2, 1, 1, 0.4 ] ],
                 "1,1,1": [],
-                "1,1,2": [],  //12
+                "1,1,2": [], //12
 
-                "0,2,0": [ [ 0, 0, 0.4, 1, 1, 0.6 ] ],  //13
+                "0,2,0": [ [ 0, 0, 0.4, 1, 1, 0.6 ] ], //13
                 "0,2,1": [],
                 "0,2,2": [],
                 "1,2,0": [ [ 0, 0, 0.4, 1, 1, 0.6 ] ],
                 "1,2,1": [],
-                "1,2,2": []  //18         
+                "1,2,2": [] //18         
 
             },
             "closedCollisionBoxes": { // In this case the drawbridge is actually down (opened) since closed = not activated = default!
                 "0,0,0": [ [ 0, 0, 0, 1, 0.1, 1 ] ], //1
-                "0,0,1": [ [ 0, 0, 0, 1, 0.1, 1 ] ],  
-                "0,0,2": [ [ 0, 0, 0, 1, 0.1, 1 ] ],  
+                "0,0,1": [ [ 0, 0, 0, 1, 0.1, 1 ] ],
+                "0,0,2": [ [ 0, 0, 0, 1, 0.1, 1 ] ],
                 "1,0,0": [ [ 0, 0, 0, 1, 0.1, 1 ] ],
-                "1,0,1": [ [ 0, 0, 0, 1, 0.1, 1 ] ], 
-                "1,0,2": [ [ 0, 0, 0, 1, 0.1, 1 ] ],  //6
+                "1,0,1": [ [ 0, 0, 0, 1, 0.1, 1 ] ],
+                "1,0,2": [ [ 0, 0, 0, 1, 0.1, 1 ] ], //6
 
-                "0,1,0": [],  //7
-                "0,1,1": [],   
-                "0,1,2": [],   
+                "0,1,0": [], //7
+                "0,1,1": [],
+                "0,1,2": [],
                 "1,1,0": [],
                 "1,1,1": [],
-                "1,1,2": [],  //12
+                "1,1,2": [], //12
 
-                "0,2,0": [],  //13
+                "0,2,0": [], //13
                 "0,2,1": [],
                 "0,2,2": [],
                 "1,2,0": [],
                 "1,2,1": [],
-                "1,2,2": []  //18
-            }
+                "1,2,2": [] //18
+            },
+            "defaultType": "oak",
+            "types": [ "oak", "pine" ]
         }
     },
-    "behaviors": [{ "name": "Lockable" },{ "name": "BlockBehaviorGate" }],
+    "behaviors": [
+        { "name": "Lockable" },
+        { "name": "BlockBehaviorGate" }
+    ],
+    "variantgroups": [
+        {
+            "code": "size",
+            "states": [ "small" ]
+        }
+    ],
     "shape": { "base": "block/wood/gate/drawbridge-{size}" },
-    "shapeinventory": { "base": "game:block/wood/crate/normal-closed", "overlays":  [{ "base": "game:block/wood/crate/label-paper" }] },
+    "shapeinventory": {
+        "base": "game:block/wood/crate/normal-closed",
+        "overlays": [ { "base": "game:block/wood/crate/label-paper" } ]
+    },
     "textures": {
-        "materialplanks": { "base": "game:block/wood/planks/oak1" },
-        "frame-generic": { "base": "game:block/wood/crate/frame-generic" },
         "sides": { "base": "game:block/wood/crate/normal" },
+        "frame-generic": { "base": "game:block/wood/crate/frame-generic" },
+        "labelbase": { "base": "block/wood/gate/label-small" },
+
+        "materialplanks": { "base": "game:block/wood/planks/oak1" },
         "material": { "base": "game:block/wood/debarked/oak" },
         "black": { "base": "game:block/black" },
-        "labelbase": { "base": "block/wood/gate/label-small" },
         "metal": { "base": "game:block/metal/sheet-plain/iron3" },
-        "metalrivets": { "base": "game:block/metal/sheet/iron1" }
+        "metalrivets": { "base": "game:block/metal/sheet/iron1" },
+
+        "oak-materialplanks": { "base": "game:block/wood/planks/oak1" },
+        "oak-material": { "base": "game:block/wood/debarked/oak" },
+        "oak-black": { "base": "game:block/black" },
+        "oak-metal": { "base": "game:block/metal/sheet-plain/iron3" },
+        "oak-metalrivets": { "base": "game:block/metal/sheet/iron1" },
+
+        "pine-materialplanks": { "base": "game:block/wood/planks/pine1" },
+        "pine-material": { "base": "game:block/wood/debarked/pine" },
+        "pine-black": { "base": "game:block/black" },
+        "pine-metal": { "base": "game:block/metal/sheet-plain/iron3" },
+        "pine-metalrivets": { "base": "game:block/metal/sheet/iron1" }
     },
     "heldTpIdleAnimation": "holdunderarm",
     "tpHandTransform": {
-		"translation": { "x": -1.3, "y": -0.5, "z": -0.7 },
-		"rotation": { "x": 0, "y": 90, "z": -102 },
-		"scale": 0.44
-	},
-	"guiTransform": {
-		"origin": { "x": 0.5, "y": 0.5, "z": 0.5 },
-		"scale": 1.16
-	},
+        "translation": {
+            "x": -1.3,
+            "y": -0.5,
+            "z": -0.7
+        },
+        "rotation": {
+            "x": 0,
+            "y": 90,
+            "z": -102
+        },
+        "scale": 0.44
+    },
+    "guiTransform": {
+        "origin": {
+            "x": 0.5,
+            "y": 0.5,
+            "z": 0.5
+        },
+        "scale": 1.16
+    },
 
-    
-    "creativeinventory": {
-        "general": [ "*" ],
-        "construction": [ "*" ],
-        "confession": [ "*" ]
-    }
+    "creativeinventoryStacks": [
+        {
+            "tabs": [ "confession", "construction", "general" ],
+            "stacks": [
+                {
+                    "type": "block",
+                    "code": "drawbridge-small",
+                    "attributes": { "type": "oak" }
+                },
+                {
+                    "type": "block",
+                    "code": "drawbridge-small",
+                    "attributes": { "type": "pine" }
+                }
+            ]
+        }
+    ]
 
 }
