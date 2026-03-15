@@ -175,7 +175,7 @@
         }
     },
    {
-        "ingredientPattern": "LP_,PGP,_P_",
+        "ingredientPattern": "L__,PGP,_P_",
         "ingredients": {
             "G": { "type": "block", "code": "game:glassslab-*-down-free", "name": "glass", "allowedVariants": ["plain", "blue", "brown", "green", "pink", "quartz", "red", "vintage", "violet", "yellow"] },
             "L": { "type": "item", "code": "game:metalbit-lead", "quantity": 5 },
