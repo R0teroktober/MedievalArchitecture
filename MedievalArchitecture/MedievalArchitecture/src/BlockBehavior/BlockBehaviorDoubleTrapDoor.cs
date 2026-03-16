@@ -113,13 +113,7 @@ namespace MedievalArchitecture
         {
             var beh = world.BlockAccessor.GetBlockEntity(pos)?.GetBehavior<BEBehaviorDoubleTrapDoor>();
 
-            if (beh != null && beh.Opened)
-            {
-                decalModelData = decalModelData.Rotate(Vec3f.Half, 90 * GameMath.DEG2RAD, 0, 0);
-                decalModelData = decalModelData.Scale(Vec3f.Half, 1, -1f, 1);
-            }
 
-            base.GetDecal(world, pos, decalTexSource, ref decalModelData, ref blockModelData, ref handled);
         }
 
         public override Cuboidf[] GetCollisionBoxes(IBlockAccessor blockAccessor, BlockPos pos, ref EnumHandling handled)
