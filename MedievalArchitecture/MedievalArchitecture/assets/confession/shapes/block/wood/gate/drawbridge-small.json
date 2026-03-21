@@ -1,6 +1,6 @@
 {
 	"editor": {
-		"collapsedPaths": ",Root/origin/originPullyBeam/metalbar2,Root/origin/originPullyBeam/beam1,Root/origin/originPullyBeam/metalbar1/hinge1/originChain2,Root/origin/originPullyBeam/metalbar1",
+		"collapsedPaths": ",Root/origin/originPullyBeam/metalbar2/hinge2/originChain2,Root/origin/originPullyBeam/metalbar1/hinge1/originChain1,Root/origin/OriginDrawbridge,Root/origin/originPullyBeam/beam1,Root/origin/originPullyBeam/metalbar1/hinge1/originChain2",
 		"allAngles": false,
 		"entityTextureMode": false
 	},
@@ -18,10 +18,9 @@
 	"elements": [
 		{
 			"name": "origin",
-			"from": [ 24.0, 0.0, 8.0 ],
-			"to": [ 24.0, 0.0, 8.0 ],
-			"rotationOrigin": [ 24.0, 0.0, 8.0 ],
-			"rotationY": -180.0,
+			"from": [ 8.0, 0.0, 8.0 ],
+			"to": [ 8.0, 0.0, 8.0 ],
+			"rotationOrigin": [ 8.0, 0.0, 8.0 ],
 			"faces": {
 				"north": { "texture": "#null", "uv": [ 0.0, 0.0, 0.5, 0.5 ] },
 				"east": { "texture": "#null", "uv": [ 0.0, 0.0, 0.5, 0.5 ] },
@@ -2291,28 +2290,26 @@
 		{
 			"name": "opened",
 			"code": "opened",
-			"quantityframes": 60,
+			"quantityframes": 30,
 			"onActivityStopped": "Rewind",
 			"onAnimationEnd": "Hold",
-			"easeAnimationSpeed": true,
 			"keyframes": [
 				{
 					"frame": 0,
 					"elements": {
 						"originPullyBeam": { "offsetX": 0.0, "offsetY": 0.0, "offsetZ": 0.0, "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 0.0 },
 						"OriginDrawbridge": { "offsetX": 0.0, "offsetY": 0.0, "offsetZ": 0.0, "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 0.0 },
-						"Board3": { "offsetX": 0.0, "offsetY": 0.0, "offsetZ": 0.0, "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 0.0 },
 						"originChain1": { "offsetX": 0.0, "offsetY": 0.0, "offsetZ": 0.0, "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 0.0 },
 						"originChain2": { "offsetX": 0.0, "offsetY": 0.0, "offsetZ": 0.0, "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 0.0 }
 					}
 				},
 				{
-					"frame": 59,
+					"frame": 29,
 					"elements": {
 						"OriginDrawbridge": { "offsetX": 0.0, "offsetY": 0.0, "offsetZ": 0.0, "rotationX": 80.0, "rotationY": 0.0, "rotationZ": 0.0 },
 						"originPullyBeam": { "offsetX": 0.0, "offsetY": 0.0, "offsetZ": 0.0, "rotationX": 80.0, "rotationY": 0.0, "rotationZ": 0.0 },
-						"originChain1": { "offsetX": 0.0, "offsetY": 0.0, "offsetZ": 0.0, "rotationX": -80.5, "rotationY": 0.0, "rotationZ": 0.0 },
-						"originChain2": { "offsetX": 0.0, "offsetY": 0.0, "offsetZ": 0.0, "rotationX": -80.5, "rotationY": 0.0, "rotationZ": 0.0 }
+						"originChain1": { "offsetX": 0.0, "offsetY": 0.0, "offsetZ": 0.0, "rotationX": -80.0, "rotationY": 0.0, "rotationZ": 0.0 },
+						"originChain2": { "offsetX": 0.0, "offsetY": 0.0, "offsetZ": 0.0, "rotationX": -80.0, "rotationY": 0.0, "rotationZ": 0.0 }
 					}
 				}
 			]

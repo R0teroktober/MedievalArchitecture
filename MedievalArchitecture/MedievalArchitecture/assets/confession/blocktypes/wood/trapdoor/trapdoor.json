@@ -8,221 +8,278 @@
 	"facecullmode": "nevercull",
 	"lightabsorption": 1,
 	"sideopaque": { "all": false },
-	"sidesolid": {
-		"up": false
+	"sidesolidByType": {
+		"*sloped-*": {
+			"all": true,
+			"up": false
+		},
+		"*": {
+			"all": false,
+			"down": true
+		}
 	},
-	"class": "BlockGeneric",
+	"class": "BlockGate",
 	"entityClass": "Generic",
-	"entityBehaviors": [ { "name": "Gate" } ],
+	"entityBehaviors": [
+		{ "name": "Gate" }
+	],
+	"behaviors": [
+		{ "name": "Lockable" }
+	],
 	"variantgroups": [
 		{
 			"code": "style",
 			"states": [ "flat", "sloped", "double", "doublesloped" ]
+		},
+		{
+			"code": "wood",
+			"states": [ "oak", "aged", "birch", "maple", "pine", "redwood", "larch", "ebony", "baldcypress", "acacia", "kapok", "purpleheart", "walnut" ]
 		}
 	],
 	"attributesByType": {
-		"*-flat": {
-			"defaultType": "oak",
-			"types": [ "oak", "pine" ],
+		"*-flat-*": {
 			"handbook": { "groupBy": [ "trapdoor-*" ] },
 			"reinforcable": true,
 			"airtight": true,
 			"width": 1,
 			"length": 2,
 			"height": 1,
-			"openSound": "game:sounds/block/door",
-			"closeSound": "game:sounds/block/door",
 			"easingSpeed": 10,
-			"openedCollisionBoxes": {
-				"0,0,0": [ [ 0.9, 0, 0, 1, 1, 1 ] ],
-				"0,0,1": [ [ 0.9, 0.0, 0.0, 1, 1, 1 ] ]
-			}
+			"boxesOpen": [
+				{
+					"offset": [ 0, 0, 0 ],
+					"boxes": [ [ 0, 0, 0, 0.1, 1, 1 ] ]
+				},
+				{
+					"offset": [ 0, 0, 1 ],
+					"boxes": [ [ 0, 0, 0, 0.1, 1, 1 ] ]
+				}
+			],
+			"boxesClosed": [
+				{
+					"offset": [ 0, 0, 0 ],
+					"boxes": [ [ 0, 0, 0, 1, 0.2, 1 ] ]
+				},
+				{
+					"offset": [ 0, 0, 1 ],
+					"boxes": [ [ 0, 0, 0, 1, 0.2, 1 ] ]
+				}
+			]
 		},
-		"*-sloped": {
-			"defaultType": "oak",
-			"types": [ "oak", "pine" ],
+		"*-sloped-*": {
 			"handbook": { "groupBy": [ "trapdoor-*" ] },
 			"reinforcable": true,
 			"airtight": true,
 			"width": 1,
 			"length": 2,
 			"height": 1,
-			"openSound": "game:sounds/block/door",
-			"closeSound": "game:sounds/block/door",
-			"easingSpeed": 10,
-			"openedCollisionBoxes": {
-				"0,0,0": [
-					[ 0.9, 0, 0, 1, 1, 1 ],
-					[ 0, 0, 0, 0.1, 0.5, 1 ]
-				],
-				"0,0,1": [
-					[ 0.9, 0.0, 0.0, 1, 1, 1 ],
-					[ 0, 0, 0, 0.1, 1, 1 ]
-				]
-			}
+			"boxesOpen": [
+				{
+					"offset": [ 0, 0, 0 ],
+					"boxes": [ [ 0, 0, 0, 0.1, 1, 1 ] ]
+				},
+				{
+					"offset": [ 0, 0, 1 ],
+					"boxes": [
+						[ 0, 0, 0, 0.1, 1, 1 ],
+						[ 0, 0.9, 0, 1, 1, 0.1 ]
+					]
+				}
+			],
+			"boxesClosed": [
+				{
+					"offset": [ 0, 0, 0 ],
+					"boxes": [ [ 0, 0, 0, 1, 0.8, 1 ] ]
+				},
+				{
+					"offset": [ 0, 0, 1 ],
+					"boxes": [ [ 0, 0, 0, 1, 0.8, 1 ] ]
+				}
+			]
 		},
-		"*-double": {
-			"defaultType": "oak",
-			"types": [ "oak", "pine" ],
+		"*-double-*": {
 			"handbook": { "groupBy": [ "trapdoor-*" ] },
 			"reinforcable": true,
 			"airtight": true,
 			"width": 2,
 			"length": 2,
 			"height": 1,
-			"openSound": "game:sounds/block/door",
-			"closeSound": "game:sounds/block/door",
-			"easingSpeed": 10,
-			"openedCollisionBoxes": {
-				"0,0,0": [ [ 0, 0, 0, 0.1, 1, 1 ] ],
-				"0,0,1": [ [ 0, 0, 0, 0.1, 1, 1 ] ],
-				"1,0,0": [ [ 0.9, 0.0, 0.0, 1, 1, 1 ] ],
-				"1,0,1": [ [ 0.9, 0.0, 0.0, 1, 1, 1 ] ]
-			}
+			"boxesOpen": [
+				{
+					"offset": [ 0, 0, 0 ],
+					"boxes": [ [ 0, 0, 0, 0.1, 1, 1 ] ]
+				},
+				{
+					"offset": [ 1, 0, 0 ],
+					"boxes": [ [ 0, 0, 0.9, 1, 1, 1 ] ]
+				},
+				{
+					"offset": [ 0, 0, 1 ],
+					"boxes": [ [ 0, 0, 0, 0.1, 1, 1 ] ]
+				},
+				{
+					"offset": [ 1, 0, 1 ],
+					"boxes": [ [ 0, 0, 0.9, 1, 1, 1 ] ]
+				}
+			],
+			"boxesClosed": [
+				{
+					"offset": [ 0, 0, 0 ],
+					"boxes": [ [ 0, 0, 0, 1, 0.2, 1 ] ]
+				},
+				{
+					"offset": [ 1, 0, 0 ],
+					"boxes": [ [ 0, 0, 0, 1, 0.2, 1 ] ]
+				},
+				{
+					"offset": [ 0, 0, 1 ],
+					"boxes": [ [ 0, 0, 0, 1, 0.2, 1 ] ]
+				},
+				{
+					"offset": [ 1, 0, 1 ],
+					"boxes": [ [ 0, 0, 0, 1, 0.2, 1 ] ]
+				}
+			]
 		},
-		"*-doublesloped": {
-			"defaultType": "oak",
-			"types": [ "oak", "pine" ],
+		"*-doublesloped-*": {
 			"handbook": { "groupBy": [ "trapdoor-*" ] },
 			"reinforcable": true,
 			"airtight": true,
 			"width": 2,
 			"length": 2,
 			"height": 1,
-			"openSound": "game:sounds/block/door",
-			"closeSound": "game:sounds/block/door",
-			"easingSpeed": 10,
-			"openedCollisionBoxes": {
-				"0,0,0": [ [ 0, 0, 0, 0.1, 1, 1 ] ],
-				"0,0,1": [
-					[ 0, 0, 0, 0.1, 1, 1 ],
-					[ 0.1, 0, 0.9, 1, 1, 1 ]
-				],
-				"1,0,0": [ [ 0.9, 0.0, 0.0, 1, 1, 1 ] ],
-				"1,0,1": [
-					[ 0.9, 0.0, 0.0, 1, 1, 1 ],
-					[ 0.1, 0, 0.9, 1, 1, 1 ]
-				]
-			}
+			"boxesOpen": [
+				{
+					"offset": [ 0, 0, 0 ],
+					"boxes": [ [ 0, 0, 0, 0.1, 1, 1 ] ]
+				},
+				{
+					"offset": [ 1, 0, 0 ],
+					"boxes": [
+						[ 0.9, 0, 0, 1, 1, 1 ]
+					]
+				},
+				{
+					"offset": [ 0, 0, 1 ],
+					"boxes": [
+						[ 0, 0, 0, 0.1, 1, 1 ],
+						[ 0, 0.9, 0, 1, 1, 0.1 ]
+					]
+				},
+				{
+					"offset": [ 1, 0, 1 ],
+					"boxes": [
+						[ 0.9, 0, 0, 1, 1, 1 ],
+						[ 0, 0.9, 0, 1, 1, 0.1 ]
+					]
+				}
+			],
+			"boxesClosed": [
+				{
+					"offset": [ 0, 0, 0 ],
+					"boxes": [ [ 0, 0, 0, 1, 0.4, 1 ] ]
+				},
+				{
+					"offset": [ 1, 0, 0 ],
+					"boxes": [ [ 0, 0, 0, 1, 0.4, 1 ] ]
+				},
+				{
+					"offset": [ 0, 0, 1 ],
+					"boxes": [ [ 0, 0, 0, 1, 0.8, 1 ] ]
+				},
+				{
+					"offset": [ 1, 0, 1 ],
+					"boxes": [ [ 0, 0, 0, 1, 0.8, 1 ] ]
+				}
+			]
 		}
 	},
-	"behaviors": [
-		{ "name": "Lockable" },
-		{ "name": "BlockBehaviorGate" }
-	],
+
 	"shape": { "base": "block/wood/trapdoor/trapdoor-{style}" },
 	"textures": {
-		"oak-materialplanks": { "base": "game:block/wood/planks/oak1" },
-		"oak-material": { "base": "game:block/wood/debarked/oak" },
-		"oak-generic": { "base": "game:block/wood/planks/generic" },
-		"oak-metal": { "base": "game:block/metal/sheet-plain/iron1" },
-		"pine-materialplanks": { "base": "game:block/wood/planks/pine1" },
-		"pine-material": { "base": "game:block/wood/debarked/pine" },
-		"pine-generic": { "base": "game:block/wood/planks/generic" },
-		"pine-metal": { "base": "game:block/metal/sheet-plain/iron1" }
-	},
-	"collisionBoxesByType": {
+		"materialplanks": { "base": "game:block/wood/planks/{wood}1" },
+		"material": { "base": "game:block/wood/debarked/{wood}" },
+		"generic": { "base": "game:block/wood/planks/generic" },
+		"metal": { "base": "game:block/metal/sheet-plain/iron1" }
 
-		"*-sloped-*": [
-			{
-				"x1": 0,
-				"y1": 0,
-				"z1": 0,
-				"x2": 1,
-				"y2": 0.8,
-				"z2": 1
-			}
-		],
-		"*-doublesloped-*": [
-			{
-				"x1": 0,
-				"y1": 0,
-				"z1": 0,
-				"x2": 1,
-				"y2": 0.8,
-				"z2": 1
-			}
-		],
-		"*": [
-			{
-				"x1": 0,
-				"y1": 0,
-				"z1": 0,
-				"x2": 1,
-				"y2": 0.2,
-				"z2": 1
-			}
-		]
 	},
 	"guiTransformByType": {
 		"*-double-*": {
 			"translation": {
 				"x": 1,
-				"y": -10,
+				"y": 0,
+				"z": 0
+			},
+			"rotation": {
+				"x": -22.6,
+				"y": -135,
 				"z": 0
 			},
 			"origin": {
 				"x": 1,
 				"y": 0.6,
-				"z": 1
+				"z": 0
 			},
-			"scale": 0.7
+			"scale": 0.6
 		},
 		"*-sloped-*": {
 			"translation": {
 				"x": 1,
-				"y": -10,
+				"y": 0,
+				"z": 0
+			},
+			"rotation": {
+				"x": -22.6,
+				"y": -135,
 				"z": 0
 			},
 			"origin": {
 				"x": 0.5,
 				"y": 0.8,
-				"z": 1
+				"z": 0
 			},
-			"scale": 0.8
+			"scale": 0.7
 		},
 		"*-doublesloped-*": {
 			"translation": {
 				"x": 1,
-				"y": -10,
+				"y": 0,
+				"z": 0
+			},
+			"rotation": {
+				"x": -22.6,
+				"y": -135,
 				"z": 0
 			},
 			"origin": {
 				"x": 1,
 				"y": 0.6,
-				"z": 1
+				"z": 0
 			},
-			"scale": 0.7
+			"scale": 0.6
 		},
 		"*": {
 			"translation": {
 				"x": 1,
-				"y": -10,
+				"y": 0,
+				"z": 0
+			},
+			"rotation": {
+				"x": -22.6,
+				"y": -135,
 				"z": 0
 			},
 			"origin": {
 				"x": 0.5,
-				"y": 0.5,
-				"z": 1
-			}
+				"y": 0.8,
+				"z": 0
+			},
+			"scale": 0.7
 		}
 	},
-	"creativeinventoryStacks": [
-		{
-			"tabs": [ "confession", "construction", "general" ],
-			"stacks": [
-				{
-					"type": "block",
-					"code": "trapdoor-flat",
-					"attributes": { "type": "oak" }
-				},
-				{
-					"type": "block",
-					"code": "trapdoor-double",
-					"attributes": { "type": "pine" }
-				}
-			]
-		}
-	]
-
+	"creativeinventory": {
+		"general": [ "*" ],
+		"construction": [ "*" ],
+		"confession": [ "*" ]
+	}
 }

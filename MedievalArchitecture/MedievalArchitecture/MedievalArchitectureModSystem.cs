@@ -13,15 +13,14 @@ namespace MedievalArchitecture
             base.Start(api);
             api.RegisterBlockClass("BlockMultiblockArchway", typeof(BlockMultiblockArchway));
             api.RegisterBlockClass("BlockBrazier", typeof(BlockBrazier));
+            api.RegisterBlockClass("BlockGate", typeof(BlockGateBase));
             api.RegisterBlockBehaviorClass("BlockBehaviorArchway", typeof(BlockBehaviorArchway));
             api.RegisterBlockBehaviorClass("BlockBehaviorCancelInteraction", typeof(BlockBehaviorCancelInteraction));
             api.RegisterBlockBehaviorClass("BlockBehaviorArchwayFrame", typeof(BlockBehaviorArchwayFrame));
             api.RegisterBlockBehaviorClass("DoubleTrapDoor", typeof(BlockBehaviorDoubleTrapDoor));
-            api.RegisterBlockBehaviorClass("BlockBehaviorGate", typeof(BlockBehaviorGate));
             api.RegisterBlockEntityClass("BlockEntityConstructable", typeof(BlockEntityConstructable));
             api.RegisterBlockEntityClass("BlockEntityBrazier", typeof(BlockEntityBrazier));
             api.RegisterBlockEntityBehaviorClass("DoubleTrapDoorBE", typeof(BEBehaviorDoubleTrapDoor));
-            //api.RegisterBlockEntityBehaviorClass("Gate", typeof(BEBehaviorGateold));
             api.RegisterBlockEntityBehaviorClass("Gate", typeof(BEBehaviorGate));
             Config = api.LoadModConfig<VariantTypesConfig>("variant-types-config.json");
             if (Config == null)

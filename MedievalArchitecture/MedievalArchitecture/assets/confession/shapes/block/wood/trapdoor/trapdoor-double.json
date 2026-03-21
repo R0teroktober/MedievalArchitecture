@@ -1,6 +1,6 @@
 {
 	"editor": {
-		"collapsedPaths": "Root/LeftBackSide,Root/plaster/plaster1/plaster11,Root/plaster/plasterBack1,Root/covercube1,Root/RightBackSide,Root/hinge1,Root/centerstonesRight,Root/LeftFrontSide,Root/centerstonesLeft,Root/originall2/hinge6/DoorWBoard1D2,Root/plaster/plasterFront1,Root/origin/Bottom-board1/bottom-board2/bottom-hinge2,Root/root/slope2,Root/RightFrontSide,Root/plaster/plasterFront1/plasterFront10,Root/origin/metal/top-hinge1,Root/originall2,Root/plaster,Root/centerstones/LCenterstone5,Root/plaster/plaster1,Root/frameE/hinge3,Root/plaster/plasterBack1/plasterBack19,Root/origin/metal/bottom-hinge1",
+		"collapsedPaths": "Root/LeftBackSide,Root/plaster/plaster1/plaster11,Root/plaster/plasterBack1,Root/covercube1,Root/RightBackSide,Root/hinge1,Root/centerstonesRight,Root/LeftFrontSide,Root/centerstonesLeft,Root/originall2/hinge6/DoorWBoard1D2,Root/plaster/plasterFront1,Root/origin/Bottom-board1/bottom-board2/bottom-hinge2,Root/root/slope2,Root/RightFrontSide,Root/plaster/plasterFront1/plasterFront10,Root/origin/metal/top-hinge1,Root/originall2,Root/plaster,Root/originall,Root/centerstones/LCenterstone5,Root/plaster/plaster1,Root/frameE/hinge3,Root/plaster/plasterBack1/plasterBack19,Root/origin/metal/bottom-hinge1",
 		"allAngles": false,
 		"entityTextureMode": false
 	},
@@ -14,10 +14,9 @@
 	"elements": [
 		{
 			"name": "originall",
-			"from": [ 16.0, 0.0, 0.0 ],
-			"to": [ 16.0, 0.0, 0.0 ],
-			"rotationOrigin": [ 24.0, 0.0, 8.0 ],
-			"rotationY": 180.0,
+			"from": [ 0.0, 0.0, 0.0 ],
+			"to": [ 0.0, 0.0, 0.0 ],
+			"rotationOrigin": [ 8.0, 0.0, 8.0 ],
 			"faces": {
 				"north": { "texture": "#null", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "enabled": false },
 				"east": { "texture": "#null", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "windMode": [-1,-1,-1,-1], "enabled": false },
@@ -486,10 +485,9 @@
 		},
 		{
 			"name": "originall2",
-			"from": [ 0.0, 0.0, 0.0 ],
-			"to": [ 0.0, 0.0, 0.0 ],
-			"rotationOrigin": [ 8.0, 0.0, 8.0 ],
-			"rotationY": 180.0,
+			"from": [ 16.0, 0.0, 0.0 ],
+			"to": [ 16.0, 0.0, 0.0 ],
+			"rotationOrigin": [ 24.0, 0.0, 8.0 ],
 			"faces": {
 				"north": { "texture": "#null", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "enabled": false },
 				"east": { "texture": "#null", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "windMode": [-1,-1,-1,-1], "enabled": false },
@@ -559,9 +557,10 @@
 		},
 		{
 			"name": "originall3",
-			"from": [ 0.0, 0.0, 15.4 ],
-			"to": [ 0.0, 0.0, 15.4 ],
-			"rotationOrigin": [ 8.0, 0.0, 23.4 ],
+			"from": [ 16.0, 0.0, -15.6 ],
+			"to": [ 16.0, 0.0, -15.6 ],
+			"rotationOrigin": [ 24.0, 0.0, -7.6 ],
+			"rotationY": 180.0,
 			"faces": {
 				"north": { "texture": "#null", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "enabled": false },
 				"east": { "texture": "#null", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "windMode": [-1,-1,-1,-1], "enabled": false },
@@ -632,9 +631,9 @@
 							"children": [
 								{
 									"name": "metalbar19",
-									"from": [ 25.83, 2.05, 11.99 ],
-									"to": [ 26.23, 2.75, 12.99 ],
-									"rotationOrigin": [ 25.83, 2.0533, 11.99 ],
+									"from": [ 26.03, 2.01, 11.99 ],
+									"to": [ 26.43, 2.71, 12.99 ],
+									"rotationOrigin": [ 26.03, 2.0533, 11.99 ],
 									"rotationX": 90.0,
 									"rotationZ": 90.0,
 									"faces": {
