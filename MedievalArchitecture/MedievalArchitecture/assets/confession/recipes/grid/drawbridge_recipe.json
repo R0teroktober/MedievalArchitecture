@@ -1,12 +1,12 @@
 [
     {
         "enabled": true,
-        "ingredientPattern": "_HL,_C_,_SS",
+        "ingredientPattern": "HHL,CC_,SS_",
         "ingredients": {
             "H": {
                 "type": "item",
-                "code": "game:helvehammer-iron",
-                "quantity": 2
+                "code": "game:helvehammer-*",
+                "quantity": 1
             },
             "L": {
                 "type": "item",
@@ -16,7 +16,7 @@
             "S": {
                 "type": "block",
                 "code": "game:plankslab-*-down-free",
-                "name": "dood",
+                "name": "wood",
                 "allowedVariants": [ "oak", "aged", "pine", "birch", "maple", "kapok", "larch", "ebony", "acacia", "walnut", "redwood", "baldcypress", "purpleheart" ],
                 "quantity": 3
             },
@@ -24,20 +24,14 @@
                 "type": "block",
                 "code": "game:clutter",
                 "attributes": { "type": "chains/chain-floor" },
-                "quantity": 2
+                "quantity": 1
             }
         },
         "width": 3,
         "height": 3,
         "output": {
             "type": "block",
-            "code": "confession:drawbridge-small",
-            "attributes": {
-                "types": {
-                    "wood": "{wood}"
-                }
-            }
-
+            "code": "confession:drawbridge-small-{wood}"
         }
     }
 ]

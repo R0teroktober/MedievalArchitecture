@@ -98,6 +98,15 @@
 								}
 							]
 						},
+						"glass-inside": {
+							"base": "game:block/glass/{glass}",
+							"blendedOverlays": [
+								{
+									"base": "game:block/overlay/dust-sparse",
+									"blendMode": "Overlay"
+								}
+							]
+						},
 						"plaster": {
 							"base": "game:block/stone/rock/{rock}1",
 							"blendedOverlays": [
@@ -126,6 +135,15 @@
 							"blendedOverlays": [
 								{
 									"base": "confession:block/glass/window-middle",
+									"blendMode": "Overlay"
+								}
+							]
+						},
+						"glass-inside": {
+							"base": "game:block/glass/{glass}",
+							"blendedOverlays": [
+								{
+									"base": "game:block/overlay/dust-sparse",
 									"blendMode": "Overlay"
 								}
 							]
@@ -161,6 +179,15 @@
 								}
 							]
 						},
+						"glass-inside": {
+							"base": "game:block/glass/{glass}",
+							"blendedOverlays": [
+								{
+									"base": "game:block/overlay/dust-sparse",
+									"blendMode": "Overlay"
+								}
+							]
+						},
 						"plaster": {
 							"base": "game:block/stone/rock/{rock}1",
 							"blendedOverlays": [
@@ -192,6 +219,15 @@
 								}
 							]
 						},
+						"glass-inside": {
+							"base": "game:block/glass/{glass}",
+							"blendedOverlays": [
+								{
+									"base": "game:block/overlay/dust-sparse",
+									"blendMode": "Overlay"
+								}
+							]
+						},
 						"plaster": {
 							"base": "game:block/stone/rock/{rock}1",
 							"blendedOverlays": [
@@ -219,6 +255,15 @@
 							"blendedOverlays": [
 								{
 									"base": "confession:block/glass/window-middle",
+									"blendMode": "Overlay"
+								}
+							]
+						},
+						"glass-inside": {
+							"base": "game:block/glass/{glass}",
+							"blendedOverlays": [
+								{
+									"base": "game:block/overlay/dust-sparse",
 									"blendMode": "Overlay"
 								}
 							]
@@ -267,6 +312,7 @@
 		"material": { "base": "game:block/transparent" },
 		"rim": { "base": "game:block/transparent" },
 		"glass": { "base": "game:block/transparent" },
+		"glass-inside": { "base": "game:block/transparent" },
 		"plaster": {
 			"base": "game:block/stone/rock/granite1",
 			"blendedOverlays": [

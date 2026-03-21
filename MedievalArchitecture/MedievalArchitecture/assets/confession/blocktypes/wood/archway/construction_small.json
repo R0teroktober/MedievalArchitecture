@@ -54,25 +54,26 @@
 		}
 	],
 	"shape": { "base": "game:block/basic/invisible" },
-	"textures": { 
-		"rim": { "base": "game:block/liquid/dye/gray"},
-		"plaster": { "base": "game:block/liquid/dye/gray"},
-		"material": { "base": "game:block/liquid/dye/gray"},
+	"textures": {
+		"rim": { "base": "game:block/liquid/dye/gray" },
+		"plaster": { "base": "game:block/liquid/dye/gray" },
+		"material": { "base": "game:block/liquid/dye/gray" },
 		"black": { "base": "game:block/transparent" },
 		"frame": { "base": "game:block/transparent" },
 		"putty": { "base": "game:block/transparent" },
 		"glass": { "base": "game:block/transparent" },
+		"glass-inside": { "base": "game:block/transparent" },
 		"lintel": { "base": "game:block/transparent" },
 		"rimstones": { "base": "game:block/transparent" },
 		"freshPlaster": { "base": "game:block/transparent" },
 		"gravel": { "base": "game:block/transparent" },
-		"metal": { "base": "game:block/metal/sheet/blackbronze1" }, 
-		"wood": { "base": "game:block/wood/debarked/aged"},
-    "bamboo": { "base": "game:block/plant/bamboo/stem-brown" },
-    "wooven": { "base": "game:block/plant/bamboo/bamboowoven" },
+		"metal": { "base": "game:block/metal/sheet/blackbronze1" },
+		"wood": { "base": "game:block/wood/debarked/aged" },
+		"bamboo": { "base": "game:block/plant/bamboo/stem-brown" },
+		"wooven": { "base": "game:block/plant/bamboo/bamboowoven" },
 		"planks": { "base": "game:block/wood/planks/generic" },
-		"bottom": { "base": "game:block/wood/barrel/bottom"},
-		"rope": { "base": "game:item/resource/rope"}
+		"bottom": { "base": "game:block/wood/barrel/bottom" },
+		"rope": { "base": "game:item/resource/rope" }
 	},
 	"collisionBox": { "x1": 0, "y1": 0.5, "z1": 0, "x2": 1, "y2": 1, "z2": 1 },
 	"creativeinventoryStacksByType": {

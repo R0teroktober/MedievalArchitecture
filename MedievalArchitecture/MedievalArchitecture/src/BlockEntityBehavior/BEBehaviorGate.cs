@@ -120,7 +120,7 @@ namespace MedievalArchitecture
                         Code = "opened",
                         AnimationSpeed = animationSpeed,
                         EaseInSpeed = easingSpeed,
-                        EaseOutSpeed =5f
+                        EaseOutSpeed =3f
                     });
                 }
             }

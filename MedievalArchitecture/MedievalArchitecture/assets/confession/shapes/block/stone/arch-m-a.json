@@ -1,6 +1,6 @@
 {
 	"editor": {
-		"collapsedPaths": "Root/Origin/Origin2,Root/glass2/Frame21,Root/LeftBackSide,Root/Frame,Root/RightFrontSide,Root/glass2/Lead29,Root/RightBackSide,Root/glass,Root/glass2,Root/glass2/Lead45,Root/centerstonesRight,Root/Origin/viewblocker,Root/centerstonesLeft",
+		"collapsedPaths": "Root/Origin/Origin2,Root/glass/Lead1,Root/glass2/Frame21,Root/glass/Frame40,Root/LeftBackSide,Root/glass/Frame,Root/Frame,Root/RightFrontSide,Root/originWood,Root/glass2/Lead29,Root/RightBackSide,Root/glass2,Root/glass2/Lead45,Root/centerstonesRight,Root/glass2/Frame50,Root/Origin/viewblocker,Root/centerstonesLeft",
 		"allAngles": false,
 		"entityTextureMode": false
 	},
@@ -16,12 +16,11 @@
 		"glass-top": [16,16],
 		"glass-bottom": [16,16],
 		"wood": [16,16],
-		"overlay-solid": [16,16]
+		"overlay-solid": [16,16],
+		"glass-inside": [16,16]
 	},
 	"textures": {
-		"glass-bottom": "C:/Users/Wanja/Pictures/vintage story textures/glass-bottom",
-		"glass-top": "C:/Users/Wanja/Pictures/vintage story textures/glass-top",
-		"wood": "C:/Users/Wanja/Pictures/vintage story textures/wood"
+		"glass-inside": "/Users/leona/Pictures/Vintagestory/textures/glass-inside"
 	},
 	"elements": [
 		{
@@ -3662,9 +3661,9 @@
 					"renderPass": 3,
 					"rotationOrigin": [ -15.6, 0.0, -0.1 ],
 					"faces": {
-						"north": { "texture": "#glass-top", "uv": [ 16.0, 0.0, 0.0, 16.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1], "windData": [0,1,1,0] },
+						"north": { "texture": "#glass-top", "uv": [ 16.0, 0.0, 0.0, 16.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1], "windData": [0,1,1,0], "reflectiveMode": 3 },
 						"east": { "texture": "#gothicA1", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
-						"south": { "texture": "#glass-top", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false },
+						"south": { "texture": "#glass-inside", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1], "windData": [0,0,1,1], "reflectiveMode": 3 },
 						"west": { "texture": "#gothicA1", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
 						"up": { "texture": "#gothicA1", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false },
 						"down": { "texture": "#gothicA1", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false }
@@ -3677,9 +3676,9 @@
 					"renderPass": 3,
 					"rotationOrigin": [ -15.6, -16.0, -0.1 ],
 					"faces": {
-						"north": { "texture": "#glass-bottom", "uv": [ 16.0, 0.0, 0.0, 16.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1], "windData": [-1,0,0,-1] },
+						"north": { "texture": "#glass-bottom", "uv": [ 16.0, 0.0, 0.0, 16.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1], "windData": [-1,0,0,-1], "reflectiveMode": 3 },
 						"east": { "texture": "#gothicA2", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
-						"south": { "texture": "#glass-bottom", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+						"south": { "texture": "#glass-inside", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [-1,-1,0,0], "reflectiveMode": 3 },
 						"west": { "texture": "#gothicA2", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
 						"up": { "texture": "#gothicA2", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false },
 						"down": { "texture": "#gothicA2", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false }
@@ -4705,9 +4704,9 @@
 					"renderPass": 3,
 					"rotationOrigin": [ -15.6, 0.0, -0.1 ],
 					"faces": {
-						"north": { "texture": "#glass-top", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [0,1,1,0] },
+						"north": { "texture": "#glass-top", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [0,1,1,0], "reflectiveMode": 3 },
 						"east": { "texture": "#gothicA1", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
-						"south": { "texture": "#glass-top", "uv": [ 16.0, 0.0, 0.0, 16.0 ], "autoUv": false },
+						"south": { "texture": "#glass-inside", "uv": [ 16.0, 0.0, 0.0, 16.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1], "windData": [0,0,1,1], "reflectiveMode": 3 },
 						"west": { "texture": "#gothicA1", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
 						"up": { "texture": "#gothicA1", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false },
 						"down": { "texture": "#gothicA1", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false }
@@ -4720,9 +4719,9 @@
 					"renderPass": 3,
 					"rotationOrigin": [ -15.6, -16.0, -0.1 ],
 					"faces": {
-						"north": { "texture": "#glass-bottom", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [-1,0,0,-1] },
+						"north": { "texture": "#glass-bottom", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [-1,0,0,-1], "reflectiveMode": 3 },
 						"east": { "texture": "#gothicA1", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
-						"south": { "texture": "#glass-bottom", "uv": [ 16.0, 0.0, 0.0, 16.0 ], "autoUv": false },
+						"south": { "texture": "#glass-inside", "uv": [ 16.0, 0.0, 0.0, 16.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1], "windData": [-1,-1,0,0], "reflectiveMode": 3 },
 						"west": { "texture": "#gothicA1", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
 						"up": { "texture": "#gothicA1", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false },
 						"down": { "texture": "#gothicA1", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false }

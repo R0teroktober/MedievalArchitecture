@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "patches": {
     "integer": {},
     "float": {},
@@ -30,7 +30,9 @@
         "confession:blocktypes/metal/brazier.json": { "enabled": "ENABLE_BRAZIER" },
         "confession:itemtypes/part/brazierpart.json": { "enabled": "ENABLE_BRAZIER" },
         "confession:recipes/grid/brazier_recipe.json": { "enabled": "ENABLE_BRAZIER" },
-        "confession:recipes/smithing/brazierpart_recipe.json": { "enabled": "ENABLE_BRAZIER" }
+        "confession:recipes/smithing/brazierpart_recipe.json": { "enabled": "ENABLE_BRAZIER" },
+        "confession:blocktypes/wood/gate/drawbridge.json": { "enabled": "ENABLE_GATE" },
+        "confession:recipes/grid/drawbridge_recipe.json": { "enabled": "ENABLE_GATE" }
 
     }, 
       "other": {}
@@ -79,6 +81,13 @@
             "ingui": "confession:setting-enable-brazier",
             "weight": 2.6,
             "comment": "Enable/ Disable brazier",
+            "default": true
+        },
+        "ENABLE_GATE": {
+            "name": "enable-gate",
+            "ingui": "confession:setting-enable-gate",
+            "weight": 2.7,
+            "comment": "Enable/ Disable gates and drawbridges",
             "default": true
         }
     },

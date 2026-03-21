@@ -94,17 +94,26 @@
 			{ "x1": 0, "y1": 0, "z1": 0, "x2": 0.25, "y2": 1, "z2": 1, "rotateYByType": {"*-east": 270, "*-west": 90 } }
 
 	],
-		"textures": {
+	"textures": {
 		"material": { "base": "game:block/transparent" },
-		"rim": {"base": "game:block/transparent"},
+		"rim": { "base": "game:block/transparent" },
 		"glass": { "base": "game:block/transparent" },
-		"plaster": {"base": "game:block/stone/rock/granite1","blendedOverlays": [{"base": "game:block/clay/fireclay","blendMode": "Lighten"}]},
+		"glass-inside": { "base": "game:block/transparent" },
+		"plaster": {
+			"base": "game:block/stone/rock/granite1",
+			"blendedOverlays": [
+				{
+					"base": "game:block/clay/fireclay",
+					"blendMode": "Lighten"
+				}
+			]
+		},
 		"putty": { "base": "game:block/transparent" },
 		"frame": { "base": "game:block/transparent" },
 		"black": { "base": "game:block/transparent" },
 		"wood": { "base": "game:block/transparent" },
-		"gray": { "base": "game:block/liquid/dye/gray"}
-		},
+		"gray": { "base": "game:block/liquid/dye/gray" }
+	},
 	"shape": { "base": "game:block/basic/invisible" },
 		"heldTpIdleAnimation": "holdbothhandslarge",
 		"heldTpUseAnimation": "twohandplaceblock",

@@ -67,7 +67,15 @@
 			]
 		},
 		"*-sloped-*": {
-			"handbook": { "groupBy": [ "trapdoor-*" ] },
+			"handbook": {
+				"groupBy": [ "trapdoor-*" ],
+				"extraSections": [
+					{
+						"title": "confession:reinforce-multiblock-title",
+						"text": "confession:reinforce-multiblock-text"
+					}
+				]
+			},
 			"reinforcable": true,
 			"airtight": true,
 			"width": 1,
@@ -76,20 +84,24 @@
 			"boxesOpen": [
 				{
 					"offset": [ 0, 0, 0 ],
-					"boxes": [ [ 0, 0, 0, 0.1, 1, 1 ] ]
+					"boxes": [
+						[ 0, 0, 0, 0.1, 1, 1 ],
+						[ 0.9, 0, 0, 1, 0.4, 1 ]
+					]
 				},
 				{
 					"offset": [ 0, 0, 1 ],
 					"boxes": [
 						[ 0, 0, 0, 0.1, 1, 1 ],
-						[ 0, 0.9, 0, 1, 1, 0.1 ]
+						[ 0, 0.9, 0, 1, 1, 0.1 ],
+						[ 0.9, 0, 0, 1, 0.8, 1 ]
 					]
 				}
 			],
 			"boxesClosed": [
 				{
 					"offset": [ 0, 0, 0 ],
-					"boxes": [ [ 0, 0, 0, 1, 0.8, 1 ] ]
+					"boxes": [ [ 0, 0, 0, 1, 0.4, 1 ] ]
 				},
 				{
 					"offset": [ 0, 0, 1 ],
@@ -111,7 +123,7 @@
 				},
 				{
 					"offset": [ 1, 0, 0 ],
-					"boxes": [ [ 0, 0, 0.9, 1, 1, 1 ] ]
+					"boxes": [ [ 0.9, 0, 0, 1, 1, 1 ] ]
 				},
 				{
 					"offset": [ 0, 0, 1 ],
@@ -119,7 +131,7 @@
 				},
 				{
 					"offset": [ 1, 0, 1 ],
-					"boxes": [ [ 0, 0, 0.9, 1, 1, 1 ] ]
+					"boxes": [ [ 0.9, 0, 0, 1, 1, 1 ] ]
 				}
 			],
 			"boxesClosed": [

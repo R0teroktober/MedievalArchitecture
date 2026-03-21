@@ -77,6 +77,15 @@
 									"blendMode": "Overlay"
 								}
 							]
+						},
+						"glass-inside": {
+							"base": "game:block/glass/{glass}",
+							"blendedOverlays": [
+								{
+									"base": "game:block/overlay/dust-sparse",
+									"blendMode":  "Overlay"
+								}
+							]
 						}
 
 					}
@@ -521,7 +530,8 @@
 		"frame": { "base": "game:block/transparent" },
 		"putty": { "base": "game:block/transparent" },
 		"black": { "base": "game:block/transparent" },
-		"glass": { "base": "game:block/transparent" }
+		"glass": { "base": "game:block/transparent" },
+		"glass-inside": { "base": "game:block/transparent" }
 
 	},
 	"sounds": {

@@ -128,9 +128,10 @@
 	],
 	"textures": {
 		"material": { "base": "game:block/transparent" },
-		"rim": {"base": "game:block/transparent"},
+		"rim": { "base": "game:block/transparent" },
 		"glass-top": { "base": "game:block/transparent" },
 		"glass-bottom": { "base": "game:block/transparent" },
+		"glass-inside": { "base": "game:block/transparent" },
 		"putty": { "base": "game:block/transparent" },
 		"frame": { "base": "game:block/transparent" },
 		"black": { "base": "game:block/transparent" },

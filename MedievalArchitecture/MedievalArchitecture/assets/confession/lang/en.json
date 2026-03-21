@@ -158,6 +158,12 @@
     "confession:blockdesc-trapdoor_small-*": "<font color=\"#D6B56D\">Can also be placed on walls and ceilings</font>",
     "confession:blockdesc-trapdoor_small_sloped-*": "<font color=\"#D6B56D\">Can also be placed on walls and ceilings</font>",
 
+    //gates and drawbridge
+    "confession:block-drawbridge-small-*": "Small Drawbridge",
+    "confession:blockdesc-drawbridge-small-*": "<font color=\"#D6B56D\">An expensive but highly effective defense system</font>",
+    "confession:reinforce-multiblock-title": "Reinforceable",
+    "confession:reinforce-multiblock-text": "You can only reinforce and lock this block if you aim at the root block! That's the part that appears at the crosshairs when you place it.",
+
     //brazier
     "confession:block-brazier-construct-name1": "Empty Brazier (",
     "confession:block-brazier-construct-name3": "Brazier",
@@ -169,7 +175,7 @@
     "confession:archway-brazier-help-text": "You'll need 4 <a href=\"handbook://item-confession:brazierpart\">brazier parts</a> and 1 <a href=\"handbook://item-hoop-iron\">metal hoop</a> of any kind. Assemble the empty brazier and place it. Add 3 more pieces of firewood until you can light it",
 
     //gates
-  "confession:block-drawbridge-small": "Small drawbridge",
+    "confession:block-drawbridge-small": "Small drawbridge",
 
     // configs
     "confession:setting-enable-small-archways": "Enable small archways",
@@ -177,8 +183,8 @@
     "confession:setting-enable-windows": "Enable windows",
     "confession:setting-enable-windowsill": "Enable windowsill",
     "confession:setting-enable-trapdoors": "Enable trapdoors",
-    "confession:setting-enable-brazier": "Enable braziers"
-
+    "confession:setting-enable-brazier": "Enable braziers",
+    "confession:setting-enable-gate": "Enable gates and drawbridges"
 
 
 

@@ -595,6 +595,15 @@
 								}
 							]
 						},
+						"glass-inside": {
+							"base": "game:block/glass/{glass}",
+							"blendedOverlays": [
+								{
+									"base": "game:block/overlay/dust-sparse",
+									"blendMode": "Overlay"
+								}
+							]
+						},
 						"material": { "base": "game:block/stone/plaster/plain" },
 						"rim": {
 							"base": "game:block/stone/rock/{rock}1",
@@ -629,6 +638,15 @@
 							"blendedOverlays": [
 								{
 									"base": "confession:block/glass/glass-bottom",
+									"blendMode": "Overlay"
+								}
+							]
+						},
+						"glass-inside": {
+							"base": "game:block/glass/{glass}",
+							"blendedOverlays": [
+								{
+									"base": "game:block/overlay/dust-sparse",
 									"blendMode": "Overlay"
 								}
 							]
@@ -671,6 +689,15 @@
 								}
 							]
 						},
+						"glass-inside": {
+							"base": "game:block/glass/{glass}",
+							"blendedOverlays": [
+								{
+									"base": "game:block/overlay/dust-sparse",
+									"blendMode": "Overlay"
+								}
+							]
+						},
 						"material": { "base": "game:block/stone/cobblestone/{rock}1" },
 						"rim": {
 							"base": "game:block/stone/rock/{rock}1",
@@ -705,6 +732,15 @@
 							"blendedOverlays": [
 								{
 									"base": "confession:block/glass/glass-bottom",
+									"blendMode": "Overlay"
+								}
+							]
+						},
+						"glass-inside": {
+							"base": "game:block/glass/{glass}",
+							"blendedOverlays": [
+								{
+									"base": "game:block/overlay/dust-sparse",
 									"blendMode": "Overlay"
 								}
 							]
@@ -746,6 +782,15 @@
 								}
 							]
 						},
+						"glass-inside": {
+							"base": "game:block/glass/{glass}",
+							"blendedOverlays": [
+								{
+									"base": "game:block/overlay/dust-sparse",
+									"blendMode": "Overlay"
+								}
+							]
+						},
 						"material": { "base": "game:block/clay/daub/{originblock}/normal1" },
 						"rim": {
 							"base": "game:block/stone/rock/{rock}1",
@@ -773,6 +818,7 @@
 		"rim": { "base": "game:block/transparent" },
 		"glass-top": { "base": "game:block/transparent" },
 		"glass-bottom": { "base": "game:block/transparent" },
+		"glass-inside": { "base": "game:block/transparent" },
 		"putty": { "base": "game:block/transparent" },
 		"frame": { "base": "game:block/transparent" },
 		"black": { "base": "game:block/transparent" },

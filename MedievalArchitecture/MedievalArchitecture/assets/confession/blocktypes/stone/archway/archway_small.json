@@ -82,9 +82,18 @@
 	],
 	"textures": {
 		"material": { "base": "game:block/transparent" },
-		"rim": {"base": "game:block/transparent"},
+		"rim": { "base": "game:block/transparent" },
 		"glass": { "base": "game:block/transparent" },
-		"plaster": {"base": "game:block/stone/rock/granite1","blendedOverlays": [{"base": "game:block/clay/fireclay","blendMode": "Lighten"}]},
+		"glass-inside": { "base": "game:block/transparent" },
+		"plaster": {
+			"base": "game:block/stone/rock/granite1",
+			"blendedOverlays": [
+				{
+					"base": "game:block/clay/fireclay",
+					"blendMode": "Lighten"
+				}
+			]
+		},
 		"putty": { "base": "game:block/transparent" },
 		"frame": { "base": "game:block/transparent" },
 		"black": { "base": "game:block/transparent" },

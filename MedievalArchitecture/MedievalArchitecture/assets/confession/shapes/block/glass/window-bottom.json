@@ -7,6 +7,7 @@
 	"textureWidth": 16,
 	"textureHeight": 16,
 	"textureSizes": {
+		"glass-inside": [16,16]
 	},
 	"textures": {
 	},
@@ -17,9 +18,9 @@
 			"to": [ 16.0, 16.0, 6.0 ],
 			"renderPass": 3,
 			"faces": {
-				"north": { "texture": "#glass", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [0,1,1,0] },
+				"north": { "texture": "#glass", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [0,1,1,0], "reflectiveMode": 3 },
 				"east": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
-				"south": { "texture": "#glass", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [0,0,1,1] },
+				"south": { "texture": "#glass-inside", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [0,0,1,1], "reflectiveMode": 3 },
 				"west": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
 				"up": { "texture": "#null", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false },
 				"down": { "texture": "#null", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false }
