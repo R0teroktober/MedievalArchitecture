@@ -1,6 +1,6 @@
 {
 	"editor": {
-		"collapsedPaths": ",Root/origin/originPullyBeam/metalbar2/hinge2/originChain2,Root/origin/originPullyBeam/metalbar1/hinge1/originChain1,Root/origin/OriginDrawbridge,Root/origin/originPullyBeam/beam1,Root/origin/originPullyBeam/metalbar1/hinge1/originChain2",
+		"collapsedPaths": ",Root/origin/originPullyBeam/metalbar2/hinge2/originChain2,Root/origin/originPullyBeam/beam1,Root/origin/originPullyBeam/metalbar1/hinge1/originChain2",
 		"allAngles": false,
 		"entityTextureMode": false
 	},
@@ -176,6 +176,7 @@
 									"name": "crossbeamcap1",
 									"from": [ -16.0001, 0.0, 3.3999 ],
 									"to": [ -14.5001, 4.0, 7.3999 ],
+									"renderInEditor": false,
 									"rotationOrigin": [ -16.0, 0.0, 3.4 ],
 									"rotationX": -179.9999,
 									"rotationZ": -179.9999,
@@ -192,6 +193,7 @@
 									"name": "crossbeamcap2",
 									"from": [ 19.5, 0.0, 3.3999 ],
 									"to": [ 21.0, 4.0, 7.3999 ],
+									"renderInEditor": false,
 									"rotationOrigin": [ 19.5, 0.0, 3.4 ],
 									"rotationX": -179.9999,
 									"rotationZ": -179.9999,
@@ -1487,23 +1489,6 @@
 																"west": { "texture": "#metal", "uv": [ 7.0, 7.5, 8.0, 11.5 ] },
 																"up": { "texture": "#metal", "uv": [ 14.5, 13.5, 15.5, 14.5 ] },
 																"down": { "texture": "#metal", "uv": [ 4.5, 4.0, 5.5, 5.0 ] }
-															}
-														},
-														{
-															"name": "Cube51",
-															"from": [ 1.0, -4.5, 2.5 ],
-															"to": [ 2.0, -0.5, 6.5 ],
-															"renderInEditor": false,
-															"rotationOrigin": [ 1.0, -4.5, 2.5 ],
-															"rotationX": -180.0,
-															"rotationZ": -180.0,
-															"faces": {
-																"north": { "texture": "#metal", "uv": [ 5.5, 8.0, 6.5, 12.0 ] },
-																"east": { "texture": "#metal", "uv": [ 3.0, 9.5, 7.0, 13.5 ] },
-																"south": { "texture": "#metal", "uv": [ 13.5, 3.0, 14.5, 7.0 ] },
-																"west": { "texture": "#metal", "uv": [ 3.5, 9.5, 7.5, 13.5 ] },
-																"up": { "texture": "#metal", "uv": [ 3.0, 3.0, 4.0, 7.0 ] },
-																"down": { "texture": "#metal", "uv": [ 9.0, 10.0, 10.0, 14.0 ] }
 															}
 														}
 													]
