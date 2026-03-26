@@ -1,94 +1,89 @@
 {
-	"enabled": true,
-	"code": "construction_small",
-	"maxStackSize": 64,
-	"blockmaterial": "Wood",
-	"resistance": 1,
-	"renderPass": "OpaqueNoCull",
-	"facecullmode": "nevercull",
-	"lightabsorption": 0,
-	"sideopaque": {"all": false},
-	"sideao": {"all": true},
-	"sidesolid": {"all":  false},
-	"entityClass": "BlockEntityConstructable",
-	"variantgroups": [{"code": "side","loadFromProperties": "abstract/horizontalorientation"}],
-	"attributes": {
-		"handbook": {"groupBy": [ "construction_small-*" ],
-								"excludeByType": {"west": true, "east": true, "south": true},
-								"extraSections": [{"title": "confession:archway-build-help-title", "text": "confession:archway-build-help-text"},{"title": "confession:construction-drop-help-title", "text": "confession:construction-drop-help-text"},{"title": "confession:archway-addglass-help-title", "text": "confession:archway-addglass-help-text"},{"title": "confession:archway-addwood-help-title", "text": "confession:archway-addwood-help-text"}]
-		} 
-	},
-	"entityBehaviors": [ { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" } ],
-	"behaviors": [
-		{ "name": "BlockBehaviorArchwayFrame", "properties": { "blockCodeBaseString": "confession:arch_small", "intMultiplicator": 1}},
-		{ "name": "AttributeRenderingLibrary.HorizontalOrientable", "properties":{"dropBlockFace": "north"} },
-		{ "name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
-			"properties": {
-				"name": {
-					"state-*": ["confession:block-construction_small-name1", "confession:{state}","confession:block-construction_small-name2"],
-					"*": [ "confession:block-debug-noname" ]
-				},
-				"description":  {
-					"rock-*::style-*": ["confession:block-arch_small-description1", "rock-{rock}","confession:block-arch_small-description2","confession:{style}", "confession:block-linebreak"],
-					"*": ["confession:block-debug-nodescription"]
-				},
-				"textures": {
-					"rock-none": {
-						"rimstones": { "base": "game:block/transparent" },
-						"freshPlaster": { "base": "game:block/transparent" },
-						"gravel": {"base": "game:block/transparent"}
-						},
-					"state-*::rock-*": {
-						"rimstones": {"base": "game:block/stone/rock/{rock}1","overlays": [ "game:block/overlay/crackedcobblestone1" ]},
-						"gravel": {"base": "game:block/stone/agedbrick/{rock}1"},
-						"freshPlaster": {"base": "game:block/stone/rock/{rock}1","blendedOverlays": [{"base": "game:block/clay/fireclay","blendMode": "Lighten"}]}
-						}
-				},
-				"shape": {
-					"state-*::style-*": { "base": "confession:block/wood/construction-s-{state}-{style}", "rotateYByType": { "*-east": 90, "*-south": 180, "*-west": 270 } }
-				},
-				"shapeinventory": {
-					"state-0::style-*": {"base": "confession:block/stone/arch-s-{style}","rotateYByType": {"*-north": 0,"*-east": 270,"*-south": 180,"*-west": 90}}
-				}
-			}	
-		}
-	],
-	"shape": { "base": "game:block/basic/invisible" },
-	"textures": {
-		"rim": { "base": "game:block/liquid/dye/gray" },
-		"plaster": { "base": "game:block/liquid/dye/gray" },
-		"material": { "base": "game:block/liquid/dye/gray" },
-		"black": { "base": "game:block/transparent" },
-		"frame": { "base": "game:block/transparent" },
-		"putty": { "base": "game:block/transparent" },
-		"glass": { "base": "game:block/transparent" },
-		"glass-inside": { "base": "game:block/transparent" },
-		"lintel": { "base": "game:block/transparent" },
-		"rimstones": { "base": "game:block/transparent" },
-		"freshPlaster": { "base": "game:block/transparent" },
-		"gravel": { "base": "game:block/transparent" },
-		"metal": { "base": "game:block/metal/sheet/blackbronze1" },
-		"wood": { "base": "game:block/wood/debarked/aged" },
-		"bamboo": { "base": "game:block/plant/bamboo/stem-brown" },
-		"wooven": { "base": "game:block/plant/bamboo/bamboowoven" },
-		"planks": { "base": "game:block/wood/planks/generic" },
-		"bottom": { "base": "game:block/wood/barrel/bottom" },
-		"rope": { "base": "game:item/resource/rope" }
-	},
-	"collisionBox": { "x1": 0, "y1": 0.5, "z1": 0, "x2": 1, "y2": 1, "z2": 1 },
-	"creativeinventoryStacksByType": {
-			"*-north": [
-				{
-					"tabs": ["confession", "construction", "general" ],
-					"stacks": [ 
-					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "b", "rock":  "none", "state": "0" } } },
-					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "a", "rock":  "none", "state": "0" } } },
-					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "c", "rock":  "none", "state": "0" } } },
-					{ "type": "block", "code": "construction_small-north", "attributes": { "types": {"style":  "d", "rock":  "none", "state": "0" } } }
-
-					]
-				}
-			]
-		}
-
+  "enabled": true,
+  "code": "construction_small",
+  "maxStackSize": 64,
+  "blockmaterial": "Wood",
+  "resistance": 1,
+  "renderPass": "OpaqueNoCull",
+  "facecullmode": "nevercull",
+  "lightabsorption": 0,
+  "sideopaque": {"all": false},
+  "sideao": {"all": true},
+  "sidesolid": {"all": false},
+  "entityClass": "BlockEntityConstructable",
+  "variantgroups": [{"code": "side", "loadFromProperties": "abstract/horizontalorientation"}],
+  "attributes": {
+    "handbook": {
+      "groupBy": ["construction_small-*"],
+      "excludeByType": {"west": true, "east": true, "south": true},
+      "extraSections": [
+        {"title": "confession:archway-build-help-title", "text": "confession:archway-build-help-text"},
+        {"title": "confession:construction-drop-help-title", "text": "confession:construction-drop-help-text"},
+        {"title": "confession:archway-addglass-help-title", "text": "confession:archway-addglass-help-text"},
+        {"title": "confession:archway-addwood-help-title", "text": "confession:archway-addwood-help-text"}
+      ]
+    }
+  },
+  "entityBehaviors": [{"name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes"}],
+  "behaviors": [
+    {"name": "BlockBehaviorArchwayFrame", "properties": {"blockCodeBaseString": "confession:arch_small", "intMultiplicator": 1}},
+    {"name": "AttributeRenderingLibrary.HorizontalOrientable", "properties": {"dropBlockFace": "north"}},
+    {
+      "name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
+      "properties": {
+        "name": {"state-*": ["confession:block-construction_small-name1", "confession:{state}", "confession:block-construction_small-name2"], "*": ["confession:block-debug-noname"]},
+        "description": {
+          "rock-*::style-*": ["confession:block-arch_small-description1", "rock-{rock}", "confession:block-arch_small-description2", "confession:{style}", "confession:block-linebreak"],
+          "*": ["confession:block-debug-nodescription"]
+        },
+        "textures": {
+          "rock-none": {"rimstones": {"base": "game:block/transparent"}, "freshPlaster": {"base": "game:block/transparent"}, "gravel": {"base": "game:block/transparent"}},
+          "state-*::rock-*": {
+            "rimstones": {"base": "game:block/stone/rock/{rock}1", "overlays": ["game:block/overlay/damagedstone1"]},
+            "gravel": {"base": "game:block/stone/agedbrick/{rock}1"},
+            "freshPlaster": {"base": "game:block/stone/rock/{rock}1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]}
+          }
+        },
+        "shape": {"state-*::style-*": {"base": "confession:block/wood/construction-s-{state}-{style}", "rotateYByType": {"*-east": 90, "*-south": 180, "*-west": 270}}},
+        "shapeinventory": {"state-0::style-*": {"base": "confession:block/stone/arch-s-{style}", "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}}}
+      }
+    }
+  ],
+  "shape": {"base": "game:block/basic/invisible"},
+  "textures": {
+    "rim": {"base": "game:block/liquid/dye/gray"},
+    "plaster": {"base": "game:block/liquid/dye/gray"},
+    "material": {"base": "game:block/liquid/dye/gray"},
+    "black": {"base": "game:block/transparent"},
+    "frame": {"base": "game:block/transparent"},
+    "putty": {"base": "game:block/transparent"},
+    "glass": {"base": "game:block/transparent"},
+    "glass-inside": {"base": "game:block/transparent"},
+    "lintel": {"base": "game:block/transparent"},
+    "rimstones": {"base": "game:block/transparent"},
+    "freshPlaster": {"base": "game:block/transparent"},
+    "gravel": {"base": "game:block/transparent"},
+    "metal": {"base": "game:block/metal/sheet/blackbronze1"},
+    "wood": {"base": "game:block/wood/debarked/aged"},
+    "bamboo": {"base": "game:block/plant/bamboo/stem-brown"},
+    "wooven": {"base": "game:block/plant/bamboo/bamboowoven"},
+    "planks": {"base": "game:block/wood/planks/generic"},
+    "bottom": {"base": "game:block/wood/barrel/bottom"},
+    "rope": {"base": "game:item/resource/rope"}
+  },
+  "collisionBox": {"x1": 0, "y1": 0.5, "z1": 0, "x2": 1, "y2": 1, "z2": 1},
+  "tpHandTransform": {"rotation": {"x": 0, "y": -85, "z": -1}},
+  "creativeinventoryStacksByType": {
+    "*-north": [
+      {
+        "tabs": ["confession", "construction", "general"],
+        "stacks": [
+          {"type": "block", "code": "construction_small-north", "attributes": {"types": {"style": "b", "rock": "none", "state": "0"}}},
+          {"type": "block", "code": "construction_small-north", "attributes": {"types": {"style": "a", "rock": "none", "state": "0"}}},
+          {"type": "block", "code": "construction_small-north", "attributes": {"types": {"style": "c", "rock": "none", "state": "0"}}},
+          {"type": "block", "code": "construction_small-north", "attributes": {"types": {"style": "d", "rock": "none", "state": "0"}}}
+        ]
+      }
+    ]
+  }
 }

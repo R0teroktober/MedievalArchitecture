@@ -1,127 +1,149 @@
 {
   "enabled": true,
-	"code": "arch_small_wood",
-	"maxStackSize": 64,
-	"blockmaterial": "Stone",
-	"resistance": 4,
-	"renderPass": "OpaqueNoCull",
-	"facecullmode": "nevercull",
-	"lightabsorption": 0,
-	"sideopaque": { "all": false  },
-	"sideao": { "all": true  },
-	"sidesolid": { "all": true },
-	"class": "BlockGeneric",
-	"entityClass": "BlockEntityConstructable",
-	"variantgroups": [  { "code": "side", "loadFromProperties": "abstract/horizontalorientation"  } ],
-	"attributes": { "handbook": { "groupBy": ["arch_small_wood-*"], "excludeByType": { "west": true, "east": true, "south": true  },"extraSections": [
-                { "title": "confession:archway-addwood-help-title", "text": "confession:archway-addwood-help-text" }
-            ] } },
-	"entityBehaviors": [ { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" } ],
-	"behaviors": [
-		{"name": "BlockBehaviorCancelInteraction"},
-    {"name": "AttributeRenderingLibrary.HorizontalOrientable", "properties":{"dropBlockFace": "north"} },
-		{"name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
-			"properties": {
-        "name": {
-					"style-*::rock-*::originblock-rock": [ "confession:block-arch_small-name1","rock-{rock}", "confession:originblock-{originblock}","confession:block-arch_small-name","confession:block-arch_small-name2" ],
-					"style-*::rock-*::originblock-cobblestone": [ "confession:block-arch_small-name1","rock-{rock}", "confession:originblock-{originblock}","confession:block-arch_small-name","confession:block-arch_small-name2" ],
-					"style-*::rock-*::originblock-brick": [ "confession:block-arch_small-name1","rock-{rock}", "confession:originblock-{originblock}","confession:block-arch_small-name","confession:block-arch_small-name2" ],
-					"style-*::rock-*::originblock-*": [ "confession:block-arch_small-name1", "confession:originblock-{originblock}","confession:block-arch_small-name","confession:block-arch_small-name2" ],
-					"*": [ "confession:block-debug-noname"]
-        },
-				"description":  {
-					"style-*::rock-*::originblock-*::wood-*": [ "confession:block-arch_small-description1", "rock-{rock}","confession:block-arch_small-description2","confession:{style}","confession:block-arch_small-description5", "block-planks-{wood}", "confession:block-linebreak"],
-					"*":  ["confession:block-debug-nodescription"]
-				},
-				"textures": {
-          "style-*::rock-*::wood-*::originblock-plaster": {
-            "material": { "base": "game:block/stone/plaster/plain" },
-            "rim": { "base": "game:block/stone/rock/{rock}1", "overlays": [ "game:block/overlay/crackedcobblestone1" ] },
-            "lintel": { "base": "game:block/wood/debarked/{wood}", "rotation": 90, "blendedOverlays": [{ "base": "game:block/wood/door/overlay-solid", "blendMode": "Overlay" }] },
-            "plaster": { "base": "game:block/stone/rock/{rock}1", "blendedOverlays": [ { "base": "game:block/clay/fireclay", "blendMode": "Lighten" } ] }
-          },
-				
-         "style-*::rock-*::originblock-rock::wood-*": {
-                	"material": { "base": "game:block/stone/rock/{rock}1" },
-                	"rim": { "base": "game:block/stone/rock/{rock}1", "overlays": [ "game:block/overlay/crackedcobblestone1" ] },
-                	"lintel": { "base": "game:block/wood/debarked/{wood}", "rotation": 90, "blendedOverlays": [{ "base": "game:block/wood/door/overlay-solid", "blendMode": "Overlay" }] },
-                	"plaster": { "base": "game:block/stone/rock/{rock}1", "blendedOverlays": [ { "base": "game:block/clay/fireclay", "blendMode": "Lighten" } ] }
-         },
-         "style-*::rock-*::originblock-cobblestone::wood-*": {
-                	"material": { "base": "game:block/stone/cobblestone/{rock}1" },
-                	"rim": { "base": "game:block/stone/rock/{rock}1", "overlays": [ "game:block/overlay/crackedcobblestone1" ] },
-									"lintel": { "base": "game:block/wood/debarked/{wood}", "rotation": 90, "blendedOverlays": [{ "base": "game:block/wood/door/overlay-solid", "blendMode": "Overlay" }] },
-                	"plaster": { "base": "game:block/stone/rock/{rock}1", "blendedOverlays": [ { "base": "game:block/clay/fireclay", "blendMode": "Lighten" } ] }
-         },
-         "style-*::rock-*::originblock-brick::wood-*": {
-                	"material": { "base": "game:block/stone/brick/{rock}1" },
-                	"rim": { "base": "game:block/stone/rock/{rock}1", "overlays": [ "game:block/overlay/crackedcobblestone1" ] },
-                	"lintel": { "base": "game:block/wood/debarked/{wood}", "rotation": 90, "blendedOverlays": [{ "base": "game:block/wood/door/overlay-solid", "blendMode": "Overlay" }] },
-                	"plaster": { "base": "game:block/stone/rock/{rock}1", "blendedOverlays": [ { "base": "game:block/clay/fireclay", "blendMode": "Lighten" } ] }
-         },
-				 	"style-*::originblock-*::rock-*::wood-*": {
-            "material": { "base": "game:block/clay/daub/{originblock}/normal1" },
-            "rim": { "base": "game:block/stone/rock/{rock}1", "overlays": [ "game:block/overlay/crackedcobblestone1" ] },
-            "lintel": { "base": "game:block/wood/debarked/{wood}", "rotation": 90, "blendedOverlays": [{ "base": "block/wood/door/overlay-solid", "blendMode": "Overlay" }] },
-            "plaster": { "base": "game:block/stone/rock/{rock}1", "blendedOverlays": [ { "base": "game:block/clay/fireclay", "blendMode": "Lighten" } ] }
-          }     
-				},
-				"CollisionSelectionBoxes": {
-					"style-d": [{ "x1": 0, "y1": 0.6875, "z1": 0, "x2": 1, "y2": 1, "z2": 1 },
-											{ "x1": 0, "y1": 0, "z1": 0, "x2": 0.0625, "y2": 0.6875, "z2": 1, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90  } },
-											{ "x1": 0.9375, "y1": 0, "z1": 0, "x2": 1, "y2": 0.6875, "z2": 1, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90  } },
-											{ "x1": 0, "y1": 0, "z1": 0.875, "x2": 1, "y2": 1, "z2": 1, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90  } }],
-					"style-b": [{ "x1": 0, "y1": 0.4375, "z1": 0, x2: 1, "y2": 1, "z2": 1 },
-											{ "x1": 0, "y1": 0, "z1": 0, x2: 0.0625, "y2": 0.4375, "z2": 1, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90  } },
-											{ "x1": 0.9375, "y1": 0, "z1": 0, x2: 1, "y2": 0.4375, "z2": 1, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90  } },
-											{ "x1": 0, "y1": 0, "z1": 0.875, "x2": 1, "y2": 1, "z2": 1, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90  }}],
-	
-					"style-*":[{ "x1": 0, "y1": 0.875, "z1": 0, "x2": 1, "y2": 1, "z2": 1 },
-											{ "x1": 0, "y1": 0.625, "z1": 0, "x2": 0.1875, "y2": 0.875, "z2": 1, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90  } },
-											{ "x1": 0.8125, "y1": 0.625, "z1": 0, "x2": 1, "y2": 0.875, "z2": 1, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90  } },
-											{ "x1": 0, "y1": 0, "z1": 0, "x2": 0.0625, "y2": 0.625, "z2": 1, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90  } },
-											{ "x1": 0.9375, "y1": 0, "z1": 0, "x2": 1, "y2": 0.625, "z2": 1, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90  } },
-											{ "x1": 0, "y1": 0, "z1": 0.875, "x2": 1, "y2": 1, "z2": 1, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90  } }]
-				}, 
-
-				"shape": {
-					"style-a": { "base": "confession:block/stone/arch-s-a", "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90  } },
-          "style-b": { "base": "confession:block/stone/arch-s-b", "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90  } },
-					"style-c": { "base": "confession:block/stone/arch-s-c", "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90  } },
-					"style-d": { "base": "confession:block/stone/arch-s-d", "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90  } }
-            }
-        }
+  "code": "arch_small_wood",
+  "maxStackSize": 64,
+  "blockmaterial": "Stone",
+  "resistance": 4,
+  "renderPass": "OpaqueNoCull",
+  "facecullmode": "nevercull",
+  "lightabsorption": 0,
+  "sideopaque": {"all": false},
+  "sideao": {"all": true},
+  "sidesolid": {"all": true},
+  "class": "BlockGeneric",
+  "entityClass": "BlockEntityConstructable",
+  "variantgroups": [{"code": "side", "loadFromProperties": "abstract/horizontalorientation"}],
+  "attributes": {
+    "handbook": {
+      "groupBy": ["arch_small_wood-*"],
+      "excludeByType": {"west": true, "east": true, "south": true},
+      "extraSections": [{"title": "confession:archway-addwood-help-title", "text": "confession:archway-addwood-help-text"}]
     }
-	],
-	"shape": { "base": "game:block/basic/invisible" },
-	"collisionSelectionBoxes": [
-		{ "x1": 0, "y1": 0.9, "z1": 0, "x2": 1, "y2": 1, "z2": 1 }
-	],
-	"heldTpIdleAnimation": "holdbothhandslarge",
-	"heldTpUseAnimation": "twohandplaceblock",
-	"tpHandTransform": {"translation": { "x": -1.23, "y": -0.91, "z": -0.8  }, "rotation": { "x": -2, "y": 25, "z": -78  }, "scale": 0.4  },
-	"textures": {
-		"material": { "base": "game:block/transparent" },
-		"rim": { "base": "game:block/transparent" },
-		"glass": { "base": "game:block/transparent" },
-		"glass-inside": { "base": "game:block/transparent" },
-		"plaster": {
-			"base": "game:block/stone/rock/granite1",
-			"blendedOverlays": [
-				{
-					"base": "game:block/clay/fireclay",
-					"blendMode": "Lighten"
-				}
-			]
-		},
-		"putty": { "base": "game:block/transparent" },
-		"frame": { "base": "game:block/transparent" },
-		"black": { "base": "game:block/transparent" },
-		"lintel": { "base": "game:block/transparent" }
-	},
-	"guiTransform": {
-			"rotation": { "x": -22.6, "y": 135, "z": 0 }
-	}
-	
-	
+  },
+  "entityBehaviors": [{"name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes"}],
+  "behaviors": [
+    {"name": "BlockBehaviorCancelInteraction"},
+    {"name": "AttributeRenderingLibrary.HorizontalOrientable", "properties": {"dropBlockFace": "north"}},
+    {
+      "name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
+      "properties": {
+        "name": {
+          "style-*::rock-*::originblock-rock": [
+            "confession:block-arch_small-name1",
+            "rock-{rock}",
+            "confession:originblock-{originblock}",
+            "confession:block-arch_small-name",
+            "confession:block-arch_small-name2"
+          ],
+          "style-*::rock-*::originblock-cobblestone": [
+            "confession:block-arch_small-name1",
+            "rock-{rock}",
+            "confession:originblock-{originblock}",
+            "confession:block-arch_small-name",
+            "confession:block-arch_small-name2"
+          ],
+          "style-*::rock-*::originblock-brick": [
+            "confession:block-arch_small-name1",
+            "rock-{rock}",
+            "confession:originblock-{originblock}",
+            "confession:block-arch_small-name",
+            "confession:block-arch_small-name2"
+          ],
+          "style-*::rock-*::originblock-*": ["confession:block-arch_small-name1", "confession:originblock-{originblock}", "confession:block-arch_small-name", "confession:block-arch_small-name2"],
+          "*": ["confession:block-debug-noname"]
+        },
+        "description": {
+          "style-*::rock-*::originblock-*::wood-*": [
+            "confession:block-arch_small-description1",
+            "rock-{rock}",
+            "confession:block-arch_small-description2",
+            "confession:{style}",
+            "confession:block-arch_small-description5",
+            "block-planks-{wood}",
+            "confession:block-linebreak"
+          ],
+          "*": ["confession:block-debug-nodescription"]
+        },
+        "textures": {
+          "style-*::rock-*::wood-*::originblock-plaster": {
+            "material": {"base": "game:block/stone/plaster/plain"},
+            "rim": {"base": "game:block/stone/rock/{rock}1", "overlays": ["game:block/overlay/damagedstone1"]},
+            "lintel": {"base": "game:block/wood/debarked/{wood}", "rotation": 90, "blendedOverlays": [{"base": "game:block/wood/door/overlay-solid", "blendMode": "Overlay"}]},
+            "plaster": {"base": "game:block/stone/rock/{rock}1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]}
+          },
+          "style-*::rock-*::originblock-rock::wood-*": {
+            "material": {"base": "game:block/stone/rock/{rock}1"},
+            "rim": {"base": "game:block/stone/rock/{rock}1", "overlays": ["game:block/overlay/damagedstone1"]},
+            "lintel": {"base": "game:block/wood/debarked/{wood}", "rotation": 90, "blendedOverlays": [{"base": "game:block/wood/door/overlay-solid", "blendMode": "Overlay"}]},
+            "plaster": {"base": "game:block/stone/rock/{rock}1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]}
+          },
+          "style-*::rock-*::originblock-cobblestone::wood-*": {
+            "material": {"base": "game:block/stone/cobblestone/{rock}1"},
+            "rim": {"base": "game:block/stone/rock/{rock}1", "overlays": ["game:block/overlay/damagedstone1"]},
+            "lintel": {"base": "game:block/wood/debarked/{wood}", "rotation": 90, "blendedOverlays": [{"base": "game:block/wood/door/overlay-solid", "blendMode": "Overlay"}]},
+            "plaster": {"base": "game:block/stone/rock/{rock}1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]}
+          },
+          "style-*::rock-*::originblock-brick::wood-*": {
+            "material": {"base": "game:block/stone/brick/{rock}1"},
+            "rim": {"base": "game:block/stone/rock/{rock}1", "overlays": ["game:block/overlay/damagedstone1"]},
+            "lintel": {"base": "game:block/wood/debarked/{wood}", "rotation": 90, "blendedOverlays": [{"base": "game:block/wood/door/overlay-solid", "blendMode": "Overlay"}]},
+            "plaster": {"base": "game:block/stone/rock/{rock}1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]}
+          },
+          "style-*::originblock-*::rock-*::wood-*": {
+            "material": {"base": "game:block/clay/daub/{originblock}/normal1"},
+            "rim": {"base": "game:block/stone/rock/{rock}1", "overlays": ["game:block/overlay/damagedstone1"]},
+            "lintel": {"base": "game:block/wood/debarked/{wood}", "rotation": 90, "blendedOverlays": [{"base": "block/wood/door/overlay-solid", "blendMode": "Overlay"}]},
+            "plaster": {"base": "game:block/stone/rock/{rock}1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]}
+          }
+        },
+        "CollisionSelectionBoxes": {
+          "style-d": [
+            {"x1": 0, "y1": 0.6875, "z1": 0, "x2": 1, "y2": 1, "z2": 1},
+            {"x1": 0, "y1": 0, "z1": 0, "x2": 0.0625, "y2": 0.6875, "z2": 1, "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
+            {"x1": 0.9375, "y1": 0, "z1": 0, "x2": 1, "y2": 0.6875, "z2": 1, "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
+            {"x1": 0, "y1": 0, "z1": 0.875, "x2": 1, "y2": 1, "z2": 1, "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}}
+          ],
+          "style-b": [
+            {"x1": 0, "y1": 0.4375, "z1": 0, "x2": 1, "y2": 1, "z2": 1},
+            {"x1": 0, "y1": 0, "z1": 0, "x2": 0.0625, "y2": 0.4375, "z2": 1, "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
+            {"x1": 0.9375, "y1": 0, "z1": 0, "x2": 1, "y2": 0.4375, "z2": 1, "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
+            {"x1": 0, "y1": 0, "z1": 0.875, "x2": 1, "y2": 1, "z2": 1, "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}}
+          ],
+
+          "style-*": [
+            {"x1": 0, "y1": 0.875, "z1": 0, "x2": 1, "y2": 1, "z2": 1},
+            {"x1": 0, "y1": 0.625, "z1": 0, "x2": 0.1875, "y2": 0.875, "z2": 1, "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
+            {"x1": 0.8125, "y1": 0.625, "z1": 0, "x2": 1, "y2": 0.875, "z2": 1, "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
+            {"x1": 0, "y1": 0, "z1": 0, "x2": 0.0625, "y2": 0.625, "z2": 1, "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
+            {"x1": 0.9375, "y1": 0, "z1": 0, "x2": 1, "y2": 0.625, "z2": 1, "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
+            {"x1": 0, "y1": 0, "z1": 0.875, "x2": 1, "y2": 1, "z2": 1, "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}}
+          ]
+        },
+
+        "shape": {
+          "style-a": {"base": "confession:block/stone/arch-s-a", "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
+          "style-b": {"base": "confession:block/stone/arch-s-b", "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
+          "style-c": {"base": "confession:block/stone/arch-s-c", "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
+          "style-d": {"base": "confession:block/stone/arch-s-d", "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}}
+        }
+      }
+    }
+  ],
+  "shape": {"base": "game:block/basic/invisible"},
+  "collisionSelectionBoxes": [{"x1": 0, "y1": 0.9, "z1": 0, "x2": 1, "y2": 1, "z2": 1}],
+  "heldTpIdleAnimation": "holdbothhandslarge",
+  "heldTpUseAnimation": "twohandplaceblock",
+  "tpHandTransform": {"translation": {"x": -1.23, "y": -0.91, "z": -0.8}, "rotation": {"x": -2, "y": 25, "z": -78}, "scale": 0.4},
+  "textures": {
+    "material": {"base": "game:block/transparent"},
+    "rim": {"base": "game:block/transparent"},
+    "glass": {"base": "game:block/transparent"},
+    "glass-inside": {"base": "game:block/transparent"},
+    "plaster": {"base": "game:block/stone/rock/granite1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
+    "putty": {"base": "game:block/transparent"},
+    "frame": {"base": "game:block/transparent"},
+    "black": {"base": "game:block/transparent"},
+    "lintel": {"base": "game:block/transparent"}
+  },
+  "guiTransform": {"rotation": {"x": -22.6, "y": 135, "z": 0}}
 }
