@@ -1,0 +1,38 @@
+[
+  {
+    "enabled": true,
+    "ingredientPattern": "AFA,RFR,LFL",
+    "ingredients": {
+      "A": {"type": "block", "code": "game:woodenaxle-ud", "quantity": 1},
+      "L": {"type": "item", "code": "game:ingot-lead", "quantity": 2},
+      "F": {
+        "type": "block",
+        "code": "game:woodenfence-*-ew-free",
+        "name": "wood",
+        "allowedVariants": ["oak", "aged", "pine", "birch", "maple", "kapok", "larch", "ebony", "acacia", "walnut", "redwood", "baldcypress", "purpleheart"],
+        "quantity": 4
+      },
+      "R": {"type": "item", "code": "game:rope", "quantity": 2}
+    },
+    "width": 3,
+    "height": 3,
+    "output": {"type": "block", "code": "confession:portcullis-4t-{wood}"}
+  },
+  {
+    "enabled": true,
+    "ingredientPattern": "NSN,NSN,NSN",
+    "ingredients": {
+      "N": {"type": "item", "code": "game:metalnailsandstrips-*", "quantity": 1},
+      "S": {
+        "type": "item",
+        "code": "game:plank-*",
+        "name": "wood",
+        "allowedVariants": ["oak", "aged", "pine", "birch", "maple", "kapok", "larch", "ebony", "acacia", "walnut", "redwood", "baldcypress", "purpleheart"],
+        "quantity": 16
+      }
+    },
+    "width": 3,
+    "height": 3,
+    "output": {"type": "block", "code": "confession:gate-4t-{wood}"}
+  }
+]

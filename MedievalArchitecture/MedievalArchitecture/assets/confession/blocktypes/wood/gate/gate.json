@@ -1,0 +1,82 @@
+{
+  "enabled": true,
+  "code": "gate",
+  "maxStackSize": 16,
+  "blockmaterial": "Wood",
+  "resistance": 4,
+  "renderPass": "OpaqueNoCull",
+  "facecullmode": "nevercull",
+  "lightabsorption": 1,
+  "sideopaque": {"all": false},
+  "sidesolid": {"up": false},
+  "class": "BlockGate",
+  "entityClass": "Generic",
+  "entityBehaviors": [{"name": "Gate"}],
+  "behaviors": [{"name": "Lockable"}],
+  "variantgroups": [
+    {"code": "size", "states": ["4t"]},
+    {"code": "wood", "states": ["oak", "aged", "birch", "maple", "pine", "redwood", "larch", "ebony", "baldcypress", "acacia", "kapok", "purpleheart", "walnut"]}
+  ],
+  "attributesByType": {
+    "*-4t-*": {
+      "handbook": {"groupBy": ["gate-*"], "extraSections": [{"title": "confession:reinforce-multiblock-title", "text": "confession:reinforce-multiblock-text"}]},
+      "reinforcable": true,
+      "airtight": true,
+      "width": 3,
+      "length": 2,
+      "height": 4,
+      "openSound": "sounds/block/gateopen",
+      "closeSound": "sounds/block/gateclose",
+      "easingSpeed": 2,
+      "easOutSpeed": 1,
+      "animationSpeed": 0.25,
+      "boxesOpen": [
+        {"offset": [0, 0, 0], "boxes": [[0, 0, 0, 0.05, 1, 1]]},
+        {"offset": [2, 0, 0], "boxes": [[0.95, 0, 0, 1, 1, 1]]},
+        {"offset": [0, 1, 0], "boxes": [[0, 0, 0, 0.05, 1, 1]]},
+        {"offset": [2, 1, 0], "boxes": [[0.95, 0, 0, 1, 1, 1]]},
+        {"offset": [0, 2, 0], "boxes": [[0, 0, 0, 0.05, 1, 1]]},
+        {"offset": [2, 2, 0], "boxes": [[0.95, 0, 0, 1, 1, 1]]},
+        {"offset": [0, 3, 0], "boxes": [[0, 0, 0, 0.05, 1, 1]]},
+        {"offset": [2, 3, 0], "boxes": [[0.95, 0, 0, 1, 1, 1]]},
+        {"offset": [0, 0, 1], "boxes": [[0, 0, 0.4, 0.05, 1, 1]]},
+        {"offset": [2, 0, 1], "boxes": [[0.95, 0, 0.4, 1, 1, 1]]},
+        {"offset": [0, 1, 1], "boxes": [[0, 0, 0.4, 0.05, 1, 1]]},
+        {"offset": [2, 1, 1], "boxes": [[0.95, 0, 0.4, 1, 1, 1]]},
+        {"offset": [0, 2, 1], "boxes": [[0, 0, 0.4, 0.05, 1, 1]]},
+        {"offset": [2, 2, 1], "boxes": [[0.95, 0, 0.4, 1, 1, 1]]},
+        {"offset": [0, 3, 1], "boxes": [[0, 0, 0.4, 0.05, 1, 1]]},
+        {"offset": [2, 3, 1], "boxes": [[0.95, 0, 0.4, 1, 1, 1]]}
+      ],
+      "boxesClosed": [
+        {"offset": [0, 0, 0], "boxes": [[0, 0, 0.75, 1, 1, 1]]},
+        {"offset": [1, 0, 0], "boxes": [[0, 0, 0.75, 1, 1, 1]]},
+        {"offset": [2, 0, 0], "boxes": [[0, 0, 0.75, 1, 1, 1]]},
+        {"offset": [0, 1, 0], "boxes": [[0, 0, 0.75, 1, 1, 1]]},
+        {"offset": [1, 1, 0], "boxes": [[0, 0, 0.75, 1, 1, 1]]},
+        {"offset": [2, 1, 0], "boxes": [[0, 0, 0.75, 1, 1, 1]]},
+        {"offset": [0, 2, 0], "boxes": [[0, 0, 0.75, 1, 1, 1]]},
+        {"offset": [1, 2, 0], "boxes": [[0, 0, 0.75, 1, 1, 1]]},
+        {"offset": [2, 2, 0], "boxes": [[0, 0, 0.75, 1, 1, 1]]},
+        {"offset": [0, 3, 0], "boxes": [[0, 0, 0.75, 1, 1, 1]]},
+        {"offset": [1, 3, 0], "boxes": [[0, 0, 0.75, 1, 1, 1]]},
+        {"offset": [2, 3, 0], "boxes": [[0, 0, 0.75, 1, 1, 1]]}
+      ]
+    }
+  },
+  "shape": {"base": "block/wood/gate/gate-{size}"},
+  "shapeinventory": {"base": "game:block/wood/crate/normal-closed", "overlays": [{"base": "game:block/wood/crate/label-paper"}]},
+  "textures": {
+    "sides": {"base": "game:block/wood/crate/{wood}-sides"},
+    "frame-generic": {"base": "game:block/wood/crate/frame-generic"},
+    "labelbase": {"base": "block/wood/gate/label-gate-{size}"},
+    "materialplanks": {"base": "game:block/wood/planks/{wood}1"},
+    "material": {"base": "game:block/wood/debarked/{wood}"},
+    "metal2": {"base": "game:block/metal/sheet-plain/lead1"},
+    "metal": {"base": "game:block/metal/plate/molybdochalkos"}
+  },
+  "creativeinventory": {"general": ["*"], "construction": ["*"], "confession": ["*"]},
+  "heldTpIdleAnimation": "holdunderarm",
+  "tpHandTransform": {"translation": {"x": -1.3, "y": -0.5, "z": -0.7}, "rotation": {"x": 0, "y": 90, "z": -102}, "scale": 0.44},
+  "guiTransform": {"origin": {"x": 0.5, "y": 0.5, "z": 0.5}, "scale": 1.16}
+}

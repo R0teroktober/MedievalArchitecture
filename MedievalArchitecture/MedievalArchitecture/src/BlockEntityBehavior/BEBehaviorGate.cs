@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using AttributeRenderingLibrary;
+using System.Collections.Generic;
+using System.Text;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
+using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Util;
@@ -18,6 +21,7 @@ namespace MedievalArchitecture
         // Sounds
         private float animationSpeed = 1f;
         private float easingSpeed = 10f;
+        private float easOutSpeed = 2f;
 
         private AssetLocation openSound;
         private AssetLocation closeSound;
@@ -49,6 +53,7 @@ namespace MedievalArchitecture
 
             animationSpeed = Block?.Attributes?["animationSpeed"].AsFloat(1f) ?? 1f;
             easingSpeed = Block?.Attributes?["easingSpeed"].AsFloat(10f) ?? 10f;
+            easOutSpeed = Block?.Attributes?["easOutSpeed"].AsFloat(10f) ?? 10f;
 
             if (api.Side == EnumAppSide.Client)
             {
@@ -120,7 +125,7 @@ namespace MedievalArchitecture
                         Code = "opened",
                         AnimationSpeed = animationSpeed,
                         EaseInSpeed = easingSpeed,
-                        EaseOutSpeed =3f
+                        EaseOutSpeed = easOutSpeed
                     });
                 }
             }
@@ -229,5 +234,6 @@ namespace MedievalArchitecture
                 _ => 0f
             };
         }
+
     }
 }

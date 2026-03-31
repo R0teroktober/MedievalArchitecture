@@ -1,37 +1,67 @@
 [
-    {
-        "enabled": true,
-        "ingredientPattern": "HHL,CC_,SS_",
-        "ingredients": {
-            "H": {
-                "type": "item",
-                "code": "game:helvehammer-*",
-                "quantity": 1
-            },
-            "L": {
-                "type": "item",
-                "code": "game:metalplate-lead",
-                "quantity": 2
-            },
-            "S": {
-                "type": "block",
-                "code": "game:plankslab-*-down-free",
-                "name": "wood",
-                "allowedVariants": [ "oak", "aged", "pine", "birch", "maple", "kapok", "larch", "ebony", "acacia", "walnut", "redwood", "baldcypress", "purpleheart" ],
-                "quantity": 3
-            },
-            "C": {
-                "type": "block",
-                "code": "game:clutter",
-                "attributes": { "type": "chains/chain-floor" },
-                "quantity": 1
-            }
-        },
-        "width": 3,
-        "height": 3,
-        "output": {
-            "type": "block",
-            "code": "confession:drawbridge-small-{wood}"
-        }
-    }
+  {
+    "enabled": true,
+    "ingredientPattern": "HHL,CC_,SS_",
+    "ingredients": {
+      "H": {"type": "item", "code": "game:helvehammer-*", "quantity": 1},
+      "L": {"type": "item", "code": "game:metalplate-lead", "quantity": 2},
+      "S": {
+        "type": "block",
+        "code": "game:plankslab-*-down-free",
+        "name": "wood",
+        "allowedVariants": ["oak", "aged", "pine", "birch", "maple", "kapok", "larch", "ebony", "acacia", "walnut", "redwood", "baldcypress", "purpleheart"],
+        "quantity": 3
+      },
+      "C": {"type": "block", "code": "game:clutter", "attributes": {"type": "chains/chain-floor"}, "quantity": 1}
+    },
+    "width": 3,
+    "height": 3,
+    "output": {"type": "block", "code": "confession:drawbridge-small-{wood}"}
+  },
+
+  {
+    "enabled": true,
+    "ingredientPattern": "HLH,C_C,SSS",
+    "ingredients": {
+      "H": {"type": "item", "code": "game:helvehammer-*", "quantity": 1},
+      "L": {"type": "item", "code": "game:metalplate-lead", "quantity": 3},
+      "S": {
+        "type": "block",
+        "code": "game:plankslab-*-down-free",
+        "name": "wood",
+        "allowedVariants": ["oak", "aged", "pine", "birch", "maple", "kapok", "larch", "ebony", "acacia", "walnut", "redwood", "baldcypress", "purpleheart"],
+        "quantity": 3
+      },
+      "C": {"type": "block", "code": "game:clutter", "attributes": {"type": "chains/chain-floor"}, "quantity": 1}
+    },
+    "width": 3,
+    "height": 3,
+    "output": {"type": "block", "code": "confession:drawbridge-medium-{wood}"}
+  },
+  {
+    "enabled": true,
+    "ingredientPattern": "HBH,CLC,SSS",
+    "ingredients": {
+      "B": {
+        "type": "block",
+        "code": "game:supportbeam-*",
+        "name": "wood",
+        "allowedVariants": ["oak", "aged", "pine", "birch", "maple", "kapok", "larch", "ebony", "acacia", "walnut", "redwood", "baldcypress", "purpleheart"],
+        "quantity": 3
+      },
+      "H": {"type": "item", "code": "game:helvehammer-*", "quantity": 1},
+      "L": {"type": "item", "code": "game:metalplate-lead", "quantity": 4},
+      "S": {
+        "type": "block",
+        "code": "game:plankslab-*-down-free",
+        "name": "wood",
+        "allowedVariants": ["oak", "aged", "pine", "birch", "maple", "kapok", "larch", "ebony", "acacia", "walnut", "redwood", "baldcypress", "purpleheart"],
+        "quantity": 4
+      },
+      "C": {"type": "block", "code": "game:clutter", "attributes": {"type": "chains/chain-floor"}, "quantity": 1}
+    },
+    "width": 3,
+    "height": 3,
+    "output": {"type": "block", "code": "confession:drawbridge-big-{wood}"}
+  }
 ]
