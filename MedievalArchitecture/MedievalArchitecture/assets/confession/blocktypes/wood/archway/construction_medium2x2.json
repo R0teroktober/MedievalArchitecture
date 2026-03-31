@@ -52,7 +52,7 @@
             "freshPlaster": {"base": "game:block/stone/rock/{rock}1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]}
           }
         },
-        "shape": {"state-*::style-*": {"base": "confession:block/wood/construction-m-{state}-{style}", "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}}},
+        "shape": {"state-*::style-*": {"base": "confession:block/wood/frame/construction-m-{state}-{style}", "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}}},
         "shapeinventory": {"state-0::style-*": {"base": "confession:block/stone/arch-m-{style}", "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}}}
       }
     }

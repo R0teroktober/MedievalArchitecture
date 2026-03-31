@@ -314,6 +314,12 @@ namespace MedievalArchitecture
                     case "confession:arch2x1":
                         stack = new ItemStack(world.GetBlock(new AssetLocation("confession:construction_medium2x1-north")));
                         break;
+                    case "confession:arch3x2":
+                        stack = new ItemStack(world.GetBlock(new AssetLocation("confession:construction_big3x2-north")));
+                        break;
+                    case "confession:arch3x3":
+                        stack = new ItemStack(world.GetBlock(new AssetLocation("confession:construction_big3x3-north")));
+                        break;
                 }
                 if (stack != null && world.Side == EnumAppSide.Server)
                 {

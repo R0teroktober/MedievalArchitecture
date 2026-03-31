@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "code": "construction_medium2x1",
+  "code": "construction_big3x3",
   "maxStackSize": 64,
   "blockmaterial": "wood",
   "resistance": 1,
@@ -13,13 +13,13 @@
   "variantgroups": [{"code": "side", "loadFromProperties": "abstract/horizontalorientation"}],
   "attributes": {
     "handbook": {
-      "groupBy": ["construction_medium2x1-*"],
+      "groupBy": ["construction_big3x3-*"],
       "excludeByType": {"west": true, "east": true, "south": true},
       "extraSections": [
         {"title": "confession:archway-build-help-title", "text": "confession:archway-build-help-text"},
         {"title": "confession:construction-drop-help-title", "text": "confession:construction-drop-help-text"},
         {"title": "confession:archway-addglass-help-title", "text": "confession:archway-addglass-help-text"},
-        {"title": "confession:archway-addwood-help-title", "text": "confession:archway-addwood-help-text"}
+        {"title": "confession:archway-addgate-help-title", "text": "confession:archway-addgate-help-text"}
       ]
     }
   },
@@ -28,18 +28,18 @@
     {
       "name": "Multiblock",
       "propertiesByType": {
-        "*-east": {"sizex": 1, "sizey": 1, "sizez": 2, "cposition": {"x": 0, "y": 0, "z": 0}},
-        "*-west": {"sizex": 1, "sizey": 1, "sizez": 2, "cposition": {"x": 0, "y": 0, "z": 1}},
-        "*-south": {"sizex": 2, "sizey": 1, "sizez": 1, "cposition": {"x": 1, "y": 0, "z": 0}},
-        "*-north": {"sizex": 2, "sizey": 1, "sizez": 1, "cposition": {"x": 0, "y": 0, "z": 0}}
+        "*-east": {"sizex": 1, "sizey": 3, "sizez": 3, "cposition": {"x": 0, "y": 2, "z": 0}},
+        "*-west": {"sizex": 1, "sizey": 3, "sizez": 3, "cposition": {"x": 0, "y": 2, "z": 2}},
+        "*-south": {"sizex": 3, "sizey": 3, "sizez": 1, "cposition": {"x": 2, "y": 2, "z": 0}},
+        "*-north": {"sizex": 3, "sizey": 3, "sizez": 1, "cposition": {"x": 0, "y": 2, "z": 0}}
       }
     },
-    {"name": "BlockBehaviorArchwayFrame", "properties": {"blockCodeBaseString": "confession:arch2x1", "intMultiplicator": 2}},
+    {"name": "BlockBehaviorArchwayFrame", "properties": {"blockCodeBaseString": "confession:arch3x3", "intMultiplicator": 9}},
     {"name": "AttributeRenderingLibrary.HorizontalOrientable", "properties": {"dropBlockFace": "north"}},
     {
       "name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
       "properties": {
-        "name": {"state-*": ["confession:block-construction_medium-name1", "confession:{state}", "confession:block-construction_small-name2"], "*": ["confession:block-debug-noname"]},
+        "name": {"state-*": ["confession:block-construction_big-name1", "confession:{state}", "confession:block-construction_small-name2"], "*": ["confession:block-debug-noname"]},
         "description": {
           "rock-*::style-*": ["confession:block-arch_small-description1", "rock-{rock}", "confession:block-arch_small-description2", "confession:{style}", "confession:block-linebreak"],
           "*": ["confession:block-debug-nodescription"]
@@ -47,43 +47,52 @@
         "textures": {
           "rock-none": {"rimstones": {"base": "game:block/transparent"}, "freshPlaster": {"base": "game:block/transparent"}, "gravel": {"base": "game:block/transparent"}},
           "state-*::rock-*": {
+            "stonesmooth": {"base": "game:block/stone/rock/{rock}1"},
             "rimstones": {"base": "game:block/stone/rock/{rock}1", "overlays": ["game:block/overlay/damagedstone1"]},
             "gravel": {"base": "game:block/stone/agedbrick/{rock}1"},
             "freshPlaster": {"base": "game:block/stone/rock/{rock}1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]}
           }
         },
-        "shape": {"state-*::style-*": {"base": "confession:block/wood/frame/construction-m-{state}-{style}", "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}}},
-        "shapeinventory": {"state-0::style-*": {"base": "confession:block/stone/arch-m-{style}", "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}}}
+        "shape": {"state-*::style-*": {"base": "confession:block/wood/frame/construction-b-{state}-{style}", "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}}},
+        "shapeinventory": {"state-0::style-*": {"base": "confession:block/stone/arch-b-{style}", "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}}}
       }
     }
   ],
-  "shape": {"base": "game:block/basic/invisible", "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
+  "shape": {"base": "game:block/basic/invisible"},
   "textures": {
     "rim": {"base": "game:block/liquid/dye/gray"},
-    "plaster": {"base": "game:block/liquid/dye/gray"},
-    "material": {"base": "game:block/liquid/dye/gray"},
     "rimstones": {"base": "game:block/transparent"},
-    "black": {"base": "game:block/transparent"},
+    "plaster": {"base": "game:block/liquid/dye/gray"},
+    "freshPlaster": {"base": "game:block/transparent"},
+    "material": {"base": "game:block/liquid/dye/gray"},
+    "stone": {"base": "game:block/liquid/dye/gray"},
+    "stonesmooth": {"base": "game:block/transparent"},
     "lintel": {"base": "game:block/transparent"},
+    "black": {"base": "game:block/transparent"},
     "frame": {"base": "game:block/transparent"},
     "putty": {"base": "game:block/transparent"},
-    "glass-top": {"base": "game:block/transparent"},
+    "glass-ls": {"base": "game:block/transparent"},
+    "glass-lm": {"base": "game:block/transparent"},
+    "glass-ms": {"base": "game:block/transparent"},
+    "glass-mm": {"base": "game:block/transparent"},
+    "glass-us": {"base": "game:block/transparent"},
+    "glass-um": {"base": "game:block/transparent"},
     "glass-inside": {"base": "game:block/transparent"},
-    "freshPlaster": {"base": "game:block/transparent"},
+    "rope": {"base": "game:item/resource/rope"},
     "gravel": {"base": "game:block/transparent"},
     "metal": {"base": "game:block/metal/sheet-plain/iron1"},
     "wood": {"base": "game:block/wood/debarked/aged"},
-    "planks": {"base": "game:block/wood/planks/generic"}
+    "planks": {"base": "game:block/wood/crate/aged-inside"}
   },
-  "collisionBox": {"x1": 0, "y1": 0.5, "z1": 0, "x2": 1, "y2": 1, "z2": 1},
+  "collisionBox": {"x1": 0, "y1": 0.5, "z1": 0, "x2": 1.5, "y2": 1, "z2": 1},
   "heldTpIdleAnimation": "holdbothhandslarge",
   "heldTpUseAnimation": "twohandplaceblock",
   "fpHandTransform": {"translation": {"x": -1.5, "y": -1.15, "z": 0.5}, "rotation": {"x": 4, "y": 40, "z": -2}, "scale": 1.57},
-  "tpHandTransform": {"translation": {"x": -0.83, "y": -0.9099, "z": -1.5}, "rotation": {"x": -84, "y": 13, "z": -107}, "origin": {"x": 0.3, "y": 0.4, "z": 0.5}, "scale": 0.39},
-  "guiTransform": {"rotation": {"x": 0, "y": 0, "z": 0}, "origin": {"x": 1, "y": 0.5, "z": 0.5}, "scale": 0.58},
+  "tpHandTransform": {"translation": {"x": -1.53, "y": -0.9099, "z": -1.3}, "rotation": {"x": -84, "y": 13, "z": -107}, "origin": {"x": 0.3, "y": 0.5, "z": 0.3}, "scale": 0.31},
+  "guiTransform": {"rotation": {"x": 0, "y": 0, "z": 0}, "origin": {"x": 1.5, "y": 0, "z": 0.5}, "scale": 0.4},
   "creativeinventoryStacksByType": {
     "*-north": [
-      {"tabs": ["confession", "construction", "general"], "stacks": [{"type": "block", "code": "construction_medium2x1-north", "attributes": {"types": {"style": "b", "rock": "none", "state": "0"}}}]}
+      {"tabs": ["confession", "construction", "general"], "stacks": [{"type": "block", "code": "construction_big3x3-north", "attributes": {"types": {"style": "a", "rock": "none", "state": "0"}}}]}
     ]
   }
 }
