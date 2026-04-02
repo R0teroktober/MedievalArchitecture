@@ -1,15 +1,10 @@
 {
-    "$schema": "https://moddbcdn.vintagestory.at/schema/modinfo.latest.json",
-    "type": "Code",
-    "modid": "medievalarchitecture",
-    "name": "MedievalArchitecture",
-    "authors": [
-        "Roteroktober", "12Port", "Craluminum2413 (Dana)"
-    ],
-    "description": "Medieval themed architecture mod.",
-    "version": "1.0.5",
-    "dependencies": {
-      "game": "1.21.6",
-      "attributerenderinglibrary":  "2.8.1"
-    }
+  "$schema": "https://moddbcdn.vintagestory.at/schema/modinfo.latest.json",
+  "type": "Code",
+  "modid": "medievalarchitecture",
+  "name": "MedievalArchitecture",
+  "authors": ["Roteroktober", "12Port", "Craluminum2413 (Dana)"],
+  "description": "Medieval themed architecture mod.",
+  "version": "1.0.6",
+  "dependencies": {"game": "1.21.6", "attributerenderinglibrary": "2.8.1"}
 }
