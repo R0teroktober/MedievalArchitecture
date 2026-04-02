@@ -120,12 +120,7 @@
           ]
         },
 
-        "shape": {
-          "style-a": {"base": "confession:block/stone/arch-s-a", "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
-          "style-b": {"base": "confession:block/stone/arch-s-b", "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
-          "style-c": {"base": "confession:block/stone/arch-s-c", "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
-          "style-d": {"base": "confession:block/stone/arch-s-d", "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}}
-        }
+        "shape": {"style-*": {"base": "confession:block/stone/arch-s-{style}", "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}}}
       }
     }
   ],

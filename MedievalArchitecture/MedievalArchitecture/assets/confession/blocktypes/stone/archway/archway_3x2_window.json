@@ -299,7 +299,7 @@
   ],
   "heldTpIdleAnimation": "holdbothhandslarge",
   "heldTpUseAnimation": "twohandplaceblock",
+  "guiTransform": {"rotation": {"x": 0, "y": 0, "z": 0}, "origin": {"x": 1.5, "y": 0, "z": 0.5}, "scale": 0.4},
   "fpHandTransform": {"translation": {"x": -1.5, "y": -1.15, "z": 0.5}, "rotation": {"x": 4, "y": 40, "z": -2}, "scale": 1.57},
-  "tpHandTransform": {"translation": {"x": -0.03, "y": -0.7099, "z": -0.7}, "rotation": {"x": 106, "y": -6, "z": -79}, "origin": {"x": 0, "y": 0.9, "z": 1.4}, "scale": 0.61},
-  "guiTransform": {"rotation": {"x": 0, "y": 0, "z": 0}, "origin": {"x": 1.5, "y": -0, "z": 0.5}, "scale": 0.58}
+  "tpHandTransform": {"translation": {"x": -0.03, "y": -0.7099, "z": -0.7}, "rotation": {"x": 106, "y": -6, "z": -79}, "origin": {"x": 0, "y": 0.9, "z": 1.4}, "scale": 0.61}
 }
