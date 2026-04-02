@@ -39,7 +39,7 @@
     "output": {"type": "block", "code": "confession:drawbridge-medium-{wood}"}
   },
   {
-    "enabled": true,
+    "enabled": false,
     "ingredientPattern": "HBH,CLC,SSS",
     "ingredients": {
       "B": {
