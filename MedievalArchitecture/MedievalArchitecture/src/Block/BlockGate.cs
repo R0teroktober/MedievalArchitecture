@@ -533,7 +533,11 @@ namespace MedievalArchitecture
             return OnGettingBroken(player, shiftedSelection, itemslot, remainingResistance, dt, counter);
         }
 
-        
+        public bool MBDoPartialSelection(IWorldAccessor world, BlockPos pos, Vec3i offset)
+        {
+            // Not used for now.
+            return false;
+        }
 
     }
 }
