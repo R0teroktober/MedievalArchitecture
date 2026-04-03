@@ -10,7 +10,6 @@ namespace MedievalArchitecture
     {
         public ValuesByMultiblockOffset ValuesByMultiblockOffset { get; set; } = new();
 
-        ICoreClientAPI capi;
 
         public override void OnLoaded(ICoreAPI api)
         {
@@ -37,19 +36,5 @@ namespace MedievalArchitecture
             Block originaBlock = blockAccessor.GetBlock(pos.AddCopy(offset.X, offset.Y, offset.Z));
             return originaBlock.GetSelectionBoxes(blockAccessor, pos);
         }
-
-        //public override float GetAmbientSoundStrength(IWorldAccessor world, BlockPos pos)
-        //{
-
-        //    var block = world.BlockAccessor.GetBlock(pos);
-        //    var blockCode = block.Code.
-        //    var conds = capi.World.Player.Entity.selfClimateCond;
-        //    if (conds != null && conds.Rainfall > 0.1f && conds.Temperature > 3f && (world.BlockAccessor.GetRainMapHeightAt(pos) <= pos.Y || world.BlockAccessor.GetDistanceToRainFall(pos, 3, 1) <= 2))
-        //    {
-        //        return conds.Rainfall;
-        //    }
-
-        //    return 0;
-        //}
     }
 }
