@@ -18,7 +18,7 @@ namespace MedievalArchitecture
         West
     }
 
-    public class BlockGateBase : BlockGeneric, IMultiBlockInteract, IMultiBlockColSelBoxes
+    public class BlockGateBase : BlockGeneric, IMultiBlockInteract, IMultiBlockColSelBoxes, IMultiBlockBlockBreaking
     {
         private int width = 1;
         private int height = 1;
@@ -202,8 +202,21 @@ namespace MedievalArchitecture
 
         public override void OnBlockBroken(IWorldAccessor world, BlockPos pos, IPlayer byPlayer, float dropQuantityMultiplier = 1)
         {
-            // Direct controller break.
-            BreakWholeMultiblock(world, pos, byPlayer, dropQuantityMultiplier);
+            // Rotation vorher sichern, weil die BE nach erfolgreichem Break evtl. weg ist
+            HorizontalRotation rotation = GetStoredRotation(world, pos);
+
+            // Erst normal den Controller brechen lassen.
+            // Reinforcement darf hier den Break verhindern.
+            base.OnBlockBroken(world, pos, byPlayer, dropQuantityMultiplier);
+
+            // Wenn der Controller noch da ist, wurde der Break verhindert.
+            Block remainingBlock = world.BlockAccessor.GetBlock(pos);
+            if (remainingBlock != null && remainingBlock.Id == Id)
+            {
+                return;
+            }
+
+            RemoveDummyBlocks(world, pos, rotation);
         }
 
         #region BlockInteract
@@ -475,44 +488,43 @@ namespace MedievalArchitecture
 
         public void MBOnBlockBroken(IWorldAccessor world, BlockPos pos, Vec3i offset, IPlayer byPlayer, float dropQuantityMultiplier = 1)
         {
-            // Dummy break routed by BlockMultiblock.
             BlockPos controllerPos = pos.AddCopy(offset);
-            BreakWholeMultiblock(world, controllerPos, byPlayer, dropQuantityMultiplier);
+            Block controllerBlock = world.BlockAccessor.GetBlock(controllerPos);
+
+            if (controllerBlock == null || controllerBlock.Id == 0)
+            {
+                return;
+            }
+
+            controllerBlock.OnBlockBroken(world, controllerPos, byPlayer, dropQuantityMultiplier);
         }
 
-        private void BreakWholeMultiblock(IWorldAccessor world, BlockPos controllerPos, IPlayer byPlayer, float dropQuantityMultiplier)
+        private void RemoveDummyBlocks(IWorldAccessor world, BlockPos controllerPos, HorizontalRotation rotation)
         {
-            HorizontalRotation rotation = GetStoredRotation(world, controllerPos);
+            IBulkBlockAccessor bulkAccessor = world.GetBlockAccessorBulkUpdate(world.Side == EnumAppSide.Server, false);
 
-            // Remove all dummy blocks first.
-            // The controller is broken last through the normal block break path,
-            // so drops and base break behavior happen only once.
             for (int dx = 0; dx < width; dx++)
             {
                 for (int dy = 0; dy < height; dy++)
                 {
                     for (int dz = 0; dz < length; dz++)
                     {
-                        if (dx == 0 && dy == 0 && dz == 0)
-                        {
-                            continue;
-                        }
+                        if (dx == 0 && dy == 0 && dz == 0) continue;
 
                         Vec3i off = GetPlacementOffset(dx, dy, dz, rotation);
                         BlockPos partPos = controllerPos.AddCopy(off.X, off.Y, off.Z);
                         Block partBlock = world.BlockAccessor.GetBlock(partPos);
 
-                        // Only remove expected multiblock dummy blocks.
-                        if (partBlock?.Code?.Domain == "game" && partBlock.Code.Path.StartsWith("multiblock-monolithic"))
+                        if (partBlock?.Code?.Domain == "game" &&
+                            partBlock.Code.Path.StartsWith("multiblock-monolithic"))
                         {
-                            world.BlockAccessor.SetBlock(0, partPos);
+                            bulkAccessor.SetBlock(0, partPos);
                         }
                     }
                 }
             }
 
-            // Break the controller through the normal path exactly once.
-            base.OnBlockBroken(world, controllerPos, byPlayer, dropQuantityMultiplier);
+            bulkAccessor.Commit();
         }
 
         public int MBGetRandomColor(ICoreClientAPI capi, BlockPos pos, BlockFacing facing, int rndIndex, Vec3i offsetInv)
