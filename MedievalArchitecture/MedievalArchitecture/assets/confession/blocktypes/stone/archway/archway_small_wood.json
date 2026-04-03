@@ -109,7 +109,6 @@
             {"x1": 0.9375, "y1": 0, "z1": 0, "x2": 1, "y2": 0.4375, "z2": 1, "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
             {"x1": 0, "y1": 0, "z1": 0.875, "x2": 1, "y2": 1, "z2": 1, "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}}
           ],
-
           "style-*": [
             {"x1": 0, "y1": 0.875, "z1": 0, "x2": 1, "y2": 1, "z2": 1},
             {"x1": 0, "y1": 0.625, "z1": 0, "x2": 0.1875, "y2": 0.875, "z2": 1, "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
@@ -119,16 +118,12 @@
             {"x1": 0, "y1": 0, "z1": 0.875, "x2": 1, "y2": 1, "z2": 1, "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}}
           ]
         },
-
         "shape": {"style-*": {"base": "confession:block/stone/arch-s-{style}", "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}}}
       }
     }
   ],
   "shape": {"base": "game:block/basic/invisible"},
   "collisionSelectionBoxes": [{"x1": 0, "y1": 0.9, "z1": 0, "x2": 1, "y2": 1, "z2": 1}],
-  "heldTpIdleAnimation": "holdbothhandslarge",
-  "heldTpUseAnimation": "twohandplaceblock",
-  "tpHandTransform": {"translation": {"x": -1.23, "y": -0.91, "z": -0.8}, "rotation": {"x": -2, "y": 25, "z": -78}, "scale": 0.4},
   "textures": {
     "material": {"base": "game:block/transparent"},
     "rim": {"base": "game:block/transparent"},
@@ -140,5 +135,8 @@
     "black": {"base": "game:block/transparent"},
     "lintel": {"base": "game:block/transparent"}
   },
-  "guiTransform": {"rotation": {"x": -22.6, "y": 135, "z": 0}}
+  "guiTransform": {"rotation": {"x": -22.6, "y": 135, "z": 0}},
+  "heldTpIdleAnimation": "holdbothhandslarge",
+  "heldTpUseAnimation": "twohandplaceblock",
+  "tpHandTransform": {"translation": {"x": -1.23, "y": -0.91, "z": -0.8}, "rotation": {"x": -2, "y": 25, "z": -78}, "scale": 0.4}
 }
