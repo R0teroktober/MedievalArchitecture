@@ -1,10 +1,10 @@
 {
   "$schema": "https://moddbcdn.vintagestory.at/schema/modinfo.latest.json",
   "type": "Code",
-  "modid": "medievalarchitecture",
-  "name": "MedievalArchitecture",
+  "modid": "ageofconfession",
+  "name": "Age of Confessio",
   "authors": ["Roteroktober", "12Port", "Craluminum2413 (Dana)"],
   "description": "Medieval themed architecture mod.",
-  "version": "1.0.9",
-  "dependencies": {"game": "1.22.0-rc.6", "attributerenderinglibrary": "3.0.0-pre.7"}
+  "version": "1.1.0",
+  "dependencies": {"game": "1.22.0", "attributerenderinglibrary": "3.0.1"}
 }
