@@ -53,5 +53,22 @@
     "width": 3,
     "height": 3,
     "output": {"type": "block", "code": "confession:gate-4t-{wood}"}
+  },
+  {
+    "enabled": true,
+    "ingredientPattern": "___,NSN,NSN",
+    "ingredients": {
+      "N": {"type": "item", "code": "game:metalnailsandstrips-*", "quantity": 1},
+      "S": {
+        "type": "item",
+        "code": "game:plank-*",
+        "name": "wood",
+        "allowedVariants": ["oak", "aged", "pine", "birch", "maple", "kapok", "larch", "ebony", "acacia", "walnut", "redwood", "baldcypress", "purpleheart"],
+        "quantity": 16
+      }
+    },
+    "width": 3,
+    "height": 3,
+    "output": {"type": "block", "code": "confession:gate-3t-{wood}"}
   }
 ]
