@@ -1,8 +1,12 @@
-﻿using System;
-using AttributeRenderingLibrary;
+﻿using AttributeRenderingLibrary;
+using System;
+using System.Runtime.CompilerServices;
+using System.Text;
 using Vintagestory.API.Common;
+using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
+using Vintagestory.API.Util;
 using Vintagestory.GameContent;
 
 namespace MedievalArchitecture
@@ -27,8 +31,8 @@ namespace MedievalArchitecture
 
         // Configuration
 
-        // burn duration is multiplied by this value to get actual burn time in seconds - e.g. 24s * 75 = 30 minutes of burn time for a piece of firewood
-        public virtual float BurnDurationModifier => 75f;
+        // burn duration is multiplied by this value to get actual burn time in seconds - e.g. 24s * 75 = 30 minutes of burn time for a piece of firewood ( day has 48 mins)
+        public virtual float BurnDurationModifier => MedievalArchitectureModSystem.Config.BrazierBurnDurationModifier;
         public virtual float HeatModifier => 1f;
         public float emptyFirepitBurnTimeMulBonus = 4f;
 
@@ -351,6 +355,13 @@ namespace MedievalArchitecture
             {
                 tree.SetBytes("fuelStack", FuelSlot.Itemstack.ToBytes());
             }
+        }
+
+        public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
+        {
+            base.GetBlockInfo(forPlayer, dsc);
+           
+
         }
 
         public override void OnBlockBroken(IPlayer? byPlayer = null)

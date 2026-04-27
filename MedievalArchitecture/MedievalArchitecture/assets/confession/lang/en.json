@@ -2,8 +2,8 @@
   //// Important: PAY ATTENTION TO SPACES INFRONT / BEHIND ""
   // version 1.0.1
   // handbook
-  "handbook-introduction-title": "Medieval Architecture Mod",
-  "handbook-introduction-text": "Medieval Architecture<br><br><i>This mod is a test to gather insights for my mod Age of Confession. Except for a few shapefiles, everything in this mod has been rebuild and the entire code has been rewritten. Thanks to the Attribute Rendering Library, I can now add significantly more blocks without compromising performance. <br>Even though it may not seem so, this mod is “bigger” than Age of Confession in the sense that it introduces more block variations. For this reason, I am particularly interested in feedback regarding performance. Help me advance this project—the modding community thrives on your input.</i><br><br><strong>Archways</strong><br>To build the archways you have to build a construction frame first and place it in the world. Now follows the three-stage construction process: Add <hk>ctrl</hk> + <hk>rightmouse</hk> loose <a href=\"handbook://item-stone-granite\">stones</a>, <a href=\"handbook://item-mortar\">mortar</a> and a block of your choice to finish the archway. You can use <a href=\"handbook://block-cobblestone-granite\">cobblestone</a>, <a href=\"handbook://block-rock-granite\">rock</a>, <a href=\"handbook://block-stonebricks-granite\">stone bricks</a>, <a href=\"handbook://block-plaster-plain\">plaster</a> or <a href=\"handbook://block-daub-tan-normal\">wattle and daub</a> to finish the archway.<br><br><strong>Tiny Window blocks</strong><br>Tiny window blocks (previously known as embrasures) are built in a similar way to archways. The difference is that there are only two building steps and the material of the rim stones is already determined by the frame. ",
+  "confession:handbook-introduction-ma-title": "Medieval Architecture Mod",
+  "confession:handbook-introduction-ma-text": "Medieval Architecture<br><br><i>This mod is a test to gather insights for my mod Age of Confession. Except for a few shapefiles, everything in this mod has been rebuild and the entire code has been rewritten. Thanks to the Attribute Rendering Library, I can now add significantly more blocks without compromising performance. <br>Even though it may not seem so, this mod is “bigger” than Age of Confession in the sense that it introduces more block variations. For this reason, I am particularly interested in feedback regarding performance. Help me advance this project—the modding community thrives on your input.</i><br><br><strong>Archways</strong><br>To build the archways you have to build a construction frame first and place it in the world. Now follows the three-stage construction process: Add <hk>ctrl</hk> + <hk>rightmouse</hk> loose <a href=\"handbook://item-stone-granite\">stones</a>, <a href=\"handbook://item-mortar\">mortar</a> and a block of your choice to finish the archway. You can use <a href=\"handbook://block-cobblestone-granite\">cobblestone</a>, <a href=\"handbook://block-rock-granite\">rock</a>, <a href=\"handbook://block-stonebricks-granite\">stone bricks</a>, <a href=\"handbook://block-plaster-plain\">plaster</a> or <a href=\"handbook://block-daub-tan-normal\">wattle and daub</a> to finish the archway.<br><br><strong>Tiny Window blocks</strong><br>Tiny window blocks (previously known as embrasures) are built in a similar way to archways. The difference is that there are only two building steps and the material of the rim stones is already determined by the frame. ",
 
   // header
   "game:tabname-confession": "Medieval Architecture",
@@ -269,6 +269,10 @@
   "confession:construct2": "1/3 firewood)",
   "confession:construct3": "2/3 firewood)",
   "confession:archway-brazier-help-text": "You'll need 4 <a href=\"handbook://item-confession:brazierpart\">brazier parts</a> and 1 <a href=\"handbook://item-hoop-iron\">metal hoop</a> of any kind. Assemble the empty brazier and place it. Add 3 more pieces of firewood until you can light it",
+  "confession:blockhelp-brazier-refuel": "Add firewood",
+  "confession:blockhelp-brazier-ignite": "Ignite",
+  "confession:blockinfo-brazier-fuelSlot": "Burntime: {0} hours",
+  "confession:blockinfo_brazier-addfirewood": "Add firewood",
 
   // configs
   "confession:setting-enable-small-archways": "Enable small archways",

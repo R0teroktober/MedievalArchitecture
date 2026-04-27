@@ -50,12 +50,6 @@ namespace MedievalArchitecture
                         MouseButton = EnumMouseButton.Right,
                         HotKeyCode = "shift"
                     },
-                    new WorldInteraction
-                    {
-                        ActionLangCode = "confession:blockhelp-brazier-construct",
-                        MouseButton = EnumMouseButton.Right,
-                        HotKeyCode = "shift"
-                    }
                 };
             });
         }
