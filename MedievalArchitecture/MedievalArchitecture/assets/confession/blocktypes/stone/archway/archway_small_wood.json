@@ -92,7 +92,7 @@
           "style-*::originblock-*::rock-*::wood-*": {
             "material": {"base": "game:block/clay/daub/{originblock}/normal1"},
             "rim": {"base": "game:block/stone/rock/{rock}1", "overlays": ["game:block/overlay/damagedstone1"]},
-            "lintel": {"base": "game:block/wood/debarked/{wood}", "rotation": 90, "blendedOverlays": [{"base": "block/wood/door/overlay-solid", "blendMode": "Overlay"}]},
+            "lintel": {"base": "game:block/wood/debarked/{wood}", "rotation": 90, "blendedOverlays": [{"base": "game:block/wood/door/overlay-solid", "blendMode": "Overlay"}]},
             "plaster": {"base": "game:block/stone/rock/{rock}1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]}
           }
         },
