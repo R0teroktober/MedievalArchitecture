@@ -39,7 +39,6 @@ namespace MedievalArchitecture
 
         {
             
-            var config = MedievalArchitectureModSystem.Config;
             soundAddStone = AssetLocation.Create("sounds/effect/stonecrush");
             soundAddMortar = AssetLocation.Create("sounds/block/sand");
             finishSound = AssetLocation.Create("sounds/block/rock-break-pickaxe");
@@ -47,10 +46,10 @@ namespace MedievalArchitecture
             intMultiplicator = properties["intMultiplicator"].AsInt(1);
             blockCodeBaseString = properties["blockCodeBaseString"].AsString();
 
-            rimStoneAmount = config.RimStoneAmount;
-            stateCodeByType = new Dictionary<string, string>(config.StateCodeByType);
-            styleCodeByType = new Dictionary<string, string>(config.StyleCodeByType);
-            rockCodeByType = new Dictionary<string, string>(config.RockCodeByType);
+            rimStoneAmount = MedievalArchitectureModSystem.Config.RimStoneAmount;
+            stateCodeByType = new Dictionary<string, string>(MedievalArchitectureModSystem.Config.StateCodeByType);
+            styleCodeByType = new Dictionary<string, string>(MedievalArchitectureModSystem.Config.StyleCodeByType);
+            rockCodeByType = new Dictionary<string, string>(MedievalArchitectureModSystem.Config.RockCodeByType);
 
             base.Initialize(properties);
 

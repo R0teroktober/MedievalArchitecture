@@ -14,6 +14,8 @@ using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Util;
 using Vintagestory.GameContent;
+using MedievalArchitecture;
+using Vintagestory.API.Config;
 
 namespace MedievalArchitecture
 {
@@ -36,14 +38,13 @@ namespace MedievalArchitecture
         public override void Initialize(JsonObject properties)
 
         {
-            
-            var config = MedievalArchitectureModSystem.Config;
-            woodCodeByType = new Dictionary<string, string>(config.WoodCodeByType);
-            glassCodeByType = new Dictionary<string, string>(config.GlassCodeByType);
-            stateCodeByType = new Dictionary<string, string>(config.StateCodeByType);
-            styleCodeByType = new Dictionary<string, string>(config.StyleCodeByType);
-            rockCodeByType = new Dictionary<string, string>(config.RockCodeByType);
-            originblockCodeByType = new Dictionary<string, string>(config.OriginblockCodeByType);
+
+             woodCodeByType = new Dictionary<string, string>(MedievalArchitectureModSystem.Config.WoodCodeByType);
+            glassCodeByType = new Dictionary<string, string>(MedievalArchitectureModSystem.Config.GlassCodeByType);
+            stateCodeByType = new Dictionary<string, string>(MedievalArchitectureModSystem.Config.StateCodeByType);
+            styleCodeByType = new Dictionary<string, string>(MedievalArchitectureModSystem.Config.StyleCodeByType);
+            rockCodeByType = new Dictionary<string, string>(MedievalArchitectureModSystem.Config.RockCodeByType);
+            originblockCodeByType = new Dictionary<string, string>(MedievalArchitectureModSystem.Config.OriginblockCodeByType);
             glassSize = properties["glassSize"].AsInt(1);
             lintelSize = properties["lintelSize"].AsInt(1);
             blockCodeWithGlass = properties["blockCodeWithGlass"].AsString();

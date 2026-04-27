@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace MedievalArchitecture
 {
-    public class VariantTypesConfig
+    public class MedievalArchitectureConfig
     {
         public int RimStoneAmount { get; set; } = 6;
+        public float BrazierBurnDurationModifier { get; set; } = 30f;
         public Dictionary<string, string> StateCodeByType { get; set; } = new();
         public Dictionary<string, string> StyleCodeByType { get; set; } = new();
         public Dictionary<string, string> RockCodeByType { get; set; } = new();
