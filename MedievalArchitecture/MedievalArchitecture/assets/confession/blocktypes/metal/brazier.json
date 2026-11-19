@@ -21,7 +21,7 @@
     "handbook": {"groupBy": ["brazier-*"], "excludeByType": {"*-lit": true}, "extraSections": [{"title": "confession:window-build-help-title", "text": "confession:archway-brazier-help-text"}]}
   },
 
-  "entityBehaviors": [{"name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes"}],
+  "entityBehaviors": [{"name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes"}, {"name": "TemperatureSensitive"}],
 
   "behaviors": [
     {

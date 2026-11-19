@@ -1,6 +1,5 @@
 ﻿using AttributeRenderingLibrary;
 using System;
-using System.Runtime.CompilerServices;
 using System.Text;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
@@ -11,11 +10,19 @@ using Vintagestory.GameContent;
 
 namespace MedievalArchitecture
 {
-    public class BlockEntityBrazier : BlockEntityConstructable, IHeatSource
+    /// <summary>
+    /// Brazier block entity. Burn logic is modelled after the vanilla firepit (BlockEntityFirepit).
+    /// IMPORTANT (savegame compatibility): the tree attribute keys written in ToTreeAttributes must not be renamed.
+    /// IMPORTANT (Real Smoke compatibility): the member names IsBurning, furnaceTemperature and CoolNow are
+    /// referenced by name from patches/brazier-real-smoke-compatibility.json. Do not rename them.
+    /// </summary>
+    public class BlockEntityBrazier : BlockEntityConstructable, IHeatSource, ITemperatureSensitive
     {
-        // Fuel storage - single slot, not full inventory
-        private ItemSlot? _fuelSlot;
-        public ItemSlot FuelSlot => _fuelSlot ??= new DummySlot();
+        // Fuel storage - single slot, not full inventory.
+        // Created once here (not in Initialize), because FromTreeAttributes runs BEFORE Initialize
+        // when a chunk is loaded. Re-creating it in Initialize would delete the loaded fuel.
+        private readonly ItemSlot _fuelSlot = new DummySlot();
+        public ItemSlot FuelSlot => _fuelSlot;
 
         // Temperature system
         public float furnaceTemperature = 20f;
@@ -40,30 +47,24 @@ namespace MedievalArchitecture
         public bool IsBurning => fuelBurnTime > 0f;
         public bool IsSmoldering => canIgniteFuel && !IsBurning;
 
-        // Weather system for rain check
-        private WeatherSystemBase? wsys;
-        private Vec3d tmpPos = new Vec3d();
-
-        // Tick listener tracking for cleanup
-        private long burnTickListenerId;
-        private long tickListenerId;
+        // ITemperatureSensitive: used by the vanilla "TemperatureSensitive" behavior (rain, water, watering can)
+        // and by Real Smoke ("extinguishFunction": "CoolNow").
+        public bool IsHot => IsBurning;
 
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
 
-            _fuelSlot = new DummySlot();
-            wsys = api.ModLoader.GetModSystem<WeatherSystemBase>(true);
-
-            burnTickListenerId = RegisterGameTickListener(OnBurnTick, 100);
-            tickListenerId = RegisterGameTickListener(On500msTick, 500);
+            // All burn logic is server-authoritative, clients receive the state via FromTreeAttributes.
+            if (api.Side == EnumAppSide.Server)
+            {
+                RegisterGameTickListener(OnBurnTick, 100);
+                RegisterGameTickListener(On500msTick, 500);
+            }
         }
 
         private void OnBurnTick(float dt)
         {
-            // Only server should modify burn state - client gets updates via FromTreeAttributes
-            if (Api.Side != EnumAppSide.Server) return;
-
             // Skip if still in construction phase
             string? currentState = GetCurrentState();
             if (currentState != null && currentState.StartsWith("construct"))
@@ -119,59 +120,38 @@ namespace MedievalArchitecture
 
         private void On500msTick(float dt)
         {
-            // Server-side sync - use MarkDirty(true) to ensure network sync to clients
-            if (Api.Side == EnumAppSide.Server && (IsBurning || IsSmoldering || prevFurnaceTemperature != furnaceTemperature))
+            // Sync to clients and mark for saving, like the vanilla firepit.
+            // No client redraw here: visual changes (state/burnstate) trigger their own redraw.
+            if (IsBurning || prevFurnaceTemperature != furnaceTemperature)
             {
-                MarkDirty(true);
+                MarkDirty();
             }
             prevFurnaceTemperature = furnaceTemperature;
-
-            // Rain extinguishment check
-            if (ShouldExtinguishFromRainFall(out float rainLevel))
-            {
-                Api.World.PlaySoundAt(
-                    new AssetLocation("sounds/effect/extinguish"),
-                    Pos.X + 0.5, Pos.Y, Pos.Z + 0.5,
-                    null, false, 16f, 1f);
-
-                fuelBurnTime -= rainLevel / 10f;
-
-                if (Api.World.Rand.NextDouble() < (double)(rainLevel / 5f) || fuelBurnTime <= 0f)
-                {
-                    SetBrazierState("cold");
-                    extinguishedTotalHours = -99.0;
-                    canIgniteFuel = false;
-                    fuelBurnTime = 0f;
-                    maxFuelBurnTime = 0f;
-                }
-
-                MarkDirty(true);
-            }
         }
 
-        public bool ShouldExtinguishFromRainFall(out float rainLevel)
+        /// <summary>
+        /// Extinguishes the brazier partially or completely. Same behavior as the vanilla firepit.
+        /// Called by the vanilla "TemperatureSensitive" behavior (rain, submerged in water, watering can) and by Real Smoke.
+        /// </summary>
+        public void CoolNow(float amountRel, OnStackToCool onStackToCoolCallback)
         {
-            rainLevel = 0f;
+            // Server-authoritative. The behavior also ticks on the client, ignore it there.
+            if (Api?.Side != EnumAppSide.Server || !IsBurning) return;
 
-            if (Api.Side != EnumAppSide.Server || !IsBurning || wsys == null)
-                return false;
+            Api.World.PlaySoundAt(new AssetLocation("sounds/effect/extinguish"), Pos, -0.5, null, false, 16);
 
-            if (Api.World.Rand.NextDouble() > 0.5)
-                return false;
+            fuelBurnTime -= amountRel / 10f;
 
-            // Check if exposed to sky
-            if (Api.World.BlockAccessor.GetRainMapHeightAt(Pos.X, Pos.Z) > Pos.Y)
-                return false;
-
-            tmpPos.Set(Pos.X + 0.5, Pos.Y + 0.5, Pos.Z + 0.5);
-            rainLevel = wsys.GetPrecipitation(tmpPos);
-
-            if (rainLevel > 0.04 && Api.World.Rand.NextDouble() < (double)(rainLevel * 5f))
+            if (Api.World.Rand.NextDouble() < amountRel / 5f || fuelBurnTime <= 0f)
             {
-                return true;
+                SetBrazierState("cold");
+                extinguishedTotalHours = -99.0;
+                canIgniteFuel = false;
+                fuelBurnTime = 0f;
+                maxFuelBurnTime = 0f;
             }
 
-            return false;
+            MarkDirty(true);
         }
 
         public float ChangeTemperature(float fromTemp, float toTemp, float dt)
@@ -208,7 +188,7 @@ namespace MedievalArchitecture
             if (FuelSlot.Empty)
                 return;
 
-            IgniteWithFuel(FuelSlot.Itemstack!);
+            ItemStack fuel = FuelSlot.Itemstack!;
 
             FuelSlot.Itemstack!.StackSize -= 1;
             if (FuelSlot.Itemstack.StackSize <= 0)
@@ -216,6 +196,9 @@ namespace MedievalArchitecture
                 FuelSlot.Itemstack = null;
             }
             FuelSlot.MarkDirty();
+
+            // Ignite after consuming, so the MarkDirty in IgniteWithFuel already contains the reduced fuel stack
+            IgniteWithFuel(fuel);
         }
 
         public void IgniteWithFuel(ItemStack stack)
@@ -230,6 +213,18 @@ namespace MedievalArchitecture
 
             SetBrazierState("lit");
             MarkDirty(true);
+        }
+
+        /// <summary>
+        /// Must be called after the fuel slot was changed from outside (e.g. refuelling),
+        /// so that the change is saved and sent to the clients.
+        /// </summary>
+        public void OnFuelChanged()
+        {
+            if (Api?.Side == EnumAppSide.Server)
+            {
+                MarkDirty();
+            }
         }
 
         public EnumIgniteState GetIgnitableState(float secondsIgniting)
@@ -316,9 +311,6 @@ namespace MedievalArchitecture
             smokeLevel = tree.GetFloat("smokeLevel", 0f);
 
             // Deserialize fuel slot
-            if (_fuelSlot == null)
-                _fuelSlot = new DummySlot();
-
             var fuelStackBytes = tree.GetBytes("fuelStack");
             if (fuelStackBytes != null && fuelStackBytes.Length > 0)
             {
@@ -360,8 +352,6 @@ namespace MedievalArchitecture
         public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {
             base.GetBlockInfo(forPlayer, dsc);
-           
-
         }
 
         public override void OnBlockBroken(IPlayer? byPlayer = null)
@@ -373,20 +363,6 @@ namespace MedievalArchitecture
             }
 
             base.OnBlockBroken(byPlayer);
-        }
-
-        public override void OnBlockRemoved()
-        {
-            base.OnBlockRemoved();
-            UnregisterGameTickListener(burnTickListenerId);
-            UnregisterGameTickListener(tickListenerId);
-        }
-
-        public override void OnBlockUnloaded()
-        {
-            base.OnBlockUnloaded();
-            UnregisterGameTickListener(burnTickListenerId);
-            UnregisterGameTickListener(tickListenerId);
         }
     }
 }

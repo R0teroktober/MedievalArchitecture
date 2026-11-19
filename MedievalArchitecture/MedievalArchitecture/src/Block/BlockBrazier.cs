@@ -18,11 +18,6 @@ namespace MedievalArchitecture
         {
             base.OnLoaded(api);
 
-            // Debug: Check if ParticleProperties loaded from JSON
-            string variant = Variant.TryGetValue("burnstate", out string? bs) ? bs : "unknown";
-            int particleCount = ParticleProperties?.Length ?? 0;
-            api.Logger.Debug($"[Brazier] OnLoaded variant={variant}, ParticleProperties.Length={particleCount}");
-
             // Setup world interactions
             List<ItemStack> igniteStacks = BlockBehaviorCanIgnite.CanIgniteStacks(api, true);
 
@@ -150,6 +145,9 @@ namespace MedievalArchitecture
 
                     if (moveOp.MovedQuantity > 0)
                     {
+                        // Save and sync the new fuel (otherwise it is only stored with the next unrelated update)
+                        be.OnFuelChanged();
+
                         if (byPlayer is IClientPlayer clientPlayer)
                         {
                             clientPlayer.TriggerFpAnimation(EnumHandInteract.HeldItemInteract);
@@ -208,6 +206,14 @@ namespace MedievalArchitecture
                 _ => "cold"
             };
 
+            // On final construction step, give some initial fuel.
+            // Must happen before SetVariant, because SetVariant saves and syncs the block entity.
+            if (nextState == "cold")
+            {
+                be.FuelSlot.Itemstack = new ItemStack(obj, 3);
+                be.FuelSlot.MarkDirty();
+            }
+
             // Set new state via ARL
             be.SetVariant("state", nextState);
 
@@ -215,13 +221,6 @@ namespace MedievalArchitecture
             if (Sounds?.Place != null)
             {
                 //world.PlaySoundAt(Sounds.Place, pos.X, pos.Y, pos.Z, player, true, 32f, 1f);
-            }
-
-            // On final construction step, give some initial fuel
-            if (nextState == "cold")
-            {
-                be.FuelSlot.Itemstack = new ItemStack(obj, 3);
-                be.FuelSlot.MarkDirty();
             }
 
             // Trigger animation

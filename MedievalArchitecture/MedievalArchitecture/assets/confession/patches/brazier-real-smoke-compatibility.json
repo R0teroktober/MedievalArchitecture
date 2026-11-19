@@ -1,0 +1,24 @@
+[
+  // Real Smoke compatibility (https://mods.vintagestory.at/realsmoke). Only applied if Real Smoke is installed.
+  // The emitter reads IsBurning, furnaceTemperature and calls CoolNow on BlockEntityBrazier by name - do not rename them.
+  {
+    "dependsOn": [{"modid": "realsmoke"}],
+    "file": "confession:blocktypes/metal/brazier.json",
+    "op": "addmerge",
+    "path": "/entityBehaviors",
+    "value": [
+      {
+        "name": "BlockEntityBehaviorRealSmokeEmitter",
+        "properties": {"smokeProduction": 6, "isSmoking": "IsBurning", "extinguishFunction": "CoolNow", "temperatureFunction": "furnaceTemperature", "ventAbove": 1, "canVentSideways": true}
+      }
+    ]
+  },
+  // Real Smoke produces the smoke itself, so remove the brazier's own smoke particles (index 1 = grey, long-living smoke quad).
+  // Keep this index in sync if the particle list in brazier.json changes.
+  {
+    "dependsOn": [{"modid": "realsmoke"}],
+    "file": "confession:blocktypes/metal/brazier.json",
+    "op": "remove",
+    "path": "/particlePropertiesByType/brazier-lit/1"
+  }
+]

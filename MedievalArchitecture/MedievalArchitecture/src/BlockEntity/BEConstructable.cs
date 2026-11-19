@@ -60,33 +60,21 @@ namespace MedievalArchitecture
         // -----------------------
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldForResolving)
         {
+            if (arlBeh == null) arlBeh = GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
+            string variantsBefore = arlBeh?.Variants?.ToString() ?? "";
+
+            // base calls FromTreeAttributes of all behaviors, including ARL, which reloads the variants and rebuilds its (cached) mesh
             base.FromTreeAttributes(tree, worldForResolving);
 
-            if (arlBeh == null) arlBeh = GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
-            if (arlBeh != null)
+            // Only redraw the chunk if the look actually changed. Redrawing on every update
+            // (e.g. the brazier syncs every 500 ms while burning) causes a constant chunk re-tesselation.
+            if (Api is ICoreClientAPI && (arlBeh?.Variants?.ToString() ?? "") != variantsBefore)
             {
-                try { arlBeh.FromTreeAttributes(tree, worldForResolving); } catch { /* safe */ }
-            }
-
-            // DER verlässliche Client-Hook: alle eingehenden Varianten sind jetzt da -> rebuild
-            var capi = Api as ICoreClientAPI;
-            if (capi != null)
-            {
-                TryRebuildArlMeshClient();
                 Api.World.BlockAccessor.MarkBlockDirty(Pos);
             }
         }
 
-        public override void ToTreeAttributes(ITreeAttribute tree)
-        {
-            base.ToTreeAttributes(tree);
-
-            if (arlBeh == null) arlBeh = GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
-            if (arlBeh != null)
-            {
-                try { arlBeh.ToTreeAttributes(tree); } catch { /* safe */ }
-            }
-        }
+        // ToTreeAttributes: base already calls ToTreeAttributes of all behaviors (incl. ARL), nothing to add here.
 
         // Try rebuild using ARL's GenTexSource + GetOrCreateMesh signature; if not found, fallback to CallMethod("Init")
         private void TryRebuildArlMeshClient()
