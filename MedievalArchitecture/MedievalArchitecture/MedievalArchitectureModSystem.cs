@@ -1,6 +1,7 @@
 ﻿using MedievalArchitecture;
 using System;
 using Vintagestory.API.Common;
+using Vintagestory.API.Server;
 using Vintagestory.GameContent;
 
 namespace MedievalArchitecture
@@ -46,6 +47,13 @@ namespace MedievalArchitecture
             base.AssetsFinalize(api);
             // All blocks and items are loaded now, so the code patterns of the registry can be resolved.
             ArchwayMaterials.Load(api);
+        }
+
+        public override void StartServerSide(ICoreServerAPI api)
+        {
+            base.StartServerSide(api);
+            // TEST ONLY (V1), remove or rework before the release.
+            ArchwayTestCommand.Register(api);
         }
 
         private static void LoadConfig(ICoreAPI api)

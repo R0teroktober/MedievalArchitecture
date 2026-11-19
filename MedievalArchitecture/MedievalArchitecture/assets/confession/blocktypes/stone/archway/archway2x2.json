@@ -117,6 +117,11 @@
           "*": ["confession:block-debug-nodescription"]
         },
         "textures": {
+          "fill-*::rock-*": {
+            "material": {"base": "confession:block/archway/fill/{fill}"},
+            "rim": {"base": "confession:block/archway/rim/{rock}", "overlays": ["game:block/overlay/damagedstone1"]},
+            "plaster": {"base": "confession:block/archway/rim/{rock}", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]}
+          },
           "style-*::rock-*::originblock-plaster": {
             "material": {"base": "game:block/stone/plaster/plain"},
             "rim": {"base": "game:block/stone/rock/{rock}1", "overlays": ["game:block/overlay/damagedstone1"]},

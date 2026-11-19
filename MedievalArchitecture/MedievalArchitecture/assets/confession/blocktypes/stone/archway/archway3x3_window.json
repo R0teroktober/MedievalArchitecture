@@ -264,6 +264,22 @@
           "*": ["confession:block-debug-nodescription"]
         },
         "textures": {
+          "fill-*::rock-*": {
+            "material": {"base": "confession:block/archway/fill/{fill}"},
+            "stone": {"base": "confession:block/archway/ledge/{fill}"},
+            "rim": {"base": "confession:block/archway/rim/{rock}", "overlays": ["game:block/overlay/damagedstone1"]},
+            "plaster": {"base": "confession:block/archway/rim/{rock}", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
+            "glass-ls": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "confession:block/glass/glass3x3-ls", "blendMode": "Overlay"}]},
+            "glass-ms": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "confession:block/glass/glass3x3-ls", "blendMode": "Overlay"}]},
+            "glass-us": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "confession:block/glass/glass3x3-us", "blendMode": "Overlay"}]},
+            "glass-lm": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "confession:block/glass/glass3x3-lm", "blendMode": "Overlay"}]},
+            "glass-mm": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "confession:block/glass/glass3x3-lm", "blendMode": "Overlay"}]},
+            "glass-um": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "confession:block/glass/glass3x3-um", "blendMode": "Overlay"}]},
+            "glass-inside": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "game:block/overlay/dust-sparse", "blendMode": "Overlay"}]},
+            "putty": {"base": "game:block/metal/ingot/lead"},
+            "frame": {"base": "game:block/wood/debarked/veryaged"},
+            "black": {"base": "game:block/black"}
+          },
           "style-*::rock-*::originblock-plaster::glass-*": {
             "material": {"base": "game:block/stone/plaster/plain"},
             "stone": {"base": "game:block/stone/rock/{rock}3"},

@@ -206,6 +206,19 @@
           "*": ["confession:block-debug-nodescription"]
         },
         "textures": {
+          "fill-*::rock-*": {
+            "plaster": {"base": "confession:block/archway/rim/{rock}", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
+            "putty": {"base": "game:block/metal/ingot/lead"},
+            "frame": {"base": "game:block/wood/debarked/veryaged"},
+            "black": {"base": "game:block/black"},
+            "glass-ls": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "confession:block/glass/glass3x2-ls", "blendMode": "Overlay"}]},
+            "glass-us": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "confession:block/glass/glass3x2-us", "blendMode": "Overlay"}]},
+            "glass-lm": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "confession:block/glass/glass3x2-lm", "blendMode": "Overlay"}]},
+            "glass-um": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "confession:block/glass/glass3x2-um", "blendMode": "Overlay"}]},
+            "glass-inside": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "game:block/overlay/dust-sparse", "blendMode": "Overlay"}]},
+            "material": {"base": "confession:block/archway/fill/{fill}"},
+            "rim": {"base": "confession:block/archway/rim/{rock}", "overlays": ["game:block/overlay/damagedstone1"]}
+          },
           "style-*::rock-*::originblock-plaster::glass-*": {
             "plaster": {"base": "game:block/stone/rock/granite1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
             "putty": {"base": "game:block/metal/ingot/lead"},

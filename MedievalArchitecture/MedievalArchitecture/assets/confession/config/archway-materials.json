@@ -11,6 +11,9 @@
   //             NEVER rename or remove an id once released. Allowed characters: a-z 0-9 - _
   //             Ids of other mods should start with the mod id, e.g. "geoaddons-cobblestone-{rock}".
   //   texture   Texture used for this material, with domain, without "textures/" and ".png".
+  //   ledgeTexture  Fills only, optional: texture of the ledge of the big (3x3) archways, usually the
+  //             "rock version" of the fill material.
+  //             String or list, the first existing texture is used. Default: "texture".
   //   name      Optional lang key for the material name. Default: name of the block/item.
   //   buildable Optional, default true. false = existing archways keep their look, but the material
   //             can no longer be used for new archways (use this instead of removing an entry).
@@ -25,11 +28,15 @@
     { "code": "game:stone-{rock}", "id": "{rock}", "texture": "game:block/stone/rock/{rock}1" }
   ],
   "fills": [
-    { "code": "game:rock-{rock}", "id": "rock-{rock}", "texture": "game:block/stone/rock/{rock}1" },
+    { "code": "game:rock-{rock}", "id": "rock-{rock}", "texture": "game:block/stone/rock/{rock}1",
+      "ledgeTexture": ["game:block/stone/rock/{rock}3", "game:block/stone/rock/{rock}1"] },
     { "code": "game:cobblestone-coral", "id": "cobblestone-coral", "texture": "game:block/creature/aquatic/coral/cobble/coral1" },
-    { "code": "game:cobblestone-{rock}", "id": "cobblestone-{rock}", "texture": "game:block/stone/cobblestone/{rock}1" },
-    { "code": "game:stonebricks-{rock}", "id": "stonebricks-{rock}", "texture": "game:block/stone/brick/{rock}1" },
-    { "code": "game:rockpolished-{rock}", "id": "rockpolished-{rock}", "texture": "game:block/stone/polishedrock/{rock}" },
+    { "code": "game:cobblestone-{rock}", "id": "cobblestone-{rock}", "texture": "game:block/stone/cobblestone/{rock}1",
+      "ledgeTexture": ["game:block/stone/rock/{rock}3", "game:block/stone/rock/{rock}1"] },
+    { "code": "game:stonebricks-{rock}", "id": "stonebricks-{rock}", "texture": "game:block/stone/brick/{rock}1",
+      "ledgeTexture": ["game:block/stone/rock/{rock}3", "game:block/stone/rock/{rock}1"] },
+    { "code": "game:rockpolished-{rock}", "id": "rockpolished-{rock}", "texture": "game:block/stone/polishedrock/{rock}",
+      "ledgeTexture": ["game:block/stone/rock/{rock}3", "game:block/stone/rock/{rock}1"] },
     { "code": "game:plaster-plain", "id": "plaster-plain", "texture": "game:block/stone/plaster/plain" },
     { "code": "game:plaster-square", "id": "plaster-square", "texture": "game:block/stone/plaster/square" },
     { "code": "game:daub-{color}-{type}", "id": "daub-{color}-{type}", "texture": "game:block/clay/daub/{color}/{type}1" },

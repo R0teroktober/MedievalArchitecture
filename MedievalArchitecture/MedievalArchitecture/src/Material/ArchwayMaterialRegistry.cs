@@ -26,6 +26,8 @@ namespace MedievalArchitecture
         public ArchwayMaterialKind Kind { get; }
         /// <summary>Texture location without "textures/" prefix and ".png" suffix.</summary>
         public AssetLocation Texture { get; }
+        /// <summary>Fills only: texture of the ledge of big archways (default: same as Texture).</summary>
+        public AssetLocation LedgeTexture { get; set; }
         /// <summary>Optional lang key for the name. Null = use the name of the source block/item.</summary>
         public string? NameLangKey { get; }
         /// <summary>False = only kept for existing archways, cannot be used for new ones.</summary>
@@ -38,6 +40,7 @@ namespace MedievalArchitecture
             Id = id;
             Kind = kind;
             Texture = texture;
+            LedgeTexture = texture;
             NameLangKey = nameLangKey;
             Buildable = buildable;
         }
@@ -52,7 +55,23 @@ namespace MedievalArchitecture
         public static readonly AssetLocation RegistryLocation = new AssetLocation("confession", "config/archway-materials.json");
         private const string LogPrefix = "[MedievalArchitecture]";
         private const string AnyLegacyKey = "*";
-        private const string UnfinishedOriginblock = "none";
+
+        /// <summary>ARL attribute names stored in archways.</summary>
+        public const string RimAttribute = "rock";
+        public const string FillAttribute = "fill";
+        /// <summary>Old fill category (before the registry). "none" = archway not finished yet.</summary>
+        public const string LegacyFillAttribute = "originblock";
+        public const string UnfinishedOriginblock = "none";
+
+        /// <summary>
+        /// Every material texture is additionally registered under these paths in our own domain, so the archway
+        /// blocks can reference any material (also from other mods) with a single ARL placeholder:
+        /// confession:block/archway/rim/{rock} and confession:block/archway/fill/{fill}.
+        /// </summary>
+        public const string AliasDomain = "confession";
+        public const string RimAliasPath = "block/archway/rim/";
+        public const string FillAliasPath = "block/archway/fill/";
+        public const string LedgeAliasPath = "block/archway/ledge/";
 
         private static readonly Regex PlaceholderRegex = new Regex(@"\{([a-z0-9_]+)\}", RegexOptions.Compiled);
         private static readonly Regex ValidIdRegex = new Regex(@"^[a-z0-9_-]+$", RegexOptions.Compiled);
@@ -127,6 +146,40 @@ namespace MedievalArchitecture
             api.Logger.Debug("{0} Archway fill ids ({1}): {2}", LogPrefix, side, string.Join(", ", fillsById.Keys.OrderBy(k => k)));
 
             LogLegacyCoverage(api, side);
+
+            // Only the client renders. ARL resolves the alias textures when it builds the archway meshes.
+            if (api.Side == EnumAppSide.Client)
+            {
+                RegisterTextureAliases(api);
+            }
+        }
+
+        private void RegisterTextureAliases(ICoreAPI api)
+        {
+            int registered = 0;
+            registered += RegisterTextureAliases(api, rimsById.Values, RimAliasPath);
+            registered += RegisterTextureAliases(api, fillsById.Values, FillAliasPath);
+            registered += RegisterTextureAliases(api, fillsById.Values, LedgeAliasPath, m => m.LedgeTexture);
+            api.Logger.Notification("{0} {1} archway textures registered (client).", LogPrefix, registered);
+        }
+
+        private static int RegisterTextureAliases(ICoreAPI api, IEnumerable<ArchwayMaterial> materials, string aliasPath, System.Func<ArchwayMaterial, AssetLocation>? selectTexture = null)
+        {
+            int registered = 0;
+            foreach (ArchwayMaterial material in materials)
+            {
+                AssetLocation source = selectTexture?.Invoke(material) ?? material.Texture;
+                IAsset? texture = api.Assets.TryGet(ToTextureFile(source));
+                if (texture == null)
+                {
+                    api.Logger.Warning("{0} Archway texture {1} of \"{2}\" could not be loaded.", LogPrefix, source, material.Id);
+                    continue;
+                }
+
+                api.Assets.Add(ToTextureFile(new AssetLocation(AliasDomain, aliasPath + material.Id)), texture);
+                registered++;
+            }
+            return registered;
         }
 
         private static ArchwayMaterialsFile? ReadFile(ICoreAPI api)
@@ -170,9 +223,10 @@ namespace MedievalArchitecture
                 AssetLocation codePattern = AssetLocation.Create(entry.Code.Trim());
                 string idTemplate = entry.Id.Trim();
                 string textureTemplate = entry.Texture.Trim();
+                List<string> ledgeTemplates = ReadTextureList(entry.LedgeTexture);
 
                 List<string> placeholders = PlaceholderRegex.Matches(codePattern.Path).Select(m => m.Groups[1].Value).ToList();
-                string? unknown = PlaceholderRegex.Matches(idTemplate + " " + textureTemplate)
+                string? unknown = PlaceholderRegex.Matches(idTemplate + " " + textureTemplate + " " + string.Join(" ", ledgeTemplates))
                     .Select(m => m.Groups[1].Value)
                     .FirstOrDefault(p => !placeholders.Contains(p));
                 if (unknown != null)
@@ -247,6 +301,10 @@ namespace MedievalArchitecture
 
                     var material = new ArchwayMaterial(id, kind, texture, string.IsNullOrWhiteSpace(entry.Name) ? null : entry.Name.Trim(), entry.Buildable);
                     material.SourceCodes.Add(code);
+                    if (kind == ArchwayMaterialKind.Fill && ledgeTemplates.Count > 0)
+                    {
+                        material.LedgeTexture = ResolveLedgeTexture(api, ledgeTemplates, placeholders, match, code.Domain) ?? texture;
+                    }
                     byId[id] = material;
                     byCode[code] = material;
                 }
@@ -292,7 +350,46 @@ namespace MedievalArchitecture
 
         private static bool TextureExists(ICoreAPI api, AssetLocation texture)
         {
-            return api.Assets.Exists(new AssetLocation(texture.Domain, "textures/" + texture.Path + ".png"));
+            return api.Assets.Exists(ToTextureFile(texture));
+        }
+
+        /// <summary>The first ledge texture that exists, or null.</summary>
+        private static AssetLocation? ResolveLedgeTexture(ICoreAPI api, List<string> templates, List<string> placeholders, Match match, string defaultDomain)
+        {
+            foreach (string template in templates)
+            {
+                AssetLocation candidate = AssetLocation.Create(FillPlaceholders(template, placeholders, match), defaultDomain);
+                if (TextureExists(api, candidate)) return candidate;
+            }
+            return null;
+        }
+
+        /// <summary>A texture field may be a single string or a list of strings (first existing one wins).</summary>
+        private static List<string> ReadTextureList(JToken? token)
+        {
+            var result = new List<string>();
+            if (token == null) return result;
+            if (token.Type == JTokenType.String)
+            {
+                string? value = token.Value<string>();
+                if (!string.IsNullOrWhiteSpace(value)) result.Add(value.Trim());
+            }
+            else if (token.Type == JTokenType.Array)
+            {
+                foreach (JToken item in token)
+                {
+                    if (item.Type != JTokenType.String) continue;
+                    string? value = item.Value<string>();
+                    if (!string.IsNullOrWhiteSpace(value)) result.Add(value.Trim());
+                }
+            }
+            return result;
+        }
+
+        /// <summary>block/stone/rock/granite1 -> textures/block/stone/rock/granite1.png</summary>
+        private static AssetLocation ToTextureFile(AssetLocation texture)
+        {
+            return new AssetLocation(texture.Domain, "textures/" + texture.Path + ".png");
         }
 
         private static Regex BuildCodeRegex(string pattern)
@@ -364,6 +461,10 @@ namespace MedievalArchitecture
 
         [JsonProperty("texture")]
         public string? Texture { get; set; }
+
+        /// <summary>Fills only, optional: string or list, the first existing texture is used for the ledge of big archways.</summary>
+        [JsonProperty("ledgeTexture")]
+        public JToken? LedgeTexture { get; set; }
 
         [JsonProperty("name")]
         public string? Name { get; set; }
