@@ -7,7 +7,12 @@ namespace MedievalArchitecture
 {
     public class MedievalArchitectureModSystem : ModSystem
     {
-        public static VariantTypesConfig Config { get; private set; }
+        // Current config file name (written by every version since 1.0.0).
+        private const string ConfigFileName = "medievalarchitecture.json";
+        // Name that older versions tried to read. Only used as a fallback if a player created it by hand.
+        private const string LegacyConfigFileName = "variant-types-config.json";
+
+        public static MedievalArchitectureConfig Config { get; private set; } = MedievalArchitectureConfig.CreateDefault();
         public override void Start(ICoreAPI api)
         {
             base.Start(api);
@@ -22,120 +27,57 @@ namespace MedievalArchitecture
             api.RegisterBlockEntityClass("BlockEntityBrazier", typeof(BlockEntityBrazier));
             api.RegisterBlockEntityBehaviorClass("DoubleTrapDoorBE", typeof(BEBehaviorDoubleTrapDoor));
             api.RegisterBlockEntityBehaviorClass("Gate", typeof(BEBehaviorGate));
-            Config = api.LoadModConfig<VariantTypesConfig>("variant-types-config.json");
-            if (Config == null)
-            {
-                Config = new VariantTypesConfig()
-                {
-                    RimStoneAmount = 6,
-                    StateCodeByType = new()
-                    {
-                        { "state-0", "0" },
-                        { "state-1", "1" },
-                        { "state-2", "2" }
-                    },
-                    StyleCodeByType = new()
-                    {
-                        { "style-a", "a" },
-                        { "style-b", "b" },
-                        { "style-c", "c" },
-                        { "style-d", "d" },
-                        { "style-e", "e" },
-                        { "style-f", "f" },
-                        { "style-g", "g" },
-                        { "style-h", "h" }
-                    },
-                    RockCodeByType = new()
-                    {
-                        { "rock-andesite", "andesite" },
-                        { "rock-basalt", "basalt" },
-                        { "rock-bauxite", "bauxite" },
-                        { "rock-chert", "chert" },
-                        { "rock-chalk", "chalk" },
-                        { "rock-claystone", "claystone" },
-                        { "rock-conglomerate", "conglomerate" },
-                        { "rock-granite", "granite" },
-                        { "rock-greenmarble", "greenmarble" },
-                        { "rock-kimberlite", "kimberlite" },
-                        { "rock-limestone", "limestone" },
-                        { "rock-peridotite", "peridotite" },
-                        { "rock-phyllite", "phyllite" },
-                        { "rock-redmarble", "redmarble" },
-                        { "rock-sandstone", "sandstone" },
-                        { "rock-scoria", "scoria" },
-                        { "rock-shale", "shale" },
-                        { "rock-slate", "slate" },
-                        { "rock-suevite", "suevite" },
-                        { "rock-whitemarble", "whitemarble" },
-                        { "rock-plaster", "plaster" },
-                        { "rock-ash", "ash" },
-                        { "rock-blue", "blue" },
-                        { "rock-brown", "brown" },
-                        { "rock-browngolden", "browngolden" },
-                        { "rock-brownlight", "brownlight" },
-                        { "rock-brownweathered", "brownweathered" },
-                        { "rock-green", "green" },
-                        { "rock-orange", "orange" },
-                        { "rock-pink", "pink" },
-                        { "rock-tan", "tan" },
-                        { "rock-yellow", "yellow" }
-                    },
-                    WoodCodeByType = new()
-                    {
-                        {"wood-acacia", "acacia" },
-                        {"wood-aged", "aged"},
-                        {"wood-baldcypress", "baldcypress"},
-                        {"wood-birch", "birch"},
-                        {"wood-ebony", "ebony"},
-                        {"wood-kapok", "kapok"},
-                        {"wood-larch", "larch"},
-                        {"wood-maple", "maple"},
-                        {"wood-oak", "oak"},
-                        {"wood-pine", "pine"},
-                        {"wood-purpleheart", "purpleheart"},
-                        {"wood-redwood", "redwood"},
-                        {"wood-walnut", "walnut" }
-                    },
-                    GlassCodeByType = new()
-                    {
-                        {"glass-plain", "plain"},
-                        {"glass-blue", "blue"},
-                        {"glass-brown", "brown"},
-                        {"glass-green", "green"},
-                        {"glass-pink", "pink"},
-                        {"glass-quartz", "quartz"},
-                        {"glass-red", "red"},
-                        {"glass-violet", "violet" },
-                        {"glass-vintage", "vintage"},
-                        {"glass-yellow", "yellow"}
-                    },
-                    OriginblockCodeByType = new()
-                    {
-                    {"originblock-none", "none" },
-                    {"originblock-rock", "rock" },
-                    {"originblock-cobblestone", "cobblestone"},
-                    {"originblock-brick", "brick"},
-                    {"originblock-plaster", "plaster"},
-                    {"originblock-ash", "ash"},
-                    {"originblock-blue", "blue"},
-                    {"originblock-brown", "brown"},
-                    {"originblock-browngolden", "browngolden"},
-                    {"originblock-brownlight", "brownlight"},
-                    {"originblock-brownweathered", "brownweathered"},
-                    {"originblock-green", "green"},
-                    {"originblock-orange", "orange"},
-                    {"originblock-pink", "pink"},
-                    {"originblock-tan", "tan"},
-                    {"originblock-yellow", "yellow"}
-                    }
-                };
+            LoadConfig(api);
+        }
 
-                api.StoreModConfig(Config, "medievalarchitecture.json");
-                api.Logger.Notification("[MedievalArchitecture] Default config created.");
+        private static void LoadConfig(ICoreAPI api)
+        {
+            MedievalArchitectureConfig? loaded = null;
+            bool readFailed = false;
+
+            try
+            {
+                loaded = api.LoadModConfig<MedievalArchitectureConfig>(ConfigFileName);
+            }
+            catch (Exception e)
+            {
+                readFailed = true;
+                api.Logger.Error("[MedievalArchitecture] Could not read config file {0}, using default values. The file will not be overwritten, please fix or delete it. Error: {1}", ConfigFileName, e.Message);
+            }
+
+            if (loaded == null && !readFailed)
+            {
+                try
+                {
+                    loaded = api.LoadModConfig<MedievalArchitectureConfig>(LegacyConfigFileName);
+                    if (loaded != null)
+                    {
+                        api.Logger.Notification("[MedievalArchitecture] Found legacy config {0}, its values are taken over into {1}.", LegacyConfigFileName, ConfigFileName);
+                    }
+                }
+                catch (Exception e)
+                {
+                    api.Logger.Warning("[MedievalArchitecture] Could not read legacy config file {0}, ignoring it. Error: {1}", LegacyConfigFileName, e.Message);
+                }
+            }
+
+            if (loaded == null)
+            {
+                Config = MedievalArchitectureConfig.CreateDefault();
+                if (!readFailed) api.Logger.Notification("[MedievalArchitecture] Default config created.");
             }
             else
             {
-                api.Logger.Notification("[MedievalArchitecture] Config loaded successfully.");
+                Config = loaded;
+                int changes = Config.ApplyMissingDefaults();
+                if (changes > 0) api.Logger.Notification("[MedievalArchitecture] Config loaded, {0} missing or invalid entries were set to default values.", changes);
+                else api.Logger.Notification("[MedievalArchitecture] Config loaded successfully.");
+            }
+
+            // Write back so that new options appear in the file. Never overwrite a file we could not read.
+            if (!readFailed)
+            {
+                api.StoreModConfig(Config, ConfigFileName);
             }
         }
     }
