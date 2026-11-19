@@ -223,6 +223,13 @@ namespace MedievalArchitecture
                 if (gateState != null)
                 {
                     gateState.SetRotation(rotation);
+
+                    // New gate: all parts are gateparts already, no conversion needed
+                    if (gatePartBlock != null)
+                    {
+                        gateState.SetPartsConverted();
+                    }
+
                     be.MarkDirty(true);
                 }
             }
@@ -294,6 +301,9 @@ namespace MedievalArchitecture
 
         public override void OnBlockBroken(IWorldAccessor world, BlockPos pos, IPlayer byPlayer, float dropQuantityMultiplier = 1)
         {
+            // Old gate: convert first, so all parts behave the same from now on
+            TryConvertLegacyParts(world, pos);
+
             // Rotation vorher sichern, weil die BE nach erfolgreichem Break evtl. weg ist
             HorizontalRotation rotation = GetStoredRotation(world, pos);
 
@@ -336,26 +346,142 @@ namespace MedievalArchitecture
             }
         }
 
-        private static bool IsStagedForRemoval(IBulkBlockAccessor accessor, BlockPos pos)
+        #region Conversion of old gates (vanilla dummies -> gatepart)
+
+        /// <summary>
+        /// Converts the vanilla dummy blocks (game:multiblock-monolithic-*) of a gate placed before the gatepart system
+        /// into gateparts, and deletes reinforcement that was (without effect) placed on a dummy.
+        /// Server only. Runs once per gate; if not all chunks of the gate are loaded, nothing happens and it is retried later.
+        /// Only dummies whose own offset provably points to this root are replaced (searched in a small area around the root).
+        /// </summary>
+        public void TryConvertLegacyParts(IWorldAccessor world, BlockPos rootPos)
         {
-            return accessor.StagedBlocks.ContainsKey(pos) && accessor.GetStagedBlockId(pos) == 0;
+            if (world.Side != EnumAppSide.Server || gatePartBlock == null) return;
+            if (world.BlockAccessor.GetBlock(rootPos) != this) return;
+
+            BlockEntity? rootBe = world.BlockAccessor.GetBlockEntity(rootPos);
+            BEBehaviorGate? gateBehavior = rootBe?.GetBehavior<BEBehaviorGate>();
+            if (rootBe == null || gateBehavior == null || gateBehavior.PartsConverted) return;
+
+            var legacyParts = new List<(BlockPos pos, Vec3i offsetToRoot)>();
+            int gatepartsFound = 0;
+
+            // Search a small area around the root instead of only the positions the current code would use:
+            // older mod versions may have arranged the dummies differently. What makes a dummy "ours" is not its
+            // position, but that its own offset provably points to this root.
+            int horizontalRange = Math.Max(width, length) - 1;
+            int checkedPositions = 0;
+
+            for (int dx = -horizontalRange; dx <= horizontalRange; dx++)
+            {
+                for (int dy = 0; dy < height; dy++)
+                {
+                    for (int dz = -horizontalRange; dz <= horizontalRange; dz++)
+                    {
+                        if (dx == 0 && dy == 0 && dz == 0) continue;
+
+                        BlockPos partPos = rootPos.AddCopy(dx, dy, dz);
+
+                        // "Not loaded" does not mean "not there": try again later, do not mark as converted
+                        if (world.BlockAccessor.GetChunkAtBlockPos(partPos) == null)
+                        {
+                            world.Logger.Debug("[MedievalArchitecture] Gate at {0}: conversion postponed, not all chunks loaded", rootPos);
+                            return;
+                        }
+
+                        checkedPositions++;
+                        Block partBlock = world.BlockAccessor.GetBlock(partPos);
+
+                        if (partBlock is BlockMultiblock dummy
+                            && dummy.OffsetInv != null
+                            && partPos.AddCopy(dummy.OffsetInv).Equals(rootPos))
+                        {
+                            legacyParts.Add((partPos, new Vec3i(dummy.OffsetInv.X, dummy.OffsetInv.Y, dummy.OffsetInv.Z)));
+                        }
+                        else if (partBlock is BlockGatePart
+                            && rootPos.Equals(world.BlockAccessor.GetBlockEntity<BEGatePart>(partPos)?.RootPos))
+                        {
+                            gatepartsFound++;
+                        }
+                    }
+                }
+            }
+
+            if (legacyParts.Count == 0)
+            {
+                if (gatepartsFound > 0)
+                {
+                    // Already made of gateparts (e.g. placed with a development build before the marker existed)
+                    gateBehavior.SetPartsConverted();
+                    rootBe.MarkDirty();
+                    world.Logger.Debug("[MedievalArchitecture] Gate at {0}: already consists of {1} gateparts, marked as converted", rootPos, gatepartsFound);
+                }
+                else
+                {
+                    // Not marked as converted, so a later attempt (or a fixed mod version) can still convert it
+                    world.Logger.Debug("[MedievalArchitecture] Gate at {0}: no vanilla dummy parts found ({1} positions checked), not converted", rootPos, checkedPositions);
+                }
+                return;
+            }
+
+            // Reinforcement is stored per position, independent of the block, so it must be cleaned up explicitly
+            string reinforcementResult = RemoveLegacyDummyReinforcement(world, legacyParts);
+
+            foreach (var (partPos, offsetToRoot) in legacyParts)
+            {
+                world.BlockAccessor.SetBlock(gatePartBlock.Id, partPos);
+
+                BEGatePart? partBe = world.BlockAccessor.GetBlockEntity<BEGatePart>(partPos);
+                if (partBe == null)
+                {
+                    world.BlockAccessor.SpawnBlockEntity("GatePart", partPos);
+                    partBe = world.BlockAccessor.GetBlockEntity<BEGatePart>(partPos);
+                }
+
+                if (partBe != null)
+                {
+                    partBe.SetOffsetToRoot(offsetToRoot);
+                }
+                else
+                {
+                    world.Logger.Warning("[MedievalArchitecture] Could not create block entity for converted gate part at {0} (gate at {1})", partPos, rootPos);
+                }
+            }
+
+            gateBehavior.SetPartsConverted();
+            rootBe.MarkDirty();
+
+            world.Logger.Debug("[MedievalArchitecture] Gate at {0}: {1} dummies converted{2}", rootPos, legacyParts.Count, reinforcementResult);
         }
 
         /// <summary>
-        /// True if partPos lies inside the footprint of the gate whose root is at rootPos.
-        /// Null if this cannot be decided right now (e.g. the root's block entity is not available).
+        /// Deletes reinforcement that was placed on a vanilla dummy part of an old gate.
+        /// It never had an effect and was never shown to the player (only the root counts), so it is not transferred.
+        /// The root's own reinforcement is not touched. Returns a short text for the log.
         /// </summary>
-        public bool? ContainsPart(IBlockAccessor blockAccessor, BlockPos rootPos, BlockPos partPos)
+        private string RemoveLegacyDummyReinforcement(IWorldAccessor world, List<(BlockPos pos, Vec3i offsetToRoot)> legacyParts)
         {
-            BEBehaviorGate? gateBehavior = blockAccessor.GetBlockEntity(rootPos)?.GetBehavior<BEBehaviorGate>();
-            if (gateBehavior == null) return null;
+            ModSystemBlockReinforcement? bre = world.Api.ModLoader.GetModSystem<ModSystemBlockReinforcement>();
+            if (bre == null) return "";
 
-            Vec3i offsetToRoot = new Vec3i(rootPos.X - partPos.X, rootPos.Y - partPos.Y, rootPos.Z - partPos.Z);
-            Vec3i local = WorldOffsetToNorthLocal(offsetToRoot, gateBehavior.Rotation);
+            int removed = 0;
+            foreach (var (partPos, _) in legacyParts)
+            {
+                if (bre.GetReinforcment(partPos) != null)
+                {
+                    bre.ClearReinforcement(partPos);
+                    removed++;
+                }
+            }
 
-            return local.X >= 0 && local.X < width
-                && local.Y >= 0 && local.Y < height
-                && local.Z >= 0 && local.Z < length;
+            return removed > 0 ? ", removed ineffective reinforcement from " + removed + " dummies" : "";
+        }
+
+        #endregion
+
+        private static bool IsStagedForRemoval(IBulkBlockAccessor accessor, BlockPos pos)
+        {
+            return accessor.StagedBlocks.ContainsKey(pos) && accessor.GetStagedBlockId(pos) == 0;
         }
 
         #region BlockInteract
@@ -426,6 +552,9 @@ namespace MedievalArchitecture
         {
 
             var controlerPos = blockSel.Position.AddCopy(offset);
+
+            // Old gate: convert on the first interaction at the latest (the player stands right in front of it, all chunks are loaded)
+            TryConvertLegacyParts(world, controlerPos);
 
             // PlacedPriorityInteract = true: while sneaking, the gate is asked BEFORE the held item.
             if (byPlayer?.Entity?.Controls.ShiftKey == true)
@@ -701,6 +830,9 @@ namespace MedievalArchitecture
             BlockPos controllerPos = pos.AddCopy(offset);
             Block controllerBlock = world.BlockAccessor.GetBlock(controllerPos);
 
+            // Old gate: convert first (see OnBlockBroken)
+            TryConvertLegacyParts(world, controllerPos);
+
             if (controllerBlock == null || controllerBlock.Id == 0)
             {
                 return;
@@ -711,37 +843,28 @@ namespace MedievalArchitecture
 
         /// <summary>
         /// Removes all dummy parts (vanilla dummies and gateparts) of the gate at controllerPos.
+        /// A part belongs to this gate if its own offset points to this root (not because of its position),
+        /// so a neighbouring gate is never touched and parts of older mod versions are found as well.
         /// If an accessor is given (explosion), the removal is staged there and committed by the caller.
         /// </summary>
         private void RemoveDummyBlocks(IWorldAccessor world, BlockPos controllerPos, HorizontalRotation rotation, IBulkBlockAccessor? stagingAccessor = null)
         {
             IBulkBlockAccessor bulkAccessor = stagingAccessor ?? world.GetBlockAccessorBulkUpdate(world.Side == EnumAppSide.Server, false);
 
-            for (int dx = 0; dx < width; dx++)
+            int horizontalRange = Math.Max(width, length) - 1;
+
+            for (int dx = -horizontalRange; dx <= horizontalRange; dx++)
             {
                 for (int dy = 0; dy < height; dy++)
                 {
-                    for (int dz = 0; dz < length; dz++)
+                    for (int dz = -horizontalRange; dz <= horizontalRange; dz++)
                     {
                         if (dx == 0 && dy == 0 && dz == 0) continue;
 
-                        Vec3i off = GetPlacementOffset(dx, dy, dz, rotation);
-                        BlockPos partPos = controllerPos.AddCopy(off.X, off.Y, off.Z);
-                        Block partBlock = world.BlockAccessor.GetBlock(partPos);
-
-                        if (partBlock?.Code?.Domain == "game" &&
-                            partBlock.Code.Path.StartsWith("multiblock-monolithic"))
+                        BlockPos partPos = controllerPos.AddCopy(dx, dy, dz);
+                        if (IsOwnPart(world.BlockAccessor, partPos, controllerPos))
                         {
                             bulkAccessor.SetBlock(0, partPos);
-                        }
-                        else if (partBlock is BlockGatePart)
-                        {
-                            // Only remove parts that belong to this gate (a neighbouring gate may touch this one)
-                            BlockPos? partRoot = world.BlockAccessor.GetBlockEntity<BEGatePart>(partPos)?.RootPos;
-                            if (partRoot == null || partRoot.Equals(controllerPos))
-                            {
-                                bulkAccessor.SetBlock(0, partPos);
-                            }
                         }
                     }
                 }
@@ -751,6 +874,26 @@ namespace MedievalArchitecture
             {
                 bulkAccessor.Commit();
             }
+        }
+
+        /// <summary>
+        /// True if the block at partPos is a dummy part (vanilla dummy or gatepart) whose offset points to rootPos.
+        /// </summary>
+        private static bool IsOwnPart(IBlockAccessor blockAccessor, BlockPos partPos, BlockPos rootPos)
+        {
+            Block partBlock = blockAccessor.GetBlock(partPos);
+
+            if (partBlock is BlockMultiblock dummy)
+            {
+                return dummy.OffsetInv != null && partPos.AddCopy(dummy.OffsetInv).Equals(rootPos);
+            }
+
+            if (partBlock is BlockGatePart)
+            {
+                return rootPos.Equals(blockAccessor.GetBlockEntity<BEGatePart>(partPos)?.RootPos);
+            }
+
+            return false;
         }
 
         public int MBGetRandomColor(ICoreClientAPI capi, BlockPos pos, BlockFacing facing, int rndIndex, Vec3i offsetInv)

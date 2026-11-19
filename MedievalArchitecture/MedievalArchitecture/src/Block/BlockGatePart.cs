@@ -61,7 +61,7 @@ namespace MedievalArchitecture
 
         /// <summary>
         /// True if this part has no gate anymore. Null if this cannot be decided right now
-        /// (root chunk not loaded, root block entity not available) - "not loaded" does not mean "not there".
+        /// (root chunk not loaded) - "not loaded" does not mean "not there".
         /// Only meaningful on the server.
         /// </summary>
         public bool? IsOrphan(IBlockAccessor blockAccessor, BlockPos pos)
@@ -75,12 +75,8 @@ namespace MedievalArchitecture
             BlockPos rootPos = pos.AddCopy(be.OffsetToRoot);
             if (blockAccessor.GetChunkAtBlockPos(rootPos) == null) return null;
 
-            if (blockAccessor.GetBlock(rootPos) is not BlockGateBase gate) return true;
-
-            bool? contains = gate.ContainsPart(blockAccessor, rootPos, pos);
-            if (contains == null) return null;
-
-            return !contains.Value;
+            // Its offset points to a gate: it belongs to that gate (ownership is defined by the offset, not the position)
+            return blockAccessor.GetBlock(rootPos) is not BlockGateBase;
         }
 
         /// <summary>

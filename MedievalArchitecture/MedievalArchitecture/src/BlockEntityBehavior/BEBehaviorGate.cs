@@ -17,6 +17,11 @@ namespace MedievalArchitecture
         private HorizontalRotation rotation = HorizontalRotation.North;
         private bool toggled = false;
 
+        // True once all dummy parts of this gate are gateparts (new gates: set on placement;
+        // old gates from before the gatepart system: set after the automatic conversion).
+        // Saved as "gatepartsConverted" - do not rename (savegame compatibility). Default false = old gate.
+        private bool partsConverted = false;
+
 
         // Sounds
         private float animationSpeed = 1f;
@@ -35,6 +40,15 @@ namespace MedievalArchitecture
 
         public HorizontalRotation Rotation => rotation;
         public bool Toggled => toggled;
+        public bool PartsConverted => partsConverted;
+
+        /// <summary>
+        /// Sets the conversion marker. The caller is responsible for MarkDirty.
+        /// </summary>
+        public void SetPartsConverted()
+        {
+            partsConverted = true;
+        }
 
         public BEBehaviorGate(BlockEntity blockentity) : base(blockentity)
         {
@@ -54,6 +68,14 @@ namespace MedievalArchitecture
             animationSpeed = Block?.Attributes?["animationSpeed"].AsFloat(1f) ?? 1f;
             easingSpeed = Block?.Attributes?["easingSpeed"].AsFloat(10f) ?? 10f;
             easOutSpeed = Block?.Attributes?["easOutSpeed"].AsFloat(10f) ?? 10f;
+
+            // Old gate (vanilla dummy blocks): convert to gateparts shortly after loading.
+            // Delayed, because neighbouring chunks may still be loading. If not all chunks are loaded,
+            // the conversion is retried on the next load or on the first interaction.
+            if (api.Side == EnumAppSide.Server && !partsConverted)
+            {
+                Blockentity.RegisterDelayedCallback(_ => (Block as BlockGateBase)?.TryConvertLegacyParts(Api.World, Pos), 2000);
+            }
 
             if (api.Side == EnumAppSide.Client)
             {
@@ -188,6 +210,7 @@ namespace MedievalArchitecture
             base.ToTreeAttributes(tree);
             tree.SetString("rotation", rotation.ToString());
             tree.SetBool("toggled", toggled);
+            tree.SetBool("gatepartsConverted", partsConverted);
         }
 
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
@@ -204,6 +227,7 @@ namespace MedievalArchitecture
             }
 
             toggled = tree.GetBool("toggled", false);
+            partsConverted = tree.GetBool("gatepartsConverted", false);
 
             if (Api != null && Api.Side == EnumAppSide.Client)
             {
