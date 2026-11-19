@@ -12,6 +12,7 @@
   //debug
   "confession:block-debug-noname": "DEBUG: Attribute mismatch. No exact name found",
   "confession:block-debug-description": "DEBUG: Attribute mismatch. No exact name found",
+  "confession:block-debug-nodescription": "DEBUG: Attribute mismatch. No exact description found",
 
   //materials and colors
   "game:rock-meteorite-iron": "Meteoric iron",
