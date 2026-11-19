@@ -20,11 +20,20 @@ namespace MedievalArchitecture
     ///
     /// As long as the offset is unknown (client: block arrived before its block entity data) or the root is missing,
     /// the part behaves neutral: default selection box, no collision, no interaction.
+    /// Orphaned parts (no gate anymore) remove themselves on the server: when loaded and when interacted with.
     ///
     /// IMPORTANT (savegame compatibility): registered as block class "BlockGatePart". Do not rename.
     /// </summary>
     public class BlockGatePart : Block, IMultiblockOffset
     {
+        public override void OnLoaded(ICoreAPI api)
+        {
+            base.OnLoaded(api);
+
+            // Same as the gate: while sneaking, ask this part before the held item (plumb and square / padlock redirect)
+            PlacedPriorityInteract = true;
+        }
+
         #region Root lookup
 
         /// <summary>
@@ -43,12 +52,50 @@ namespace MedievalArchitecture
             rootPos = pos.AddCopy(offsetInv);
             rootBlock = blockAccessor.GetBlock(rootPos);
 
-            if (rootBlock == null || rootBlock.Id == 0) return false;
-
-            // Prevent endless recursion if blocks are arranged incorrectly (e.g. broken world)
-            if (rootBlock is BlockGatePart || rootBlock is BlockMultiblock) return false;
+            // Only gates use gateparts. Anything else at the root position (air, another block, a dummy) means: no valid root.
+            // This also prevents endless recursion if blocks are arranged incorrectly (e.g. broken world).
+            if (rootBlock is not BlockGateBase) return false;
 
             return true;
+        }
+
+        /// <summary>
+        /// True if this part has no gate anymore. Null if this cannot be decided right now
+        /// (root chunk not loaded, root block entity not available) - "not loaded" does not mean "not there".
+        /// Only meaningful on the server.
+        /// </summary>
+        public bool? IsOrphan(IBlockAccessor blockAccessor, BlockPos pos)
+        {
+            BEGatePart? be = blockAccessor.GetBlockEntity<BEGatePart>(pos);
+            if (be == null) return null;
+
+            // A server-side part without offset can never find its gate
+            if (be.OffsetToRoot == null) return true;
+
+            BlockPos rootPos = pos.AddCopy(be.OffsetToRoot);
+            if (blockAccessor.GetChunkAtBlockPos(rootPos) == null) return null;
+
+            if (blockAccessor.GetBlock(rootPos) is not BlockGateBase gate) return true;
+
+            bool? contains = gate.ContainsPart(blockAccessor, rootPos, pos);
+            if (contains == null) return null;
+
+            return !contains.Value;
+        }
+
+        /// <summary>
+        /// Removes this part if it certainly has no gate anymore (e.g. root removed with WorldEdit). Server only.
+        /// </summary>
+        public void TryRemoveIfOrphan(IWorldAccessor world, BlockPos pos)
+        {
+            if (world.Side != EnumAppSide.Server) return;
+            if (world.BlockAccessor.GetBlock(pos) != this) return;
+
+            if (IsOrphan(world.BlockAccessor, pos) == true)
+            {
+                world.Logger.Debug("[MedievalArchitecture] Removed orphaned gate part at {0}", pos);
+                world.BlockAccessor.SetBlock(0, pos);
+            }
         }
 
         private T? GetRootInterface<T>(Block rootBlock, BlockPos rootPos) where T : class
@@ -111,7 +158,11 @@ namespace MedievalArchitecture
 
         public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
         {
-            if (!TryGetRoot(world.BlockAccessor, blockSel.Position, out BlockPos rootPos, out Vec3i offsetInv, out Block rootBlock)) return false;
+            if (!TryGetRoot(world.BlockAccessor, blockSel.Position, out BlockPos rootPos, out Vec3i offsetInv, out Block rootBlock))
+            {
+                TryRemoveIfOrphan(world, blockSel.Position);
+                return false;
+            }
 
             var inf = GetRootInterface<IMultiBlockInteract>(rootBlock, rootPos);
             if (inf != null) return inf.MBOnBlockInteractStart(world, byPlayer, blockSel, offsetInv);

@@ -20,6 +20,19 @@ namespace MedievalArchitecture
 
         public BlockPos? RootPos => OffsetToRoot == null ? null : Pos.AddCopy(OffsetToRoot);
 
+        public override void Initialize(ICoreAPI api)
+        {
+            base.Initialize(api);
+
+            // Remove this part if its gate is gone (e.g. root deleted with WorldEdit).
+            // Delayed, because neighbouring chunks may still be loading, and right after placement
+            // the gate writes the offset only after this block entity was created.
+            if (api.Side == EnumAppSide.Server)
+            {
+                RegisterDelayedCallback(_ => (Block as BlockGatePart)?.TryRemoveIfOrphan(Api.World, Pos), 2000);
+            }
+        }
+
         /// <summary>
         /// Called by the gate when placing or converting its parts (server side).
         /// </summary>

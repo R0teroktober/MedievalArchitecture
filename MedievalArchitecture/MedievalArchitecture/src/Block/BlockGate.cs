@@ -43,6 +43,9 @@ namespace MedievalArchitecture
             height = Attributes?["height"].AsInt(1) ?? 1;
             length = Attributes?["length"].AsInt(1) ?? 1;
 
+            // While sneaking, ask the gate before the held item, so plumb and square / padlock can be redirected to the root
+            PlacedPriorityInteract = true;
+
             gatePartBlock = api.World.GetBlock(GatePartCode);
             if (gatePartBlock == null)
             {
@@ -308,22 +311,91 @@ namespace MedievalArchitecture
             RemoveDummyBlocks(world, pos, rotation);
         }
 
+        public override void OnBlockExploded(IWorldAccessor world, BlockPos pos, BlockPos explosionCenter, EnumBlastType blastType, string ignitedByPlayerUid)
+        {
+            // Explosions write into world.BulkBlockAccessor and only take effect on Commit.
+            // One explosion can hit several parts of the gate; all of them forward to here before the commit,
+            // while world.BlockAccessor still reports the root as present.
+            // Dupe protection: if this explosion already removed the root, do nothing (no second drop).
+            IBulkBlockAccessor explosionAccessor = world.BulkBlockAccessor;
+            if (IsStagedForRemoval(explosionAccessor, pos))
+            {
+                return;
+            }
+
+            // Rotation before the root might be removed
+            HorizontalRotation rotation = GetStoredRotation(world, pos);
+
+            // Vanilla handling: reinforcement loses strength and prevents the removal, otherwise the root is removed and may drop
+            base.OnBlockExploded(world, pos, explosionCenter, blastType, ignitedByPlayerUid);
+
+            // Vanilla does not call OnBlockBroken for explosions, so the parts must be removed here
+            if (IsStagedForRemoval(explosionAccessor, pos))
+            {
+                RemoveDummyBlocks(world, pos, rotation, explosionAccessor);
+            }
+        }
+
+        private static bool IsStagedForRemoval(IBulkBlockAccessor accessor, BlockPos pos)
+        {
+            return accessor.StagedBlocks.ContainsKey(pos) && accessor.GetStagedBlockId(pos) == 0;
+        }
+
+        /// <summary>
+        /// True if partPos lies inside the footprint of the gate whose root is at rootPos.
+        /// Null if this cannot be decided right now (e.g. the root's block entity is not available).
+        /// </summary>
+        public bool? ContainsPart(IBlockAccessor blockAccessor, BlockPos rootPos, BlockPos partPos)
+        {
+            BEBehaviorGate? gateBehavior = blockAccessor.GetBlockEntity(rootPos)?.GetBehavior<BEBehaviorGate>();
+            if (gateBehavior == null) return null;
+
+            Vec3i offsetToRoot = new Vec3i(rootPos.X - partPos.X, rootPos.Y - partPos.Y, rootPos.Z - partPos.Z);
+            Vec3i local = WorldOffsetToNorthLocal(offsetToRoot, gateBehavior.Rotation);
+
+            return local.X >= 0 && local.X < width
+                && local.Y >= 0 && local.Y < height
+                && local.Z >= 0 && local.Z < length;
+        }
+
         #region BlockInteract
 
         public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
         {
+            return MBOnBlockInteractStart(world, byPlayer, blockSel, new Vec3i(0, 0, 0));
+        }
 
-            ModSystemBlockReinforcement bre = world.Api.ModLoader.GetModSystem<ModSystemBlockReinforcement>();
-            if (bre.IsLockedForInteract(blockSel.Position, byPlayer))
-            {
-                if (world.Side == EnumAppSide.Client)
-                {
-                    (world.Api as ICoreClientAPI).TriggerIngameError(this, "locked", Lang.Get("ingameerror-locked"));
-                }
-                return false;
-            } else
+        public override WorldInteraction[] GetPlacedBlockInteractionHelp(IWorldAccessor world, BlockSelection selection, IPlayer forPlayer)
+        {
+            return MBGetPlacedBlockInteractionHelp(world, selection, forPlayer, new Vec3i(0, 0, 0));
+        }
 
-            return true;
+        /// <summary>
+        /// Sneak + right click with plumb and square or padlock: handled by the gate (see MBOnBlockInteractStart).
+        /// </summary>
+        private static bool IsReinforceOrLockInteraction(IPlayer byPlayer)
+        {
+            if (byPlayer?.Entity?.Controls.ShiftKey != true) return false;
+
+            CollectibleObject? held = byPlayer.InventoryManager?.ActiveHotbarSlot?.Itemstack?.Collectible;
+            return held is ItemPlumbAndSquare || held is ItemPadlock;
+        }
+
+        /// <summary>
+        /// Runs the original vanilla item interaction (plumb and square / padlock), but on the root position.
+        /// "Redirect instead of rebuild": claims, resources, group mode, strength, messages, sounds and costs
+        /// stay exactly vanilla. Reinforcement and lock therefore always end up on the root block.
+        /// </summary>
+        private static void RedirectToolInteractionToRoot(IPlayer byPlayer, BlockSelection blockSel, BlockPos controllerPos)
+        {
+            ItemSlot slot = byPlayer.InventoryManager.ActiveHotbarSlot;
+            CollectibleObject held = slot.Itemstack.Collectible;
+
+            BlockSelection rootSel = blockSel.Clone();
+            rootSel.Position = controllerPos.Copy();
+
+            EnumHandHandling handling = EnumHandHandling.NotHandled;
+            held.OnHeldInteractStart(slot, byPlayer.Entity, rootSel, null, true, ref handling);
         }
 
         public override bool OnBlockInteractStep(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
@@ -355,6 +427,23 @@ namespace MedievalArchitecture
 
             var controlerPos = blockSel.Position.AddCopy(offset);
 
+            // PlacedPriorityInteract = true: while sneaking, the gate is asked BEFORE the held item.
+            if (byPlayer?.Entity?.Controls.ShiftKey == true)
+            {
+                if (IsReinforceOrLockInteraction(byPlayer))
+                {
+                    RedirectToolInteractionToRoot(byPlayer, blockSel, controlerPos);
+                    // Handled: the item must not act a second time on this part, and the gate must not toggle (see Stop)
+                    return true;
+                }
+
+                // Any other held item (e.g. a block to place): let the item act first, like vanilla
+                if (byPlayer.InventoryManager?.ActiveHotbarSlot?.Itemstack != null)
+                {
+                    return false;
+                }
+            }
+
             ModSystemBlockReinforcement bre = world.Api.ModLoader.GetModSystem<ModSystemBlockReinforcement>();
             if (bre.IsLockedForInteract(controlerPos, byPlayer))
             {
@@ -375,6 +464,9 @@ namespace MedievalArchitecture
 
         public void MBOnBlockInteractStop(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, Vec3i offset)
         {
+            // Reinforcing / locking must not open or close the gate
+            if (IsReinforceOrLockInteraction(byPlayer)) return;
+
             BlockPos controllerPos = blockSel.Position.AddCopy(offset);
             BlockEntity be = world.BlockAccessor.GetBlockEntity(controllerPos);
             if (be == null) return;
@@ -401,7 +493,36 @@ namespace MedievalArchitecture
 
         public WorldInteraction[] MBGetPlacedBlockInteractionHelp(IWorldAccessor world, BlockSelection blockSel, IPlayer forPlayer, Vec3i offset)
         {
-            return base.GetPlacedBlockInteractionHelp(world, blockSel, forPlayer);
+            WorldInteraction[] baseHelp = base.GetPlacedBlockInteractionHelp(world, blockSel, forPlayer) ?? Array.Empty<WorldInteraction>();
+
+            if (forPlayer?.InventoryManager?.ActiveHotbarSlot?.Itemstack?.Collectible is not ItemPlumbAndSquare)
+            {
+                return baseHelp;
+            }
+
+            var help = new List<WorldInteraction>(baseHelp)
+            {
+                // Vanilla's held help says "right click"; for gates sneaking is needed (like vanilla doors)
+                new WorldInteraction()
+                {
+                    ActionLangCode = "confession:blockhelp-gate-reinforce",
+                    HotKeyCode = "shift",
+                    MouseButton = EnumMouseButton.Right
+                }
+            };
+
+            bool isRoot = offset.X == 0 && offset.Y == 0 && offset.Z == 0;
+            if (!isRoot)
+            {
+                // Removing reinforcement is handled by the item only (left click), it cannot be redirected without Harmony
+                help.Add(new WorldInteraction()
+                {
+                    ActionLangCode = "confession:blockhelp-gate-removereinforcement-mainblock",
+                    MouseButton = EnumMouseButton.Left
+                });
+            }
+
+            return help.ToArray();
         }
 
         public BlockSounds MBGetSounds(IBlockAccessor blockAccessor, BlockSelection blockSel, ItemStack stack, Vec3i offset)
@@ -588,9 +709,13 @@ namespace MedievalArchitecture
             controllerBlock.OnBlockBroken(world, controllerPos, byPlayer, dropQuantityMultiplier);
         }
 
-        private void RemoveDummyBlocks(IWorldAccessor world, BlockPos controllerPos, HorizontalRotation rotation)
+        /// <summary>
+        /// Removes all dummy parts (vanilla dummies and gateparts) of the gate at controllerPos.
+        /// If an accessor is given (explosion), the removal is staged there and committed by the caller.
+        /// </summary>
+        private void RemoveDummyBlocks(IWorldAccessor world, BlockPos controllerPos, HorizontalRotation rotation, IBulkBlockAccessor? stagingAccessor = null)
         {
-            IBulkBlockAccessor bulkAccessor = world.GetBlockAccessorBulkUpdate(world.Side == EnumAppSide.Server, false);
+            IBulkBlockAccessor bulkAccessor = stagingAccessor ?? world.GetBlockAccessorBulkUpdate(world.Side == EnumAppSide.Server, false);
 
             for (int dx = 0; dx < width; dx++)
             {
@@ -622,7 +747,10 @@ namespace MedievalArchitecture
                 }
             }
 
-            bulkAccessor.Commit();
+            if (stagingAccessor == null)
+            {
+                bulkAccessor.Commit();
+            }
         }
 
         public int MBGetRandomColor(ICoreClientAPI capi, BlockPos pos, BlockFacing facing, int rndIndex, Vec3i offsetInv)

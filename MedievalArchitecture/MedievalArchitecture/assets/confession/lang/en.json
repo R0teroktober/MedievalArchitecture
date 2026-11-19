@@ -158,6 +158,8 @@
 
   //gates and drawbridge
   "confession:placefailure-gate-outsideworld": "The gate would reach outside the world here.",
+  "confession:blockhelp-gate-reinforce": "Reinforce gate",
+  "confession:blockhelp-gate-removereinforcement-mainblock": "Remove at bottom corner",
   "confession:block-drawbridge-small-oak": "Small drawbridge (Oak)",
   "confession:block-drawbridge-small-aged": "Small drawbridge (Aged)",
   "confession:block-drawbridge-small-birch": "Small drawbridge (Birch)",
