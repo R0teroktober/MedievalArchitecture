@@ -1,0 +1,49 @@
+{
+  // Archway material registry.
+  //
+  // rims:  items (or blocks) that can be used as rim stones of an archway frame.
+  // fills: blocks that can be used to fill (complete) an archway.
+  //
+  // Every entry:
+  //   code      Block/item code pattern. Placeholders like {rock} capture a part of the code.
+  //             Example: "game:cobblestone-{rock}" matches game:cobblestone-granite with rock = granite.
+  //   id        Material id, may use the placeholders of "code". The id is SAVED in archways (savegames).
+  //             NEVER rename or remove an id once released. Allowed characters: a-z 0-9 - _
+  //             Ids of other mods should start with the mod id, e.g. "geoaddons-cobblestone-{rock}".
+  //   texture   Texture used for this material, with domain, without "textures/" and ".png".
+  //   name      Optional lang key for the material name. Default: name of the block/item.
+  //   buildable Optional, default true. false = existing archways keep their look, but the material
+  //             can no longer be used for new archways (use this instead of removing an entry).
+  //
+  // If several entries match the same block/item, the FIRST one wins. Put specific entries before general ones.
+  //
+  // legacyFills: maps the fill of archways built before the registry ("originblock") to a fill id.
+  //   {rock} = rim stone of the archway, {originblock} = old originblock value. "*" = any other value.
+  //
+  // Other mods can add entries with a JSON patch (op "add", path "/fills/-" or "/rims/-").
+  "rims": [
+    { "code": "game:stone-{rock}", "id": "{rock}", "texture": "game:block/stone/rock/{rock}1" }
+  ],
+  "fills": [
+    { "code": "game:rock-{rock}", "id": "rock-{rock}", "texture": "game:block/stone/rock/{rock}1" },
+    { "code": "game:cobblestone-coral", "id": "cobblestone-coral", "texture": "game:block/creature/aquatic/coral/cobble/coral1" },
+    { "code": "game:cobblestone-{rock}", "id": "cobblestone-{rock}", "texture": "game:block/stone/cobblestone/{rock}1" },
+    { "code": "game:stonebricks-{rock}", "id": "stonebricks-{rock}", "texture": "game:block/stone/brick/{rock}1" },
+    { "code": "game:rockpolished-{rock}", "id": "rockpolished-{rock}", "texture": "game:block/stone/polishedrock/{rock}" },
+    { "code": "game:plaster-plain", "id": "plaster-plain", "texture": "game:block/stone/plaster/plain" },
+    { "code": "game:plaster-square", "id": "plaster-square", "texture": "game:block/stone/plaster/square" },
+    { "code": "game:daub-{color}-{type}", "id": "daub-{color}-{type}", "texture": "game:block/clay/daub/{color}/{type}1" },
+    { "code": "game:claybricks-good-fire", "id": "claybricks-good-fire", "texture": "game:block/clay/brick/four/running/fire1" },
+    { "code": "game:claybricks-clinkerrough", "id": "claybricks-clinkerrough", "texture": "game:block/clay/brick/irregular/clinker/clinker1" },
+    { "code": "game:claybricks-uneven-four-{pattern}-{color}", "id": "claybricks-uneven-four-{pattern}-{color}", "texture": "game:block/clay/brick/uneven/four/{pattern}/{color}1" },
+    { "code": "game:rammed-light-{pattern}", "id": "rammed-light-{pattern}", "texture": "game:block/soil/rammed/light/{pattern}1" },
+    { "code": "game:mudbrick-{type}", "id": "mudbrick-{type}", "texture": "game:block/soil/mudbrick/{type}1" }
+  ],
+  "legacyFills": {
+    "rock": "rock-{rock}",
+    "cobblestone": "cobblestone-{rock}",
+    "brick": "stonebricks-{rock}",
+    "plaster": "plaster-plain",
+    "*": "daub-{originblock}-normal"
+  }
+}

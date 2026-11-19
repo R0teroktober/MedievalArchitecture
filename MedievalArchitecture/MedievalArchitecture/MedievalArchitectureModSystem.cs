@@ -13,6 +13,15 @@ namespace MedievalArchitecture
         private const string LegacyConfigFileName = "variant-types-config.json";
 
         public static MedievalArchitectureConfig Config { get; private set; } = MedievalArchitectureConfig.CreateDefault();
+
+        /// <summary>Archway materials of this side (server and client each have their own instance).</summary>
+        public ArchwayMaterialRegistry ArchwayMaterials { get; } = new ArchwayMaterialRegistry();
+
+        public static ArchwayMaterialRegistry? GetArchwayMaterials(ICoreAPI api)
+        {
+            return api.ModLoader.GetModSystem<MedievalArchitectureModSystem>()?.ArchwayMaterials;
+        }
+
         public override void Start(ICoreAPI api)
         {
             base.Start(api);
@@ -30,6 +39,13 @@ namespace MedievalArchitecture
             api.RegisterBlockEntityBehaviorClass("DoubleTrapDoorBE", typeof(BEBehaviorDoubleTrapDoor));
             api.RegisterBlockEntityBehaviorClass("Gate", typeof(BEBehaviorGate));
             LoadConfig(api);
+        }
+
+        public override void AssetsFinalize(ICoreAPI api)
+        {
+            base.AssetsFinalize(api);
+            // All blocks and items are loaded now, so the code patterns of the registry can be resolved.
+            ArchwayMaterials.Load(api);
         }
 
         private static void LoadConfig(ICoreAPI api)
