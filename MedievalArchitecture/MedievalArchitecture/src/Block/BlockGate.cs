@@ -29,6 +29,10 @@ namespace MedievalArchitecture
         private readonly Dictionary<string, Cuboidf[]> closedBoxesByOffset = new();
         private readonly Dictionary<string, Cuboidf[]> openBoxesByOffset = new();
 
+        // Dummy block used for all parts of newly placed gates (see BlockGatePart)
+        private static readonly AssetLocation GatePartCode = new AssetLocation("confession", "gatepart");
+        private Block? gatePartBlock;
+
 
         public override void OnLoaded(ICoreAPI api)
         {
@@ -38,6 +42,12 @@ namespace MedievalArchitecture
             width = Attributes?["width"].AsInt(1) ?? 1;
             height = Attributes?["height"].AsInt(1) ?? 1;
             length = Attributes?["length"].AsInt(1) ?? 1;
+
+            gatePartBlock = api.World.GetBlock(GatePartCode);
+            if (gatePartBlock == null)
+            {
+                api.Logger.Error("[MedievalArchitecture] Block {0} not found, {1} falls back to vanilla dummy blocks.", GatePartCode, Code);
+            }
 
             LoadBoxSets();
         }
@@ -52,9 +62,17 @@ namespace MedievalArchitecture
 
         public override bool CanPlaceBlock(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref string failureCode)
         {
+            // Root position: all vanilla rules (replaceable, entities, land claims, block behaviors)
+            if (!base.CanPlaceBlock(world, byPlayer, blockSel, ref failureCode))
+            {
+                return false;
+            }
+
             HorizontalRotation rotation = DetermineRotation(byPlayer, blockSel);
             BlockPos rootPos = blockSel.Position;
 
+            // Every position of the gate is checked BEFORE anything is placed, so there is never a half gate.
+            // The root is checked again here, because the vanilla entity check above does not know the rotation yet.
             for (int dx = 0; dx < width; dx++)
             {
                 for (int dy = 0; dy < height; dy++)
@@ -62,12 +80,10 @@ namespace MedievalArchitecture
                     for (int dz = 0; dz < length; dz++)
                     {
                         Vec3i off = GetPlacementOffset(dx, dy, dz, rotation);
-                        BlockPos testPos = rootPos.AddCopy(off.X, off.Y, off.Z);
-                        Block existingBlock = world.BlockAccessor.GetBlock(testPos);
+                        BlockPos partPos = rootPos.AddCopy(off.X, off.Y, off.Z);
 
-                        if (existingBlock.Id != 0 && !existingBlock.IsReplacableBy(this))
+                        if (!CanPlacePartAt(world, byPlayer, partPos, new Vec3i(dx, dy, dz), rotation, ref failureCode))
                         {
-                            failureCode = "notenoughspace";
                             return false;
                         }
                     }
@@ -77,11 +93,57 @@ namespace MedievalArchitecture
             return true;
         }
 
+        /// <summary>
+        /// Same checks as vanilla Block.CanPlaceBlock, for one position of the gate.
+        /// </summary>
+        private bool CanPlacePartAt(IWorldAccessor world, IPlayer byPlayer, BlockPos partPos, Vec3i northLocalOffset, HorizontalRotation rotation, ref string failureCode)
+        {
+            // Inside the world (e.g. a tall gate must not reach above the build height)
+            if (!world.BlockAccessor.IsValidPos(partPos))
+            {
+                (world.Api as ICoreClientAPI)?.TriggerIngameError(this, "outsideworld", Lang.Get("confession:placefailure-gate-outsideworld"));
+                failureCode = "__ignore__";
+                return false;
+            }
+
+            // Free space (air or replaceable blocks like grass)
+            if (!world.BlockAccessor.GetBlock(partPos).IsReplacableBy(this))
+            {
+                failureCode = "notreplaceable";
+                return false;
+            }
+
+            // Land claims: a gate can reach into a neighbouring claim
+            if (byPlayer != null && !world.Claims.TryAccess(byPlayer, partPos, EnumBlockAccessFlags.BuildOrBreak))
+            {
+                byPlayer.InventoryManager.ActiveHotbarSlot?.MarkDirty();
+                failureCode = "claimed";
+                return false;
+            }
+
+            // Players or animals inside the closed gate at this position
+            Cuboidf[] boxes = GetClosedBoxesForPlacement(northLocalOffset, rotation);
+            if (boxes.Length > 0 && world.GetIntersectingEntities(partPos, boxes, e => e.IsInteractable).Length != 0)
+            {
+                failureCode = "entityintersecting";
+                return false;
+            }
+
+            return true;
+        }
+
+        private Cuboidf[] GetClosedBoxesForPlacement(Vec3i northLocalOffset, HorizontalRotation rotation)
+        {
+            string key = OffsetKey(northLocalOffset.X, northLocalOffset.Y, northLocalOffset.Z);
+            if (!closedBoxesByOffset.TryGetValue(key, out Cuboidf[]? boxes)) return Array.Empty<Cuboidf>();
+            return RotateBoxes(boxes, rotation);
+        }
+
         public override bool DoPlaceBlock(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ItemStack byItemStack)
         {
             HorizontalRotation rotation = DetermineRotation(byPlayer, blockSel);
             BlockPos rootPos = blockSel.Position;
-          
+
             // Place the controller block first.
             bool placed = base.DoPlaceBlock(world, byPlayer, blockSel, byItemStack);
             if (!placed)
@@ -91,6 +153,7 @@ namespace MedievalArchitecture
 
             // Place all dummy blocks after the controller.
             IBulkBlockAccessor bulkAccessor = world.GetBlockAccessorBulkUpdate(world.Side == EnumAppSide.Server, false);
+            var placedParts = new List<(BlockPos pos, Vec3i offsetToRoot)>();
 
             for (int dx = 0; dx < width; dx++)
             {
@@ -106,7 +169,8 @@ namespace MedievalArchitecture
                         Vec3i off = GetPlacementOffset(dx, dy, dz, rotation);
                         BlockPos dummyPos = rootPos.AddCopy(off.X, off.Y, off.Z);
 
-                        Block dummyBlock = GetDummyBlockForOffset(world, off);
+                        // New gates always use gatepart. Vanilla dummies only as emergency fallback if gatepart is missing.
+                        Block? dummyBlock = gatePartBlock ?? GetDummyBlockForOffset(world, off);
                         if (dummyBlock == null)
                         {
                             world.Logger.Warning(
@@ -117,11 +181,36 @@ namespace MedievalArchitecture
                         }
 
                         bulkAccessor.SetBlock(dummyBlock.Id, dummyPos);
+
+                        if (dummyBlock == gatePartBlock)
+                        {
+                            placedParts.Add((dummyPos, new Vec3i(-off.X, -off.Y, -off.Z)));
+                        }
                     }
                 }
             }
 
             bulkAccessor.Commit();
+
+            // The block entities of the parts only exist after Commit, so the offset can only be written now.
+            foreach (var (partPos, offsetToRoot) in placedParts)
+            {
+                BEGatePart? partBe = world.BlockAccessor.GetBlockEntity<BEGatePart>(partPos);
+                if (partBe == null)
+                {
+                    world.BlockAccessor.SpawnBlockEntity("GatePart", partPos);
+                    partBe = world.BlockAccessor.GetBlockEntity<BEGatePart>(partPos);
+                }
+
+                if (partBe != null)
+                {
+                    partBe.SetOffsetToRoot(offsetToRoot);
+                }
+                else
+                {
+                    world.Logger.Warning("MedievalArchitecture: Could not create block entity for gate part at {0} (gate at {1})", partPos, rootPos);
+                }
+            }
 
             // Write the chosen rotation into the existing block entity behavior.
             BlockEntity be = world.BlockAccessor.GetBlockEntity(rootPos);
@@ -519,6 +608,15 @@ namespace MedievalArchitecture
                             partBlock.Code.Path.StartsWith("multiblock-monolithic"))
                         {
                             bulkAccessor.SetBlock(0, partPos);
+                        }
+                        else if (partBlock is BlockGatePart)
+                        {
+                            // Only remove parts that belong to this gate (a neighbouring gate may touch this one)
+                            BlockPos? partRoot = world.BlockAccessor.GetBlockEntity<BEGatePart>(partPos)?.RootPos;
+                            if (partRoot == null || partRoot.Equals(controllerPos))
+                            {
+                                bulkAccessor.SetBlock(0, partPos);
+                            }
                         }
                     }
                 }

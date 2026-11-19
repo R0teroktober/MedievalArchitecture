@@ -157,6 +157,7 @@
   "confession:blockdesc-trapdoor_small_sloped-*": "<font color=\"#D6B56D\">Can also be placed on walls and ceilings</font>",
 
   //gates and drawbridge
+  "confession:placefailure-gate-outsideworld": "The gate would reach outside the world here.",
   "confession:block-drawbridge-small-oak": "Small drawbridge (Oak)",
   "confession:block-drawbridge-small-aged": "Small drawbridge (Aged)",
   "confession:block-drawbridge-small-birch": "Small drawbridge (Birch)",
