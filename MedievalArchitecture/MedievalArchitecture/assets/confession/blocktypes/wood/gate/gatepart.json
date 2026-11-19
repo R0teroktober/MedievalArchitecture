@@ -1,0 +1,23 @@
+{
+  // Invisible dummy part of gates, drawbridges, portcullises and big trapdoors.
+  // Placed and removed by BlockGate only, never by players. Stores the offset to its root block in its block entity.
+  // IMPORTANT: "reinforcable": false - otherwise vanilla adds the reinforcement behavior and reinforcement would land here instead of on the root.
+  "enabled": true,
+  "code": "gatepart",
+  "class": "BlockGatePart",
+  "entityClass": "GatePart",
+  "blockmaterial": "Wood",
+  "resistance": 4,
+  "drawtype": "Empty",
+  "renderPass": "OpaqueNoCull",
+  "lightabsorption": 0,
+  "sideopaque": {"all": false},
+  "sidesolid": {"all": false},
+  "sideao": {"all": false},
+  "replaceable": 0,
+  "attributes": {
+    "reinforcable": false,
+    "handbook": {"exclude": true}
+  },
+  "drops": []
+}

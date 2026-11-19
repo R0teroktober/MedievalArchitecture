@@ -19,12 +19,14 @@ namespace MedievalArchitecture
             api.RegisterBlockClass("BlockMultiblockArchway", typeof(BlockMultiblockArchway));
             api.RegisterBlockClass("BlockBrazier", typeof(BlockBrazier));
             api.RegisterBlockClass("BlockGate", typeof(BlockGateBase));
+            api.RegisterBlockClass("BlockGatePart", typeof(BlockGatePart));
             api.RegisterBlockBehaviorClass("BlockBehaviorArchway", typeof(BlockBehaviorArchway));
             api.RegisterBlockBehaviorClass("BlockBehaviorCancelInteraction", typeof(BlockBehaviorCancelInteraction));
             api.RegisterBlockBehaviorClass("BlockBehaviorArchwayFrame", typeof(BlockBehaviorArchwayFrame));
             api.RegisterBlockBehaviorClass("DoubleTrapDoor", typeof(BlockBehaviorDoubleTrapDoor));
             api.RegisterBlockEntityClass("BlockEntityConstructable", typeof(BlockEntityConstructable));
             api.RegisterBlockEntityClass("BlockEntityBrazier", typeof(BlockEntityBrazier));
+            api.RegisterBlockEntityClass("GatePart", typeof(BEGatePart));
             api.RegisterBlockEntityBehaviorClass("DoubleTrapDoorBE", typeof(BEBehaviorDoubleTrapDoor));
             api.RegisterBlockEntityBehaviorClass("Gate", typeof(BEBehaviorGate));
             LoadConfig(api);
