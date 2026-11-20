@@ -1,5 +1,4 @@
-﻿using Vintagestory.API.Client;
-using Vintagestory.API.Common;
+﻿using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 
@@ -9,8 +8,6 @@ namespace MedievalArchitecture
     public class BlockMultiblockArchway : BlockGeneric, IMultiBlockColSelBoxes
     {
         public ValuesByMultiblockOffset ValuesByMultiblockOffset { get; set; } = new();
-
-        ICoreClientAPI capi;
 
         public override void OnLoaded(ICoreAPI api)
         {

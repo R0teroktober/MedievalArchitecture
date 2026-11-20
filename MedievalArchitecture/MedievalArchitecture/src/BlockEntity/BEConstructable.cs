@@ -80,7 +80,7 @@ namespace MedievalArchitecture
         }
 
         /// <summary>
-        /// Setzt mehrere Varianten in einem Rutsch (Server) und sorgt für Sync & clientseitigen Mesh-Rebuild.
+        /// Deploys multiple variants in one go (server) and handles synchronization and client-side mesh rebuild
         /// </summary>
         public void SetVariants(IDictionary<string, string> variants)
         {
@@ -88,22 +88,22 @@ namespace MedievalArchitecture
             if (arlBeh == null) arlBeh = GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
             if (arlBeh == null) return;
 
-            // Setze alle Varianten serverseitig in der ARL-Behavior
+            // Set all variants on the server side in the ARL behavior
             foreach (var kv in variants)
             {
                 arlBeh.Variants?.Set(kv.Key, kv.Value);
             }
 
-            // Old fill values (e.g. from the frame or when glass/planks are added) are translated right away.
+            // Old fill values (e.g. from the frame or when glass/planks are added) are translated right away
             TryConvertLegacyFill(markDirty: false);
 
-            // Server -> sendet TreeAttributes zum Client
+            // Server -> sends TreeAttributes to the client
             MarkDirty(true);
 
-            // Optional: erzwinge Redraw fuer Clients
+            // Optional: calls Redraw for Clients
             Api.World.BlockAccessor.MarkBlockDirty(Pos);
 
-            // Wenn wir clientseitig sind, rebuild direkt (auch FromTreeAttributes macht das)
+            // if client rebuild mesh
             if (Api.Side == EnumAppSide.Client)
             {
                 TryRebuildArlMeshClient();
@@ -112,7 +112,7 @@ namespace MedievalArchitecture
         }
 
         /// <summary>
-        /// Convenience für einzelne Variant.
+        /// Convenience for individual variants
         /// </summary>
         public void SetVariant(string key, string value)
         {
@@ -120,7 +120,7 @@ namespace MedievalArchitecture
         }
 
         // -----------------------
-        // Persistenz
+        // Persistence
         // -----------------------
         public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldForResolving)
         {
@@ -131,14 +131,14 @@ namespace MedievalArchitecture
             base.FromTreeAttributes(tree, worldForResolving);
 
             // Only redraw the chunk if the look actually changed. Redrawing on every update
-            // (e.g. the brazier syncs every 500 ms while burning) causes a constant chunk re-tesselation.
+            // (e.g. the brazier syncs every 500 ms while burning) causes a constant chunk re-tesselation
             if (Api is ICoreClientAPI && (arlBeh?.Variants?.ToString() ?? "") != variantsBefore)
             {
                 Api.World.BlockAccessor.MarkBlockDirty(Pos);
             }
         }
 
-        // ToTreeAttributes: base already calls ToTreeAttributes of all behaviors (incl. ARL), nothing to add here.
+        // ToTreeAttributes: base already calls ToTreeAttributes of all behaviors (incl. ARL), nothing to add here
 
         // Try rebuild using ARL's GenTexSource + GetOrCreateMesh signature; if not found, fallback to CallMethod("Init")
         private void TryRebuildArlMeshClient()
