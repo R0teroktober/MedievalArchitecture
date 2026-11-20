@@ -189,6 +189,8 @@
       "name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
       "properties": {
         "name": {
+          "@fill-(rock|cobblestone|stonebricks|rockpolished|drystone|plaster|daub|claybricks|brickcourse|rammed|mudbrick)-.*::rock-*::glass-*": [["confession:archway-name-big-window", "game:block-{fill}", "rock-{rock}", "block-glass-{glass}"]],
+          "fill-*::rock-*::glass-*": [["confession:archway-name-big-window", "confession:archwayfill-{fill}", "rock-{rock}", "block-glass-{glass}"]],
           "style-*::rock-*::originblock-rock": ["confession:block-arch_medium-name1", "rock-{rock}", "confession:originblock-{originblock}", "confession:block-arch_small-name"],
           "style-*::rock-*::originblock-cobblestone": ["confession:block-arch_medium-name1", "rock-{rock}", "confession:originblock-{originblock}", "confession:block-arch_small-name"],
           "style-*::rock-*::originblock-brick": ["confession:block-arch_medium-name1", "rock-{rock}", "confession:originblock-{originblock}", "confession:block-arch_small-name"],
@@ -196,6 +198,30 @@
           "*": ["confession:block-debug-noname"]
         },
         "description": {
+          "@fill-(rock|cobblestone|stonebricks|rockpolished|drystone|plaster|daub|claybricks|brickcourse|rammed|mudbrick)-.*::rock-*::glass-*": [
+            "confession:block-arch_small-description6",
+            "game:block-{fill}",
+            "confession:block-linebreak",
+            "confession:block-arch_small-description1",
+            "rock-{rock}",
+            "confession:block-arch_small-description2",
+            "confession:{style}",
+            "confession:block-arch_small-description4",
+            "block-glass-{glass}",
+            "confession:block-linebreak"
+          ],
+          "fill-*::rock-*::glass-*": [
+            "confession:block-arch_small-description6",
+            "confession:archwayfill-{fill}",
+            "confession:block-linebreak",
+            "confession:block-arch_small-description1",
+            "rock-{rock}",
+            "confession:block-arch_small-description2",
+            "confession:{style}",
+            "confession:block-arch_small-description4",
+            "block-glass-{glass}",
+            "confession:block-linebreak"
+          ],
           "style-*::rock-*::originblock-*": [
             "confession:block-arch_small-description1",
             "rock-{rock}",

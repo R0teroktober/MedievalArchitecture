@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "patches": {
     "integer": {},
     "float": {},
@@ -123,49 +123,49 @@
         "name": "enable-small-archways",
         "ingui": "confession:setting-enable-small-archways",
         "weight": 2.1,
-        "comment": "Enable/ Disable all archways and tiny windows",
+        "comment": "Enable all archways and tiny windows",
         "default": true
       },
       "ENABLE_ROOF": {
         "name": "enable-roofs",
         "ingui": "confession:setting-enable-roof",
         "weight": 2.2,
-        "comment": "Enable/ Disable all roof blocks",
+        "comment": "Enable all roof blocks",
         "default": false
       },
       "ENABLE_WINDOW": {
         "name": "enable-windows",
         "ingui": "confession:setting-enable-windows",
         "weight": 2.3,
-        "comment": "Enable/ Disable window panes",
+        "comment": "Enable window panes",
         "default": true
       },
       "ENABLE_WINDOWSILL": {
         "name": "enable-windowsill",
         "ingui": "confession:setting-enable-windowsill",
         "weight": 2.4,
-        "comment": "Enable/ Disable windowsills",
+        "comment": "Enable windowsills",
         "default": true
       },
       "ENABLE_TRAPDOOR": {
         "name": "enable-trapdoors",
         "ingui": "confession:setting-enable-trapdoors",
         "weight": 2.5,
-        "comment": "Enable/ Disable trapdoors",
+        "comment": "Enable trapdoors",
         "default": true
       },
       "ENABLE_BRAZIER": {
         "name": "enable-brazier",
         "ingui": "confession:setting-enable-brazier",
         "weight": 2.6,
-        "comment": "Enable/ Disable brazier",
+        "comment": "Enable brazier",
         "default": true
       },
       "ENABLE_GATE": {
         "name": "enable-gate",
         "ingui": "confession:setting-enable-gate",
         "weight": 2.7,
-        "comment": "Enable/ Disable gates, drawbridges and portcullis",
+        "comment": "Enable gates, drawbridges and portcullis",
         "default": true
       }
     },

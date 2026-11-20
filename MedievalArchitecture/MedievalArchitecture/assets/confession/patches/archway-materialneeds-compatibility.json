@@ -1,0 +1,21 @@
+[
+  // Archway fill materials of Material Needs (mod id "materialneeds"). Only applied if the mod is installed.
+  // Daub colors of Material Needs are variants of the vanilla daub block and need no entry here.
+  // Plaster: only the plain variant, like vanilla.
+  // Names: lang entries "confession:archwayfill-<id>" in assets/confession/lang/en.json.
+  {
+    "op": "add", "path": "/fills/-", "file": "confession:config/archway-materials.json",
+    "dependsOn": [{ "modid": "materialneeds" }],
+    "value": { "code": "materialneeds:plaster-{color}-plain", "id": "materialneeds-plaster-{color}-plain", "texture": "materialneeds:block/stone/plaster/{color}/plain" }
+  },
+  {
+    "op": "add", "path": "/fills/-", "file": "confession:config/archway-materials.json",
+    "dependsOn": [{ "modid": "materialneeds" }],
+    "value": { "code": "materialneeds:rammed-light-{color}-{pattern}", "id": "materialneeds-rammed-light-{color}-{pattern}", "texture": "materialneeds:block/soil/rammed/light/{color}/{pattern}1" }
+  },
+  {
+    "op": "add", "path": "/fills/-", "file": "confession:config/archway-materials.json",
+    "dependsOn": [{ "modid": "materialneeds" }],
+    "value": { "code": "materialneeds:{color}mudbrick-{type}", "id": "materialneeds-mudbrick-{color}-{type}", "texture": "materialneeds:block/soil/mudbrick/{color}mudbrick/{type}1" }
+  }
+]

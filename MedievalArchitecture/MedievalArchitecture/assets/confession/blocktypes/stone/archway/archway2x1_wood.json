@@ -81,6 +81,8 @@
       "name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
       "properties": {
         "name": {
+          "@fill-(rock|cobblestone|stonebricks|rockpolished|drystone|plaster|daub|claybricks|brickcourse|rammed|mudbrick)-.*::rock-*::wood-*": [["confession:archway-name-medium-lintel", "game:block-{fill}", "rock-{rock}", "material-{wood}"]],
+          "fill-*::rock-*::wood-*": [["confession:archway-name-medium-lintel", "confession:archwayfill-{fill}", "rock-{rock}", "material-{wood}"]],
           "style-*::rock-*::originblock-rock": ["confession:block-arch_medium-name1", "rock-{rock}", "confession:originblock-{originblock}", "confession:block-arch_small-name"],
           "style-*::rock-*::originblock-cobblestone": ["confession:block-arch_medium-name1", "rock-{rock}", "confession:originblock-{originblock}", "confession:block-arch_small-name"],
           "style-*::rock-*::originblock-brick": ["confession:block-arch_medium-name1", "rock-{rock}", "confession:originblock-{originblock}", "confession:block-arch_small-name"],
@@ -88,6 +90,30 @@
           "*": ["confession:block-debug-noname"]
         },
         "description": {
+          "@fill-(rock|cobblestone|stonebricks|rockpolished|drystone|plaster|daub|claybricks|brickcourse|rammed|mudbrick)-.*::rock-*::wood-*": [
+            "confession:block-arch_small-description6",
+            "game:block-{fill}",
+            "confession:block-linebreak",
+            "confession:block-arch_small-description1",
+            "rock-{rock}",
+            "confession:block-arch_small-description2",
+            "confession:{style}",
+            "confession:block-arch_small-description5",
+            "material-{wood}",
+            "confession:block-linebreak"
+          ],
+          "fill-*::rock-*::wood-*": [
+            "confession:block-arch_small-description6",
+            "confession:archwayfill-{fill}",
+            "confession:block-linebreak",
+            "confession:block-arch_small-description1",
+            "rock-{rock}",
+            "confession:block-arch_small-description2",
+            "confession:{style}",
+            "confession:block-arch_small-description5",
+            "material-{wood}",
+            "confession:block-linebreak"
+          ],
           "style-*::rock-*::originblock-*": [
             "confession:block-arch_small-description1",
             "rock-{rock}",
@@ -100,37 +126,37 @@
         "textures": {
           "fill-*::rock-*": {
             "plaster": {"base": "confession:block/archway/rim/{rock}", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
-            "lintel": {"base": "game:block/wood/debarked/{wood}", "blendedOverlays": [{"base": "game:block/wood/door/overlay-solid", "blendMode": "Overlay"}]},
+            "lintel": {"base": "confession:block/archway/wood/{wood}", "blendedOverlays": [{"base": "game:block/wood/door/overlay-solid", "blendMode": "Overlay"}]},
             "material": {"base": "confession:block/archway/fill/{fill}"},
             "rim": {"base": "confession:block/archway/rim/{rock}", "overlays": ["game:block/overlay/damagedstone1"]}
           },
           "style-*::rock-*::originblock-plaster::wood-*": {
             "plaster": {"base": "game:block/stone/rock/granite1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
-            "lintel": {"base": "game:block/wood/debarked/{wood}", "blendedOverlays": [{"base": "game:block/wood/door/overlay-solid", "blendMode": "Overlay"}]},
+            "lintel": {"base": "confession:block/archway/wood/{wood}", "blendedOverlays": [{"base": "game:block/wood/door/overlay-solid", "blendMode": "Overlay"}]},
             "material": {"base": "game:block/stone/plaster/plain"},
             "rim": {"base": "game:block/stone/rock/{rock}1", "overlays": ["game:block/overlay/damagedstone1"]}
           },
           "style-*::rock-*::originblock-rock::wood-*": {
             "plaster": {"base": "game:block/stone/rock/granite1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
-            "lintel": {"base": "game:block/wood/debarked/{wood}", "blendedOverlays": [{"base": "game:block/wood/door/overlay-solid", "blendMode": "Overlay"}]},
+            "lintel": {"base": "confession:block/archway/wood/{wood}", "blendedOverlays": [{"base": "game:block/wood/door/overlay-solid", "blendMode": "Overlay"}]},
             "material": {"base": "game:block/stone/rock/{rock}1"},
             "rim": {"base": "game:block/stone/rock/{rock}1", "overlays": ["game:block/overlay/damagedstone1"]}
           },
           "style-*::rock-*::originblock-cobblestone::wood-*": {
             "plaster": {"base": "game:block/stone/rock/granite1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
-            "lintel": {"base": "game:block/wood/debarked/{wood}", "blendedOverlays": [{"base": "game:block/wood/door/overlay-solid", "blendMode": "Overlay"}]},
+            "lintel": {"base": "confession:block/archway/wood/{wood}", "blendedOverlays": [{"base": "game:block/wood/door/overlay-solid", "blendMode": "Overlay"}]},
             "material": {"base": "game:block/stone/cobblestone/{rock}1"},
             "rim": {"base": "game:block/stone/rock/{rock}1", "overlays": ["game:block/overlay/damagedstone1"]}
           },
           "style-*::rock-*::originblock-brick::wood-*": {
             "plaster": {"base": "game:block/stone/rock/granite1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
-            "lintel": {"base": "game:block/wood/debarked/{wood}", "blendedOverlays": [{"base": "game:block/wood/door/overlay-solid", "blendMode": "Overlay"}]},
+            "lintel": {"base": "confession:block/archway/wood/{wood}", "blendedOverlays": [{"base": "game:block/wood/door/overlay-solid", "blendMode": "Overlay"}]},
             "material": {"base": "game:block/stone/brick/{rock}1"},
             "rim": {"base": "game:block/stone/rock/{rock}1", "overlays": ["game:block/overlay/damagedstone1"]}
           },
           "style-*::rock-*::originblock-*::wood-*": {
             "plaster": {"base": "game:block/stone/rock/granite1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
-            "lintel": {"base": "game:block/wood/debarked/{wood}", "blendedOverlays": [{"base": "game:block/wood/door/overlay-solid", "blendMode": "Overlay"}]},
+            "lintel": {"base": "confession:block/archway/wood/{wood}", "blendedOverlays": [{"base": "game:block/wood/door/overlay-solid", "blendMode": "Overlay"}]},
             "material": {"base": "game:block/clay/daub/{originblock}/normal1"},
             "rim": {"base": "game:block/stone/rock/{rock}1", "overlays": ["game:block/overlay/damagedstone1"]}
           }

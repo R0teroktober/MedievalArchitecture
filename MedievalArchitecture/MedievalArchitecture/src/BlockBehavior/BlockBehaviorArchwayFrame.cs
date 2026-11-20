@@ -18,8 +18,6 @@ namespace MedievalArchitecture
     {
         private const string StateAttribute = "state";
         private const string StyleAttribute = "style";
-        /// <summary>originblock value of archways whose fill material is stored in "fill".</summary>
-        private const string RegistryFillOriginblock = "fill";
 
         private int rimStoneAmount;
         private int intMultiplicator;
@@ -180,12 +178,12 @@ namespace MedievalArchitecture
             world.BlockAccessor.MarkBlockDirty(controlPos);
             world.BlockAccessor.TriggerNeighbourBlockUpdate(controlPos);
 
+            // "fill" alone marks the archway as finished. "originblock" is only kept by archways of older versions.
             var archVariants = new Dictionary<string, string>
             {
                 [StyleAttribute] = style,
                 [ArchwayMaterialRegistry.RimAttribute] = rimId,
                 [ArchwayMaterialRegistry.FillAttribute] = fill.Id,
-                [ArchwayMaterialRegistry.LegacyFillAttribute] = RegistryFillOriginblock,
                 ["glass"] = "none"
             };
 

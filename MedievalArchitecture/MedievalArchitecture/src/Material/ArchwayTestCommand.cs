@@ -15,7 +15,7 @@ namespace MedievalArchitecture
         public static void Register(ICoreServerAPI sapi)
         {
             sapi.ChatCommands.Create("archwaytest")
-                .WithDescription("Test only: set (or remove without value) an attribute of the archway you are looking at. Example: /archwaytest fill cobblestone-basalt, /archwaytest info")
+                .WithDescription("Test only: set (or remove without value) an attribute of the archway you are looking at. Example: /archwaytest fill cobblestone-basalt")
                 .RequiresPrivilege(Privilege.controlserver)
                 .RequiresPlayer()
                 .WithArgs(sapi.ChatCommands.Parsers.Word("key"), sapi.ChatCommands.Parsers.OptionalWord("value"))
@@ -38,8 +38,6 @@ namespace MedievalArchitecture
             BlockEntity? be = sapi.World.BlockAccessor.GetBlockEntity(pos);
             BlockEntityBehaviorShapeTexturesFromAttributes? arl = be?.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
             if (be == null || arl == null) return TextCommandResult.Error("This is not an archway.");
-
-            if (key == "info") return TextCommandResult.Success("Archway at " + pos + ": " + arl.Variants);
 
             if (key == ArchwayMaterialRegistry.FillAttribute && !string.IsNullOrEmpty(value))
             {

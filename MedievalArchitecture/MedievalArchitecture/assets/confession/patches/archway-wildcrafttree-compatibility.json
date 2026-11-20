@@ -1,0 +1,9 @@
+[
+  // Door lintel boards of Wildcraft: Trees and Shrubs (mod id "wildcrafttree"). Only applied if the mod is installed.
+  // The mod ships the debarked textures and the names ("game:material-<wood>") of its woods in the vanilla domain.
+  {
+    "op": "add", "path": "/woods/-", "file": "confession:config/archway-materials.json",
+    "dependsOn": [{ "modid": "wildcrafttree" }],
+    "value": { "code": "wildcrafttree:plank-{wood}", "id": "{wood}", "texture": "game:block/wood/debarked/{wood}" }
+  }
+]

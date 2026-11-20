@@ -13,7 +13,9 @@ namespace MedievalArchitecture
     public enum ArchwayMaterialKind
     {
         Rim,
-        Fill
+        Fill,
+        /// <summary>Boards for the door lintel.</summary>
+        Wood
     }
 
     /// <summary>
@@ -28,20 +30,17 @@ namespace MedievalArchitecture
         public AssetLocation Texture { get; }
         /// <summary>Fills only: texture of the ledge of big archways (default: same as Texture).</summary>
         public AssetLocation LedgeTexture { get; set; }
-        /// <summary>Optional lang key for the name. Null = use the name of the source block/item.</summary>
-        public string? NameLangKey { get; }
         /// <summary>False = only kept for existing archways, cannot be used for new ones.</summary>
         public bool Buildable { get; }
         /// <summary>Block/item codes that represent this material.</summary>
         public List<AssetLocation> SourceCodes { get; } = new();
 
-        public ArchwayMaterial(string id, ArchwayMaterialKind kind, AssetLocation texture, string? nameLangKey, bool buildable)
+        public ArchwayMaterial(string id, ArchwayMaterialKind kind, AssetLocation texture, bool buildable)
         {
             Id = id;
             Kind = kind;
             Texture = texture;
             LedgeTexture = texture;
-            NameLangKey = nameLangKey;
             Buildable = buildable;
         }
     }
@@ -59,9 +58,19 @@ namespace MedievalArchitecture
         /// <summary>ARL attribute names stored in archways.</summary>
         public const string RimAttribute = "rock";
         public const string FillAttribute = "fill";
+        public const string WoodAttribute = "wood";
         /// <summary>Old fill category (before the registry). "none" = archway not finished yet.</summary>
         public const string LegacyFillAttribute = "originblock";
         public const string UnfinishedOriginblock = "none";
+
+        /// <summary>
+        /// True if an archway with these attributes is finished: it has a fill material, or it was finished
+        /// before the registry existed (old fill category in "originblock", "none" = unfinished).
+        /// </summary>
+        public static bool IsFinishedArchway(string? fill, string? originblock)
+        {
+            return !string.IsNullOrEmpty(fill) || (!string.IsNullOrEmpty(originblock) && originblock != UnfinishedOriginblock);
+        }
 
         /// <summary>
         /// Every material texture is additionally registered under these paths in our own domain, so the archway
@@ -72,6 +81,7 @@ namespace MedievalArchitecture
         public const string RimAliasPath = "block/archway/rim/";
         public const string FillAliasPath = "block/archway/fill/";
         public const string LedgeAliasPath = "block/archway/ledge/";
+        public const string WoodAliasPath = "block/archway/wood/";
 
         private static readonly Regex PlaceholderRegex = new Regex(@"\{([a-z0-9_]+)\}", RegexOptions.Compiled);
         private static readonly Regex ValidIdRegex = new Regex(@"^[a-z0-9_-]+$", RegexOptions.Compiled);
@@ -80,16 +90,21 @@ namespace MedievalArchitecture
         private readonly Dictionary<string, ArchwayMaterial> fillsById = new();
         private readonly Dictionary<AssetLocation, ArchwayMaterial> rimsByCode = new();
         private readonly Dictionary<AssetLocation, ArchwayMaterial> fillsByCode = new();
+        private readonly Dictionary<string, ArchwayMaterial> woodsById = new();
+        private readonly Dictionary<AssetLocation, ArchwayMaterial> woodsByCode = new();
         private readonly Dictionary<string, List<string>> legacyFills = new();
 
         public bool Loaded { get; private set; }
         public IReadOnlyCollection<ArchwayMaterial> Rims => rimsById.Values;
         public IReadOnlyCollection<ArchwayMaterial> Fills => fillsById.Values;
+        public IReadOnlyCollection<ArchwayMaterial> Woods => woodsById.Values;
 
         public bool TryGetRim(string id, [MaybeNullWhen(false)] out ArchwayMaterial material) => rimsById.TryGetValue(id, out material);
         public bool TryGetFill(string id, [MaybeNullWhen(false)] out ArchwayMaterial material) => fillsById.TryGetValue(id, out material);
         public bool TryGetRimByCode(AssetLocation code, [MaybeNullWhen(false)] out ArchwayMaterial material) => rimsByCode.TryGetValue(code, out material);
         public bool TryGetFillByCode(AssetLocation code, [MaybeNullWhen(false)] out ArchwayMaterial material) => fillsByCode.TryGetValue(code, out material);
+        public bool TryGetWood(string id, [MaybeNullWhen(false)] out ArchwayMaterial material) => woodsById.TryGetValue(id, out material);
+        public bool TryGetWoodByCode(AssetLocation code, [MaybeNullWhen(false)] out ArchwayMaterial material) => woodsByCode.TryGetValue(code, out material);
 
         /// <summary>
         /// Translates the fill of an archway built before the registry existed into a fill id.
@@ -122,6 +137,8 @@ namespace MedievalArchitecture
             fillsById.Clear();
             rimsByCode.Clear();
             fillsByCode.Clear();
+            woodsById.Clear();
+            woodsByCode.Clear();
             legacyFills.Clear();
             Loaded = false;
 
@@ -133,6 +150,7 @@ namespace MedievalArchitecture
             var stats = new LoadStats();
             ResolveEntries(api, file.Rims, ArchwayMaterialKind.Rim, rimsById, rimsByCode, stats);
             ResolveEntries(api, file.Fills, ArchwayMaterialKind.Fill, fillsById, fillsByCode, stats);
+            ResolveEntries(api, file.Woods, ArchwayMaterialKind.Wood, woodsById, woodsByCode, stats);
 
             if (file.LegacyFills != null)
             {
@@ -145,11 +163,12 @@ namespace MedievalArchitecture
 
             Loaded = true;
 
-            api.Logger.Notification("{0} Archway materials ({1}): {2} rims, {3} fills from {4} entries. Skipped: {5} (missing texture), {6} (invalid), {7} (id conflict).",
-                LogPrefix, side, rimsById.Count, fillsById.Count, stats.Entries, stats.MissingTexture, stats.Invalid, stats.Conflicts);
+            api.Logger.Notification("{0} Archway materials ({1}): {2} rims, {3} fills, {4} woods from {5} entries. Skipped: {6} (missing texture), {7} (invalid), {8} (id conflict).",
+                LogPrefix, side, rimsById.Count, fillsById.Count, woodsById.Count, stats.Entries, stats.MissingTexture, stats.Invalid, stats.Conflicts);
 
             api.Logger.Debug("{0} Archway rim ids ({1}): {2}", LogPrefix, side, string.Join(", ", rimsById.Keys.OrderBy(k => k)));
             api.Logger.Debug("{0} Archway fill ids ({1}): {2}", LogPrefix, side, string.Join(", ", fillsById.Keys.OrderBy(k => k)));
+            api.Logger.Debug("{0} Archway wood ids ({1}): {2}", LogPrefix, side, string.Join(", ", woodsById.Keys.OrderBy(k => k)));
 
             LogLegacyCoverage(api, side);
 
@@ -166,6 +185,7 @@ namespace MedievalArchitecture
             registered += RegisterTextureAliases(api, rimsById.Values, RimAliasPath);
             registered += RegisterTextureAliases(api, fillsById.Values, FillAliasPath);
             registered += RegisterTextureAliases(api, fillsById.Values, LedgeAliasPath, m => m.LedgeTexture);
+            registered += RegisterTextureAliases(api, woodsById.Values, WoodAliasPath);
             api.Logger.Notification("{0} {1} archway textures registered (client).", LogPrefix, registered);
         }
 
@@ -213,7 +233,7 @@ namespace MedievalArchitecture
         {
             if (entries == null) return;
 
-            string kindName = kind == ArchwayMaterialKind.Rim ? "rim" : "fill";
+            string kindName = kind switch { ArchwayMaterialKind.Rim => "rim", ArchwayMaterialKind.Wood => "wood", _ => "fill" };
 
             foreach (ArchwayMaterialEntry entry in entries)
             {
@@ -312,7 +332,7 @@ namespace MedievalArchitecture
                         continue;
                     }
 
-                    var material = new ArchwayMaterial(id, kind, texture, string.IsNullOrWhiteSpace(entry.Name) ? null : entry.Name.Trim(), entry.Buildable);
+                    var material = new ArchwayMaterial(id, kind, texture, entry.Buildable);
                     material.SourceCodes.Add(code);
                     if (kind == ArchwayMaterialKind.Fill && ledgeTemplates.Count > 0)
                     {
@@ -360,7 +380,7 @@ namespace MedievalArchitecture
                 return;
             }
 
-            var material = new ArchwayMaterial(id, kind, texture, string.IsNullOrWhiteSpace(entry.Name) ? null : entry.Name.Trim(), buildable: false);
+            var material = new ArchwayMaterial(id, kind, texture, buildable: false);
             foreach (string candidate in ledgeTemplates)
             {
                 AssetLocation ledge = AssetLocation.Create(candidate);
@@ -502,6 +522,10 @@ namespace MedievalArchitecture
         [JsonProperty("fills")]
         public List<ArchwayMaterialEntry>? Fills { get; set; }
 
+        /// <summary>Boards for the door lintel of archways.</summary>
+        [JsonProperty("woods")]
+        public List<ArchwayMaterialEntry>? Woods { get; set; }
+
         /// <summary>Old fill category -> fill id (string) or list of fill ids (first existing wins).</summary>
         [JsonProperty("legacyFills")]
         public Dictionary<string, JToken>? LegacyFills { get; set; }
@@ -521,9 +545,6 @@ namespace MedievalArchitecture
         /// <summary>Fills only, optional: string or list, the first existing texture is used for the ledge of big archways.</summary>
         [JsonProperty("ledgeTexture")]
         public JToken? LedgeTexture { get; set; }
-
-        [JsonProperty("name")]
-        public string? Name { get; set; }
 
         [JsonProperty("buildable")]
         public bool Buildable { get; set; } = true;

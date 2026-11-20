@@ -1,50 +1,48 @@
 ﻿using AttributeRenderingLibrary;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Reflection.Emit;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
-using Vintagestory.API.Util;
 using Vintagestory.GameContent;
-using MedievalArchitecture;
-using Vintagestory.API.Config;
 
 namespace MedievalArchitecture
 {
+    /// <summary>
+    /// Finished archway. Building steps (ctrl + right click):
+    /// boards (registry "woods") -> door lintel (block "blockCodeWithLintel"), glass pane or window -> window (block "blockCodeWithGlass").
+    /// Archways left unfinished by older versions (originblock "none") can be finished with a fill block (registry "fills").
+    /// </summary>
     public class BlockBehaviorArchway(Block block) : BlockBehavior(block), IInteractable
     {
-        private string blockCodeWithGlass;
-        private string blockCodeWithLintel;
+        private const string StyleAttribute = "style";
+        private const string GlassAttribute = "glass";
+
+        /// <summary>Attributes that are kept when glass or planks are added. "originblock" only exists in archways of older versions.</summary>
+        private static readonly string[] KeptAttributes =
+        [
+            StyleAttribute,
+            ArchwayMaterialRegistry.RimAttribute,
+            ArchwayMaterialRegistry.FillAttribute,
+            ArchwayMaterialRegistry.LegacyFillAttribute
+        ];
+
+        private string? blockCodeWithGlass;
+        private string? blockCodeWithLintel;
+        /// <summary>Glass panes for a window. Also the number of fill blocks needed to finish the archway (same as "intMultiplicator" of the frame).</summary>
         private int glassSize;
         private int lintelSize;
-        public Dictionary<string, string> glassCodeByType = new();
-        public Dictionary<string, string> woodCodeByType = new();
-        public Dictionary<string, string> stateCodeByType = new();
-        public Dictionary<string, string> rockCodeByType = new();
-        public Dictionary<string, string> styleCodeByType = new();
-        public Dictionary<string, string> originblockCodeByType = new();
-        AssetLocation finishSound = new AssetLocation();
-        AssetLocation soundAddWood = new AssetLocation();
-        AssetLocation soundAddGlass = new AssetLocation();
+        private Dictionary<string, string> glassCodeByType = new();
+
+        private AssetLocation finishSound = new AssetLocation();
+        private AssetLocation soundAddWood = new AssetLocation();
+        private AssetLocation soundAddGlass = new AssetLocation();
 
         public override void Initialize(JsonObject properties)
-
         {
-
-             woodCodeByType = new Dictionary<string, string>(MedievalArchitectureModSystem.Config.WoodCodeByType);
             glassCodeByType = new Dictionary<string, string>(MedievalArchitectureModSystem.Config.GlassCodeByType);
-            stateCodeByType = new Dictionary<string, string>(MedievalArchitectureModSystem.Config.StateCodeByType);
-            styleCodeByType = new Dictionary<string, string>(MedievalArchitectureModSystem.Config.StyleCodeByType);
-            rockCodeByType = new Dictionary<string, string>(MedievalArchitectureModSystem.Config.RockCodeByType);
-            originblockCodeByType = new Dictionary<string, string>(MedievalArchitectureModSystem.Config.OriginblockCodeByType);
             glassSize = properties["glassSize"].AsInt(1);
             lintelSize = properties["lintelSize"].AsInt(1);
             blockCodeWithGlass = properties["blockCodeWithGlass"].AsString();
@@ -53,9 +51,8 @@ namespace MedievalArchitecture
             soundAddWood = AssetLocation.Create("sounds/block/planks");
             soundAddGlass = AssetLocation.Create("sounds/block/ingot");
             finishSound = AssetLocation.Create("sounds/block/rock-break-pickaxe");
+
             base.Initialize(properties);
-
-
         }
 
         public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handling)
@@ -65,23 +62,17 @@ namespace MedievalArchitecture
                 handling = EnumHandling.PreventDefault;
                 return true;
             }
-            else
-
-                return base.OnBlockInteractStart(world, byPlayer, blockSel, ref handling);
-
-
+            return base.OnBlockInteractStart(world, byPlayer, blockSel, ref handling);
         }
+
         public override bool OnBlockInteractCancel(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handling)
         {
             if (byPlayer.Entity.Controls.CtrlKey)
             {
                 handling = EnumHandling.PreventDefault;
-                secondsUsed = 0;
                 return true;
             }
-            else
-                return base.OnBlockInteractCancel(secondsUsed, world, byPlayer, blockSel, ref handling);
-
+            return base.OnBlockInteractCancel(secondsUsed, world, byPlayer, blockSel, ref handling);
         }
 
         public override bool OnBlockInteractStep(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handled)
@@ -89,373 +80,259 @@ namespace MedievalArchitecture
             if (byPlayer.Entity.Controls.CtrlKey)
             {
                 handled = EnumHandling.PreventDefault;
-
-
                 if (byPlayer.CurrentBlockSelection == null) return false;
-                //  Nur auf dem Client Animation
                 if (world.Side == EnumAppSide.Client)
                 {
                     (byPlayer as IClientPlayer)?.TriggerFpAnimation(EnumHandInteract.BlockInteract);
-
                 }
                 return true;
             }
-            else
-                return base.OnBlockInteractStep(secondsUsed, world, byPlayer, blockSel, ref handled);
-
-
+            return base.OnBlockInteractStep(secondsUsed, world, byPlayer, blockSel, ref handled);
         }
+
         public override void OnBlockInteractStop(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handled)
         {
-            //if (secondsUsed < 0.5) base.OnBlockInteractStop(secondsUsed, world, byPlayer, blockSel, ref handled); // Bauzeit
-                secondsUsed = 0; // Bauzeit zurücksetzten
-                handled = EnumHandling.PreventDefault;
-                    
-                    // Baumaterial
-                    if (byPlayer?.InventoryManager?.ActiveHotbarSlot?.Itemstack == null || blockSel == null) return;
-                    var heldItem = byPlayer.InventoryManager.ActiveHotbarSlot.Itemstack;
-                    string heldItemCode = heldItem.Collectible.Code.ToString();
+            handled = EnumHandling.PreventDefault;
 
-            // Control position wenn dummy Block
+            if (byPlayer == null || blockSel == null || !byPlayer.Entity.Controls.CtrlKey) return;
+            ItemSlot? slot = byPlayer.InventoryManager?.ActiveHotbarSlot;
+            ItemStack? heldStack = slot?.Itemstack;
+            if (slot == null || heldStack == null) return;
+
             BlockPos controlPos = ResolveControlPos(world, blockSel);
-            if (controlPos == null) return;
+            BlockEntity? be = world.BlockAccessor.GetBlockEntity(controlPos);
+            BlockEntityBehaviorShapeTexturesFromAttributes? arl = be?.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
+            if (be == null || arl?.Variants == null) return;
 
-            // Block
-            var be = world.BlockAccessor?.GetBlockEntity(controlPos);
-                    if (be == null) return;
-                    // Blockbehavior
-                    var beh = be.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
-                    if (beh.Variants is null) return;
-                    var oldVariants = beh.Variants.Clone();
-                    // Read the stored values directly (the config lists do not know mod materials or "fill").
-                    string style = oldVariants.Get("style");
-                    string rock = oldVariants.Get(ArchwayMaterialRegistry.RimAttribute);
-                    string originblock = oldVariants.Get(ArchwayMaterialRegistry.LegacyFillAttribute);
-                    string fill = oldVariants.Get(ArchwayMaterialRegistry.FillAttribute);
-                    var block = world.BlockAccessor.GetBlock(controlPos);
-                    if (block == null) return;
-           
-                    string orientation = block.Variant.TryGetValue("side");
-
-                    if (originblock != "none")
-                    {
-
-
-                        if (heldItemCode.StartsWith("game:plank-") && blockCodeWithLintel != null)
-                        {
-                            if (heldItem.StackSize < lintelSize) return;
-                            TryAddPlanks(world, byPlayer, be, beh, heldItem, orientation, style, rock, originblock, fill, controlPos, lintelSize);
-                        }
-                        else if (heldItemCode.StartsWith("confession:window-") && blockCodeWithGlass != null || heldItemCode.StartsWith("game:glasspane-") && blockCodeWithGlass != null)
-                        {
-                            if (heldItem.StackSize < glassSize) return;
-                            TryAddGlass(world, byPlayer, be, beh, heldItem, orientation, style, rock, originblock, fill, controlPos, glassSize);
-                        }
-                    }
-                    else
-                    {
-                        if (heldItemCode.StartsWith("game:rock-"))
-                        {
-          
-                            if (heldItem.StackSize <  glassSize) return;
-                            originblock = "rock";
-                            TryComplete(world, byPlayer, blockSel, be, beh, heldItem, orientation, style, rock, originblock, controlPos, glassSize);
-                        }
-
-                        if (heldItemCode.StartsWith("game:cobblestone-"))
-                        {
-                            originblock = "cobblestone";
-                            if (heldItem.StackSize < glassSize) return;
-                            TryComplete(world, byPlayer, blockSel, be, beh, heldItem, orientation, style, rock, originblock, controlPos, glassSize);
-                        }
-
-                        if (heldItemCode.StartsWith("game:stonebricks-"))
-                        {
-                            originblock = "brick";
-                            if (heldItem.StackSize < glassSize) return;
-                            TryComplete(world, byPlayer, blockSel, be, beh, heldItem, orientation, style, rock, originblock, controlPos, glassSize);
-                        }
-                        if (heldItemCode.StartsWith("game:plaster-"))
-                        {
-                            originblock = "plaster";
-                            if (heldItem.StackSize < glassSize) return;
-                            TryComplete(world, byPlayer, blockSel, be, beh, heldItem, orientation, style, rock, originblock, controlPos, glassSize);
-                        }
-                        if (heldItemCode.StartsWith("game:daub-"))
-                        {
-  
-                            var daubString = heldItemCode.Substring(10);
-                            var i = daubString.Length;
-                    if (daubString.EndsWith("cracked"))
-                    {
-                        originblock = daubString.Remove((i - 8), 8);
-                    }
-                    else
-                    {
-                        originblock = daubString.Remove((i - 7), 7);
-                    }
-
-
-
-                        if (heldItem.StackSize < glassSize) return;
-                            TryComplete(world, byPlayer, blockSel, be, beh, heldItem, orientation, style, rock, originblock, controlPos, glassSize);
-                        }
-                    
+            if (!IsFinished(arl.Variants))
+            {
+                TryFinish(world, byPlayer, slot, heldStack, be, arl, controlPos);
+                return;
             }
-         
 
+            string? orientation = world.BlockAccessor.GetBlock(controlPos).Variant?["side"];
+            ArchwayMaterial? wood = GetLintelWood(world, heldStack);
 
+            if (wood != null && blockCodeWithLintel != null)
+            {
+                if (heldStack.StackSize < lintelSize) return;
+                TryAddPlanks(world, byPlayer, slot, wood, arl.Variants, controlPos, orientation, blockCodeWithLintel);
+            }
+            else if (IsGlass(heldStack) && blockCodeWithGlass != null)
+            {
+                if (heldStack.StackSize < glassSize) return;
+                TryAddGlass(world, byPlayer, slot, heldStack, arl.Variants, controlPos, orientation, blockCodeWithGlass);
+            }
         }
 
-
-        private void TryAddPlanks(IWorldAccessor world, IPlayer player, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string orientation, string style, string rock, string originblock, string fill, BlockPos controlPos, int lintelSize)
+        private void TryAddPlanks(IWorldAccessor world, IPlayer player, ItemSlot slot, ArchwayMaterial wood, Variants oldVariants, BlockPos controlPos, string? orientation, string baseCode)
         {
-            // Item
-            string heldItemCode = heldItem.Collectible.Code.ToString();
-            string wood = heldItemCode.Substring(11);
-            if (world.Side == EnumAppSide.Client)
-            {
-                try
-                {
-                    world.PlaySoundAt(soundAddWood, controlPos, 0.5, player);
-                }
-                catch { }
-            }
-            // Neuer Block
-            var newBlock = world.GetBlock(new AssetLocation(blockCodeWithLintel + "-" + orientation));
-            if (world.Side == EnumAppSide.Server)
-            {
-
-                // Setzen und Attribute übertragen
-                BlockPos newBlockPos = controlPos.Copy();
-
-                world.BlockAccessor.SetBlock(newBlock.BlockId, newBlockPos);
-                world.BlockAccessor.MarkBlockDirty(newBlockPos);
-                world.BlockAccessor.TriggerNeighbourBlockUpdate(newBlockPos);
-
-                // Callback um auf Blockentity zu warten
-                world.RegisterCallback(dt =>
-                {
-                    var newBe = world.BlockAccessor?.GetBlockEntity(newBlockPos);
-                    var newBeh = newBe?.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
-                    if (newBeh == null) return;
-                    var newMyBe = newBe as BlockEntityConstructable;
-                    if (player.WorldData.CurrentGameMode != EnumGameMode.Creative)
-                    {
-                        var slot = player.InventoryManager.ActiveHotbarSlot;
-                        slot.TakeOut(lintelSize);
-                        slot.MarkDirty();
-                    }
-                    if (newMyBe != null)
-                    {
-                        newMyBe.SetVariants(new Dictionary<string, string> {
-                        { "style", style },
-                        { "rock", rock },
-                        { "originblock", originblock },
-                        { "wood", wood }
-                        }.WithFill(fill));
-                    }
-                    else
-                    {
-                        newBeh.Variants.Set("style", style);
-                        newBeh.Variants.Set("rock", rock);
-                        newBeh.Variants.Set("originblock", originblock);
-                        newBeh.Variants.Set("wood", wood);
-                        if (!string.IsNullOrEmpty(fill)) newBeh.Variants.Set(ArchwayMaterialRegistry.FillAttribute, fill);
-                        newBe.MarkDirty(true);
-
-                    }
-
-
-                }, 100);
-            }
-            
-
-        }
-        private void TryAddGlass(IWorldAccessor world, IPlayer player, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string orientation, string style, string rock, string originblock, string fill, BlockPos controlPos, int glassSize)
-        {
-            // Item
-            var glassVariants = Variants.FromStack(heldItem);
-            glassVariants.FindByVariant(glassCodeByType, out string glass);
-            if (glass == null) glass = "plain";
-
-            
-            
-            if (world.Side == EnumAppSide.Client)
-            {
-
-                world.PlaySoundAt(soundAddGlass, controlPos, 0.5, player);
-
-            }
-            // Neuer Block
-            var newBlock = world.GetBlock(new AssetLocation(blockCodeWithGlass + "-" + orientation));
+            Block? newBlock = GetTargetBlock(world, baseCode, orientation, controlPos);
             if (newBlock == null) return;
 
-            if (world.Side == EnumAppSide.Server)
-            {
+            PlaySound(world, soundAddWood, controlPos, player);
+            if (world.Side != EnumAppSide.Server) return;
 
-
-                // Setzen und Attribute übertragen
-                BlockPos newBlockPos = controlPos.Copy();
-                world.BlockAccessor.SetBlock(newBlock.BlockId, newBlockPos);
-                world.BlockAccessor.MarkBlockDirty(newBlockPos);
-                world.BlockAccessor.TriggerNeighbourBlockUpdate(newBlockPos);
-
-                // Callback um auf Blockentity zu warten
-                world.RegisterCallback(dt =>
-                {
-                    var newBe = world.BlockAccessor?.GetBlockEntity(newBlockPos);
-                    var MBBlock = world.BlockAccessor.GetBlock(newBlockPos, 1);
-                    var newBeh = newBe?.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
-                    if (newBeh == null) return;
-                    var newMyBe = newBe as BlockEntityConstructable;
-                    if (player.WorldData.CurrentGameMode != EnumGameMode.Creative)
-                    {
-                        var slot = player.InventoryManager.ActiveHotbarSlot;
-                        slot.TakeOut(glassSize);
-                        slot.MarkDirty();
-                    }
-                    if (newMyBe != null)
-                    {
-                        newMyBe.SetVariants(new Dictionary<string, string> {
-                        { "style", style },
-                        { "rock", rock },
-                        { "originblock", originblock },
-                        {"glass", glass }
-                        }.WithFill(fill));
-                    }
-                    else
-                    {
-                        newBeh.Variants.Set("style", style);
-                        newBeh.Variants.Set("rock", rock);
-                        newBeh.Variants.Set("originblock", originblock);
-                        newBeh.Variants.Set("glass", glass);
-                        if (!string.IsNullOrEmpty(fill)) newBeh.Variants.Set(ArchwayMaterialRegistry.FillAttribute, fill);
-                        newBe.MarkDirty(true);
-
-                    }
-
-
-                }, 100);
-            }
-            
-
-
-
+            Dictionary<string, string> newVariants = CopyKeptVariants(oldVariants);
+            newVariants[ArchwayMaterialRegistry.WoodAttribute] = wood.Id;
+            ReplaceArchway(world, player, slot, controlPos, newBlock, newVariants, lintelSize);
         }
-        private void TryComplete(IWorldAccessor world, IPlayer player, BlockSelection blockSel, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string orientation, string style, string rock, string originblock, BlockPos controlPos, int requiredAmount)
+
+        private void TryAddGlass(IWorldAccessor world, IPlayer player, ItemSlot slot, ItemStack heldStack, Variants oldVariants, BlockPos controlPos, string? orientation, string baseCode)
         {
-            if (world.Side == EnumAppSide.Client)
+            Block? newBlock = GetTargetBlock(world, baseCode, orientation, controlPos);
+            if (newBlock == null) return;
+
+            PlaySound(world, soundAddGlass, controlPos, player);
+            if (world.Side != EnumAppSide.Server) return;
+
+            Variants glassVariants = Variants.FromStack(heldStack);
+            if (!glassVariants.FindByVariant(glassCodeByType, out string glass) || string.IsNullOrEmpty(glass)) glass = "plain";
+
+            Dictionary<string, string> newVariants = CopyKeptVariants(oldVariants);
+            newVariants[GlassAttribute] = glass;
+            ReplaceArchway(world, player, slot, controlPos, newBlock, newVariants, glassSize);
+        }
+
+        /// <summary>Finishes an archway that was left unfinished by an older version, with a fill block of the registry.</summary>
+        private void TryFinish(IWorldAccessor world, IPlayer player, ItemSlot slot, ItemStack heldStack, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes arl, BlockPos controlPos)
+        {
+            ArchwayMaterialRegistry? registry = MedievalArchitectureModSystem.GetArchwayMaterials(world.Api);
+            ArchwayMaterial? fill = registry == null ? null : GetBuildableFill(registry, heldStack);
+            int amount = glassSize;
+            if (registry == null || fill == null || heldStack.StackSize < amount) return;
+
+            // No fallback: an archway with unknown rim stones would show missing textures.
+            string? rimId = arl.Variants.Get(ArchwayMaterialRegistry.RimAttribute);
+            if (string.IsNullOrEmpty(rimId) || !registry.TryGetRim(rimId, out _))
             {
-                try
+                if (world.Api is ICoreClientAPI capi)
                 {
-                    world.PlaySoundAt(finishSound, controlPos, 0.5, player);
-                }
-                catch { }
-            }
-            // Item
-            string heldItemCode = heldItem.Collectible.Code.ToString();
-            string originblockType = heldItemCode.Substring(10);
-            if (world.Side == EnumAppSide.Server) {
-                var myBe = be as BlockEntityConstructable;
-                if (myBe != null)
-                {
-                    myBe.SetVariant("originblock", originblock);
+                    capi.TriggerIngameError(this, "archway-unknownrim", Lang.Get("confession:archway-unknownrim"));
                 }
                 else
                 {
-                    beh.Variants.Set("originblock", originblock);
-                    be.MarkDirty(true);
+                    world.Logger.Warning("[MedievalArchitecture] Archway at {0} cannot be finished: rim stones \"{1}\" are not in the archway material registry.", controlPos, rimId);
                 }
-                // Creative Mode Check
-                if (player.WorldData.CurrentGameMode != EnumGameMode.Creative)
-                {
-                var slot = player.InventoryManager.ActiveHotbarSlot;
-                slot.TakeOut(requiredAmount);
-                slot.MarkDirty();
-                }
+                return;
             }
 
-        }
-        public override WorldInteraction[] GetPlacedBlockInteractionHelp(IWorldAccessor world, BlockSelection selection, IPlayer forPlayer, ref EnumHandling handling)
+            PlaySound(world, finishSound, controlPos, player);
+            if (world.Side != EnumAppSide.Server) return;
 
-        {
-            // 1) Auf den Block zugreifen
-            var be = world.BlockAccessor?.GetBlockEntity(selection.Position);
-            var beh = be?.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
-            // 2) Itemstack 
-            ItemStack displayStack;
-            // 3) Attribut prüfen
-            if (beh is null) return base.GetPlacedBlockInteractionHelp(world, selection, forPlayer, ref handling); // 4) sonst keine Hilfe anzeigen
+            TakeMaterial(player, slot, amount);
 
-                string originblock = beh.Variants.Get(ArchwayMaterialRegistry.LegacyFillAttribute);
-
-                if (originblock == "none")
-                {
-                    if (forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Block?.Code.Path.StartsWith("cobblestone") == true ||forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Block?.Code.Path.StartsWith("rock") == true ||forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Block?.Code.Path.StartsWith("stonebricks") == true ||forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Block?.Code.Path.StartsWith("plaster") == true ||forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Block?.Code.Path.StartsWith("daub") == true)
-                    {
-                        displayStack = GetRequiredDisplayStack(forPlayer, glassSize);
-                        return [new WorldInteraction() { ActionLangCode = "confession:block-interaction-add-block", MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl", Itemstacks = displayStack == null ? null : new[] { displayStack } }];
-                    } else return base.GetPlacedBlockInteractionHelp(world, selection, forPlayer, ref handling);
-               
-
-                }
-                else if (forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Collectible?.Code?.PathStartsWith("window-") == true && originblock != "none" && blockCodeWithGlass != null)
-                {
-                    displayStack = GetRequiredDisplayStack(forPlayer, glassSize);
-                    return [new WorldInteraction() { ActionLangCode = "confession:block-interaction-add-glass", MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl", Itemstacks = displayStack == null ? null : new[] { displayStack } }];
-                }
-                else if (forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Collectible?.Code?.PathStartsWith("glasspane-") == true && originblock != "none" && blockCodeWithGlass != null)
-                {
-                    displayStack = GetRequiredDisplayStack(forPlayer, glassSize);
-                    return [new WorldInteraction() { ActionLangCode = "confession:block-interaction-add-glass", MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl", Itemstacks = displayStack == null ? null : new[] { displayStack } }];
-                }
-                else if (forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack?.Collectible?.Code?.PathStartsWith("plank-") == true && originblock != "none" && blockCodeWithLintel != null)
-                {
-                    displayStack = GetRequiredDisplayStack(forPlayer, glassSize);
-                    return [new WorldInteraction() { ActionLangCode = "confession:block-interaction-add-plank", MouseButton = EnumMouseButton.Right, HotKeyCode = "ctrl", Itemstacks = displayStack == null ? null : new[] { displayStack } }];
-                }
-                else { return base.GetPlacedBlockInteractionHelp(world, selection, forPlayer, ref handling); } 
-
-        }
-        private BlockPos ResolveControlPos(IWorldAccessor world, BlockSelection blockSel)
-        {
-            if (blockSel == null) return null;
-
-            BlockPos pos = blockSel.Position.Copy();
-            Block dummyBlock = world.BlockAccessor.GetBlock(pos);
-
-            IMultiblockOffset mbo =
-                dummyBlock as IMultiblockOffset
-                ?? dummyBlock?.GetInterface<IMultiblockOffset>(world, pos);
-
-            if (mbo != null)
+            // "fill" alone marks the archway as finished, the old "none" is removed.
+            arl.Variants.RemoveKeys(ArchwayMaterialRegistry.LegacyFillAttribute);
+            var values = new Dictionary<string, string> { [ArchwayMaterialRegistry.FillAttribute] = fill.Id };
+            if (be is BlockEntityConstructable constructable)
             {
-                pos = mbo.GetControlBlockPos(pos);
+                constructable.SetVariants(values);
+            }
+            else
+            {
+                arl.Variants.Set(values);
+                be.MarkDirty(true);
+            }
+        }
+
+        /// <summary>
+        /// Server: replaces the archway by the block with glass or planks. The material is taken right away from the slot
+        /// that was used (B6: older versions took it 100 ms later from the slot that was active then).
+        /// </summary>
+        private static void ReplaceArchway(IWorldAccessor world, IPlayer player, ItemSlot slot, BlockPos pos, Block newBlock, Dictionary<string, string> variants, int amount)
+        {
+            TakeMaterial(player, slot, amount);
+
+            world.BlockAccessor.SetBlock(newBlock.BlockId, pos);
+            world.BlockAccessor.MarkBlockDirty(pos);
+            world.BlockAccessor.TriggerNeighbourBlockUpdate(pos);
+
+            if (world.BlockAccessor.GetBlockEntity(pos) is BlockEntityConstructable newBe)
+            {
+                newBe.SetVariants(variants);
+                return;
             }
 
-            return pos;
+            // Should not happen: the block entity is created by SetBlock. Try once more a moment later.
+            world.Logger.Warning("[MedievalArchitecture] Archway at {0}: block entity not ready, setting its materials a moment later.", pos);
+            world.RegisterCallback(_ => (world.BlockAccessor.GetBlockEntity(pos) as BlockEntityConstructable)?.SetVariants(variants), 100);
         }
-        private ItemStack GetRequiredDisplayStack(IPlayer forPlayer, int amount)
+
+        /// <summary>B12: the archway block with glass or planks for this orientation. Null (and an error in the log) if it does not exist.</summary>
+        private Block? GetTargetBlock(IWorldAccessor world, string baseCode, string? orientation, BlockPos pos)
         {
-            var heldStack = forPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack;
-            if (heldStack == null) return null;
+            Block? target = string.IsNullOrEmpty(orientation) ? null : world.GetBlock(new AssetLocation(baseCode + "-" + orientation));
+            if (target == null && world.Side == EnumAppSide.Server)
+            {
+                world.Logger.Error("[MedievalArchitecture] Archway {0} at {1}: block \"{2}-{3}\" not found.", block.Code, pos, baseCode, orientation);
+            }
+            return target;
+        }
 
-            if (amount <= 0) return null;
+        private static Dictionary<string, string> CopyKeptVariants(Variants variants)
+        {
+            var result = new Dictionary<string, string>();
+            foreach (string key in KeptAttributes)
+            {
+                string? value = variants.Get(key);
+                if (!string.IsNullOrEmpty(value)) result[key] = value;
+            }
+            return result;
+        }
 
+        private static bool IsFinished(Variants variants)
+        {
+            return ArchwayMaterialRegistry.IsFinishedArchway(
+                variants.Get(ArchwayMaterialRegistry.FillAttribute),
+                variants.Get(ArchwayMaterialRegistry.LegacyFillAttribute));
+        }
+
+        /// <summary>Boards of the registry ("woods") that can be used for the door lintel. Null for anything else.</summary>
+        private static ArchwayMaterial? GetLintelWood(IWorldAccessor world, ItemStack stack)
+        {
+            ArchwayMaterialRegistry? registry = MedievalArchitectureModSystem.GetArchwayMaterials(world.Api);
+            if (registry == null) return null;
+            return registry.TryGetWoodByCode(stack.Collectible.Code, out ArchwayMaterial? wood) && wood.Buildable ? wood : null;
+        }
+
+        private static bool IsGlass(ItemStack stack)
+        {
+            string code = stack.Collectible.Code.ToString();
+            return code.StartsWith("confession:window-", StringComparison.Ordinal) || code.StartsWith("game:glasspane-", StringComparison.Ordinal);
+        }
+
+        private static ArchwayMaterial? GetBuildableFill(ArchwayMaterialRegistry registry, ItemStack stack)
+        {
+            if (stack.Block == null) return null;
+            return registry.TryGetFillByCode(stack.Collectible.Code, out ArchwayMaterial? fill) && fill.Buildable ? fill : null;
+        }
+
+        private static void TakeMaterial(IPlayer player, ItemSlot slot, int amount)
+        {
+            if (player.WorldData.CurrentGameMode == EnumGameMode.Creative) return;
+            slot.TakeOut(amount);
+            slot.MarkDirty();
+        }
+
+        private static void PlaySound(IWorldAccessor world, AssetLocation sound, BlockPos pos, IPlayer player)
+        {
+            if (world.Side == EnumAppSide.Client) world.PlaySoundAt(sound, pos, 0.5, player);
+        }
+
+        public override WorldInteraction[] GetPlacedBlockInteractionHelp(IWorldAccessor world, BlockSelection selection, IPlayer forPlayer, ref EnumHandling handling)
+        {
+            ItemStack? heldStack = forPlayer.InventoryManager?.ActiveHotbarSlot?.Itemstack;
+            Variants? variants = world.BlockAccessor.GetBlockEntity(ResolveControlPos(world, selection))?.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>()?.Variants;
+
+            if (heldStack == null || variants == null)
+            {
+                return base.GetPlacedBlockInteractionHelp(world, selection, forPlayer, ref handling);
+            }
+
+            if (!IsFinished(variants))
+            {
+                ArchwayMaterialRegistry? registry = MedievalArchitectureModSystem.GetArchwayMaterials(world.Api);
+                if (registry != null && GetBuildableFill(registry, heldStack) != null)
+                {
+                    return Help("confession:block-interaction-add-block", heldStack, glassSize);
+                }
+            }
+            else if (blockCodeWithLintel != null && GetLintelWood(world, heldStack) != null)
+            {
+                // B10: planks need lintelSize, not glassSize
+                return Help("confession:block-interaction-add-plank", heldStack, lintelSize);
+            }
+            else if (IsGlass(heldStack) && blockCodeWithGlass != null)
+            {
+                return Help("confession:block-interaction-add-glass", heldStack, glassSize);
+            }
+
+            return base.GetPlacedBlockInteractionHelp(world, selection, forPlayer, ref handling);
+        }
+
+        private static WorldInteraction[] Help(string langCode, ItemStack heldStack, int amount)
+        {
             ItemStack displayStack = heldStack.Clone();
             displayStack.StackSize = amount;
-            return displayStack;
+            return
+            [
+                new WorldInteraction
+                {
+                    ActionLangCode = langCode,
+                    MouseButton = EnumMouseButton.Right,
+                    HotKeyCode = "ctrl",
+                    Itemstacks = [displayStack]
+                }
+            ];
         }
-    }
 
-    internal static class ArchwayVariantDictionaryExtensions
-    {
-        /// <summary>Adds the fill material (if any), so that it is kept when glass or planks are added.</summary>
-        public static Dictionary<string, string> WithFill(this Dictionary<string, string> variants, string fill)
+        private static BlockPos ResolveControlPos(IWorldAccessor world, BlockSelection blockSel)
         {
-            if (!string.IsNullOrEmpty(fill)) variants[ArchwayMaterialRegistry.FillAttribute] = fill;
-            return variants;
+            BlockPos pos = blockSel.Position.Copy();
+            Block dummyBlock = world.BlockAccessor.GetBlock(pos);
+            IMultiblockOffset? mbo = dummyBlock as IMultiblockOffset ?? dummyBlock.GetInterface<IMultiblockOffset>(world, pos);
+            return mbo != null ? mbo.GetControlBlockPos(pos) : pos;
         }
     }
 }

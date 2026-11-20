@@ -28,6 +28,8 @@
       "name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
       "properties": {
         "name": {
+          "@fill-(rock|cobblestone|stonebricks|rockpolished|drystone|plaster|daub|claybricks|brickcourse|rammed|mudbrick)-.*::rock-*::glass-*": [["confession:archway-name-small-window", "game:block-{fill}", "rock-{rock}", "block-glass-{glass}"]],
+          "fill-*::rock-*::glass-*": [["confession:archway-name-small-window", "confession:archwayfill-{fill}", "rock-{rock}", "block-glass-{glass}"]],
           "style-*::rock-*::glass-*::originblock-rock": [
             "confession:block-arch_small-name1",
             "rock-{rock}",
@@ -66,6 +68,30 @@
           "*": ["confession:block-debug-noname"]
         },
         "description": {
+          "@fill-(rock|cobblestone|stonebricks|rockpolished|drystone|plaster|daub|claybricks|brickcourse|rammed|mudbrick)-.*::rock-*::glass-*": [
+            "confession:block-arch_small-description6",
+            "game:block-{fill}",
+            "confession:block-linebreak",
+            "confession:block-arch_small-description1",
+            "rock-{rock}",
+            "confession:block-arch_small-description2",
+            "confession:{style}",
+            "confession:block-arch_small-description4",
+            "block-glass-{glass}",
+            "confession:block-linebreak"
+          ],
+          "fill-*::rock-*::glass-*": [
+            "confession:block-arch_small-description6",
+            "confession:archwayfill-{fill}",
+            "confession:block-linebreak",
+            "confession:block-arch_small-description1",
+            "rock-{rock}",
+            "confession:block-arch_small-description2",
+            "confession:{style}",
+            "confession:block-arch_small-description4",
+            "block-glass-{glass}",
+            "confession:block-linebreak"
+          ],
           "style-*::rock-*::glass-*::originblock-*": [
             "confession:block-arch_small-description1",
             "rock-{rock}",

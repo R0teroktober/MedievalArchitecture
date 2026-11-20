@@ -3,6 +3,8 @@
   //
   // rims:  items (or blocks) that can be used as rim stones of an archway frame.
   // fills: blocks that can be used to fill (complete) an archway.
+  // woods: boards that can be used for the door lintel of an archway. Wood ids are plain wood names (no mod id),
+  //        because all mods share the vanilla wood names ("game:material-<wood>", "game:block/wood/debarked/<wood>").
   //
   // Every entry:
   //   code      Block/item code pattern. Placeholders like {rock} capture a part of the code.
@@ -14,11 +16,14 @@
   //   ledgeTexture  Fills only, optional: texture of the ledge of the big (3x3) archways, usually the
   //             "rock version" of the fill material.
   //             String or list, the first existing texture is used. Default: "texture".
-  //   name      Optional lang key for the material name. Default: name of the block/item.
   //   buildable Optional, default true. false = existing archways keep their look, but the material
   //             can no longer be used for new archways (use this instead of removing an entry).
   //
   // If several entries match the same block/item, the FIRST one wins. Put specific entries before general ones.
+  //
+  // Names (set in the archway block types, not here): vanilla fill ids are vanilla block codes, so the name of
+  // that block ("game:block-<id>") is shown. Fills of other mods need a lang entry "confession:archwayfill-<id>",
+  // otherwise "Modded material" is shown. Rim stones are named with the lang entry "game:rock-<id>".
   //
   // Entries WITHOUT "code" are legacy-only: they keep the look of archways built with older versions
   // (e.g. vanilla has a cobblestone texture for halite, but no halite cobblestone block). They can not be built
@@ -28,7 +33,7 @@
   //   {rock} = rim stone of the archway, {originblock} = old originblock value. "*" = any other value.
   //   A list means: the first fill that exists is used.
   //
-  // Other mods can add entries with a JSON patch (op "add", path "/fills/-" or "/rims/-").
+  // Other mods can add entries with a JSON patch (op "add", path "/fills/-", "/rims/-" or "/woods/-").
   "rims": [
     { "code": "game:stone-{rock}", "id": "{rock}", "texture": "game:block/stone/rock/{rock}1" }
   ],
@@ -42,15 +47,16 @@
       "ledgeTexture": ["game:block/stone/rock/{rock}3", "game:block/stone/rock/{rock}1"] },
     { "code": "game:rockpolished-{rock}", "id": "rockpolished-{rock}", "texture": "game:block/stone/polishedrock/{rock}",
       "ledgeTexture": ["game:block/stone/rock/{rock}3", "game:block/stone/rock/{rock}1"] },
+    { "code": "game:drystone-{rock}", "id": "drystone-{rock}", "texture": "game:block/stone/drystone/{rock}1",
+      "ledgeTexture": ["game:block/stone/rock/{rock}3", "game:block/stone/rock/{rock}1"] },
     { "code": "game:plaster-plain", "id": "plaster-plain", "texture": "game:block/stone/plaster/plain" },
-    { "code": "game:plaster-square", "id": "plaster-square", "texture": "game:block/stone/plaster/square" },
     { "code": "game:daub-{color}-{type}", "id": "daub-{color}-{type}", "texture": "game:block/clay/daub/{color}/{type}1" },
     { "code": "game:claybricks-good-fire", "id": "claybricks-good-fire", "texture": "game:block/clay/brick/four/running/fire1" },
     { "code": "game:claybricks-clinkerrough", "id": "claybricks-clinkerrough", "texture": "game:block/clay/brick/irregular/clinker/clinker1" },
     { "code": "game:claybricks-uneven-four-{pattern}-{color}", "id": "claybricks-uneven-four-{pattern}-{color}", "texture": "game:block/clay/brick/uneven/four/{pattern}/{color}1" },
-    { "code": "game:brickcourse-*-*-cream", "id": "brickcourse-cream", "texture": "game:block/clay/brick/four/running/cream1" },
-    { "code": "game:brickcourse-*-*-clinker", "id": "brickcourse-clinker", "texture": "game:block/clay/brick/four/running/clinker1" },
-    { "code": "game:brickcourse-*-*-{color}", "id": "brickcourse-{color}", "texture": "confession:block/stone/archwaymaterials/brickcourse-{color}" },
+    { "code": "game:brickcourse-*-*-cream", "id": "brickcourse-four-running-cream", "texture": "game:block/clay/brick/four/running/cream1" },
+    { "code": "game:brickcourse-*-*-clinker", "id": "brickcourse-four-running-clinker", "texture": "game:block/clay/brick/four/running/clinker1" },
+    { "code": "game:brickcourse-*-*-{color}", "id": "brickcourse-four-running-{color}", "texture": "confession:block/stone/archwaymaterials/brickcourse-{color}" },
     { "code": "game:rammed-light-{pattern}", "id": "rammed-light-{pattern}", "texture": "game:block/soil/rammed/light/{pattern}1" },
     { "code": "game:mudbrick-{type}", "id": "mudbrick-{type}", "texture": "game:block/soil/mudbrick/{type}1" },
     { "id": "cobblestone-halite", "texture": "game:block/stone/cobblestone/halite1",
@@ -61,6 +67,9 @@
       "ledgeTexture": ["game:block/stone/rock/tuff3", "game:block/stone/rock/tuff1"] },
     { "id": "rock-meteorite-iron", "texture": "game:block/stone/rock/meteorite-iron1",
       "ledgeTexture": ["game:block/stone/rock/meteorite-iron3", "game:block/stone/rock/meteorite-iron1"] }
+  ],
+  "woods": [
+    { "code": "game:plank-{wood}", "id": "{wood}", "texture": "game:block/wood/debarked/{wood}" }
   ],
   "legacyFills": {
     "rock": "rock-{rock}",
