@@ -39,9 +39,9 @@
         "textures": {
           "rock-none": {"rimstones": {"base": "game:block/transparent"}, "freshPlaster": {"base": "game:block/transparent"}, "gravel": {"base": "game:block/transparent"}},
           "state-*::rock-*": {
-            "rimstones": {"base": "game:block/stone/rock/{rock}1", "overlays": ["game:block/overlay/damagedstone1"]},
-            "gravel": {"base": "game:block/stone/agedbrick/{rock}1"},
-            "freshPlaster": {"base": "game:block/stone/rock/{rock}1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]}
+            "rimstones": {"base": "confession:block/archway/rim/{rock}", "overlays": ["game:block/overlay/damagedstone1"]},
+            "gravel": {"base": "confession:block/archway/rim/{rock}", "overlays": ["game:block/overlay/damagedstone2"]},
+            "freshPlaster": {"base": "confession:block/archway/rim/{rock}", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]}
           }
         },
         "shape": {"state-*::style-*": {"base": "confession:block/wood/frame/construction-s-{state}-{style}", "rotateYByType": {"*-east": 90, "*-south": 180, "*-west": 270}}},

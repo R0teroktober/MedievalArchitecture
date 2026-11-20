@@ -108,6 +108,7 @@
   "confession:block-interaction-add-block": "Add block to finish archway",
   "confession:block-interaction-add-glass": "Add window",
   "confession:block-interaction-add-plank": "Add plank to create a door lintel",
+  "confession:archwayframe-unknownrim": "The rim stones of this frame are unknown. Break the frame and build it again.",
   "confession:construction-drop-help-title": "Drops when constructed",
   "confession:construction-drop-help-text": "The empty frame will drop, when the archway is fully constructed",
 

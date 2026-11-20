@@ -127,9 +127,11 @@ namespace MedievalArchitecture
                     var beh = be.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>();
                     if (beh.Variants is null) return;
                     var oldVariants = beh.Variants.Clone();
-                    oldVariants.FindByVariant(styleCodeByType, out string style);
-                    oldVariants.FindByVariant(rockCodeByType, out string rock);
-                    oldVariants.FindByVariant(originblockCodeByType, out string originblock);
+                    // Read the stored values directly (the config lists do not know mod materials or "fill").
+                    string style = oldVariants.Get("style");
+                    string rock = oldVariants.Get(ArchwayMaterialRegistry.RimAttribute);
+                    string originblock = oldVariants.Get(ArchwayMaterialRegistry.LegacyFillAttribute);
+                    string fill = oldVariants.Get(ArchwayMaterialRegistry.FillAttribute);
                     var block = world.BlockAccessor.GetBlock(controlPos);
                     if (block == null) return;
            
@@ -142,12 +144,12 @@ namespace MedievalArchitecture
                         if (heldItemCode.StartsWith("game:plank-") && blockCodeWithLintel != null)
                         {
                             if (heldItem.StackSize < lintelSize) return;
-                            TryAddPlanks(world, byPlayer, be, beh, heldItem, orientation, style, rock, originblock, controlPos, lintelSize);
+                            TryAddPlanks(world, byPlayer, be, beh, heldItem, orientation, style, rock, originblock, fill, controlPos, lintelSize);
                         }
                         else if (heldItemCode.StartsWith("confession:window-") && blockCodeWithGlass != null || heldItemCode.StartsWith("game:glasspane-") && blockCodeWithGlass != null)
                         {
                             if (heldItem.StackSize < glassSize) return;
-                            TryAddGlass(world, byPlayer, be, beh, heldItem, orientation, style, rock, originblock, controlPos, glassSize);
+                            TryAddGlass(world, byPlayer, be, beh, heldItem, orientation, style, rock, originblock, fill, controlPos, glassSize);
                         }
                     }
                     else
@@ -206,7 +208,7 @@ namespace MedievalArchitecture
         }
 
 
-        private void TryAddPlanks(IWorldAccessor world, IPlayer player, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string orientation, string style, string rock, string originblock, BlockPos controlPos, int lintelSize)
+        private void TryAddPlanks(IWorldAccessor world, IPlayer player, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string orientation, string style, string rock, string originblock, string fill, BlockPos controlPos, int lintelSize)
         {
             // Item
             string heldItemCode = heldItem.Collectible.Code.ToString();
@@ -251,7 +253,7 @@ namespace MedievalArchitecture
                         { "rock", rock },
                         { "originblock", originblock },
                         { "wood", wood }
-                        });
+                        }.WithFill(fill));
                     }
                     else
                     {
@@ -259,6 +261,7 @@ namespace MedievalArchitecture
                         newBeh.Variants.Set("rock", rock);
                         newBeh.Variants.Set("originblock", originblock);
                         newBeh.Variants.Set("wood", wood);
+                        if (!string.IsNullOrEmpty(fill)) newBeh.Variants.Set(ArchwayMaterialRegistry.FillAttribute, fill);
                         newBe.MarkDirty(true);
 
                     }
@@ -269,7 +272,7 @@ namespace MedievalArchitecture
             
 
         }
-        private void TryAddGlass(IWorldAccessor world, IPlayer player, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string orientation, string style, string rock, string originblock,BlockPos controlPos, int glassSize)
+        private void TryAddGlass(IWorldAccessor world, IPlayer player, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes beh, ItemStack heldItem, string orientation, string style, string rock, string originblock, string fill, BlockPos controlPos, int glassSize)
         {
             // Item
             var glassVariants = Variants.FromStack(heldItem);
@@ -319,7 +322,7 @@ namespace MedievalArchitecture
                         { "rock", rock },
                         { "originblock", originblock },
                         {"glass", glass }
-                        });
+                        }.WithFill(fill));
                     }
                     else
                     {
@@ -327,6 +330,7 @@ namespace MedievalArchitecture
                         newBeh.Variants.Set("rock", rock);
                         newBeh.Variants.Set("originblock", originblock);
                         newBeh.Variants.Set("glass", glass);
+                        if (!string.IsNullOrEmpty(fill)) newBeh.Variants.Set(ArchwayMaterialRegistry.FillAttribute, fill);
                         newBe.MarkDirty(true);
 
                     }
@@ -384,8 +388,7 @@ namespace MedievalArchitecture
             // 3) Attribut prüfen
             if (beh is null) return base.GetPlacedBlockInteractionHelp(world, selection, forPlayer, ref handling); // 4) sonst keine Hilfe anzeigen
 
-                beh.Variants.FindByVariant(originblockCodeByType, out string originblock);
-                beh.Variants.FindByVariant(rockCodeByType, out string rock);
+                string originblock = beh.Variants.Get(ArchwayMaterialRegistry.LegacyFillAttribute);
 
                 if (originblock == "none")
                 {
@@ -445,5 +448,14 @@ namespace MedievalArchitecture
             return displayStack;
         }
     }
-    
+
+    internal static class ArchwayVariantDictionaryExtensions
+    {
+        /// <summary>Adds the fill material (if any), so that it is kept when glass or planks are added.</summary>
+        public static Dictionary<string, string> WithFill(this Dictionary<string, string> variants, string fill)
+        {
+            if (!string.IsNullOrEmpty(fill)) variants[ArchwayMaterialRegistry.FillAttribute] = fill;
+            return variants;
+        }
+    }
 }
