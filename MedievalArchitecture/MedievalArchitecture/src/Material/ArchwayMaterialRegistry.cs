@@ -80,7 +80,7 @@ namespace MedievalArchitecture
         private readonly Dictionary<string, ArchwayMaterial> fillsById = new();
         private readonly Dictionary<AssetLocation, ArchwayMaterial> rimsByCode = new();
         private readonly Dictionary<AssetLocation, ArchwayMaterial> fillsByCode = new();
-        private readonly Dictionary<string, string> legacyFills = new();
+        private readonly Dictionary<string, List<string>> legacyFills = new();
 
         public bool Loaded { get; private set; }
         public IReadOnlyCollection<ArchwayMaterial> Rims => rimsById.Values;
@@ -93,22 +93,27 @@ namespace MedievalArchitecture
 
         /// <summary>
         /// Translates the fill of an archway built before the registry existed into a fill id.
+        /// Several candidates may be listed, the first existing fill wins.
         /// Returns null if the archway is unfinished or no matching fill material exists.
         /// </summary>
         public string? ResolveLegacyFill(string? originblock, string? rock)
         {
             if (string.IsNullOrEmpty(originblock) || originblock == UnfinishedOriginblock) return null;
 
-            if (!legacyFills.TryGetValue(originblock, out string? template)
-                && !legacyFills.TryGetValue(AnyLegacyKey, out template))
+            if (!legacyFills.TryGetValue(originblock, out List<string>? templates)
+                && !legacyFills.TryGetValue(AnyLegacyKey, out templates))
             {
                 return null;
             }
 
-            if (template.Contains("{rock}") && string.IsNullOrEmpty(rock)) return null;
+            foreach (string template in templates)
+            {
+                if (template.Contains("{rock}") && string.IsNullOrEmpty(rock)) continue;
 
-            string id = template.Replace("{rock}", rock ?? "").Replace("{originblock}", originblock);
-            return fillsById.ContainsKey(id) ? id : null;
+                string id = template.Replace("{rock}", rock ?? "").Replace("{originblock}", originblock);
+                if (fillsById.ContainsKey(id)) return id;
+            }
+            return null;
         }
 
         public void Load(ICoreAPI api)
@@ -131,9 +136,10 @@ namespace MedievalArchitecture
 
             if (file.LegacyFills != null)
             {
-                foreach ((string key, string value) in file.LegacyFills)
+                foreach ((string key, JToken value) in file.LegacyFills)
                 {
-                    if (!string.IsNullOrWhiteSpace(key) && !string.IsNullOrWhiteSpace(value)) legacyFills[key] = value;
+                    List<string> templates = ReadTextureList(value);
+                    if (!string.IsNullOrWhiteSpace(key) && templates.Count > 0) legacyFills[key] = templates;
                 }
             }
 
@@ -212,6 +218,13 @@ namespace MedievalArchitecture
             foreach (ArchwayMaterialEntry entry in entries)
             {
                 stats.Entries++;
+
+                // Entries without "code" are legacy-only materials (see ResolveLegacyOnlyEntry).
+                if (entry != null && string.IsNullOrWhiteSpace(entry.Code))
+                {
+                    ResolveLegacyOnlyEntry(api, entry, kind, kindName, byId, stats);
+                    continue;
+                }
 
                 if (entry == null || string.IsNullOrWhiteSpace(entry.Code) || string.IsNullOrWhiteSpace(entry.Id) || string.IsNullOrWhiteSpace(entry.Texture))
                 {
@@ -314,6 +327,48 @@ namespace MedievalArchitecture
                     api.Logger.Notification("{0} Archway {1} entry {2} matches no loaded block or item.", LogPrefix, kindName, entry.Code);
                 }
             }
+        }
+
+        /// <summary>
+        /// An entry without "code" describes a material that exists only so that old archways keep their look
+        /// (e.g. vanilla has a cobblestone texture for halite, but no halite cobblestone block). It can never be built.
+        /// No placeholders are allowed here.
+        /// </summary>
+        private static void ResolveLegacyOnlyEntry(ICoreAPI api, ArchwayMaterialEntry entry, ArchwayMaterialKind kind, string kindName,
+            Dictionary<string, ArchwayMaterial> byId, LoadStats stats)
+        {
+            string id = entry.Id?.Trim() ?? "";
+            string textureText = entry.Texture?.Trim() ?? "";
+            List<string> ledgeTemplates = ReadTextureList(entry.LedgeTexture);
+
+            if (id.Length == 0 || textureText.Length == 0 || !ValidIdRegex.IsMatch(id)
+                || PlaceholderRegex.IsMatch(id + " " + textureText + " " + string.Join(" ", ledgeTemplates)))
+            {
+                stats.Invalid++;
+                api.Logger.Warning("{0} Archway {1} entry without code skipped: needs a valid \"id\" and \"texture\", placeholders are not allowed.", LogPrefix, kindName);
+                return;
+            }
+
+            // A real (buildable) material with the same id always wins.
+            if (byId.ContainsKey(id)) return;
+
+            AssetLocation texture = AssetLocation.Create(textureText);
+            if (!TextureExists(api, texture))
+            {
+                stats.MissingTexture++;
+                api.Logger.Warning("{0} Archway {1} \"{2}\" (legacy only) skipped: texture {3} not found.", LogPrefix, kindName, id, texture);
+                return;
+            }
+
+            var material = new ArchwayMaterial(id, kind, texture, string.IsNullOrWhiteSpace(entry.Name) ? null : entry.Name.Trim(), buildable: false);
+            foreach (string candidate in ledgeTemplates)
+            {
+                AssetLocation ledge = AssetLocation.Create(candidate);
+                if (!TextureExists(api, ledge)) continue;
+                material.LedgeTexture = ledge;
+                break;
+            }
+            byId[id] = material;
         }
 
         /// <summary>
@@ -447,8 +502,9 @@ namespace MedievalArchitecture
         [JsonProperty("fills")]
         public List<ArchwayMaterialEntry>? Fills { get; set; }
 
+        /// <summary>Old fill category -> fill id (string) or list of fill ids (first existing wins).</summary>
         [JsonProperty("legacyFills")]
-        public Dictionary<string, string>? LegacyFills { get; set; }
+        public Dictionary<string, JToken>? LegacyFills { get; set; }
     }
 
     public class ArchwayMaterialEntry

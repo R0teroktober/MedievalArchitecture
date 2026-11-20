@@ -20,8 +20,13 @@
   //
   // If several entries match the same block/item, the FIRST one wins. Put specific entries before general ones.
   //
+  // Entries WITHOUT "code" are legacy-only: they keep the look of archways built with older versions
+  // (e.g. vanilla has a cobblestone texture for halite, but no halite cobblestone block). They can not be built
+  // and must not use placeholders.
+  //
   // legacyFills: maps the fill of archways built before the registry ("originblock") to a fill id.
   //   {rock} = rim stone of the archway, {originblock} = old originblock value. "*" = any other value.
+  //   A list means: the first fill that exists is used.
   //
   // Other mods can add entries with a JSON patch (op "add", path "/fills/-" or "/rims/-").
   "rims": [
@@ -43,13 +48,24 @@
     { "code": "game:claybricks-good-fire", "id": "claybricks-good-fire", "texture": "game:block/clay/brick/four/running/fire1" },
     { "code": "game:claybricks-clinkerrough", "id": "claybricks-clinkerrough", "texture": "game:block/clay/brick/irregular/clinker/clinker1" },
     { "code": "game:claybricks-uneven-four-{pattern}-{color}", "id": "claybricks-uneven-four-{pattern}-{color}", "texture": "game:block/clay/brick/uneven/four/{pattern}/{color}1" },
+    { "code": "game:brickcourse-*-*-cream", "id": "brickcourse-cream", "texture": "game:block/clay/brick/four/running/cream1" },
+    { "code": "game:brickcourse-*-*-clinker", "id": "brickcourse-clinker", "texture": "game:block/clay/brick/four/running/clinker1" },
+    { "code": "game:brickcourse-*-*-{color}", "id": "brickcourse-{color}", "texture": "confession:block/stone/archwaymaterials/brickcourse-{color}" },
     { "code": "game:rammed-light-{pattern}", "id": "rammed-light-{pattern}", "texture": "game:block/soil/rammed/light/{pattern}1" },
-    { "code": "game:mudbrick-{type}", "id": "mudbrick-{type}", "texture": "game:block/soil/mudbrick/{type}1" }
+    { "code": "game:mudbrick-{type}", "id": "mudbrick-{type}", "texture": "game:block/soil/mudbrick/{type}1" },
+    { "id": "cobblestone-halite", "texture": "game:block/stone/cobblestone/halite1",
+      "ledgeTexture": ["game:block/stone/rock/halite3", "game:block/stone/rock/halite1"] },
+    { "id": "cobblestone-scoria", "texture": "game:block/stone/cobblestone/scoria1",
+      "ledgeTexture": ["game:block/stone/rock/scoria3", "game:block/stone/rock/scoria1"] },
+    { "id": "cobblestone-tuff", "texture": "game:block/stone/cobblestone/tuff1",
+      "ledgeTexture": ["game:block/stone/rock/tuff3", "game:block/stone/rock/tuff1"] },
+    { "id": "rock-meteorite-iron", "texture": "game:block/stone/rock/meteorite-iron1",
+      "ledgeTexture": ["game:block/stone/rock/meteorite-iron3", "game:block/stone/rock/meteorite-iron1"] }
   ],
   "legacyFills": {
     "rock": "rock-{rock}",
-    "cobblestone": "cobblestone-{rock}",
-    "brick": "stonebricks-{rock}",
+    "cobblestone": ["cobblestone-{rock}", "rock-{rock}"],
+    "brick": ["stonebricks-{rock}", "rock-{rock}"],
     "plaster": "plaster-plain",
     "*": "daub-{originblock}-normal"
   }
