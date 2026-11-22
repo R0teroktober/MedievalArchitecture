@@ -84,7 +84,7 @@ With Config lib installed, whole groups of blocks can be switched off in game: a
 
 ## For modders
 
-How to add materials, use the rim stone registry for your own blocks or define gates: [docs/MODDING.md](docs/MODDING.md).
+How to add materials, use the rim stone registry for your own blocks or define gates: [docs/Modding.md](docs/Modding.md).
 
 ## Credits
 
