@@ -1,6 +1,7 @@
 ﻿using AttributeRenderingLibrary;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
@@ -14,6 +15,7 @@ namespace MedievalArchitecture
     /// Finished archway. Building steps (ctrl + right click):
     /// boards (registry "woods") -> door lintel (block "blockCodeWithLintel"), glass pane or window -> window (block "blockCodeWithGlass").
     /// Archways left unfinished by older versions (originblock "none") can be finished with a fill block (registry "fills").
+    /// Blocks whose textures do not know "fill" yet (tiny windows, until V7) are finished the old way: the held block sets "originblock".
     /// </summary>
     public class BlockBehaviorArchway(Block block) : BlockBehavior(block), IInteractable
     {
@@ -35,6 +37,8 @@ namespace MedievalArchitecture
         private int glassSize;
         private int lintelSize;
         private Dictionary<string, string> glassCodeByType = new();
+        /// <summary>Cached: true if the ARL textures of this block have a "fill-*" entry.</summary>
+        private bool? supportsFill;
 
         private AssetLocation finishSound = new AssetLocation();
         private AssetLocation soundAddWood = new AssetLocation();
@@ -106,7 +110,8 @@ namespace MedievalArchitecture
 
             if (!IsFinished(arl.Variants))
             {
-                TryFinish(world, byPlayer, slot, heldStack, be, arl, controlPos);
+                if (SupportsFill()) TryFinish(world, byPlayer, slot, heldStack, be, arl, controlPos);
+                else TryFinishLegacy(world, byPlayer, slot, heldStack, be, arl, controlPos);
                 return;
             }
 
@@ -194,6 +199,62 @@ namespace MedievalArchitecture
                 arl.Variants.Set(values);
                 be.MarkDirty(true);
             }
+        }
+
+        /// <summary>
+        /// Finishes a block whose textures do not know "fill" yet (tiny windows): the held block sets the old fill category
+        /// "originblock" (rock, cobblestone, brick, plaster or the daub color), like before V1.
+        /// </summary>
+        private void TryFinishLegacy(IWorldAccessor world, IPlayer player, ItemSlot slot, ItemStack heldStack, BlockEntity be, BlockEntityBehaviorShapeTexturesFromAttributes arl, BlockPos controlPos)
+        {
+            string? originblock = GetLegacyFill(heldStack);
+            int amount = glassSize;
+            if (originblock == null || heldStack.StackSize < amount) return;
+
+            PlaySound(world, finishSound, controlPos, player);
+            if (world.Side != EnumAppSide.Server) return;
+
+            TakeMaterial(player, slot, amount);
+
+            var values = new Dictionary<string, string> { [ArchwayMaterialRegistry.LegacyFillAttribute] = originblock };
+            if (be is BlockEntityConstructable constructable)
+            {
+                constructable.SetVariants(values);
+            }
+            else
+            {
+                arl.Variants.Set(values);
+                be.MarkDirty(true);
+            }
+        }
+
+        /// <summary>Old fill category ("originblock") of a vanilla block, or null if the block cannot be used.</summary>
+        private static string? GetLegacyFill(ItemStack stack)
+        {
+            if (stack.Block == null || stack.Collectible.Code.Domain != "game") return null;
+            string path = stack.Collectible.Code.Path;
+            if (path.StartsWith("rock-", StringComparison.Ordinal)) return "rock";
+            if (path.StartsWith("cobblestone-", StringComparison.Ordinal)) return "cobblestone";
+            if (path.StartsWith("stonebricks-", StringComparison.Ordinal)) return "brick";
+            if (path.StartsWith("plaster-", StringComparison.Ordinal)) return "plaster";
+            if (path.StartsWith("daub-", StringComparison.Ordinal))
+            {
+                // daub-{color}-{normal|cracked|wattle}
+                int first = path.IndexOf('-');
+                int last = path.LastIndexOf('-');
+                if (last > first + 1) return path.Substring(first + 1, last - first - 1);
+            }
+            return null;
+        }
+
+        private bool SupportsFill()
+        {
+            if (supportsFill == null)
+            {
+                Dictionary<string, Dictionary<string, CompositeTexture>>? textures = block.GetBehavior<BlockBehaviorShapeTexturesFromAttributes>()?.texturesByType;
+                supportsFill = textures != null && textures.Keys.Any(k => k.StartsWith(ArchwayMaterialRegistry.FillAttribute + "-", StringComparison.Ordinal));
+            }
+            return supportsFill.Value;
         }
 
         /// <summary>
@@ -292,11 +353,17 @@ namespace MedievalArchitecture
 
             if (!IsFinished(variants))
             {
-                ArchwayMaterialRegistry? registry = MedievalArchitectureModSystem.GetArchwayMaterials(world.Api);
-                if (registry != null && GetBuildableFill(registry, heldStack) != null)
+                bool usable;
+                if (SupportsFill())
                 {
-                    return Help("confession:block-interaction-add-block", heldStack, glassSize);
+                    ArchwayMaterialRegistry? registry = MedievalArchitectureModSystem.GetArchwayMaterials(world.Api);
+                    usable = registry != null && GetBuildableFill(registry, heldStack) != null;
                 }
+                else
+                {
+                    usable = GetLegacyFill(heldStack) != null;
+                }
+                if (usable) return Help("confession:block-interaction-add-block", heldStack, glassSize);
             }
             else if (blockCodeWithLintel != null && GetLintelWood(world, heldStack) != null)
             {

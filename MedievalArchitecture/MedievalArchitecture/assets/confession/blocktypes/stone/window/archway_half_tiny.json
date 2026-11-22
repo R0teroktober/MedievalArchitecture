@@ -14,6 +14,7 @@
   "entityClass": "BlockEntityConstructable",
   "variantgroups": [{"code": "side", "loadFromProperties": "abstract/horizontalorientation"}],
   "attributes": {
+    "creativeStacksByRim": true,
     "handbook": {
       "groupBy": ["arch_half_tiny-*"],
       "excludeByType": {"west": true, "east": true, "south": true},
@@ -31,6 +32,8 @@
       "name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
       "properties": {
         "name": {
+          "@fill-(rock|cobblestone|stonebricks|rockpolished|drystone|plaster|daub|claybricks|brickcourse|rammed|mudbrick)-.*::rock-*": [["confession:archway-name-tiny", "game:block-{fill}", "rock-{rock}"]],
+          "fill-*::rock-*": [["confession:archway-name-tiny", "confession:archwayfill-{fill}", "rock-{rock}"]],
           "originblock-none::rock-*": ["confession:block-tiny-construction", "rock-{rock}", "confession:block-window-name2"],
           "style-*::rock-*::originblock-rock": ["confession:block-arch_tiny-name1", "rock-{rock}", "confession:originblock-{originblock}", "confession:block-arch_tiny-name2"],
           "style-*::rock-*::originblock-cobblestone": ["confession:block-arch_tiny-name1", "rock-{rock}", "confession:originblock-{originblock}", "confession:block-arch_tiny-name2"],
@@ -39,6 +42,26 @@
           "*": ["confession:block-debug-noname"]
         },
         "description": {
+          "@fill-(rock|cobblestone|stonebricks|rockpolished|drystone|plaster|daub|claybricks|brickcourse|rammed|mudbrick)-.*::rock-*": [
+            "confession:block-arch_small-description6",
+            "game:block-{fill}",
+            "confession:block-linebreak",
+            "confession:block-arch_small-description1",
+            "rock-{rock}",
+            "confession:block-arch_small-description2",
+            "confession:{style}",
+            "confession:block-arch_small-description3"
+          ],
+          "fill-*::rock-*": [
+            "confession:block-arch_small-description6",
+            "confession:archwayfill-{fill}",
+            "confession:block-linebreak",
+            "confession:block-arch_small-description1",
+            "rock-{rock}",
+            "confession:block-arch_small-description2",
+            "confession:{style}",
+            "confession:block-arch_small-description3"
+          ],
           "style-*::rock-*::originblock-*": [
             "confession:block-arch_small-description1",
             "rock-{rock}",
@@ -49,12 +72,18 @@
           "*": ["confession:block-debug-nodescription"]
         },
         "textures": {
+          "fill-*::rock-*": {
+            "material": {"base": "confession:block/archway/fill/{fill}"},
+            "rim": {"base": "confession:block/archway/rim/{rock}", "overlays": ["game:block/overlay/crackedcobblestone1"]},
+            "plaster": {"base": "confession:block/archway/rim/{rock}", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
+            "inside": {"base": "confession:block/archway/rim/{rock}"}
+          },
           "style-*::rock-*::originblock-none": {
             "material": {"base": "game:block/wood/debarked/aged"},
-            "rim": {"base": "game:block/stone/rock/{rock}1", "overlays": ["game:block/overlay/crackedcobblestone1"]},
+            "rim": {"base": "confession:block/archway/rim/{rock}", "overlays": ["game:block/overlay/crackedcobblestone1"]},
             "putty": {"base": "game:block/wood/barrel/mortar"},
             "black": {"base": "game:block/clay/ceramic"},
-            "inside": {"base": "game:block/stone/cobblestone/{rock}1"},
+            "inside": {"base": "confession:block/archway/rim/{rock}"},
             "frame": {"base": "game:block/wood/planks/generic"}
           },
 
@@ -62,34 +91,35 @@
             "material": {"base": "game:block/stone/plaster/plain"},
             "rim": {"base": "game:block/stone/rock/{rock}1", "overlays": ["game:block/overlay/crackedcobblestone1"]},
             "plaster": {"base": "game:block/stone/rock/{rock}1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
-            "inside": {"base": "game:block/stone/cobblestone/{rock}1"}
+            "inside": {"base": "game:block/stone/rock/{rock}1"}
           },
           "style-*::rock-*::originblock-rock": {
             "material": {"base": "game:block/stone/rock/{rock}1"},
             "rim": {"base": "game:block/stone/rock/{rock}1", "overlays": ["game:block/overlay/crackedcobblestone1"]},
             "plaster": {"base": "game:block/stone/rock/{rock}1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
-            "inside": {"base": "game:block/stone/cobblestone/{rock}1"}
+            "inside": {"base": "game:block/stone/rock/{rock}1"}
           },
           "style-*::rock-*::originblock-cobblestone": {
             "material": {"base": "game:block/stone/cobblestone/{rock}1"},
             "rim": {"base": "game:block/stone/rock/{rock}1", "overlays": ["game:block/overlay/crackedcobblestone1"]},
             "plaster": {"base": "game:block/stone/rock/{rock}1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
-            "inside": {"base": "game:block/stone/cobblestone/{rock}1"}
+            "inside": {"base": "game:block/stone/rock/{rock}1"}
           },
           "style-*::rock-*::originblock-brick": {
             "material": {"base": "game:block/stone/brick/{rock}1"},
             "rim": {"base": "game:block/stone/rock/{rock}1", "overlays": ["game:block/overlay/crackedcobblestone1"]},
             "plaster": {"base": "game:block/stone/rock/{rock}1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
-            "inside": {"base": "game:block/stone/cobblestone/{rock}1"}
+            "inside": {"base": "game:block/stone/rock/{rock}1"}
           },
           "style-*::rock-*::originblock-*": {
             "material": {"base": "game:block/clay/daub/{originblock}/normal1"},
             "rim": {"base": "game:block/stone/rock/{rock}1", "overlays": ["game:block/overlay/crackedcobblestone1"]},
             "plaster": {"base": "game:block/stone/rock/{rock}1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
-            "inside": {"base": "game:block/stone/cobblestone/{rock}1"}
+            "inside": {"base": "game:block/stone/rock/{rock}1"}
           }
         },
         "shape": {
+          "fill-*::style-*": {"base": "confession:block/stone/window-t-{style}", "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
           "originblock-none::style-*": {"base": "confession:block/wood/frame/construction-t-{style}", "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
           "originblock-*::style-*": {"base": "confession:block/stone/window-t-{style}", "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}}
         },
@@ -127,26 +157,8 @@
       {
         "tabs": ["confession", "construction", "general"],
         "stacks": [
-          // type e rock
-          {"type": "block", "code": "arch_half_tiny-north", "attributes": {"types": {"originblock": "none", "rock": "andesite", "style": "e"}}},
-          {"type": "block", "code": "arch_half_tiny-north", "attributes": {"types": {"originblock": "none", "rock": "basalt", "style": "e"}}},
-          {"type": "block", "code": "arch_half_tiny-north", "attributes": {"types": {"originblock": "none", "rock": "bauxite", "style": "e"}}},
-          {"type": "block", "code": "arch_half_tiny-north", "attributes": {"types": {"originblock": "none", "rock": "chalk", "style": "e"}}},
-          {"type": "block", "code": "arch_half_tiny-north", "attributes": {"types": {"originblock": "none", "rock": "chert", "style": "e"}}},
-          {"type": "block", "code": "arch_half_tiny-north", "attributes": {"types": {"originblock": "none", "rock": "claystone", "style": "e"}}},
-          {"type": "block", "code": "arch_half_tiny-north", "attributes": {"types": {"originblock": "none", "rock": "conglomerate", "style": "e"}}},
-          {"type": "block", "code": "arch_half_tiny-north", "attributes": {"types": {"originblock": "none", "rock": "granite", "style": "e"}}},
-          {"type": "block", "code": "arch_half_tiny-north", "attributes": {"types": {"originblock": "none", "rock": "greenmarble", "style": "e"}}},
-          {"type": "block", "code": "arch_half_tiny-north", "attributes": {"types": {"originblock": "none", "rock": "kimberlite", "style": "e"}}},
-          {"type": "block", "code": "arch_half_tiny-north", "attributes": {"types": {"originblock": "none", "rock": "limestone", "style": "e"}}},
-          {"type": "block", "code": "arch_half_tiny-north", "attributes": {"types": {"originblock": "none", "rock": "peridotite", "style": "e"}}},
-          {"type": "block", "code": "arch_half_tiny-north", "attributes": {"types": {"originblock": "none", "rock": "phyllite", "style": "e"}}},
-          {"type": "block", "code": "arch_half_tiny-north", "attributes": {"types": {"originblock": "none", "rock": "redmarble", "style": "e"}}},
-          {"type": "block", "code": "arch_half_tiny-north", "attributes": {"types": {"originblock": "none", "rock": "sandstone", "style": "e"}}},
-          {"type": "block", "code": "arch_half_tiny-north", "attributes": {"types": {"originblock": "none", "rock": "shale", "style": "e"}}},
-          {"type": "block", "code": "arch_half_tiny-north", "attributes": {"types": {"originblock": "none", "rock": "slate", "style": "e"}}},
-          {"type": "block", "code": "arch_half_tiny-north", "attributes": {"types": {"originblock": "none", "rock": "suevite", "style": "e"}}},
-          {"type": "block", "code": "arch_half_tiny-north", "attributes": {"types": {"originblock": "none", "rock": "whitemarble", "style": "e"}}}
+          // Templates: one stack per rim stone of the archway material registry is created from each entry (attribute creativeStacksByRim).
+          {"type": "block", "code": "arch_half_tiny-north", "attributes": {"types": {"originblock": "none", "rock": "granite", "style": "e"}}}
         ]
       }
     ]

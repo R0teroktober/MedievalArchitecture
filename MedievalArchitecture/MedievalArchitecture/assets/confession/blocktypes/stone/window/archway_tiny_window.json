@@ -31,6 +31,8 @@
       "name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
       "properties": {
         "name": {
+          "@fill-(rock|cobblestone|stonebricks|rockpolished|drystone|plaster|daub|claybricks|brickcourse|rammed|mudbrick)-.*::rock-*::glass-*": [["confession:archway-name-tiny-window", "game:block-{fill}", "rock-{rock}", "block-glass-{glass}"]],
+          "fill-*::rock-*::glass-*": [["confession:archway-name-tiny-window", "confession:archwayfill-{fill}", "rock-{rock}", "block-glass-{glass}"]],
           "style-*::rock-*::glass-*::originblock-rock": [
             "confession:block-arch_tiny-name1",
             "rock-{rock}",
@@ -69,6 +71,30 @@
           "*": ["confession:block-debug-noname"]
         },
         "description": {
+          "@fill-(rock|cobblestone|stonebricks|rockpolished|drystone|plaster|daub|claybricks|brickcourse|rammed|mudbrick)-.*::rock-*::glass-*": [
+            "confession:block-arch_small-description6",
+            "game:block-{fill}",
+            "confession:block-linebreak",
+            "confession:block-arch_small-description1",
+            "rock-{rock}",
+            "confession:block-arch_small-description2",
+            "confession:{style}",
+            "confession:block-arch_small-description4",
+            "block-glass-{glass}",
+            "confession:block-linebreak"
+          ],
+          "fill-*::rock-*::glass-*": [
+            "confession:block-arch_small-description6",
+            "confession:archwayfill-{fill}",
+            "confession:block-linebreak",
+            "confession:block-arch_small-description1",
+            "rock-{rock}",
+            "confession:block-arch_small-description2",
+            "confession:{style}",
+            "confession:block-arch_small-description4",
+            "block-glass-{glass}",
+            "confession:block-linebreak"
+          ],
           "style-*::rock-*::glass-*::originblock-*": [
             "confession:block-arch_small-description1",
             "rock-{rock}",
@@ -81,13 +107,29 @@
           "*": ["confession:block-debug-nodescription"]
         },
         "textures": {
+          "fill-*::style-a::rock-*::glass-*": {
+            "material": {"base": "confession:block/archway/fill/{fill}"},
+            "rim": {"base": "confession:block/archway/rim/{rock}", "blendedOverlays": [{"base": "game:block/overlay/crackedcobblestone1", "blendMode": "Overlay"}]},
+            "glass": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "confession:block/glass/leadedround", "blendMode": "Overlay"}]},
+            "glass-inside": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "game:block/overlay/dust-sparse", "blendMode": "Overlay"}]},
+            "plaster": {"base": "confession:block/archway/rim/{rock}", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
+            "inside": {"base": "confession:block/archway/rim/{rock}"}
+          },
+          "fill-*::rock-*::glass-*": {
+            "material": {"base": "confession:block/archway/fill/{fill}"},
+            "rim": {"base": "confession:block/archway/rim/{rock}", "blendedOverlays": [{"base": "game:block/overlay/crackedcobblestone1", "blendMode": "Overlay"}]},
+            "glass": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "confession:block/glass/window-middle", "blendMode": "Overlay"}]},
+            "glass-inside": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "game:block/overlay/dust-sparse", "blendMode": "Overlay"}]},
+            "plaster": {"base": "confession:block/archway/rim/{rock}", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
+            "inside": {"base": "confession:block/archway/rim/{rock}"}
+          },
           "style-a::rock-*::glass-*::originblock-plaster": {
             "material": {"base": "game:block/stone/plaster/plain"},
             "rim": {"base": "game:block/stone/rock/{rock}1", "blendedOverlays": [{"base": "game:block/overlay/crackedcobblestone1", "blendMode": "Overlay"}]},
             "glass": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "confession:block/glass/leadedround", "blendMode": "Overlay"}]},
             "glass-inside": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "game:block/overlay/dust-sparse", "blendMode": "Overlay"}]},
             "plaster": {"base": "game:block/stone/rock/{rock}1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
-            "inside": {"base": "game:block/stone/cobblestone/{rock}1"}
+            "inside": {"base": "game:block/stone/rock/{rock}1"}
           },
 
           "style-a::rock-*::glass-*::originblock-rock": {
@@ -96,7 +138,7 @@
             "glass": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "confession:block/glass/leadedround", "blendMode": "Overlay"}]},
             "glass-inside": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "game:block/overlay/dust-sparse", "blendMode": "Overlay"}]},
             "plaster": {"base": "game:block/stone/rock/{rock}1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
-            "inside": {"base": "game:block/stone/cobblestone/{rock}1"}
+            "inside": {"base": "game:block/stone/rock/{rock}1"}
           },
           "style-a::rock-*::glass-*::originblock-cobblestone": {
             "material": {"base": "game:block/stone/cobblestone/{rock}1"},
@@ -104,7 +146,7 @@
             "glass": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "confession:block/glass/leadedround", "blendMode": "Overlay"}]},
             "glass-inside": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "game:block/overlay/dust-sparse", "blendMode": "Overlay"}]},
             "plaster": {"base": "game:block/stone/rock/{rock}1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
-            "inside": {"base": "game:block/stone/cobblestone/{rock}1"}
+            "inside": {"base": "game:block/stone/rock/{rock}1"}
           },
           "style-a::rock-*::glass-*::originblock-brick": {
             "material": {"base": "game:block/stone/brick/{rock}1"},
@@ -112,7 +154,7 @@
             "glass": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "confession:block/glass/leadedround", "blendMode": "Overlay"}]},
             "glass-inside": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "game:block/overlay/dust-sparse", "blendMode": "Overlay"}]},
             "plaster": {"base": "game:block/stone/rock/{rock}1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
-            "inside": {"base": "game:block/stone/cobblestone/{rock}1"}
+            "inside": {"base": "game:block/stone/rock/{rock}1"}
           },
           "style-a::rock-*::glass-*::originblock-*": {
             "material": {"base": "game:block/clay/daub/{originblock}/normal1"},
@@ -120,7 +162,7 @@
             "glass": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "confession:block/glass/leadedround", "blendMode": "Overlay"}]},
             "glass-inside": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "game:block/overlay/dust-sparse", "blendMode": "Overlay"}]},
             "plaster": {"base": "game:block/stone/rock/{rock}1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
-            "inside": {"base": "game:block/stone/cobblestone/{rock}1"}
+            "inside": {"base": "game:block/stone/rock/{rock}1"}
           },
           "style-*::rock-*::glass-*::originblock-plaster": {
             "material": {"base": "game:block/stone/plaster/plain"},
@@ -128,7 +170,7 @@
             "glass": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "confession:block/glass/window-middle", "blendMode": "Overlay"}]},
             "glass-inside": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "game:block/overlay/dust-sparse", "blendMode": "Overlay"}]},
             "plaster": {"base": "game:block/stone/rock/{rock}1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
-            "inside": {"base": "game:block/stone/cobblestone/{rock}1"}
+            "inside": {"base": "game:block/stone/rock/{rock}1"}
           },
 
           "style-*::rock-*::glass-*::originblock-rock": {
@@ -137,7 +179,7 @@
             "glass": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "confession:block/glass/window-middle", "blendMode": "Overlay"}]},
             "glass-inside": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "game:block/overlay/dust-sparse", "blendMode": "Overlay"}]},
             "plaster": {"base": "game:block/stone/rock/{rock}1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
-            "inside": {"base": "game:block/stone/cobblestone/{rock}1"}
+            "inside": {"base": "game:block/stone/rock/{rock}1"}
           },
           "style-*::rock-*::glass-*::originblock-cobblestone": {
             "material": {"base": "game:block/stone/cobblestone/{rock}1"},
@@ -145,7 +187,7 @@
             "glass": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "confession:block/glass/window-middle", "blendMode": "Overlay"}]},
             "glass-inside": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "game:block/overlay/dust-sparse", "blendMode": "Overlay"}]},
             "plaster": {"base": "game:block/stone/rock/{rock}1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
-            "inside": {"base": "game:block/stone/cobblestone/{rock}1"}
+            "inside": {"base": "game:block/stone/rock/{rock}1"}
           },
           "style-*::rock-*::glass-*::originblock-brick": {
             "material": {"base": "game:block/stone/brick/{rock}1"},
@@ -153,7 +195,7 @@
             "glass": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "confession:block/glass/window-middle", "blendMode": "Overlay"}]},
             "glass-inside": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "game:block/overlay/dust-sparse", "blendMode": "Overlay"}]},
             "plaster": {"base": "game:block/stone/rock/{rock}1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
-            "inside": {"base": "game:block/stone/cobblestone/{rock}1"}
+            "inside": {"base": "game:block/stone/rock/{rock}1"}
           },
           "style-*::rock-*::glass-*::originblock-*": {
             "material": {"base": "game:block/clay/daub/{originblock}/normal1"},
@@ -161,7 +203,7 @@
             "glass": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "confession:block/glass/window-middle", "blendMode": "Overlay"}]},
             "glass-inside": {"base": "game:block/glass/{glass}", "blendedOverlays": [{"base": "game:block/overlay/dust-sparse", "blendMode": "Overlay"}]},
             "plaster": {"base": "game:block/stone/rock/{rock}1", "blendedOverlays": [{"base": "game:block/clay/fireclay", "blendMode": "Lighten"}]},
-            "inside": {"base": "game:block/stone/cobblestone/{rock}1"}
+            "inside": {"base": "game:block/stone/rock/{rock}1"}
           }
         },
         "shape": {

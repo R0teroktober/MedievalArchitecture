@@ -105,7 +105,7 @@
   "confession:originblock-yellow": "yellow wattle & daub",
   "confession:block-interaction-add-rimStones": "Add stones",
   "confession:block-interaction-add-mortar": "Add mortar",
-  "confession:block-interaction-add-block": "Add block to finish archway",
+  "confession:block-interaction-add-block": "Add block to finish",
   "confession:block-interaction-add-glass": "Add window",
   "confession:block-interaction-add-plank": "Add plank to create a door lintel",
   "confession:archwayframe-unknownrim": "The rim stones of this frame are unknown. Break the frame and build it again.",
@@ -121,6 +121,12 @@
   "confession:archway-name-small-window": "Small archway with window ({0})",
   "confession:archway-name-medium-window": "Medium archway with window ({0})",
   "confession:archway-name-big-window": "Big archway with window ({0})",
+  // tiny windows: all sizes share one name, so the handbook lists them next to each other
+  "confession:archway-name-tiny": "Tiny window ({0})",
+  "confession:archway-name-tiny-window": "Tiny window with glass ({0})",
+  // windowsill: {0} = fill material; the frame (before the fill is added) shows the rim stones
+  "confession:archway-name-windowsill": "Windowsill ({0})",
+  "confession:archway-name-windowsill-frame": "Windowsill frame 1/2 ({0})",
   // fill materials: vanilla fills show the name of their block (game:block-<fill id>).
   // Fills of other mods: "confession:archwayfill-<fill id>": "<name>", otherwise this fallback is shown.
   "confession:archwayfill-*": "Modded material",

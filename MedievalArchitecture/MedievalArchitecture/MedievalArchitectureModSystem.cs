@@ -45,6 +45,8 @@ namespace MedievalArchitecture
             base.AssetsFinalize(api);
             // All blocks and items are loaded now, so the code patterns of the registry can be resolved.
             ArchwayMaterials.Load(api);
+            // Tiny windows and windowsill: one creative stack (and handbook page) per rim stone
+            ArchwayCreativeStacks.Apply(api, ArchwayMaterials);
         }
 
         private static void LoadConfig(ICoreAPI api)
