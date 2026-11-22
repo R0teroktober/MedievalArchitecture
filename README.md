@@ -52,11 +52,11 @@ The small gate seals rooms (e.g. for the cellar bonus). The big gate has a peeph
 
 ### Trapdoors
 
-Small and big trapdoors, flat or sloped, single or double, made of a vanilla trapdoor or door, planks and nails. Big trapdoors seal rooms and hold back water like vanilla trapdoors – a cellar closed with a big trapdoor gets the cellar bonus.
+Small and big trapdoors, flat or sloped, single or double, made of a vanilla trapdoor or door, planks and nails. Trapdoors seal rooms and hold back water like vanilla trapdoors.
 
 ### Brazier
 
-Smith 4 **brazier parts** from metal ingots and combine them with a **metal hoop**. Place the empty brazier, add 3 pieces of firewood and light it. A brazier burns much longer than a firepit and can be put out with water. The decorative vanilla brazier clutter can be turned into a working brazier with a fired bowl.
+Smith 4 **brazier parts** from metal ingots and combine them with a **metal hoop**. Place the empty brazier, add 3 pieces of firewood and light it. A brazier burns much longer than a firepit and can be put out with water. The decorative vanilla brazier clutter can be turned into a working brazier with a fired bowl and some acid.
 
 ## Supported mods
 
