@@ -66,6 +66,7 @@ Rim stones and fill materials of these mods can be used without any further setu
 - **Material Needs** – plaster, rammed earth, mud bricks and daub colors
 - **Material Needs: Geology** – all rocks as rim stones and fills
 - **Wildcraft: Trees and Shrubs** – all woods for door lintels
+- **Thievery** – gates, portcullises, drawbridges and big trapdoors can be locked and unlocked with Thievery locks, like vanilla doors. Like vanilla multiblock doors, this only works at the root block (the bottom corner where the gate was placed).
 
 Other mods can add their materials with a JSON patch, see [docs/MODDING.md](docs/MODDING.md).
 
