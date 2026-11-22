@@ -249,6 +249,35 @@ namespace MedievalArchitecture
 
         #endregion
 
+        #region Rooms and liquids
+
+        // Rooms (heat retention) and water (liquid barrier) are decided by the root, depending on the gate's state at this position.
+        // Without a root this part is air (like its JSON: no solid sides).
+
+        public override int GetRetention(BlockPos pos, BlockFacing facing, EnumRetentionType type)
+        {
+            if (!TryGetRoot(api.World.BlockAccessor, pos, out BlockPos rootPos, out Vec3i offsetInv, out Block rootBlock))
+            {
+                return base.GetRetention(pos, facing, type);
+            }
+
+            var inf = GetRootInterface<IMultiBlockBlockProperties>(rootBlock, rootPos);
+            return inf?.MBGetRetention(pos, facing, type, offsetInv) ?? base.GetRetention(pos, facing, type);
+        }
+
+        public override float GetLiquidBarrierHeightOnSide(BlockFacing face, BlockPos pos)
+        {
+            if (!TryGetRoot(api.World.BlockAccessor, pos, out BlockPos rootPos, out Vec3i offsetInv, out Block rootBlock))
+            {
+                return base.GetLiquidBarrierHeightOnSide(face, pos);
+            }
+
+            var inf = GetRootInterface<IMultiBlockBlockProperties>(rootBlock, rootPos);
+            return inf?.MBGetLiquidBarrierHeightOnSide(face, pos, offsetInv) ?? base.GetLiquidBarrierHeightOnSide(face, pos);
+        }
+
+        #endregion
+
         #region Breaking and explosions
 
         public override float GetResistance(IBlockAccessor blockAccessor, BlockPos pos)

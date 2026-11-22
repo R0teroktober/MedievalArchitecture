@@ -21,7 +21,7 @@
     "*-4t-*": {
       "handbook": {"groupBy": ["portcullis-*"], "extraSections": [{"title": "confession:reinforce-multiblock-title", "text": "confession:reinforce-multiblock-text"}]},
       "reinforcable": true,
-      "airtight": true,
+      "airtight": false,
       "width": 3,
       "length": 1,
       "height": 4,
@@ -60,7 +60,7 @@
     "*-3t-*": {
       "handbook": {"groupBy": ["portcullis-*"], "extraSections": [{"title": "confession:reinforce-multiblock-title", "text": "confession:reinforce-multiblock-text"}]},
       "reinforcable": true,
-      "airtight": true,
+      "airtight": false,
       "width": 2,
       "length": 1,
       "height": 3,

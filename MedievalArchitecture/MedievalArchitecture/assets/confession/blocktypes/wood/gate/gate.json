@@ -21,7 +21,8 @@
     "*-4t-*": {
       "handbook": {"groupBy": ["gate-*"], "extraSections": [{"title": "confession:reinforce-multiblock-title", "text": "confession:reinforce-multiblock-text"}]},
       "reinforcable": true,
-      "airtight": true,
+      "airtight": false,
+      "liquidBarrier": true,
       "width": 3,
       "length": 2,
       "height": 4,

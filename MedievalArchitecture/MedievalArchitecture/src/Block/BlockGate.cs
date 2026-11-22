@@ -18,11 +18,15 @@ namespace MedievalArchitecture
         West
     }
 
-    public class BlockGateBase : BlockGeneric, IMultiBlockInteract, IMultiBlockColSelBoxes, IMultiBlockBlockBreaking
+    public class BlockGateBase : BlockGeneric, IMultiBlockInteract, IMultiBlockColSelBoxes, IMultiBlockBlockBreaking, IMultiBlockBlockProperties
     {
         private int width = 1;
         private int height = 1;
         private int length = 1;
+
+        // "airtight": the gate seals rooms (heat retention). "liquidBarrier": the closed gate holds back water (default: airtight).
+        private bool airtight = true;
+        private bool liquidBarrier = true;
 
         // Runtime lookup tables for the active block.
         // Key format: "x/y/z" in north-based local coordinates.
@@ -42,6 +46,8 @@ namespace MedievalArchitecture
             width = Attributes?["width"].AsInt(1) ?? 1;
             height = Attributes?["height"].AsInt(1) ?? 1;
             length = Attributes?["length"].AsInt(1) ?? 1;
+            airtight = Attributes?["airtight"].AsBool(true) ?? true;
+            liquidBarrier = Attributes?["liquidBarrier"].AsBool(airtight) ?? airtight;
 
             // While sneaking, ask the gate before the held item, so plumb and square / padlock can be redirected to the root
             PlacedPriorityInteract = true;
@@ -607,6 +613,9 @@ namespace MedievalArchitecture
                 return;
             }
             gateBehavior.Toggle();
+
+            // Like vanilla doors: neighbouring water (and other blocks) re-check the gate in its new state
+            TriggerNeighbourUpdates(world, controllerPos);
         }
 
         public bool MBOnBlockInteractCancel(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, EnumItemUseCancelReason cancelReason, Vec3i offset)
@@ -663,6 +672,121 @@ namespace MedievalArchitecture
 
         #endregion
 
+        #region Rooms and liquids
+
+        // Vanilla asks every block position for its heat retention (rooms, e.g. cellars) and for its liquid barrier (water).
+        // Gate parts forward these questions to the root (IMultiBlockBlockProperties, also used by vanilla dummies).
+        // A side of a gate position counts as closed if one collision box of the current state covers it completely.
+
+        public override int GetRetention(BlockPos pos, BlockFacing facing, EnumRetentionType type)
+        {
+            return GetGateRetention(api.World.BlockAccessor, pos, facing, type, new Vec3i(0, 0, 0));
+        }
+
+        public override float GetLiquidBarrierHeightOnSide(BlockFacing face, BlockPos pos)
+        {
+            return GetGateLiquidBarrier(api.World.BlockAccessor, pos, face, new Vec3i(0, 0, 0));
+        }
+
+        public int MBGetRetention(BlockPos pos, BlockFacing facing, EnumRetentionType type, Vec3i offsetInv)
+        {
+            return GetGateRetention(api.World.BlockAccessor, pos, facing, type, offsetInv);
+        }
+
+        public float MBGetLiquidBarrierHeightOnSide(BlockFacing face, BlockPos pos, Vec3i offsetInv)
+        {
+            return GetGateLiquidBarrier(api.World.BlockAccessor, pos, face, offsetInv);
+        }
+
+        // The remaining members of IMultiBlockBlockProperties keep the behavior old gates with vanilla dummies had before
+        // (the vanilla dummy asked the root block directly with its own position).
+        public bool MBCanAttachBlockAt(IBlockAccessor blockAccessor, Block block, BlockPos pos, BlockFacing blockFace, Cuboidi attachmentArea, Vec3i offsetInv)
+        {
+            return CanAttachBlockAt(blockAccessor, block, pos, blockFace, attachmentArea);
+        }
+
+        public bool MBSideIsSolid(BlockPos pos, int faceIndex, Vec3i offsetInv)
+        {
+            return SideIsSolid(pos, faceIndex);
+        }
+
+        public bool MBSideIsSolid(IBlockAccessor blockAccessor, BlockPos pos, int faceIndex, Vec3i offsetInv)
+        {
+            return SideIsSolid(blockAccessor, pos, faceIndex);
+        }
+
+        public JsonObject MBGetAttributes(IBlockAccessor blockAccessor, BlockPos pos)
+        {
+            return GetAttributes(blockAccessor, pos);
+        }
+
+        /// <summary>Same rules as vanilla doors and trapdoors (BlockBehaviorDoor/BlockBehaviorTrapDoor.GetRetention).</summary>
+        private int GetGateRetention(IBlockAccessor blockAccessor, BlockPos pos, BlockFacing facing, EnumRetentionType type, Vec3i offset)
+        {
+            Cuboidf[] boxes = GetBoxesForState(blockAccessor, pos, offset, null);
+            bool closed = IsSideCovered(boxes, facing);
+
+            if (type == EnumRetentionType.Sound) return closed ? 3 : 0;
+            if (!airtight) return 0;
+
+            // Positions without any part of the gate in both states are air
+            if (!HasBoxesInAnyState(blockAccessor, pos, offset)) return 0;
+
+            int insulation = GetInsulation(blockAccessor, pos.AddCopy(offset));
+            if (api.World.Config.GetBool("openDoorsNotSolid", false)) return closed ? insulation : 0;
+
+            // Like vanilla doors: an airtight door is a wall for rooms, also when it is open
+            return closed || IsSideCovered(boxes, facing.Opposite) ? insulation : 3;
+        }
+
+        private float GetGateLiquidBarrier(IBlockAccessor blockAccessor, BlockPos pos, BlockFacing face, Vec3i offset)
+        {
+            if (!liquidBarrier) return 0f;
+            return IsSideCovered(GetBoxesForState(blockAccessor, pos, offset, null), face) ? 1f : 0f;
+        }
+
+        private int GetInsulation(IBlockAccessor blockAccessor, BlockPos rootPos)
+        {
+            EnumBlockMaterial material = GetBlockMaterial(blockAccessor, rootPos);
+            if (material == EnumBlockMaterial.Ore || material == EnumBlockMaterial.Stone || material == EnumBlockMaterial.Soil || material == EnumBlockMaterial.Ceramic)
+            {
+                return -1;
+            }
+            return 1;
+        }
+
+        private bool HasBoxesInAnyState(IBlockAccessor blockAccessor, BlockPos pos, Vec3i offset)
+        {
+            return GetBoxesForState(blockAccessor, pos, offset, false).Length > 0 || GetBoxesForState(blockAccessor, pos, offset, true).Length > 0;
+        }
+
+        /// <summary>True if one of the boxes covers the given side of the block completely (it does not have to touch it).</summary>
+        private static bool IsSideCovered(Cuboidf[] boxes, BlockFacing side)
+        {
+            const float epsilon = 0.01f;
+
+            foreach (Cuboidf box in boxes)
+            {
+                if (box == null) continue;
+
+                bool fullX = Math.Min(box.X1, box.X2) <= epsilon && Math.Max(box.X1, box.X2) >= 1 - epsilon;
+                bool fullY = Math.Min(box.Y1, box.Y2) <= epsilon && Math.Max(box.Y1, box.Y2) >= 1 - epsilon;
+                bool fullZ = Math.Min(box.Z1, box.Z2) <= epsilon && Math.Max(box.Z1, box.Z2) >= 1 - epsilon;
+
+                bool covered = side.Axis switch
+                {
+                    EnumAxis.X => fullY && fullZ,
+                    EnumAxis.Y => fullX && fullZ,
+                    _ => fullX && fullY
+                };
+                if (covered) return true;
+            }
+
+            return false;
+        }
+
+        #endregion
+
         #region BlockColSelBoxes
 
         public override Cuboidf[] GetCollisionBoxes(IBlockAccessor blockAccessor, BlockPos pos)
@@ -693,6 +817,12 @@ namespace MedievalArchitecture
 
         private Cuboidf[] GetBoxesForCurrentState(IBlockAccessor blockAccessor, BlockPos pos, Vec3i offset)
         {
+            return GetBoxesForState(blockAccessor, pos, offset, null);
+        }
+
+        /// <summary>Boxes of one gate position. toggledOverride: null = current state, true = open, false = closed.</summary>
+        private Cuboidf[] GetBoxesForState(IBlockAccessor blockAccessor, BlockPos pos, Vec3i offset, bool? toggledOverride)
+        {
             BlockPos controllerPos = pos.AddCopy(offset);
             BlockEntity be = blockAccessor.GetBlockEntity(controllerPos);
 
@@ -708,6 +838,8 @@ namespace MedievalArchitecture
                     toggled = gateBehavior.Toggled;
                 }
             }
+
+            if (toggledOverride.HasValue) toggled = toggledOverride.Value;
 
             // Convert the current world-space offset back into north-based local coordinates.
             Vec3i localOffset = WorldOffsetToNorthLocal(offset, rotation);
@@ -873,6 +1005,36 @@ namespace MedievalArchitecture
             if (stagingAccessor == null)
             {
                 bulkAccessor.Commit();
+            }
+        }
+
+        /// <summary>
+        /// Server: triggers a neighbour block update around the root and all parts of the gate at controllerPos.
+        /// </summary>
+        private void TriggerNeighbourUpdates(IWorldAccessor world, BlockPos controllerPos)
+        {
+            if (world.Side != EnumAppSide.Server) return;
+
+            IBlockAccessor blockAccessor = world.BlockAccessor;
+            blockAccessor.TriggerNeighbourBlockUpdate(controllerPos);
+
+            int horizontalRange = Math.Max(width, length) - 1;
+
+            for (int dx = -horizontalRange; dx <= horizontalRange; dx++)
+            {
+                for (int dy = 0; dy < height; dy++)
+                {
+                    for (int dz = -horizontalRange; dz <= horizontalRange; dz++)
+                    {
+                        if (dx == 0 && dy == 0 && dz == 0) continue;
+
+                        BlockPos partPos = controllerPos.AddCopy(dx, dy, dz);
+                        if (IsOwnPart(blockAccessor, partPos, controllerPos))
+                        {
+                            blockAccessor.TriggerNeighbourBlockUpdate(partPos);
+                        }
+                    }
+                }
             }
         }
 

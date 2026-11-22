@@ -46,7 +46,8 @@
         ]
       },
       "reinforcable": true,
-      "airtight": true,
+      "airtight": false,
+      "liquidBarrier": true,
       "width": 2,
       "length": 3,
       "height": 3,
@@ -85,7 +86,8 @@
         ]
       },
       "reinforcable": true,
-      "airtight": true,
+      "airtight": false,
+      "liquidBarrier": true,
       "width": 3,
       "length": 3,
       "height": 3,
@@ -130,7 +132,8 @@
         ]
       },
       "reinforcable": true,
-      "airtight": true,
+      "airtight": false,
+      "liquidBarrier": true,
       "width": 3,
       "length": 4,
       "height": 4,
