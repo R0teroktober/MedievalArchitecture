@@ -6778,9 +6778,9 @@
 							"renderPass": 3,
 							"rotationOrigin": [ 0.0, 0.0, 4.0 ],
 							"faces": {
-								"north": { "texture": "#glass-lm", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [-2,-1,-1,-2], "reflectiveMode": 3 },
+								"north": { "texture": "#glass-lm", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [-2,-1,-1,-2], "reflectiveMode": 0 },
 								"east": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
-								"south": { "texture": "#glass-inside", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [-2,-2,-1,-1], "reflectiveMode": 3 },
+								"south": { "texture": "#glass-inside", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [-2,-2,-1,-1], "reflectiveMode": 0 },
 								"west": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
 								"up": { "texture": "#null", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false },
 								"down": { "texture": "#null", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false }
@@ -6793,9 +6793,9 @@
 							"renderPass": 3,
 							"rotationOrigin": [ 16.0, 0.0, 4.0 ],
 							"faces": {
-								"north": { "texture": "#glass-ls", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [-2,-1,-1,-2], "reflectiveMode": 3 },
+								"north": { "texture": "#glass-ls", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [-2,-1,-1,-2], "reflectiveMode": 0 },
 								"east": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
-								"south": { "texture": "#glass-inside", "uv": [ 16.0, 0.0, 0.0, 16.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1], "windData": [-2,-2,-1,-1], "reflectiveMode": 3 },
+								"south": { "texture": "#glass-inside", "uv": [ 16.0, 0.0, 0.0, 16.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1], "windData": [-2,-2,-1,-1], "reflectiveMode": 0 },
 								"west": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
 								"up": { "texture": "#null", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false },
 								"down": { "texture": "#null", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false }
@@ -6808,9 +6808,9 @@
 							"renderPass": 3,
 							"rotationOrigin": [ -16.0, 0.0, 4.0 ],
 							"faces": {
-								"north": { "texture": "#glass-ls", "uv": [ 16.0, 0.0, 0.0, 16.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1], "windData": [-2,-1,-1,-2], "reflectiveMode": 3 },
+								"north": { "texture": "#glass-ls", "uv": [ 16.0, 0.0, 0.0, 16.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1], "windData": [-2,-1,-1,-2], "reflectiveMode": 0 },
 								"east": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
-								"south": { "texture": "#glass-inside", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [-2,-2,-1,-1], "reflectiveMode": 3 },
+								"south": { "texture": "#glass-inside", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [-2,-2,-1,-1], "reflectiveMode": 0 },
 								"west": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
 								"up": { "texture": "#null", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false },
 								"down": { "texture": "#null", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false }
@@ -6823,9 +6823,9 @@
 							"renderPass": 3,
 							"rotationOrigin": [ 16.0, 0.0, 4.0 ],
 							"faces": {
-								"north": { "texture": "#glass-ms", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [-1,0,0,-1], "reflectiveMode": 3 },
+								"north": { "texture": "#glass-ms", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [-1,0,0,-1], "reflectiveMode": 0 },
 								"east": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
-								"south": { "texture": "#glass-inside", "uv": [ 16.0, 0.0, 0.0, 16.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1], "windData": [-1,-1,0,0], "reflectiveMode": 3 },
+								"south": { "texture": "#glass-inside", "uv": [ 16.0, 0.0, 0.0, 16.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1], "windData": [-1,-1,0,0], "reflectiveMode": 0 },
 								"west": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
 								"up": { "texture": "#null", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false },
 								"down": { "texture": "#null", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false }
@@ -6838,9 +6838,9 @@
 							"renderPass": 3,
 							"rotationOrigin": [ 0.0, 0.0, 4.0 ],
 							"faces": {
-								"north": { "texture": "#glass-mm", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [-1,0,0,-1], "reflectiveMode": 3 },
+								"north": { "texture": "#glass-mm", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [-1,0,0,-1], "reflectiveMode": 0 },
 								"east": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
-								"south": { "texture": "#glass-inside", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [-1,-1,0,0], "reflectiveMode": 3 },
+								"south": { "texture": "#glass-inside", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [-1,-1,0,0], "reflectiveMode": 0 },
 								"west": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
 								"up": { "texture": "#null", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false },
 								"down": { "texture": "#null", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false }
@@ -6853,9 +6853,9 @@
 							"renderPass": 3,
 							"rotationOrigin": [ -16.0, 0.0, 4.0 ],
 							"faces": {
-								"north": { "texture": "#glass-ms", "uv": [ 16.0, 0.0, 0.0, 16.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1], "windData": [-1,0,0,-1], "reflectiveMode": 3 },
+								"north": { "texture": "#glass-ms", "uv": [ 16.0, 0.0, 0.0, 16.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1], "windData": [-1,0,0,-1], "reflectiveMode": 0 },
 								"east": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
-								"south": { "texture": "#glass-inside", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [-1,-1,0,0], "reflectiveMode": 3 },
+								"south": { "texture": "#glass-inside", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [-1,-1,0,0], "reflectiveMode": 0 },
 								"west": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
 								"up": { "texture": "#null", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false },
 								"down": { "texture": "#null", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false }
@@ -6868,9 +6868,9 @@
 							"renderPass": 3,
 							"rotationOrigin": [ 16.0, 16.0, 4.0 ],
 							"faces": {
-								"north": { "texture": "#glass-us", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [0,1,1,0], "reflectiveMode": 3 },
+								"north": { "texture": "#glass-us", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [0,1,1,0], "reflectiveMode": 0 },
 								"east": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
-								"south": { "texture": "#glass-inside", "uv": [ 16.0, 0.0, 0.0, 16.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1], "windData": [0,0,1,1], "reflectiveMode": 3 },
+								"south": { "texture": "#glass-inside", "uv": [ 16.0, 0.0, 0.0, 16.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1], "windData": [0,0,1,1], "reflectiveMode": 0 },
 								"west": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
 								"up": { "texture": "#null", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false },
 								"down": { "texture": "#null", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false }
@@ -6883,9 +6883,9 @@
 							"renderPass": 3,
 							"rotationOrigin": [ 0.0, 16.0, 4.0 ],
 							"faces": {
-								"north": { "texture": "#glass-um", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [0,1,1,0], "reflectiveMode": 3 },
+								"north": { "texture": "#glass-um", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [0,1,1,0], "reflectiveMode": 0 },
 								"east": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
-								"south": { "texture": "#glass-inside", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [0,0,1,1], "reflectiveMode": 3 },
+								"south": { "texture": "#glass-inside", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [0,0,1,1], "reflectiveMode": 0 },
 								"west": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
 								"up": { "texture": "#null", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false },
 								"down": { "texture": "#null", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false }
@@ -6898,9 +6898,9 @@
 							"renderPass": 3,
 							"rotationOrigin": [ -16.0, 0.0, 4.0 ],
 							"faces": {
-								"north": { "texture": "#glass-us", "uv": [ 16.0, 0.0, 0.0, 16.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1], "windData": [0,1,1,0], "reflectiveMode": 3 },
+								"north": { "texture": "#glass-us", "uv": [ 16.0, 0.0, 0.0, 16.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1], "windData": [0,1,1,0], "reflectiveMode": 0 },
 								"east": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
-								"south": { "texture": "#glass-inside", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [0,0,1,1], "reflectiveMode": 3 },
+								"south": { "texture": "#glass-inside", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [0,0,1,1], "reflectiveMode": 0 },
 								"west": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
 								"up": { "texture": "#null", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false },
 								"down": { "texture": "#null", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false }

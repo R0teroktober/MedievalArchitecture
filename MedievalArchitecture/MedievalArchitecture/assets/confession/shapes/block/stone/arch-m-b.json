@@ -2804,9 +2804,9 @@
 			"renderPass": 3,
 			"rotationOrigin": [ 0.0, 0.0, 4.0 ],
 			"faces": {
-				"north": { "texture": "#glass-top", "uv": [ 16.0, 0.0, 0.0, 16.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1], "windData": [0,1,1,0], "reflectiveMode": 3 },
+				"north": { "texture": "#glass-top", "uv": [ 16.0, 0.0, 0.0, 16.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1], "windData": [0,1,1,0], "reflectiveMode": 0 },
 				"east": { "texture": "#glass-top", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
-				"south": { "texture": "#glass-inside", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [0,0,1,1], "reflectiveMode": 3 },
+				"south": { "texture": "#glass-inside", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [0,0,1,1], "reflectiveMode": 0 },
 				"west": { "texture": "#glass-top", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
 				"up": { "texture": "#glass-top", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false },
 				"down": { "texture": "#glass-top", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false }
@@ -2819,9 +2819,9 @@
 			"renderPass": 3,
 			"rotationOrigin": [ 16.0, 0.0, 4.0 ],
 			"faces": {
-				"north": { "texture": "#glass-top", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [0,1,1,0], "reflectiveMode": 3 },
+				"north": { "texture": "#glass-top", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "windMode": [-1,-1,-1,-1], "windData": [0,1,1,0], "reflectiveMode": 0 },
 				"east": { "texture": "#glass-top", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
-				"south": { "texture": "#glass-inside", "uv": [ 16.0, 0.0, 0.0, 16.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1], "windData": [0,0,1,1], "reflectiveMode": 3 },
+				"south": { "texture": "#glass-inside", "uv": [ 16.0, 0.0, 0.0, 16.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1], "windData": [0,0,1,1], "reflectiveMode": 0 },
 				"west": { "texture": "#glass-top", "uv": [ 0.0, 0.0, 2.0, 16.0 ], "enabled": false },
 				"up": { "texture": "#glass-top", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false },
 				"down": { "texture": "#glass-top", "uv": [ 0.0, 0.0, 16.0, 2.0 ], "enabled": false }
