@@ -52,7 +52,7 @@ The small gate seals rooms (e.g. for the cellar bonus). The big gate has a peeph
 
 ### Trapdoors
 
-Small and big trapdoors, flat or sloped, single or double, made of a vanilla trapdoor or door, planks and nails. Trapdoors seal rooms and hold back water like vanilla trapdoors.
+All trapdoors seal rooms and hold back water like vanilla trapdoors – a cellar closed with a trapdoor gets the cellar bonus.
 
 ### Brazier
 
