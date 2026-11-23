@@ -242,7 +242,7 @@ namespace MedievalArchitecture
                     continue;
                 }
 
-                if (entry == null || string.IsNullOrWhiteSpace(entry.Code) || string.IsNullOrWhiteSpace(entry.Id) || string.IsNullOrWhiteSpace(entry.Texture))
+                if (entry == null || string.IsNullOrWhiteSpace(entry.Code) || string.IsNullOrWhiteSpace(entry.Id) || ReadTextureList(entry.Texture).Count == 0)
                 {
                     stats.Invalid++;
                     api.Logger.Warning("{0} Archway {1} entry skipped: \"code\", \"id\" and \"texture\" are required.", LogPrefix, kindName);
@@ -251,11 +251,11 @@ namespace MedievalArchitecture
 
                 AssetLocation codePattern = AssetLocation.Create(entry.Code.Trim());
                 string idTemplate = entry.Id.Trim();
-                string textureTemplate = entry.Texture.Trim();
+                List<string> textureTemplates = ReadTextureList(entry.Texture);
                 List<string> ledgeTemplates = ReadTextureList(entry.LedgeTexture);
 
                 List<string> placeholders = PlaceholderRegex.Matches(codePattern.Path).Select(m => m.Groups[1].Value).ToList();
-                string? unknown = PlaceholderRegex.Matches(idTemplate + " " + textureTemplate + " " + string.Join(" ", ledgeTemplates))
+                string? unknown = PlaceholderRegex.Matches(idTemplate + " " + string.Join(" ", textureTemplates) + " " + string.Join(" ", ledgeTemplates))
                     .Select(m => m.Groups[1].Value)
                     .FirstOrDefault(p => !placeholders.Contains(p));
                 if (unknown != null)
@@ -287,7 +287,6 @@ namespace MedievalArchitecture
                     matches++;
 
                     string id = FillPlaceholders(idTemplate, placeholders, match);
-                    AssetLocation texture = AssetLocation.Create(FillPlaceholders(textureTemplate, placeholders, match), code.Domain);
 
                     if (!ValidIdRegex.IsMatch(id))
                     {
@@ -307,10 +306,13 @@ namespace MedievalArchitecture
                         continue;
                     }
 
-                    if (!TextureExists(api, texture))
+                    // "texture" may list several textures (e.g. a texture pack first, vanilla as fallback): the first existing one wins.
+                    AssetLocation? texture = ResolveFirstTexture(api, textureTemplates, placeholders, match, code.Domain);
+                    if (texture == null)
                     {
                         stats.MissingTexture++;
-                        api.Logger.Warning("{0} Archway {1} \"{2}\" ({3}) skipped: texture {4} not found.", LogPrefix, kindName, id, code, texture);
+                        string tried = string.Join(", ", textureTemplates.Select(t => AssetLocation.Create(FillPlaceholders(t, placeholders, match), code.Domain).ToString()));
+                        api.Logger.Warning("{0} Archway {1} \"{2}\" ({3}) skipped: texture {4} not found.", LogPrefix, kindName, id, code, tried);
                         continue;
                     }
 
@@ -332,7 +334,7 @@ namespace MedievalArchitecture
                     material.SourceCodes.Add(code);
                     if (kind == ArchwayMaterialKind.Fill && ledgeTemplates.Count > 0)
                     {
-                        material.LedgeTexture = ResolveLedgeTexture(api, ledgeTemplates, placeholders, match, code.Domain) ?? texture;
+                        material.LedgeTexture = ResolveFirstTexture(api, ledgeTemplates, placeholders, match, code.Domain) ?? texture;
                     }
                     byId[id] = material;
                     byCode[code] = material;
@@ -354,11 +356,11 @@ namespace MedievalArchitecture
             Dictionary<string, ArchwayMaterial> byId, LoadStats stats)
         {
             string id = entry.Id?.Trim() ?? "";
-            string textureText = entry.Texture?.Trim() ?? "";
+            List<string> textureTemplates = ReadTextureList(entry.Texture);
             List<string> ledgeTemplates = ReadTextureList(entry.LedgeTexture);
 
-            if (id.Length == 0 || textureText.Length == 0 || !ValidIdRegex.IsMatch(id)
-                || PlaceholderRegex.IsMatch(id + " " + textureText + " " + string.Join(" ", ledgeTemplates)))
+            if (id.Length == 0 || textureTemplates.Count == 0 || !ValidIdRegex.IsMatch(id)
+                || PlaceholderRegex.IsMatch(id + " " + string.Join(" ", textureTemplates) + " " + string.Join(" ", ledgeTemplates)))
             {
                 stats.Invalid++;
                 api.Logger.Warning("{0} Archway {1} entry without code skipped: needs a valid \"id\" and \"texture\", placeholders are not allowed.", LogPrefix, kindName);
@@ -368,11 +370,11 @@ namespace MedievalArchitecture
             // A real (buildable) material with the same id always wins.
             if (byId.ContainsKey(id)) return;
 
-            AssetLocation texture = AssetLocation.Create(textureText);
-            if (!TextureExists(api, texture))
+            AssetLocation? texture = textureTemplates.Select(t => AssetLocation.Create(t)).FirstOrDefault(t => TextureExists(api, t));
+            if (texture == null)
             {
                 stats.MissingTexture++;
-                api.Logger.Warning("{0} Archway {1} \"{2}\" (legacy only) skipped: texture {3} not found.", LogPrefix, kindName, id, texture);
+                api.Logger.Warning("{0} Archway {1} \"{2}\" (legacy only) skipped: texture {3} not found.", LogPrefix, kindName, id, string.Join(", ", textureTemplates));
                 return;
             }
 
@@ -424,8 +426,8 @@ namespace MedievalArchitecture
             return api.Assets.Exists(ToTextureFile(texture));
         }
 
-        /// <summary>The first ledge texture that exists, or null.</summary>
-        private static AssetLocation? ResolveLedgeTexture(ICoreAPI api, List<string> templates, List<string> placeholders, Match match, string defaultDomain)
+        /// <summary>The first texture of the list that exists (placeholders filled in), or null.</summary>
+        private static AssetLocation? ResolveFirstTexture(ICoreAPI api, List<string> templates, List<string> placeholders, Match match, string defaultDomain)
         {
             foreach (string template in templates)
             {
@@ -535,8 +537,9 @@ namespace MedievalArchitecture
         [JsonProperty("id")]
         public string? Id { get; set; }
 
+        /// <summary>String or list, the first existing texture is used (e.g. a texture pack first, vanilla as fallback).</summary>
         [JsonProperty("texture")]
-        public string? Texture { get; set; }
+        public JToken? Texture { get; set; }
 
         /// <summary>Fills only, optional: string or list, the first existing texture is used for the ledge of big archways.</summary>
         [JsonProperty("ledgeTexture")]

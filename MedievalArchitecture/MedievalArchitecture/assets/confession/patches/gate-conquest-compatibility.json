@@ -1,0 +1,21 @@
+[
+  // Conquest VS Edition (mod id "conquest"). Only applied if the mod is installed.
+  // Conquest patches the vanilla crate label shape (game:shapes/block/wood/crate/label-paper.json) to use the texture
+  // code "label-building" instead of "labelbase". The inventory shapes of gates, portcullises and drawbridges use that
+  // label, so they map "label-building" to their own label (B3: "Missing mapping for texture code #label-building").
+  {
+    "op": "add", "path": "/textures/label-building", "file": "confession:blocktypes/wood/gate/gate.json",
+    "dependsOn": [{ "modid": "conquest" }],
+    "value": { "base": "block/wood/gate/label-gate-{size}" }
+  },
+  {
+    "op": "add", "path": "/textures/label-building", "file": "confession:blocktypes/wood/gate/portcullis.json",
+    "dependsOn": [{ "modid": "conquest" }],
+    "value": { "base": "block/wood/gate/label-portcullis-4t" }
+  },
+  {
+    "op": "add", "path": "/textures/label-building", "file": "confession:blocktypes/wood/gate/drawbridge.json",
+    "dependsOn": [{ "modid": "conquest" }],
+    "value": { "base": "block/wood/gate/label-{size}" }
+  }
+]

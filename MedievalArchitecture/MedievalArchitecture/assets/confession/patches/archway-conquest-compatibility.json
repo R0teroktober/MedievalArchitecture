@@ -1,0 +1,34 @@
+[
+  // Conquest VS Edition (mod id "conquest"). Only applied if the mod is installed.
+  // Conquest moves the textures of most stone blocks to new paths (e.g. block/stone/rock/conquest/<rock>/sides/<n>)
+  // and patches the vanilla blocks to use them. These patches let archways use the same textures.
+  // Every texture is a list: the first existing one wins, so rocks without a Conquest texture keep the vanilla one.
+  // ARL supports one fixed texture per material, so archways always use tile 1 (ledge: tile 3).
+  // Paths are indices of config/archway-materials.json: keep them in sync when vanilla entries are added or moved.
+  // Polished rock, daub, rammed earth, mud bricks and the lintel boards need nothing: Conquest replaces those vanilla files directly.
+  // Rim stones (also frames, windowsills, tiny windows): raw rock
+  {"op": "replace", "path": "/rims/0/texture", "file": "confession:config/archway-materials.json", "dependsOn": [{"modid": "conquest"}], "value": ["game:block/stone/rock/conquest/{rock}/sides/1", "game:block/stone/rock/{rock}1"]},
+  // Fill: raw rock
+  {"op": "replace", "path": "/fills/0/texture", "file": "confession:config/archway-materials.json", "dependsOn": [{"modid": "conquest"}], "value": ["game:block/stone/rock/conquest/{rock}/sides/1", "game:block/stone/rock/{rock}1"]},
+  {"op": "replace", "path": "/fills/0/ledgeTexture", "file": "confession:config/archway-materials.json", "dependsOn": [{"modid": "conquest"}], "value": ["game:block/stone/rock/conquest/{rock}/sides/3", "game:block/stone/rock/{rock}3", "game:block/stone/rock/{rock}1"]},
+  // Fill: cobblestone
+  {"op": "replace", "path": "/fills/2/texture", "file": "confession:config/archway-materials.json", "dependsOn": [{"modid": "conquest"}], "value": ["game:block/stone/cobblestone/{rock}/sides/1", "game:block/stone/cobblestone/{rock}1"]},
+  {"op": "replace", "path": "/fills/2/ledgeTexture", "file": "confession:config/archway-materials.json", "dependsOn": [{"modid": "conquest"}], "value": ["game:block/stone/rock/conquest/{rock}/sides/3", "game:block/stone/rock/{rock}3", "game:block/stone/rock/{rock}1"]},
+  // Fill: stone bricks (Conquest uses two folder layouts)
+  {"op": "replace", "path": "/fills/3/texture", "file": "confession:config/archway-materials.json", "dependsOn": [{"modid": "conquest"}], "value": ["game:block/stone/brick/{rock}/1", "game:block/stone/brick/{rock}/sides/1", "game:block/stone/brick/{rock}1"]},
+  {"op": "replace", "path": "/fills/3/ledgeTexture", "file": "confession:config/archway-materials.json", "dependsOn": [{"modid": "conquest"}], "value": ["game:block/stone/rock/conquest/{rock}/sides/3", "game:block/stone/rock/{rock}3", "game:block/stone/rock/{rock}1"]},
+  // Fill: polished rock - Conquest replaces the vanilla file itself, only the ledge changes
+  {"op": "replace", "path": "/fills/4/ledgeTexture", "file": "confession:config/archway-materials.json", "dependsOn": [{"modid": "conquest"}], "value": ["game:block/stone/rock/conquest/{rock}/sides/3", "game:block/stone/rock/{rock}3", "game:block/stone/rock/{rock}1"]},
+  // Fill: dry stone
+  {"op": "replace", "path": "/fills/5/texture", "file": "confession:config/archway-materials.json", "dependsOn": [{"modid": "conquest"}], "value": ["game:block/stone/drystone/{rock}/1", "game:block/stone/drystone/{rock}1"]},
+  {"op": "replace", "path": "/fills/5/ledgeTexture", "file": "confession:config/archway-materials.json", "dependsOn": [{"modid": "conquest"}], "value": ["game:block/stone/rock/conquest/{rock}/sides/3", "game:block/stone/rock/{rock}3", "game:block/stone/rock/{rock}1"]},
+  // Fill: plaster
+  {"op": "replace", "path": "/fills/6/texture", "file": "confession:config/archway-materials.json", "dependsOn": [{"modid": "conquest"}], "value": ["game:block/stone/plaster/plain/1", "game:block/stone/plaster/plain"]},
+  // Legacy-only fills (old archways): ledge
+  {"op": "replace", "path": "/fills/16/ledgeTexture", "file": "confession:config/archway-materials.json", "dependsOn": [{"modid": "conquest"}], "value": ["game:block/stone/rock/conquest/halite/sides/3", "game:block/stone/rock/halite3", "game:block/stone/rock/halite1"]},
+  {"op": "replace", "path": "/fills/17/ledgeTexture", "file": "confession:config/archway-materials.json", "dependsOn": [{"modid": "conquest"}], "value": ["game:block/stone/rock/conquest/scoria/sides/3", "game:block/stone/rock/scoria3", "game:block/stone/rock/scoria1"]},
+  {"op": "replace", "path": "/fills/18/ledgeTexture", "file": "confession:config/archway-materials.json", "dependsOn": [{"modid": "conquest"}], "value": ["game:block/stone/rock/conquest/tuff/sides/3", "game:block/stone/rock/tuff3", "game:block/stone/rock/tuff1"]},
+  // Legacy-only fill: meteoric iron
+  {"op": "replace", "path": "/fills/19/texture", "file": "confession:config/archway-materials.json", "dependsOn": [{"modid": "conquest"}], "value": ["game:block/stone/rock/conquest/meteorite-iron/sides/1", "game:block/stone/rock/meteorite-iron1"]},
+  {"op": "replace", "path": "/fills/19/ledgeTexture", "file": "confession:config/archway-materials.json", "dependsOn": [{"modid": "conquest"}], "value": ["game:block/stone/rock/conquest/meteorite-iron/sides/3", "game:block/stone/rock/meteorite-iron3", "game:block/stone/rock/meteorite-iron1"]}
+]

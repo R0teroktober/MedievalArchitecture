@@ -13,6 +13,7 @@
   //             NEVER rename or remove an id once released. Allowed characters: a-z 0-9 - _
   //             Ids of other mods should start with the mod id, e.g. "geoaddons-cobblestone-{rock}".
   //   texture   Texture used for this material, with domain, without "textures/" and ".png".
+  //             String or list, the first existing texture is used (e.g. a texture pack first, vanilla as fallback).
   //   ledgeTexture  Fills only, optional: texture of the ledge of the big (3x3) archways, usually the
   //             "rock version" of the fill material.
   //             String or list, the first existing texture is used. Default: "texture".
