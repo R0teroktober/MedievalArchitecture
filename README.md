@@ -24,7 +24,7 @@ Small, medium (2×1, 2×2) and big (3×2, 3×3) archways in several styles.
 The interaction help shows what to add next as soon as you hold a matching item. Afterwards you can
 
 - insert a **glass pane** or a **leaded glass window** to get an archway with a window (all sizes),
-- add **boards** to get a door lintel for a vanilla door (small and medium archways),
+- add **boards** to get a door lintel for a vanilla door (small, medium and one of the big archways),
 - place a **gate** or **portcullis** behind a 3 block wide archway.
 
 ### Tiny windows and windowsills
@@ -32,7 +32,7 @@ The interaction help shows what to add next as soon as you hold a matching item.
 Built in two steps: the recipe decides the rim stones, the fill block is added in the world.
 
 - **Tiny windows** (5 shapes): stones, mortar and a chisel. Place it, then <kbd>Ctrl</kbd> + <kbd>right mouse button</kbd> with a fill block. A glass pane can be added afterwards.
-- **Windowsill:** hammer, chisel, plumb and square and 2 stones. Place the windowsill frame and finish it with a fill block.
+- **Windowsill:** hammer, chisel, plumb and square, 2 stones and wooden boards of your coice. Place the windowsill frame and finish it with a fill block.
 
 Hammer, chisel and plumb and square stay in the crafting grid.
 
@@ -67,6 +67,7 @@ Rim stones and fill materials of these mods can be used without any further setu
 - **Material Needs: Geology** – all rocks as rim stones and fills
 - **Wildcraft: Trees and Shrubs** – all woods for door lintels
 - **Thievery** – gates, portcullises, drawbridges and big trapdoors can be locked and unlocked with Thievery locks, like vanilla doors. Like vanilla multiblock doors, this only works at the root block (the bottom corner where the gate was placed).
+- **Conquest VS Edition** - archways, construction frames, tiny windows and windowsills use the Conquest textures for raw rock, cobblestone, stone bricks, dry stone and plaster (one fixed tile per material). Rocks without a Conquest texture keep the vanilla one
 
 Other mods can add their materials with a JSON patch, see [docs/Modding.md](docs/Modding.md).
 
