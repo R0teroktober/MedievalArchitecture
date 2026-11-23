@@ -166,10 +166,6 @@ namespace MedievalArchitecture
             api.Logger.Notification("{0} Archway materials ({1}): {2} rims, {3} fills, {4} woods from {5} entries. Skipped: {6} (missing texture), {7} (invalid), {8} (id conflict).",
                 LogPrefix, side, rimsById.Count, fillsById.Count, woodsById.Count, stats.Entries, stats.MissingTexture, stats.Invalid, stats.Conflicts);
 
-            api.Logger.Debug("{0} Archway rim ids ({1}): {2}", LogPrefix, side, string.Join(", ", rimsById.Keys.OrderBy(k => k)));
-            api.Logger.Debug("{0} Archway fill ids ({1}): {2}", LogPrefix, side, string.Join(", ", fillsById.Keys.OrderBy(k => k)));
-            api.Logger.Debug("{0} Archway wood ids ({1}): {2}", LogPrefix, side, string.Join(", ", woodsById.Keys.OrderBy(k => k)));
-
             LogLegacyCoverage(api, side);
 
             // Only the client renders. ARL resolves the alias textures when it builds the archway meshes.

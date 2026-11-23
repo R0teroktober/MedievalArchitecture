@@ -1,17 +1,35 @@
 [
   {
-    "ingredientPattern": "HCP,SS_",
+    "ingredientPattern": "HCP,SSB",
     "ingredients": {
       "S": { "type": "item", "code": "game:stone-*", "name": "rock" },
       "H": { "type": "item", "code": "game:hammer-*", "isTool": true },
       "P": { "type": "item", "code": "game:plumbandsquare", "consume": false },
-      "C": { "type": "item", "code": "game:chisel-*", "isTool": true }
+      "C": { "type": "item", "code": "game:chisel-*", "isTool": true },
+      "B": { "type": "item", "code": "game:plank-*"}
     },
     "width": 3,
     "height": 2,
     "output": {
       "type": "block",
       "code": "confession:windowsill_a-ns",
+      "attributes": { "types": { "originblock": "none", "rock": "{rock}" } }
+    }
+  },
+  {
+    "ingredientPattern": "HCP,SS_,BB_",
+    "ingredients": {
+      "S": { "type": "item", "code": "game:stone-*", "name": "rock" },
+      "H": { "type": "item", "code": "game:hammer-*", "isTool": true },
+      "P": { "type": "item", "code": "game:plumbandsquare", "consume": false },
+      "C": { "type": "item", "code": "game:chisel-*", "isTool": true },
+      "B": { "type": "item", "code": "game:plank-*"}
+    },
+    "width": 3,
+    "height": 3,
+    "output": {
+      "type": "block",
+      "code": "confession:windowsill_b-north",
       "attributes": { "types": { "originblock": "none", "rock": "{rock}" } }
     }
   },

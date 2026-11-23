@@ -14,9 +14,11 @@
   "variantgroups": [{ "code": "side", "states": ["ns", "we"] }],
   "attributes": {
     "creativeStacksByRim": true,
-    "handbook": {
-      "groupBy": ["windowsill_a-*"],
-      "excludeByType": { "we": true }
+    "handbook": { 
+        "groupBy": [ "windowsill_a-*" ], 
+        "excludeByType": {"we": true}, 
+        "extraSections": [{"title": "confession:archway-build-help-title", "text": "confession:archway-build-help-text2"}] 
+
     }
   },
   "entityBehaviors": [

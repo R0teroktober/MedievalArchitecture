@@ -9,9 +9,7 @@
 	"textureSizes": {
 		"glass-inside": [16,16]
 	},
-	"textures": {
-		"glass-inside": "/Users/leona/Pictures/Vintagestory/textures/glass-inside"
-	},
+
 	"elements": [
 		{
 			"name": "originRim1",

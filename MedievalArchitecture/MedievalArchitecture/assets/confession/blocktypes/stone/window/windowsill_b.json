@@ -1,0 +1,125 @@
+{
+  "enabled": true,
+  "code": "windowsill_b",
+  "maxStackSize": 64,
+  "blockmaterial": "stone",
+  "resistance": 4,
+  "renderPass": "OpaqueNoCull",
+  "facecullmode": "nevercull",
+  "lightabsorption": 0,
+  "sideopaque": {"all": false},
+  "sideao": {"all": true},
+  "sidesolid": {"all": true},
+  "class": "BlockMultiblockArchway",
+  "entityClass": "BlockEntityConstructable",
+  "variantgroups": [{"code": "side", "loadFromProperties": "abstract/horizontalorientation"}],
+  "attributes": {
+    "creativeStacksByRim": true,
+    "handbook": {
+      "groupBy": ["windowsill_b-*"],
+      "excludeByType": {"west": true, "east": true, "south": true},
+      "extraSections": [{"title": "confession:archway-build-help-title", "text": "confession:archway-build-help-text2"}]
+    },
+    // Collision of the upper part (offset from the upper part to the main block below)
+    "valuesByMultiblockOffset": {
+      "collisionSelectionBoxes": {
+        "0,-1,0": [
+          {"x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 1, "z2": 0.5, "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
+          {"x1": 0, "y1": 0.875, "z1": 0.5, "x2": 1, "y2": 1, "z2": 0.5625, "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
+          {"x1": 0, "y1": 0, "z1": 0.5, "x2": 1, "y2": 0.5, "z2": 0.625, "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
+          {"x1": 0, "y1": 0, "z1": 0.625, "x2": 1, "y2": 0.25, "z2": 0.6875, "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}}
+        ]
+      }
+    }
+  },
+  "entityBehaviors": [{"name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes"}],
+  "behaviors": [
+    {"name": "Multiblock", "properties": {"sizex": 1, "sizey": 2, "sizez": 1, "cposition": {"x": 0, "y": 0, "z": 0}}},
+    {"name": "BlockBehaviorArchway", "properties": {"glassSize": 2}},
+    {"name": "AttributeRenderingLibrary.HorizontalOrientable", "properties": {"dropBlockFace": "north"}},
+    {
+      "name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
+      "properties": {
+        "name": {
+          "@fill-(rock|cobblestone|stonebricks|rockpolished|drystone|plaster|daub|claybricks|brickcourse|rammed|mudbrick)-.*::rock-*": [["confession:archway-name-windowsill", "game:block-{fill}", "rock-{rock}"]],
+          "fill-*::rock-*": [["confession:archway-name-windowsill", "confession:archwayfill-{fill}", "rock-{rock}"]],
+          "rock-*::originblock-none": [["confession:archway-name-windowsill-frame", "rock-{rock}"]],
+          "*": ["confession:block-debug-noname"]
+        },
+        "description": {
+          "@fill-(rock|cobblestone|stonebricks|rockpolished|drystone|plaster|daub|claybricks|brickcourse|rammed|mudbrick)-.*::rock-*": [
+            "confession:block-arch_small-description6",
+            "game:block-{fill}",
+            "confession:block-linebreak",
+            "confession:block-arch_small-description1",
+            "rock-{rock}",
+            "confession:block-linebreak"
+          ],
+          "fill-*::rock-*": [
+            "confession:block-arch_small-description6",
+            "confession:archwayfill-{fill}",
+            "confession:block-linebreak",
+            "confession:block-arch_small-description1",
+            "rock-{rock}",
+            "confession:block-linebreak"
+          ],
+          "rock-*::originblock-none": [
+            "confession:block-arch_small-description1",
+            "rock-{rock}",
+            "confession:block-linebreak"
+          ],
+          "*": ["confession:block-debug-nodescription"]
+        },
+        "textures": {
+          "fill-*::rock-*": {
+            "material": {"base": "confession:block/archway/fill/{fill}"},
+            "sill": {"base": "confession:block/archway/rim/{rock}"}
+          },
+          "rock-*::originblock-none": {
+            "wood": {"base": "game:block/wood/debarked/aged"},
+            "planks": {"base": "game:block/wood/planks/generic"},
+            "sill": {"base": "confession:block/archway/rim/{rock}"}
+          }
+        },
+        "shape": {
+          "rock-*::originblock-none": {"base": "confession:block/wood/frame/construction-w-b", "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
+          "*": {"base": "confession:block/stone/windowsill-b", "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}}
+        },
+        "shapeinventory": {
+          "rock-*::originblock-none": {"base": "confession:block/shapeinventory/shapeinventory-w-b", "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}}
+        }
+      }
+    }
+  ],
+  "shape": {"base": "game:block/basic/invisible"},
+  "textures": {
+    "material": {"base": "game:block/transparent"},
+    "sill": {"base": "game:block/transparent"},
+    "wood": {"base": "game:block/transparent"},
+    "planks": {"base": "game:block/transparent"},
+    "gray": {"base": "game:block/liquid/dye/gray"}
+  },
+  // Collision of the main (lower) part
+  "collisionSelectionBoxes": [
+    {"x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 1, "z2": 0.75, "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
+    {"x1": 0, "y1": 0, "z1": 0.75, "x2": 1, "y2": 0.875, "z2": 0.8125, "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
+    {"x1": 0, "y1": 0, "z1": 0.8125, "x2": 1, "y2": 0.5, "z2": 0.875, "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
+    {"x1": 0, "y1": 0, "z1": 0.875, "x2": 1, "y2": 0.25, "z2": 0.9375, "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}}
+  ],
+  "creativeinventoryStacksByType": {
+    "*-north": [
+      {
+        "tabs": ["confession", "construction", "general"],
+        "stacks": [
+          // Template: one stack per rim stone of the archway material registry is created from it (attribute creativeStacksByRim).
+          {"type": "block", "code": "windowsill_b-north", "attributes": {"types": {"originblock": "none", "rock": "granite"}}}
+        ]
+      }
+    ]
+  },
+  "guiTransform": {
+		"rotation": { "x": -22, "y": 135, "z": 0 },
+		"origin": { "x": 0.5, "y": 1, "z": 0.5 },
+		"scale": 0.63
+	}
+}

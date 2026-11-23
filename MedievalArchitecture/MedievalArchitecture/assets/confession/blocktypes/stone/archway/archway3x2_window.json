@@ -81,7 +81,7 @@
             {"x1": 0, "y1": 0, "z1": 0.1875, "x2": 1, "y2": 1, "z2": 0.4375, "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}}
           ],
           // Upper middle part
-          "0,0,1-": [
+          "0,0,-1": [
             {"x1": 0, "y1": 0.375, "z1": 0, "x2": 1, "y2": 1, "z2": 1, "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}},
             {"x1": 0, "y1": 0, "z1": 0.1875, "x2": 1, "y2": 1, "z2": 0.4375, "rotateYByType": {"*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90}}
           ],

@@ -64,6 +64,9 @@
       "confession:blocktypes/stone/archway/archway3x2_window.json": {
         "enabled": "ENABLE_SMALL_ARCHWAY"
       },
+      "confession:blocktypes/stone/archway/archway3x2_wood.json": {
+        "enabled": "ENABLE_SMALL_ARCHWAY"
+      },
       "confession:blocktypes/stone/archway/archway3x3.json": {
         "enabled": "ENABLE_SMALL_ARCHWAY"
       },
@@ -75,6 +78,9 @@
       },
       "confession:blocktypes/glass/window.json": { "enabled": "ENABLE_WINDOW" },
       "confession:blocktypes/stone/window/windowsill_a.json": {
+        "enabled": "ENABLE_WINDOWSILL"
+      },
+      "confession:blocktypes/stone/window/windowsill_b.json": {
         "enabled": "ENABLE_WINDOWSILL"
       },
       "confession:blocktypes/wood/trapdoor/trapdoor_small.json": {
