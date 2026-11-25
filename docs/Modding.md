@@ -42,6 +42,8 @@ Notes:
 - If several entries match the same block or item, the **first** one wins. Entries added by patches come after the built-in ones.
 - Entries **without** `code` are legacy-only: they keep the look of archways built with older versions and can not be built.
 - Wood ids are plain wood names without a mod prefix (`oak`, `larch`), because the lintel name and texture use the vanilla wood names.
+- If several entries match the same block or item, the **first** one wins, also if its texture does not exist. Entries added by patches come after the built-in ones.
+- Textures are only checked on the client (a dedicated server does not load them). A material whose texture is missing keeps its id, but it can not be used for new archways; the client log names the missing texture.
 
 The server log shows the result after loading, for example:
 
