@@ -17,6 +17,11 @@ namespace MedievalArchitecture
     /// their "types" without "rock" are combined with every buildable rim stone (sorted by id). Stacks without
     /// "types.rock" are kept as they are. If the registry has no rim stones, the JSON stacks stay unchanged.
     /// </para>
+    /// <para>
+    /// Server and client must create exactly the same stacks: the creative inventory is addressed by slot numbers, so a
+    /// different list on one side presumably hands out the wrong item (B28, test T14). Only "buildable" of the registry
+    /// counts here, never the textures (only the client knows them).
+    /// </para>
     /// </summary>
     public static class ArchwayCreativeStacks
     {
@@ -29,12 +34,24 @@ namespace MedievalArchitecture
         {
             if (!registry.Loaded) return;
 
+            // "Buildable" and not "CanBuild": a rim stone without texture (client only) still gets its stacks, so that
+            // server and client have the same list.
             List<string> rimIds = registry.Rims
                 .Where(rim => rim.Buildable)
                 .Select(rim => rim.Id)
                 .Distinct()
                 .OrderBy(id => id, StringComparer.Ordinal)
                 .ToList();
+
+            List<string> rimsWithoutTexture = registry.Rims
+                .Where(rim => rim.Buildable && rim.TextureMissing)
+                .Select(rim => rim.Id)
+                .OrderBy(id => id, StringComparer.Ordinal)
+                .ToList();
+            if (rimsWithoutTexture.Count > 0)
+            {
+                api.Logger.Warning("{0} Rim stone(s) without texture still get creative stacks (same list as on the server): {1}", LogPrefix, string.Join(", ", rimsWithoutTexture));
+            }
 
             int blockCount = 0;
             int stackCount = 0;

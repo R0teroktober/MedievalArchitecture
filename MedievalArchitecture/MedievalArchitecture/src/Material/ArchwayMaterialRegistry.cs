@@ -26,28 +26,46 @@ namespace MedievalArchitecture
         /// <summary>Material id. Saved in archways, never changes.</summary>
         public string Id { get; }
         public ArchwayMaterialKind Kind { get; }
-        /// <summary>Texture location without "textures/" prefix and ".png" suffix.</summary>
+        /// <summary>
+        /// Texture location without "textures/" prefix and ".png" suffix. Client: the first existing texture of the list.
+        /// Server: always the first texture of the list (the server does not check textures and never renders).
+        /// </summary>
         public AssetLocation Texture { get; }
+        /// <summary>All textures of the entry (placeholders filled in), in order. Same on server and client.</summary>
+        public IReadOnlyList<AssetLocation> TextureCandidates { get; }
         /// <summary>Fills only: texture of the ledge of big archways (default: same as Texture).</summary>
         public AssetLocation LedgeTexture { get; set; }
         /// <summary>False = only kept for existing archways, cannot be used for new ones.</summary>
         public bool Buildable { get; }
+        /// <summary>
+        /// Client only: none of the textures exists. The material keeps its id (server and client assign the same
+        /// materials), but it cannot be used for new archways. Always false on the server.
+        /// </summary>
+        public bool TextureMissing { get; internal set; }
+        /// <summary>True if new archways can be built with this material: buildable and, on the client, with a texture.</summary>
+        public bool CanBuild => Buildable && !TextureMissing;
         /// <summary>Block/item codes that represent this material.</summary>
         public List<AssetLocation> SourceCodes { get; } = new();
 
-        public ArchwayMaterial(string id, ArchwayMaterialKind kind, AssetLocation texture, bool buildable)
+        public ArchwayMaterial(string id, ArchwayMaterialKind kind, AssetLocation texture, IReadOnlyList<AssetLocation> textureCandidates, bool buildable)
         {
             Id = id;
             Kind = kind;
             Texture = texture;
+            TextureCandidates = textureCandidates;
             LedgeTexture = texture;
             Buildable = buildable;
         }
     }
 
     /// <summary>
-    /// Loads assets/confession/config/archway-materials.json, resolves the code patterns against all loaded
-    /// blocks and items and checks that every texture exists. Each side (server/client) has its own instance.
+    /// Loads assets/confession/config/archway-materials.json and resolves the code patterns against all loaded
+    /// blocks and items. Each side (server/client) has its own instance.
+    /// <para>
+    /// B28: a dedicated server does not load textures. So which entry owns a block/item code never depends on textures:
+    /// the first entry whose code pattern matches wins, on both sides. Only the client checks the textures; a material
+    /// without texture keeps its id there but cannot be built (<see cref="ArchwayMaterial.TextureMissing"/>).
+    /// </para>
     /// </summary>
     public class ArchwayMaterialRegistry
     {
@@ -163,8 +181,10 @@ namespace MedievalArchitecture
 
             Loaded = true;
 
-            api.Logger.Notification("{0} Archway materials ({1}): {2} rims, {3} fills, {4} woods from {5} entries. Skipped: {6} (missing texture), {7} (invalid), {8} (id conflict).",
-                LogPrefix, side, rimsById.Count, fillsById.Count, woodsById.Count, stats.Entries, stats.MissingTexture, stats.Invalid, stats.Conflicts);
+            // The numbers before "Missing texture" are the same on server and client.
+            api.Logger.Notification("{0} Archway materials ({1}): {2} rims, {3} fills, {4} woods from {5} entries. Skipped: {6} (invalid), {7} (id conflict). Missing texture: {8}.",
+                LogPrefix, side, rimsById.Count, fillsById.Count, woodsById.Count, stats.Entries, stats.Invalid, stats.Conflicts,
+                api.Side == EnumAppSide.Client ? stats.MissingTexture.ToString() : "not checked on the server");
 
             LogLegacyCoverage(api, side);
 
@@ -190,6 +210,9 @@ namespace MedievalArchitecture
             int registered = 0;
             foreach (ArchwayMaterial material in materials)
             {
+                // Already reported while loading. Without alias ARL shows "?", but such a material cannot be built.
+                if (material.TextureMissing) continue;
+
                 AssetLocation source = selectTexture?.Invoke(material) ?? material.Texture;
                 IAsset? texture = api.Assets.TryGet(ToTextureFile(source));
                 if (texture == null)
@@ -295,7 +318,7 @@ namespace MedievalArchitecture
                         continue;
                     }
 
-                    // An earlier (more specific) entry already defines this block/item: it wins, the texture of this entry is irrelevant.
+                    // An earlier (more specific) entry already defines this block/item: it wins, also if its texture is missing (B28).
                     if (byCode.TryGetValue(code, out ArchwayMaterial? codeOwner))
                     {
                         if (codeOwner.Id != id)
@@ -306,22 +329,16 @@ namespace MedievalArchitecture
                         continue;
                     }
 
-                    // "texture" may list several textures (e.g. a texture pack first, vanilla as fallback): the first existing one wins.
-                    AssetLocation? texture = ResolveFirstTexture(api, textureTemplates, placeholders, match, code.Domain);
-                    if (texture == null)
-                    {
-                        stats.MissingTexture++;
-                        string tried = string.Join(", ", textureTemplates.Select(t => AssetLocation.Create(FillPlaceholders(t, placeholders, match), code.Domain).ToString()));
-                        api.Logger.Warning("{0} Archway {1} \"{2}\" ({3}) skipped: texture {4} not found.", LogPrefix, kindName, id, code, tried);
-                        continue;
-                    }
+                    List<AssetLocation> candidates = textureTemplates.Select(t => AssetLocation.Create(FillPlaceholders(t, placeholders, match), code.Domain)).ToList();
 
                     if (byId.TryGetValue(id, out ArchwayMaterial? existing))
                     {
-                        if (!existing.Texture.Equals(texture))
+                        // Compare the texture lists, not the resolved textures: the result must be the same on server and client.
+                        if (!existing.TextureCandidates.SequenceEqual(candidates))
                         {
                             stats.Conflicts++;
-                            api.Logger.Error("{0} Archway {1} id \"{2}\" is defined twice with different textures ({3} and {4}). {5} is ignored.", LogPrefix, kindName, id, existing.Texture, texture, code);
+                            api.Logger.Error("{0} Archway {1} id \"{2}\" is defined twice with different textures ({3} and {4}). {5} is ignored.", LogPrefix, kindName, id,
+                                string.Join(", ", existing.TextureCandidates), string.Join(", ", candidates), code);
                             continue;
                         }
 
@@ -330,12 +347,12 @@ namespace MedievalArchitecture
                         continue;
                     }
 
-                    var material = new ArchwayMaterial(id, kind, texture, entry.Buildable);
+                    List<AssetLocation> ledgeCandidates = kind == ArchwayMaterialKind.Fill
+                        ? ledgeTemplates.Select(t => AssetLocation.Create(FillPlaceholders(t, placeholders, match), code.Domain)).ToList()
+                        : new List<AssetLocation>();
+
+                    ArchwayMaterial material = CreateMaterial(api, id, kind, candidates, ledgeCandidates, entry.Buildable, kindName, code.ToString(), stats);
                     material.SourceCodes.Add(code);
-                    if (kind == ArchwayMaterialKind.Fill && ledgeTemplates.Count > 0)
-                    {
-                        material.LedgeTexture = ResolveFirstTexture(api, ledgeTemplates, placeholders, match, code.Domain) ?? texture;
-                    }
                     byId[id] = material;
                     byCode[code] = material;
                 }
@@ -370,23 +387,38 @@ namespace MedievalArchitecture
             // A real (buildable) material with the same id always wins.
             if (byId.ContainsKey(id)) return;
 
-            AssetLocation? texture = textureTemplates.Select(t => AssetLocation.Create(t)).FirstOrDefault(t => TextureExists(api, t));
+            List<AssetLocation> candidates = textureTemplates.Select(t => AssetLocation.Create(t)).ToList();
+            List<AssetLocation> ledgeCandidates = ledgeTemplates.Select(t => AssetLocation.Create(t)).ToList();
+            byId[id] = CreateMaterial(api, id, kind, candidates, ledgeCandidates, buildable: false, kindName, "legacy only", stats);
+        }
+
+        /// <summary>
+        /// Creates a material. "texture" may list several textures (e.g. a texture pack first, vanilla as fallback): on the client
+        /// the first existing one wins. The server never checks textures (B28: a dedicated server does not load them), it keeps
+        /// the first one of the list. A material without texture on the client keeps its id, but cannot be built.
+        /// </summary>
+        private static ArchwayMaterial CreateMaterial(ICoreAPI api, string id, ArchwayMaterialKind kind, List<AssetLocation> candidates, List<AssetLocation> ledgeCandidates,
+            bool buildable, string kindName, string source, LoadStats stats)
+        {
+            bool checkTextures = api.Side == EnumAppSide.Client;
+
+            AssetLocation? texture = checkTextures ? candidates.FirstOrDefault(t => TextureExists(api, t)) : candidates[0];
+            var material = new ArchwayMaterial(id, kind, texture ?? candidates[0], candidates, buildable);
+
             if (texture == null)
             {
+                material.TextureMissing = true;
                 stats.MissingTexture++;
-                api.Logger.Warning("{0} Archway {1} \"{2}\" (legacy only) skipped: texture {3} not found.", LogPrefix, kindName, id, string.Join(", ", textureTemplates));
-                return;
+                api.Logger.Warning("{0} Archway {1} \"{2}\" ({3}): texture {4} not found. It cannot be used for new archways.", LogPrefix, kindName, id, source, string.Join(", ", candidates));
             }
 
-            var material = new ArchwayMaterial(id, kind, texture, buildable: false);
-            foreach (string candidate in ledgeTemplates)
+            if (ledgeCandidates.Count > 0)
             {
-                AssetLocation ledge = AssetLocation.Create(candidate);
-                if (!TextureExists(api, ledge)) continue;
-                material.LedgeTexture = ledge;
-                break;
+                AssetLocation? ledge = checkTextures ? ledgeCandidates.FirstOrDefault(t => TextureExists(api, t)) : ledgeCandidates[0];
+                material.LedgeTexture = ledge ?? material.Texture;
             }
-            byId[id] = material;
+
+            return material;
         }
 
         /// <summary>
@@ -421,20 +453,10 @@ namespace MedievalArchitecture
             }
         }
 
+        /// <summary>Client only: a dedicated server does not load textures, there this is false for nearly every texture (B28).</summary>
         private static bool TextureExists(ICoreAPI api, AssetLocation texture)
         {
             return api.Assets.Exists(ToTextureFile(texture));
-        }
-
-        /// <summary>The first texture of the list that exists (placeholders filled in), or null.</summary>
-        private static AssetLocation? ResolveFirstTexture(ICoreAPI api, List<string> templates, List<string> placeholders, Match match, string defaultDomain)
-        {
-            foreach (string template in templates)
-            {
-                AssetLocation candidate = AssetLocation.Create(FillPlaceholders(template, placeholders, match), defaultDomain);
-                if (TextureExists(api, candidate)) return candidate;
-            }
-            return null;
         }
 
         /// <summary>A texture field may be a single string or a list of strings (first existing one wins).</summary>

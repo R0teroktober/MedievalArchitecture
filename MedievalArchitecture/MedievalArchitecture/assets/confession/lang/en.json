@@ -111,6 +111,7 @@
   "confession:block-interaction-add-plank": "Add plank to create a door lintel",
   "confession:archwayframe-unknownrim": "The rim stones of this frame are unknown. Break the frame and build it again.",
   "confession:archway-unknownrim": "The rim stones of this archway are unknown. It can not be finished.",
+  "confession:archway-notexture": "This material has no texture and can not be used for archways and windows. See the client log.",
 
   // archway names, keep them short: {0} = fill material, {1} = rim stones, {2} = glass (window) or wood (door lintel).
   // Rim stones, glass and wood are shown in the tooltip.

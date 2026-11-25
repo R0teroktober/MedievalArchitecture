@@ -64,9 +64,37 @@ namespace MedievalArchitecture
             if (byPlayer.Entity.Controls.CtrlKey)
             {
                 handling = EnumHandling.PreventDefault;
+
+                // B28: the server cannot check textures. The client does not start the interaction with a material
+                // whose texture is missing, so it never reaches the server (the archway would show "?").
+                if (world.Side == EnumAppSide.Client && HoldsMaterialWithoutTexture(world, byPlayer, blockSel))
+                {
+                    (world.Api as ICoreClientAPI)?.TriggerIngameError(this, "archway-notexture", Lang.Get("confession:archway-notexture"));
+                    return false;
+                }
                 return true;
             }
             return base.OnBlockInteractStart(world, byPlayer, blockSel, ref handling);
+        }
+
+        /// <summary>Client: true if the held item is a fill block (unfinished) or lintel boards (finished) whose texture is missing.</summary>
+        private bool HoldsMaterialWithoutTexture(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
+        {
+            ItemStack? heldStack = byPlayer.InventoryManager?.ActiveHotbarSlot?.Itemstack;
+            ArchwayMaterialRegistry? registry = MedievalArchitectureModSystem.GetArchwayMaterials(world.Api);
+            if (heldStack == null || registry == null || blockSel == null) return false;
+
+            Variants? variants = world.BlockAccessor.GetBlockEntity(ResolveControlPos(world, blockSel))?.GetBehavior<BlockEntityBehaviorShapeTexturesFromAttributes>()?.Variants;
+            if (variants == null) return false;
+
+            if (!IsFinished(variants))
+            {
+                return SupportsFill() && heldStack.Block != null
+                    && registry.TryGetFillByCode(heldStack.Collectible.Code, out ArchwayMaterial? fill) && fill.Buildable && fill.TextureMissing;
+            }
+
+            return blockCodeWithLintel != null
+                && registry.TryGetWoodByCode(heldStack.Collectible.Code, out ArchwayMaterial? wood) && wood.Buildable && wood.TextureMissing;
         }
 
         public override bool OnBlockInteractCancel(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handling)
@@ -314,7 +342,8 @@ namespace MedievalArchitecture
         {
             ArchwayMaterialRegistry? registry = MedievalArchitectureModSystem.GetArchwayMaterials(world.Api);
             if (registry == null) return null;
-            return registry.TryGetWoodByCode(stack.Collectible.Code, out ArchwayMaterial? wood) && wood.Buildable ? wood : null;
+            // CanBuild: on the client also false for materials without texture (B28), on the server the same as Buildable.
+            return registry.TryGetWoodByCode(stack.Collectible.Code, out ArchwayMaterial? wood) && wood.CanBuild ? wood : null;
         }
 
         private static bool IsGlass(ItemStack stack)
@@ -326,7 +355,7 @@ namespace MedievalArchitecture
         private static ArchwayMaterial? GetBuildableFill(ArchwayMaterialRegistry registry, ItemStack stack)
         {
             if (stack.Block == null) return null;
-            return registry.TryGetFillByCode(stack.Collectible.Code, out ArchwayMaterial? fill) && fill.Buildable ? fill : null;
+            return registry.TryGetFillByCode(stack.Collectible.Code, out ArchwayMaterial? fill) && fill.CanBuild ? fill : null;
         }
 
         private static void TakeMaterial(IPlayer player, ItemSlot slot, int amount)
